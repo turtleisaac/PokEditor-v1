@@ -1,0 +1,11 @@
+Narc Locations for HGSS:
+
+Personal Data: a/0/0/2.narc
+Learnset Data: a/0/3/3.narc
+Evolution Data: a/0/3/4.narc
+Encounter Data: (HG) a/0/3/7.narc, (SS) a/1/3/6.narc
+
+Narc Locations for DP:
+
+
+Narc Locations for PT:
