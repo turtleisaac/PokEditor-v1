@@ -1,11 +1,14 @@
 PokemonEditor
 Author: Turtleisaac
 
+
 Usage:
 
 java -jar PokemonEditor.jar <arguments>
 
+
 Arguments:
+
 
 personal toCsv <directory containing unpacked files from personal narc>
 
