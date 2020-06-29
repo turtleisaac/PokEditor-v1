@@ -1,13 +1,13 @@
-PokemonEditor
+# PokemonEditor
 Author: Turtleisaac
 
 
-Usage:
+# Usage
 
-java -jar PokemonEditor.jar <arguments>
+java -jar PokEditor.jar <arguments>
 
 
-Arguments:
+# Arguments
 
 
 personal toCsv <directory containing unpacked files from personal narc>
