@@ -402,9 +402,9 @@ public class PersonalEditor
             throw new RuntimeException("The provided TM learnset data file is not a .csv");
         }
 
-        if(!new File(path + outputDir).exists())
+        if(!new File(path + "temp" + File.separator + outputDir).exists())
         {
-            if(!new File(path + outputDir).mkdir())
+            if(!new File(path + "temp" + File.separator + outputDir).mkdir())
             {
                 throw new RuntimeException("Could not create output directory");
             }
@@ -419,7 +419,6 @@ public class PersonalEditor
             personalLines.add(line);
         }
         reader.close();
-        personalLines.remove(0);
         personalLines.remove(0);
         xValue= personalLines.get(0).split(",").length;
         yValue= personalLines.size();
@@ -601,77 +600,15 @@ public class PersonalEditor
             });
         }
 
-//        reader= new BufferedReader(new FileReader(tmPath));
-//        ArrayList<String> tmLines= new ArrayList<>();
-//        while((line=reader.readLine()) != null)
-//        {
-//            tmLines.add(line);
-//        }
-//        reader.close();
-//        tmLines.remove(0);
-//        xValue= tmLines.get(0).split(",").length;
-//        yValue= tmLines.size();
-//        for(int row= 0; row < yValue; row++)
-//        {
-//            for(int i= 0; i < 2; i++)
-//            {
-//                line= tmLines.get(row);
-//                tmLines.set(row, line.substring(line.indexOf(",")+1));
-//            }
-//            tmLines.set(row,tmLines.get(row).substring(0,tmLines.get(row).length()-1).trim());
-//            //System.out.println(tmLines.get(row));
-//        }
-//
-//        String[] tmBinaryStrings= new String[tmLines.size()];
-//        for(int i= 0; i < tmLines.size(); i++)
-//        {
-////            System.out.println("length " + tmLines.get(i).split(",").length);
-////            System.out.println(Arrays.toString(tmLines.get(i).split(",")));
-////            String to01= "";
-////            for(int idx= 0; i < tmLines.get(i).split(",").length; idx++)
-////            {
-////                //System.out.println(tmLines.get(i).split(",")[idx]);
-////                if(tmLines.get(i).split(",")[idx].equals("true"))
-////                {
-////                    to01+= "1";
-////                    System.out.println(to01);
-////                    //System.out.println(to01.length());
-////                }
-////                else if(tmLines.get(i).split(",")[idx].equals("false"))
-////                {
-////                    to01+= "0";
-////                    System.out.println(to01);
-////                    //System.out.println(to01.length());
-////                }
-////                else
-////                {
-////                    System.out.println("ERROR");
-////                }
-////            }
-////            tmBinaryStrings[i]= to01;
-//            String[] thisLine= tmLines.get(i).split(",");
-//            tmBinaryStrings[i]= "0000000000000000000000000000";
-//            for(int t= thisLine.length-1; t != -1; t--)
-//            {
-//                if(thisLine[t].equals("true"))
-//                {
-//                    tmBinaryStrings[i]+= 1;
-//                }
-//                else
-//                {
-//                    tmBinaryStrings[i]+= 0;
-//                }
-//            }
-//        }
 
 
         CsvReader csvReader= new CsvReader(tmPath);
-        String[] tmBinaryStrings= new String[csvReader.length()];
+        csvReader.next();
+        String[] tmBinaryStrings= new String[csvReader.length()-1];
         for(int i= 0; i < tmBinaryStrings.length; i++)
         {
             tmBinaryStrings[i]= "0000000000000000000000000000";
             String[] thisLine= reverse(csvReader.next());
-            //System.out.println(Arrays.toString(thisLine));
             for (String str: thisLine)
             {
                 if(str.equals("true"))
@@ -685,7 +622,7 @@ public class PersonalEditor
             }
         }
 
-        String outputPath= path + outputDir + File.separator;
+        String outputPath= path + "temp" + File.separator + outputDir + File.separator;
         BinaryWriter writer;
         for(int i= 0; i < personalData.size(); i++)
         {
@@ -698,7 +635,7 @@ public class PersonalEditor
             writer.writeShort((short)data.getRareItem());
             writer.writeBytes(data.getGenderRatio(),data.getHatchMultiplier(),data.getBaseHappiness(),data.getExpRate(),data.getEggGroup1(),data.getEggGroup2(),data.getAbility1(),data.getAbility2(),data.getRunChance(),data.getDexColor());
             writer.writeBytes(0x00,0x00);
-            System.out.println(tmBinaryStrings[i]);
+            //System.out.println(tmBinaryStrings[i]);
             writer.writeLong(parseLong(tmBinaryStrings[i].substring(tmBinaryStrings[i].length()/2)));
             writer.writeLong(parseLong(tmBinaryStrings[i].substring(0,tmBinaryStrings[i].length()/2)));
         }

@@ -1,4 +1,3 @@
-
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +9,7 @@ public class Buffer {
 
     private byte[] bytes = new byte[1024*64];
     private int position = 0;
+    private int truePosition= 0;
     private int limit = 0;
     private String file;
     private final BufferedInputStream in;
@@ -28,15 +28,20 @@ public class Buffer {
     }
 
     public int readInt() {
-      require(4);
+        require(4);
 
-      int ret = readByte();
-      ret |= readByte() << 8;
-      ret |= readByte() << 16;
-      ret |= readByte() << 24;
+        int ret = readByte();
+        ret |= readByte() << 8;
+        ret |= readByte() << 16;
+        ret |= readByte() << 24;
 
-      return ret;
+        return ret;
     }
+
+    public long readUIntI() {
+        return (long)readInt() & 0xffffffffL;
+    }
+    public long readUIntS() { return (long)readShort() & 0xffffL; }
 
     public long readLong() {
         require(8);
@@ -73,6 +78,7 @@ public class Buffer {
         require(size);
         String ret = new String(bytes, position, size);
         position += size;
+        truePosition+= size;
         return ret;
     }
 
@@ -85,6 +91,8 @@ public class Buffer {
             require(toRead);
             System.arraycopy(bytes, position, ret, offset, toRead);
             position += toRead;
+            offset += toRead;
+            truePosition+= toRead;
             size -= toRead;
         }
 
@@ -92,12 +100,13 @@ public class Buffer {
     }
     public int readByte() {
         require(1);
+        truePosition++;
         return bytes[position++] & 0xff;
     }
 
     public int getPosition()
     {
-        return position;
+        return truePosition;
     }
 
     private void require(int size) {
@@ -145,4 +154,15 @@ public class Buffer {
         return endOfFile;
     }
 
+    public void skipBytes(int bytes) {
+        byte[] throwAway= readBytes(bytes);
+    }
+
+    public void skipTo(int offset)
+    {
+        if(offset < truePosition) {
+            throw new RuntimeException("Already beyond this offset");
+        }
+        byte[] throwAway= readBytes(offset-truePosition);
+    }
 }

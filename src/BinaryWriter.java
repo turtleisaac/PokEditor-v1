@@ -99,4 +99,7 @@ public class BinaryWriter {
     public void close() throws IOException {
         raf.close();
     }
+
+    public void write(int i) {
+    }
 }

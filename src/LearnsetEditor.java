@@ -180,7 +180,7 @@ public class LearnsetEditor
     public void csvToLearnsets(String learnsetCsv, String outputDir) throws IOException
     {
         String learnsetPath= path + learnsetCsv;
-        String outputPath= path + outputDir;
+        String outputPath= path + "temp" + File.separator+ outputDir;
 
         if(!new File(outputPath).exists() && !new File(outputPath).mkdir())
         {

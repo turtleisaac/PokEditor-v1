@@ -115,7 +115,6 @@ public class EncounterEditor
             int goodRate= buffer.readByte();
             int superRate= buffer.readByte();
             short padding= buffer.readShort();
-            System.out.println("Color: " + colorArr[padding]);
             byte[] fieldLevels= buffer.readBytes(12);
             short[] fieldMorning= buffer.readShorts(12);
             short[] fieldDay= buffer.readShorts(12);
@@ -672,7 +671,7 @@ public class EncounterEditor
 
     public void csvToEncounters(String csvDir, String outputDir) throws IOException
     {
-        String outputPath= path + outputDir;
+        String outputPath= path + "temp" + File.separator+ outputDir;
         String csvDirPath= path + csvDir + separator;
         if(!new File(outputPath).exists() && !new File(outputPath).mkdir())
         {

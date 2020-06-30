@@ -310,7 +310,7 @@ public class EvolutionEditor
     public void csvToEvolutions(String evolutionCsv, String outputDir) throws IOException
     {
         String evolutionPath= path + evolutionCsv;
-        String outputPath= path + outputDir;
+        String outputPath= path + "temp" + File.separator+ outputDir;;
 
         if(!new File(outputPath).exists() && !new File(outputPath).mkdir())
         {
