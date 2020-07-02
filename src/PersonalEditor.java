@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class PersonalEditor
 {
@@ -84,7 +81,7 @@ public class PersonalEditor
         Buffer personalBuffer;
         ArrayList<PersonalData> dataList= new ArrayList<>();
 
-        List<File> fileList = new ArrayList<>(Arrays.asList(new File(dataPath).listFiles())); //creates a List of File objects representing every file in specified parameter directory
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
 
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
@@ -389,6 +386,16 @@ public class PersonalEditor
         String personalPath= path + personalCsv;
         String tmPath= path + tmLearnsetCsv;
 
+        String outputPath;
+        if(outputDir.contains("Recompile"))
+        {
+            outputPath= path + "temp" + File.separator+ outputDir;
+        }
+        else
+        {
+            outputPath= path + File.separator + outputDir;
+        }
+
         int xValue;
         int yValue;
 
@@ -402,9 +409,9 @@ public class PersonalEditor
             throw new RuntimeException("The provided TM learnset data file is not a .csv");
         }
 
-        if(!new File(path + "temp" + File.separator + outputDir).exists())
+        if(!new File(outputPath).exists())
         {
-            if(!new File(path + "temp" + File.separator + outputDir).mkdir())
+            if(!new File(outputPath).mkdir())
             {
                 throw new RuntimeException("Could not create output directory");
             }
@@ -622,7 +629,7 @@ public class PersonalEditor
             }
         }
 
-        String outputPath= path + "temp" + File.separator + outputDir + File.separator;
+        outputPath+= File.separator;
         BinaryWriter writer;
         for(int i= 0; i < personalData.size(); i++)
         {

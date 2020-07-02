@@ -1,5 +1,3 @@
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.*;
 
 public class BinaryWriter {
@@ -94,6 +92,16 @@ public class BinaryWriter {
 
     public void write(byte[] bytes, int offset, int length) throws IOException {
         raf.write(bytes, offset, length);
+    }
+
+    public void writeByteNumTimes(byte b, int num) throws IOException {
+        for(int i= 0; i < num; i++) {
+            raf.write(b);
+        }
+    }
+
+    public void writePadding(int num) throws IOException {
+        writeByteNumTimes((byte) 0x00,num);
     }
 
     public void close() throws IOException {

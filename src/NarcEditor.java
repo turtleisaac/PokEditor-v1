@@ -46,7 +46,7 @@ public class NarcEditor
     public NarcEditor() throws IOException
     {
         String extensionPath= path + "Program Files" + File.separator + "identifiers.hex"; //creates a String containing the path to identifiers.hex (constant)
-        for(int i= 0; i < extensionPath.length()/4; i++) //goes through the file four bytes at a time
+        for(int i= 0; i < new File(extensionPath).length()/4; i++) //goes through the file four bytes at a time
         {
             Buffer extensions = new Buffer(extensionPath); //creates a new Buffer object for reading from identifiers.hex
             fileExtensions.add(extensions.readBytes(4)); //adds the current set of four bytes to the fileExtensions ArrayList as a byte[]
@@ -240,7 +240,7 @@ public class NarcEditor
         ArrayList<TableSubFile> fimgTable= new ArrayList<>(); //creates new ArrayList of tableSubFile instances
         int fimgPosition= 0; //creates a counter to track the length of the fimg section
         File file; //creates a File object to be defined later in for-loop
-        List<File> fileList = new ArrayList<>(Arrays.asList(new File(directory).listFiles())); //creates a List of File objects representing every file in specified parameter directory
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(directory).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
 
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
