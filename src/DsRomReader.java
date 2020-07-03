@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class DsRomReader
 {
@@ -21,6 +18,7 @@ public class DsRomReader
     private Buffer buffer;
     private RomData romData;
     private ArrayList<FimgEntry> fimgEntries;
+    private ArrayList<FimgEntry> sortedEntries;
     private int fileOffset;
     private int length;
     private int fileID;
@@ -47,7 +45,8 @@ public class DsRomReader
         readHeader();
         readFatb();
         grabFile(args);
-        System.out.println("Identical directories: " + compareDirs(new File(tempPathUnpack),new File(tempPathUnpack + "Recompile")));
+        //System.out.println("Identical directories: " + compareDirs(new File(tempPathUnpack),new File(tempPathUnpack + "Recompile")));
+        clearDirectory(new File(path + "temp"));
     }
 
     public void readHeader() throws IOException
@@ -422,13 +421,38 @@ public class DsRomReader
     }
 
 
+    private int SS_HG_FIRST_FILE= 0x81;
+    private int D_P_PT_FIRST_FILE= 0x7A;
+
     public void readFatb()
     {
+        int firstFileID= 0;
+        switch (romData.getTitle())
+        {
+            case "POKEMON SS" :
+
+            case "POKEMON HG" :
+                firstFileID= SS_HG_FIRST_FILE;
+                break;
+
+            case "POKEMON D" :
+
+            case "POKEMON P" :
+
+            case "POKEMON PL" :
+                firstFileID= D_P_PT_FIRST_FILE;
+                break;
+        }
+        System.out.println("First file ID: " + firstFileID + "\n");
+
         int fatbPos= 0;
         buffer.skipTo(romData.getFatbOffset());
         System.out.println(buffer.getPosition() + "\n");
         fimgEntries= new ArrayList<>();
-        System.out.println("Length: " + romData.getFatbLength()/8);
+        System.out.println("Length: " + romData.getFatbLength()/8 + " files");
+        int lastEnd= 0;
+
+
         for(int i= 0; i < romData.getFatbLength()/8; i++)
         {
             System.out.println("Fatb Offset: " + buffer.getPosition());
@@ -439,7 +463,21 @@ public class DsRomReader
             System.out.println("Starting Offset: " +startingOffset);
             System.out.println("Ending Offset: " + endingOffset);
             System.out.println("Length: " + (endingOffset-startingOffset) + "\n");
+
+            long gap= 0;
+            if(i > firstFileID)
+            {
+                gap= startingOffset-lastEnd;
+            }
+            System.out.println(gap);
+
+            if(gap % 4 != 0)
+            {
+//                throw new RuntimeException("Gap between previous file and file with ID " + i + " is negative: " + gap);
+                //throw new RuntimeException("Gap isn't a multiple of 4");
+            }
             int finalI = i;
+            long finalDiff = gap;
             fimgEntries.add(new FimgEntry() {
                 @Override
                 public int getId() {
@@ -455,9 +493,17 @@ public class DsRomReader
                 public long getEndingOffset() {
                     return endingOffset;
                 }
+
+                @Override
+                public long getGap() {
+                    return finalDiff;
+                }
             });
+            lastEnd= (int) endingOffset;
         }
         System.out.println("Number of recorded entries: " + fimgEntries.size());
+
+
     }
 
     private static final int PERSONALJ= 0x83;
@@ -488,6 +534,8 @@ public class DsRomReader
         length= 0;
         String type= args[0].toLowerCase();
         this.type= type;
+        String in= "";
+
         switch (romData.getTitle())
         {
             case "POKEMON HG":
@@ -652,7 +700,7 @@ public class DsRomReader
 
             default:
                 System.out.println("Invalid rom header. Please specify what game this is using the following options: Diamond, Pearl, Platinum, HeartGold, SoulSilver");
-                String in= scanner.nextLine();
+                in= scanner.nextLine();
                 in= in.toLowerCase();
                 switch(in) {
                     case "diamond":
@@ -880,13 +928,27 @@ public class DsRomReader
 
                 break;
             case "encounters":
-                EncounterEditor encounterEditor = new EncounterEditor();
-                if (args[1].equals("toCsv")) {
-                    encounterEditor.encountersToCsv(tempPathUnpack);
-                } else if (args[1].equals("toEncounters")) {
-                    encounterEditor.csvToEncounters(args[2],args[3]);
-                } else {
-                    throw new RuntimeException("Invalid arguments");
+                if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS"))
+                {
+                    EncounterEditor encounterEditor= new EncounterEditor();
+                    if (args[1].equals("toCsv")) {
+                        encounterEditor.encountersToCsv(tempPathUnpack);
+                    } else if (args[1].equals("toEncounters")) {
+                        encounterEditor.csvToEncounters(args[2],args[3]);
+                    } else {
+                        throw new RuntimeException("Invalid arguments");
+                    }
+                }
+                else
+                {
+                    SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
+                    if (args[1].equals("toCsv")) {
+                        encounterEditor.encountersToCsv(tempPathUnpack);
+                    } else if (args[1].equals("toEncounters")) {
+                        encounterEditor.csvToEncounters(args[2],args[3]);
+                    } else {
+                        throw new RuntimeException("Invalid arguments");
+                    }
                 }
 
                 break;
@@ -900,134 +962,260 @@ public class DsRomReader
         switch (args[0].toLowerCase()) {
             case "personal":
                 PersonalEditor personalEditor = new PersonalEditor();
-                personalEditor.csvToPersonal("personalData.csv", "tmLearnsetData.csv", type + "Recompile");
+                personalEditor.csvToPersonal("personalDataRecompile.csv", "tmLearnsetDataRecompile.csv", type + "Recompile");
 
                 break;
             case "learnsets":
                 LearnsetEditor learnsetEditor = new LearnsetEditor();
-                learnsetEditor.csvToLearnsets("Learnset.csv", type + "Recompile");
+                learnsetEditor.csvToLearnsets("LearnsetRecompile.csv", type + "Recompile");
 
                 break;
             case "evolutions":
                 EvolutionEditor evolutionEditor = new EvolutionEditor();
-                evolutionEditor.csvToEvolutions("EvolutionData.csv", type + "Recompile");
+                evolutionEditor.csvToEvolutions("EvolutionDataRecompile.csv", type + "Recompile");
 
                 break;
             case "growth":
                 GrowthEditor growthEditor = new GrowthEditor();
-                growthEditor.csvToGrowth("GrowthTable.csv", type + "Recompile");
+                growthEditor.csvToGrowth("GrowthTableRecompile.csv", type + "Recompile");
 
                 break;
             case "encounters":
-                EncounterEditor encounterEditor = new EncounterEditor();
-                encounterEditor.csvToEncounters("Encounters",type + "Recompile");
+                if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS"))
+                {
+                    EncounterEditor encounterEditor = new EncounterEditor();
+                    encounterEditor.csvToEncounters("Encounters",type + "Recompile");
+                }
+                else
+                {
+                    SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
+                    encounterEditor.csvToEncounters("Encounters",type + "Recompile");
+                }
 
                 break;
             default:
                 throw new RuntimeException("Invalid arguments");
         }
 
-        narc.pack(tempPathUnpack,type + "Recompile");
+        narc.pack(tempPathUnpack + "Recompile",type + "Recompile");
 
+        if(length != new File(path + "temp" + File.separator + type + "Recompile.narc").length())
+        {
+            System.out.println("The file you have recompiled is different in length from the original file. Recompiling roms using a file of different length is unsupported at the moment, so please use Tinke to insert the narc into your rom.\nUse this website to find out where the file is meant to go in Tinke: https://projectpokemon.org/rawdb/");
+
+            Buffer narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc");
+            BinaryWriter narcWriter= new BinaryWriter(path + type + "Recompile.narc");
+            narcWriter.write(narcBuffer.readBytes((int)new File(path + "temp" + File.separator + type + "Recompile.narc").length()));
+            narcBuffer.close();
+            narcWriter.close();
+            clearDirectory(new File(path + "temp"));
+            System.exit(0);
+        }
         replaceFile(args);
     }
 
     public void replaceFile(String[] args) throws Exception
     {
+        Scanner scanner= new Scanner(System.in);
+
+        System.out.println("Please enter the name to be given to the output rom (include .nds)");
+        String name= scanner.nextLine();
+
         BinaryWriter writer= new BinaryWriter(path + "temp" + File.separator + "rom.nds");
         Buffer romBuffer= new Buffer(rom);
-        writer.write(romBuffer.readBytes(romData.getFatbOffset() + (fileID*8)));
-        newFileLength= (int) new File(path + "temp" + File.separator + type + "Recompile.narc").length();
-        if(newFileLength != length)
-        {
-            int diff= newFileLength-length;
-            int start= romBuffer.readInt();
-            writer.writeInt(start);
-            int end= romBuffer.readInt()+diff;
-            writer.writeInt(end);
-            int idx= fileID;
-            int finalStart = start;
-            int finalEnd = end;
-            fimgEntries.set(idx, new FimgEntry() {
-                @Override
-                public int getId() {
-                    return fileID;
-                }
 
-                @Override
-                public long getStartingOffset() {
-                    return finalStart;
-                }
+//        writer.write(romBuffer.readBytes(romData.getFatbOffset() + (fileID*8))); //copies all bytes from base rom between 0x00 and FATB entry for file that was extracted and edited
 
-                @Override
-                public long getEndingOffset() {
-                    return finalEnd;
-                }
-            });
-            for(int i= (fileID+1); i < romData.getFatbLength()/8; i++)
-            {
-                start= romBuffer.readInt()+diff;
-                writer.writeInt(start);
-                end= romBuffer.readInt()+diff;
-                writer.writeInt(end);
-                int finalIdx = i;
-                int finalStart1 = start;
-                int finalEnd1 = end;
-                fimgEntries.set(i, new FimgEntry() {
-                    @Override
-                    public int getId() {
-                        return finalIdx;
-                    }
+//        ArrayList<FimgEntry> newFimgEntries= new ArrayList<>();
+//        for(int i= 0; i < fileID; i++)
+//        {
+//            newFimgEntries.add(fimgEntries.get(i));
+//        }
+//
+//        newFileLength= (int) new File(path + "temp" + File.separator + type + "Recompile.narc").length(); //gets the length of the repacked narc
+//        int diff= newFileLength-length; //the difference between the length of the new file and the length of the original
+//        int start= romBuffer.readInt(); //the offset that the file starts at in the FIMG table
+//        writer.writeInt(start); //copies start offset to new rom
+//        int end= romBuffer.readInt()+diff; //the offset that the new file will end at in the FIMG table
+//        writer.writeInt(end); //writes new ending offset to new rom
+//        int finalStart = start; //stores a local, final copy of start
+//        int finalEnd = end; //stores a local, final copy of end
+//        newFimgEntries.add(new FimgEntry() { //changes the contents of the program's internal FATB table for the edited file
+//            @Override
+//            public int getId() {
+//                return fileID;
+//            }
+//
+//            @Override
+//            public long getStartingOffset() {
+//                return finalStart;
+//            }
+//
+//            @Override
+//            public long getEndingOffset() {
+//                return finalEnd;
+//            }
+//
+//            @Override
+//            public long getGap() {
+//                return fimgEntries.get(0).getGap();
+//            }
+//        });
+//
+//        start= romBuffer.readInt()+diff;
+//        int gap= 0;
+//        if(start % 4 != 0)
+//        {
+//            gap= 4-(start%4);
+//        }
+//        start+= gap;
+//        writer.writeInt(start);
+//        diff+= gap;
+//        end= romBuffer.readInt()+diff;
+//        writer.writeInt(end);
+//        int finalStart2 = start;
+//        int finalEnd2 = end;
+//        int finalGap1 = gap;
+//        newFimgEntries.add(new FimgEntry() {
+//            @Override
+//            public int getId() {
+//                return fileID+1;
+//            }
+//
+//            @Override
+//            public long getStartingOffset() {
+//                return finalStart2;
+//            }
+//
+//            @Override
+//            public long getEndingOffset() {
+//                return finalEnd2;
+//            }
+//
+//            @Override
+//            public long getGap() {
+//                return finalGap1;
+//            }
+//        });
+//
+//        for(int i= (fileID+2); i < romData.getFatbLength()/8; i++) //goes through the remainder of the FIMG and copies it to the new rom, with the necessary alterations
+//        {
+//            start= romBuffer.readInt()+diff;
+//            writer.writeInt(start);
+//            end= romBuffer.readInt()+diff;
+//            writer.writeInt(end);
+//            int finalIdx = i;
+//            int finalStart1 = start;
+//            int finalEnd1 = end;
+//            int finalGap = gap;
+//            newFimgEntries.add(new FimgEntry() {
+//                @Override
+//                public int getId() {
+//                    return finalIdx;
+//                }
+//
+//                @Override
+//                public long getStartingOffset() {
+//                    return finalStart1;
+//                }
+//
+//                @Override
+//                public long getEndingOffset() {
+//                    return finalEnd1;
+//                }
+//
+//                @Override
+//                public long getGap() {
+//                    return finalGap;
+//                }
+//            });
+//        }
 
-                    @Override
-                    public long getStartingOffset() {
-                        return finalStart1;
-                    }
 
-                    @Override
-                    public long getEndingOffset() {
-                        return finalEnd1;
-                    }
-                });
-            }
+//        writer.write(romBuffer.readBytes(fileOffset-romData.getFatbOffset()+romData.getFatbLength())); //copies all bytes between the end of the FATB to the start of the file to be replaced in the FIMG from the base rom to the new rom
+
+        writer.write(romBuffer.readBytes(fileOffset));
+        Buffer narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc"); //creates a new Buffer object to read through the repacked, modified narc
+//        writer.write(narcBuffer.readBytes(newFileLength)); //writes the entire modified narc to the new rom
+        writer.write(narcBuffer.readBytes(length));
+        romBuffer.skipBytes(length); //skips past the original file in the Buffer reading the original rom
+        writer.write(romBuffer.readRemainder());
+
+//        int b;
+//        while((b= romBuffer.readByte()) == 0xff)
+//        {
+//            System.out.println("moo");
+//            writer.writeByte((byte)0xff);
+//        }
+//        writer.writeByteNumTimes((byte) 0xff,gap);
+//        writer.writeByte((byte)b);
+//        writer.write(romBuffer.readBytes((int) (new File(rom).length()-romBuffer.getPosition())));
+
+        writer= new BinaryWriter(path + name);
+        romBuffer= new Buffer(path + "temp" + File.separator + "rom.nds");
+        writer.write(romBuffer.readBytes((int) new File(path + "temp" + File.separator + "rom.nds").length()));
+        System.out.println("\nProcess completed. Output file can be found at: " + path + name);
+
+        //writer.write(romBuffer.readBytes((int) (new File(rom).length()-fimgEntries.get(fileID+1).getStartingOffset()))); //writes all bytes from the starting offset of the file after the modified file to the end of the rom
+////        writer.write(romBuffer.readBytes((int) (new File(rom).length())-romBuffer.getPosition()));
+//        for(int i= fileOffset + newFileLength; i < fimgEntries.get(fileID+1).getStartingOffset(); i++)
+//        {
+//            writer.writeByte((byte) 0xff);
+//        }
+//        writer.close();
+//        romBuffer.close();
         }
-        else
-        {
-            writer.write(romBuffer.readBytes(romData.getFatbLength()-(fileID*8)));
-        }
-        writer.write(romBuffer.readBytes(fileOffset-romBuffer.getPosition()));
-
-        Buffer narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc");
-        writer.write(narcBuffer.readBytes(newFileLength));
-        romBuffer.readBytes(length);
-
-        writer.write(romBuffer.readBytes((int) (new File(rom).length()-fimgEntries.get(fileID+1).getStartingOffset())));
-        for(int i= fileOffset + newFileLength; i < fimgEntries.get(fileID+1).getStartingOffset(); i++)
-        {
-            writer.writeByte((byte) 0xff);
-        }
-
-    }
 
 
 
-    private boolean clearDirectory(File directory)
+
+
+
+    private void clearDirectory(File directory)
     {
-        File file;
-        for(int i = 0; i < Objects.requireNonNull(directory.listFiles()).length; i++)
+//        if(!directory.isDirectory())
+//        {
+//            throw new RuntimeException(directory.getName() + " is not a directory");
+//        }
+//
+//        List<File> fileList = new ArrayList<>(Arrays.asList(new File(path + "temp").listFiles())); //creates a List of File objects representing every file in specified parameter directory
+//        fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
+//
+//        File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
+//        Arrays.sort(files); //sorts files
+//        File file;
+//
+//        for(int i= 0; i < files.length; i++)
+//        {
+//            file= files[i];
+//            if(directory.isDirectory())
+//            {
+//                clearDirectory(file);
+//            }
+//            else
+//            {
+//                if(!file.delete())
+//                {
+//                    throw new RuntimeException("Unable to delete file " + file.getName() + ". Check write perms");
+//                }
+//            }
+//        }
+//        if(!directory.delete())
+//        {
+//            throw new RuntimeException("Unable to delete directory " + directory.getName() + ". Check write perms.");
+//        }
+        for(File subfile : directory.listFiles())
         {
-            file= Objects.requireNonNull(directory.listFiles())[i];
-            if(file.isDirectory())
+            if(subfile.isDirectory())
             {
-                clearDirectory(file);
+                clearDirectory(subfile);
             }
-
-            if(!file.delete())
+            else
             {
-                return false;
+                subfile.delete();
             }
         }
-        return directory.delete();
+        directory.delete();
     }
 
     private String hexFormat(String hexVal)
@@ -1073,6 +1261,16 @@ public class DsRomReader
             }
         }
         return true;
+    }
+
+    private void sort (File arr[])
+    {
+        Arrays.sort(arr, Comparator.comparingInt(DsRomReader::fileToInt));
+    }
+
+    private static int fileToInt (File f)
+    {
+        return Integer.parseInt(f.getName().split("\\.")[0]);
     }
 }
 

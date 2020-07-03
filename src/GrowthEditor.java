@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class GrowthEditor
 {
@@ -34,7 +31,7 @@ public class GrowthEditor
         Buffer buffer;
         ArrayList<int[]> dataList= new ArrayList<>();
 
-        List<File> fileList = new ArrayList<>(Arrays.asList(new File(dataPath).listFiles())); //creates a List of File objects representing every file in specified parameter directory
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
 
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
@@ -75,6 +72,16 @@ public class GrowthEditor
 
     public void csvToGrowth(String growthCsv, String outputDir) throws IOException
     {
+        String outputPath;
+        if(outputDir.contains("Recompile"))
+        {
+            outputPath= path + "temp" + File.separator+ outputDir;
+        }
+        else
+        {
+            outputPath= path + File.separator + outputDir;
+        }
+
         String growthPath= path + growthCsv;
         CsvReader csvReader= new CsvReader(growthPath);
 

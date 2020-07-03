@@ -1,7 +1,4 @@
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class Buffer {
 
@@ -164,5 +161,9 @@ public class Buffer {
             throw new RuntimeException("Already beyond this offset");
         }
         byte[] throwAway= readBytes(offset-truePosition);
+    }
+
+    public byte[] readRemainder() {
+        return readBytes((int)(new File(file).length()-truePosition));
     }
 }

@@ -55,6 +55,10 @@ public class CsvReader
         return in.length;
     }
 
+    public void skipLine() {
+        next();
+    }
+
     public String[][] getCsv()
     {
         return in;

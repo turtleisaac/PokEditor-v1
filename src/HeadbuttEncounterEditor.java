@@ -1,10 +1,7 @@
 import sun.security.krb5.internal.crypto.Aes128;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class HeadbuttEncounterEditor
 {
@@ -100,7 +97,7 @@ public class HeadbuttEncounterEditor
 
         ArrayList<HeadbuttData> dataList= new ArrayList<>();
 
-        List<File> fileList = new ArrayList<>(Arrays.asList(new File(dataPath).listFiles())); //creates a List of File objects representing every file in specified parameter directory
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
 
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
@@ -323,6 +320,17 @@ public class HeadbuttEncounterEditor
 
     public void csvToHeadbutt(String headbuttCsv, String outputDir)
     {
+        String outputPath;
+        if(outputDir.contains("Recompile"))
+        {
+            outputPath= path + "temp" + File.separator+ outputDir;
+        }
+        else
+        {
+            outputPath= path + File.separator + outputDir;
+        }
+
+
     }
 
 

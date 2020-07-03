@@ -1,9 +1,6 @@
 import java.io.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class EncounterEditor
 {
@@ -96,7 +93,7 @@ public class EncounterEditor
         dataPath+= encounterDir;
         ArrayList<EncounterData> dataList= new ArrayList<>();
 
-        List<File> fileList = new ArrayList<>(Arrays.asList(new File(dataPath).listFiles())); //creates a List of File objects representing every file in specified parameter directory
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
 
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
@@ -671,8 +668,17 @@ public class EncounterEditor
 
     public void csvToEncounters(String csvDir, String outputDir) throws IOException
     {
-        String outputPath= path + "temp" + File.separator+ outputDir;
+        String outputPath;
+        if(outputDir.contains("Recompile"))
+        {
+            outputPath= path + "temp" + File.separator+ outputDir;
+        }
+        else
+        {
+            outputPath= path + File.separator + outputDir;
+        }
         String csvDirPath= path + csvDir + separator;
+
         if(!new File(outputPath).exists() && !new File(outputPath).mkdir())
         {
             throw new RuntimeException("Could not create output directory. Check write permissions");
@@ -682,7 +688,17 @@ public class EncounterEditor
         ArrayList<int[]> fieldMorningList= new ArrayList<>();
         ArrayList<int[]> fieldDayList= new ArrayList<>();
         ArrayList<int[]> fieldNightList= new ArrayList<>();
-        CsvReader fieldReader= new CsvReader(csvDirPath + "fieldEncounterData.csv");
+
+        CsvReader fieldReader;
+        if(outputDir.contains("Recompile"))
+        {
+            fieldReader= new CsvReader(csvDirPath + "fieldEncounterDataRecompile.csv");
+        }
+        else
+        {
+            fieldReader= new CsvReader(csvDirPath + "fieldEncounterData.csv");
+        }
+
         for(int i= 0; i < fieldReader.length()/13; i++)
         {
             int[] morningArr= new int[12];
@@ -731,7 +747,17 @@ public class EncounterEditor
         ArrayList<int[]> superLevelMins= new ArrayList<>();
         ArrayList<int[]> superLevelMaxs= new ArrayList<>();
         ArrayList<int[]> superEncounterList= new ArrayList<>();
-        CsvReader waterReader= new CsvReader(csvDirPath + "waterEncounterData.csv");
+
+        CsvReader waterReader;
+        if(outputDir.contains("Recompile"))
+        {
+            waterReader= new CsvReader(csvDirPath + "waterEncounterDataRecompile.csv");
+        }
+        else
+        {
+            waterReader= new CsvReader(csvDirPath + "waterEncounterData.csv");
+        }
+
         for(int i= 0; i < waterReader.length()/6; i++)
         {
             int[] rates= rateList.get(i);
@@ -802,7 +828,17 @@ public class EncounterEditor
         ArrayList<int[]> smashLevelMins= new ArrayList<>();
         ArrayList<int[]> smashLevelMaxs= new ArrayList<>();
         ArrayList<int[]> smashEncounterList= new ArrayList<>();
-        CsvReader smashReader= new CsvReader(csvDirPath + "smashEncounterData.csv");
+
+        CsvReader smashReader;
+        if(outputDir.contains("Recompile"))
+        {
+            smashReader= new CsvReader(csvDirPath + "smashEncounterDataRecompile.csv");
+        }
+        else
+        {
+            smashReader= new CsvReader(csvDirPath + "smashEncounterData.csv");
+        }
+
         for(int i= 0; i < smashReader.length()/3; i++)
         {
             int[] rates = rateList.get(i);
@@ -831,7 +867,17 @@ public class EncounterEditor
         }
 
         ArrayList<int[]> massOutbreakEncounterList= new ArrayList<>();
-        CsvReader outbreakReader= new CsvReader(csvDirPath + "massOutbreakEncounterData.csv");
+
+        CsvReader outbreakReader;
+        if(outputDir.contains("Recompile"))
+        {
+            outbreakReader= new CsvReader(csvDirPath + "massOutbreakEncounterDataRecompile.csv");
+        }
+        else
+        {
+            outbreakReader= new CsvReader(csvDirPath + "massOutbreakEncounterData.csv");
+        }
+
         for(int i= 0; i < outbreakReader.length()/2;i++)
         {
             int[] outbreaks= new int[4];
@@ -851,7 +897,17 @@ public class EncounterEditor
 
         ArrayList<int[]> hoennSoundList= new ArrayList<>();
         ArrayList<int[]> sinnohSoundList= new ArrayList<>();
-        CsvReader soundReader= new CsvReader(csvDirPath + "soundEncounterData.csv");
+
+        CsvReader soundReader;
+        if(outputDir.contains("Recompile"))
+        {
+            soundReader= new CsvReader(csvDirPath + "soundEncounterDataRecompile.csv");
+        }
+        else
+        {
+            soundReader= new CsvReader(csvDirPath + "soundEncounterData.csv");
+        }
+
         for(int i= 0; i < soundReader.length()/3; i++)
         {
             int[] hoenn= new int[2];

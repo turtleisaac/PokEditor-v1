@@ -1,15 +1,12 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class PersonalEditor
 {
 
     public static void main(String[] args) throws IOException {
         PersonalEditor personalEditor= new PersonalEditor();
-        personalEditor.csvReformat("tmLearnsetData.csv");
+        personalEditor.csvToPersonal2("personalData.csv","tmLearnsetData.csv","moo");
     }
 
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
@@ -84,7 +81,7 @@ public class PersonalEditor
         Buffer personalBuffer;
         ArrayList<PersonalData> dataList= new ArrayList<>();
 
-        List<File> fileList = new ArrayList<>(Arrays.asList(new File(dataPath).listFiles())); //creates a List of File objects representing every file in specified parameter directory
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
 
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
@@ -389,6 +386,16 @@ public class PersonalEditor
         String personalPath= path + personalCsv;
         String tmPath= path + tmLearnsetCsv;
 
+        String outputPath;
+        if(outputDir.contains("Recompile"))
+        {
+            outputPath= path + "temp" + File.separator+ outputDir;
+        }
+        else
+        {
+            outputPath= path + File.separator + outputDir;
+        }
+
         int xValue;
         int yValue;
 
@@ -402,9 +409,9 @@ public class PersonalEditor
             throw new RuntimeException("The provided TM learnset data file is not a .csv");
         }
 
-        if(!new File(path + "temp" + File.separator + outputDir).exists())
+        if(!new File(outputPath).exists())
         {
-            if(!new File(path + "temp" + File.separator + outputDir).mkdir())
+            if(!new File(outputPath).mkdir())
             {
                 throw new RuntimeException("Could not create output directory");
             }
@@ -431,7 +438,6 @@ public class PersonalEditor
                 personalLines.set(row, line.substring(line.indexOf(",")+1));
             }
             personalLines.set(row,personalLines.get(row).substring(0,personalLines.get(row).length()-1).trim());
-            //System.out.println(personalLines.get(row));
         }
 
         String[] csvRow;
@@ -603,26 +609,22 @@ public class PersonalEditor
 
 
         CsvReader csvReader= new CsvReader(tmPath);
-        csvReader.next();
-        String[] tmBinaryStrings= new String[csvReader.length()-1];
-        for(int i= 0; i < tmBinaryStrings.length; i++)
+        csvReader.skipLine();
+        BitStream[] tmLearnsetData = new BitStream[csvReader.length()-1];
+        for(int i= 0; i < tmLearnsetData.length; i++)
         {
-            tmBinaryStrings[i]= "0000000000000000000000000000";
-            String[] thisLine= reverse(csvReader.next());
-            for (String str: thisLine)
-            {
-                if(str.equals("true"))
-                {
-                    tmBinaryStrings[i]+= 1;
-                }
-                if(str.equals("false"))
-                {
-                    tmBinaryStrings[i]+= 0;
-                }
+            tmLearnsetData[i] = new BitStream();
+
+            String[] strs = csvReader.next();
+            for (String str : strs) {
+                tmLearnsetData[i].append(Boolean.parseBoolean(str));
             }
+
+            tmLearnsetData[i].append(false, 28);
+            System.out.println(tmLearnsetData[i]);
         }
 
-        String outputPath= path + "temp" + File.separator + outputDir + File.separator;
+        outputPath+= File.separator;
         BinaryWriter writer;
         for(int i= 0; i < personalData.size(); i++)
         {
@@ -635,9 +637,237 @@ public class PersonalEditor
             writer.writeShort((short)data.getRareItem());
             writer.writeBytes(data.getGenderRatio(),data.getHatchMultiplier(),data.getBaseHappiness(),data.getExpRate(),data.getEggGroup1(),data.getEggGroup2(),data.getAbility1(),data.getAbility2(),data.getRunChance(),data.getDexColor());
             writer.writeBytes(0x00,0x00);
-            //System.out.println(tmBinaryStrings[i]);
-            writer.writeLong(parseLong(tmBinaryStrings[i].substring(tmBinaryStrings[i].length()/2)));
-            writer.writeLong(parseLong(tmBinaryStrings[i].substring(0,tmBinaryStrings[i].length()/2)));
+            System.out.println(i + ":   " + tmLearnsetData[i]);
+            writer.write(tmLearnsetData[i].toBytes());
+        }
+    }
+
+    public void csvToPersonal2(String personalCsv, String tmLearnsetCsv, String outputDir) throws IOException
+    {
+        String personalPath= path + personalCsv;
+        String tmPath= path + tmLearnsetCsv;
+
+        String outputPath;
+        if(outputDir.contains("Recompile"))
+        {
+            outputPath= path + "temp" + File.separator+ outputDir;
+        }
+        else
+        {
+            outputPath= path + File.separator + outputDir;
+        }
+
+        int xValue;
+        int yValue;
+
+        if(!personalCsv.substring(personalCsv.length()-4).equals(".csv"))
+        {
+            throw new RuntimeException("The provided personal data file is not a .csv");
+        }
+        if(!tmLearnsetCsv.substring(tmLearnsetCsv.length()-4).equals(".csv"))
+        {
+            throw new RuntimeException("The provided TM learnset data file is not a .csv");
+        }
+
+        if(!new File(outputPath).exists() && !new File(outputPath).mkdirs())
+        {
+            throw new RuntimeException("Could not create output directory");
+        }
+
+        ArrayList<PersonalData> personalList= new ArrayList<>();
+        CsvReader personalReader= new CsvReader(personalPath);
+
+        long[][] tmLongs= new long[personalReader.length()][2];
+        CsvReader tmReader= new CsvReader(tmPath);
+        for(int i= 0; i < personalReader.length(); i++)
+        {
+            String[] mon= personalReader.next();
+            String[] tmLearnset= tmReader.next();
+            int finalI = i;
+            personalList.add(new PersonalData() {
+                @Override
+                public int getNum() {
+                    return finalI;
+                }
+
+                @Override
+                public int getHP() {
+                    return Integer.parseInt(mon[0]);
+                }
+
+                @Override
+                public int getAtk() {
+                    return Integer.parseInt(mon[1]);
+                }
+
+                @Override
+                public int getDef() {
+                    return Integer.parseInt(mon[2]);
+                }
+
+                @Override
+                public int getSpe() {
+                    return Integer.parseInt(mon[3]);
+                }
+
+                @Override
+                public int getSpAtk() {
+                    return Integer.parseInt(mon[4]);
+                }
+
+                @Override
+                public int getSpDef() {
+                    return Integer.parseInt(mon[5]);
+                }
+
+                @Override
+                public int getType1() {
+                    return getType(mon[6]);
+                }
+
+                @Override
+                public int getType2() {
+                    return getType(mon[7]);
+                }
+
+                @Override
+                public int getCatchRate() {
+                    return Integer.parseInt(mon[8]);
+                }
+
+                @Override
+                public int getBaseExp() {
+                    return Integer.parseInt(mon[9]);
+                }
+
+                @Override
+                public int getHpEv() {
+                    return Integer.parseInt(mon[10]);
+                }
+
+                @Override
+                public int getSpeEv() {
+                    return Integer.parseInt(mon[11]);
+                }
+
+                @Override
+                public int getAtkEv() {
+                    return Integer.parseInt(mon[12]);
+                }
+
+                @Override
+                public int getDefEv() {
+                    return Integer.parseInt(mon[13]);
+                }
+
+                @Override
+                public int getSpAtkEv() {
+                    return Integer.parseInt(mon[14]);
+                }
+
+                @Override
+                public int getSpDefEv() {
+                    return Integer.parseInt(mon[15]);
+                }
+
+                @Override
+                public int getPadding() {
+                    return 0;
+                }
+
+                @Override
+                public int getUncommonItem() {
+                    return getItem(mon[16]);
+                }
+
+                @Override
+                public int getRareItem() {
+                    return getItem(mon[17]);
+                }
+
+                @Override
+                public int getGenderRatio() {
+                    return Integer.parseInt(mon[18]);
+                }
+
+                @Override
+                public int getHatchMultiplier() {
+                    return Integer.parseInt(mon[19]);
+                }
+
+                @Override
+                public int getBaseHappiness() {
+                    return Integer.parseInt(mon[20]);
+                }
+
+                @Override
+                public int getExpRate() {
+                    return getGrowthRate(mon[21]);
+                }
+
+                @Override
+                public int getEggGroup1() {
+                    return getEggGroup(mon[22]);
+                }
+
+                @Override
+                public int getEggGroup2() {
+                    return getEggGroup(mon[23]);
+                }
+
+                @Override
+                public int getAbility1() {
+                    return getAbility(mon[24]);
+                }
+
+                @Override
+                public int getAbility2() {
+                    return getAbility(mon[25]);
+                }
+
+                @Override
+                public int getRunChance() {
+                    return Integer.parseInt(mon[26]);
+                }
+
+                @Override
+                public int getDexColor() {
+                    return Integer.parseInt(mon[27]);
+                }
+
+                @Override
+                public boolean getTm(int idx) {
+                    assert idx >= 0 && idx < 128;
+                    return tmLearnset[idx].toLowerCase().equals("true");
+                }
+            });
+
+            StringBuilder tmString= new StringBuilder("0000000000000000000000000000");
+            for(int tm= 100; tm != -1; tm--)
+            {
+                if(personalList.get(i).getTm(tm))
+                {
+                    tmString.append("1");
+                }
+                else
+                {
+                    tmString.append("0");
+                }
+            }
+            tmLongs[i][0]= Long.parseLong(tmString.substring(0,64),2);
+            tmLongs[i][1]= Long.parseLong(tmString.substring(64),2);
+        }
+
+        BinaryWriter writer;
+        for(int i= 0; i < personalList.size(); i++)
+        {
+            writer= new BinaryWriter(outputPath + File.separator + i + ".bin");
+            PersonalData personalData= personalList.get(i);
+
+            writer.writeBytes(personalData.getHP(),personalData.getAtk(),personalData.getDef(),personalData.getSpe(),personalData.getSpAtk(),personalData.getSpDef(),personalData.getType1(),personalData.getType2(),personalData.getCatchRate(),personalData.getBaseExp());
+            writer.writeShort(parseShort(Integer.toBinaryString(personalData.getHpEv()),Integer.toBinaryString(personalData.getSpeEv()),Integer.toBinaryString(personalData.getAtkEv()),Integer.toBinaryString(personalData.getDefEv()),Integer.toBinaryString(personalData.getSpAtkEv()),Integer.toBinaryString(personalData.getSpDefEv()),"0000"));
+            writer.writeShorts(personalData.getUncommonItem(),personalData.getRareItem());
+            writer.writeBytes();
         }
     }
 
@@ -904,5 +1134,13 @@ public class PersonalEditor
             arr[arr.length-i-1]= foo;
         }
         return arr;
+    }
+
+    private static byte toByte(String[] arr) {
+        int ret = 0;
+        for (int i=0; i<arr.length; i++) {
+            ret |= (Boolean.parseBoolean(arr[i])?1:0) << i;
+        }
+        return (byte) ret;
     }
 }
