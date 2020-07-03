@@ -7,6 +7,8 @@ Next up is the learnset narc, which kind of speaks for itself. Each entry is def
 
 The next narc is the Evolutions narc.  You can implement the method of evolution, what is required to evolve (representing a level, item, species, move, etc... depending on the selected method), and the resulting species. Each species has a maximum of 7 evolutions. If a pokemon has no evolution in a slot, it should have "None" as the defined method, the "Required" column should be left blank, and the "Result" column should contain "~" (tilde, the squiggly line)
 
+HGSS Encounters:
+
 Lastly is the final narc (for now), the Encounters narc. With it, you can firstly change (on a by-area basis) (editing map header data is required to edit the associated encounter data for maps using that header) the master encounter rates for field encounters, water encounters (individual rates for each rod and surf), and rock smash encounters (all rates are out of 255).
 
 For field encounters you can edit the species that appears in any of 36 encounter slots: 12 for morning, 12 for day, 12 for night. Each slot for all three times share a hard-coded encounter rate and user-defined level (see program output to see what I mean). To make one species appear more frequently and at varying levels, simply put it in more encounter slots and vary the levels for those slots.
@@ -20,3 +22,7 @@ Mass Outbreak/ Swarm data has four entries per-area, representing a species that
 Pastoral/ Meridian Sound (Hoenn/ Sinnoh Sound) editing is super simple, all you need is to define species that appear in two slots for each area. The levels of these slots are defined by the field encounter slot 1 and slot 2 levels.
 
 To finish off the encounter data editor, if you wish to have no encounter present in a slot, enter in "~" (tilde, the squiggly line) as the pokemon name. Level/ min level/ max level should be set to 0 for those null entries.
+
+DPPT Encounters:
+
+Self explanatory really, use the HGSS documentation + common sense to figure it out
