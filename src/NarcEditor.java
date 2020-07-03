@@ -349,7 +349,7 @@ public class NarcEditor
         narcWriter.write(fimgBuf.reader().getBuffer()); //writes the entire fimg buffer
         narcWriter.close(); //closes writer and flushes data
 
-        System.out.println("Process completed. Output file can be found at: " + path + "temp" + File.separator + name + ".narc");
+//        System.out.println("Process completed. Output file can be found at: " + path + "temp" + File.separator + name + ".narc");
 
     }
 

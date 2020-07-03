@@ -1,3 +1,6 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import javax.management.relation.RoleUnresolved;
 import java.io.*;
 import java.util.*;
 
@@ -87,6 +90,15 @@ public class SinnohEncounterEditor
     {
         dataPath+= encounterDir;
         ArrayList<SinnohEncounterData> dataList= new ArrayList<>();
+        String tempPath= dataPath.substring(0,dataPath.lastIndexOf(File.separator)+1) + "temp";
+
+        System.out.println(tempPath);
+        if(!new File(tempPath).exists() && !new File(tempPath).mkdir())
+        {
+            throw new RuntimeException("Could not create temp directory. Check write perms.");
+        }
+        tempPath+= File.separator;
+
 
         List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
@@ -146,7 +158,12 @@ public class SinnohEncounterEditor
             int radar3= buffer.readInt();
             int radar4= buffer.readInt();
             int[] radarMons= new int[] {radar1,radar2,radar3,radar4};
-            buffer.skipBytes(0x18);
+
+//            buffer.skipBytes(0x18);
+            byte[] padding= buffer.readBytes(0x18);
+            BinaryWriter writer= new BinaryWriter(tempPath + i);
+            writer.write(padding);
+            writer.close();
 
             int ruby1= buffer.readInt();
             int ruby2= buffer.readInt();
@@ -576,6 +593,16 @@ public class SinnohEncounterEditor
 
     public void csvToEncounters(String csvDir, String outputDir) throws IOException
     {
+        String tempPath= path + "temp" + File.separator + "temp";
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(tempPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
+        fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
+
+        File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
+        sort(files); //sorts files numerically (0.bin, 1.bin, 2.bin, etc...)
+        File file;
+
+        tempPath+= File.separator;
+
         String outputPath;
         if(outputDir.contains("Recompile"))
         {
@@ -1504,7 +1531,21 @@ public class SinnohEncounterEditor
             writer.writeInts(encounterData.getNightEncounters());
 
             writer.writeInts(encounterData.getRadarEncounters());
-            writer.writePadding(0x18);
+
+            byte[] padding;
+            if(i >= files.length)
+            {
+                padding= new byte[0x18];
+                Arrays.fill(padding, (byte) 0);
+            }
+            else
+            {
+                file= files[i];
+                Buffer buffer= new Buffer(file.toString());
+                padding= buffer.readBytes((int)file.length());
+                buffer.close();
+            }
+            writer.write(padding);
 
             writer.writeInts(encounterData.getRuby());
             writer.writeInts(encounterData.getSapphire());
