@@ -1,0 +1,28 @@
+None
+Happiness
+Happiness (Day)
+Happiness (Night)
+Level
+Trade
+Trade (Item)
+Trade (Karrablast/ Shelmet)
+Use Item
+Level (Attack > Defense)
+Level (Attack = Defense)
+Level (Attack < Defense)
+Level (PID > 5)
+Level (PID < 5)
+Level (1 of 2)
+Level (2 of 2)
+Max Beauty
+Use Item (Male)
+Use Item (Female)
+Held Item
+Held Item (Night)
+Attack Known
+Pokemon in Party
+Level (Male)
+Level (Female)
+Level Up (Magnetic Field)
+Level Up (Mossy Rock)
+Level Up (Ice Rock)

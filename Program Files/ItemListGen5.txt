@@ -2,7 +2,7 @@ None
 Master Ball
 Ultra Ball
 Great Ball
-Poke Ball
+Poké Ball
 Safari Ball
 Net Ball
 Dive Ball
@@ -20,7 +20,7 @@ Antidote
 Burn Heal
 Ice Heal
 Awakening
-Parlyz Heal
+Paralyze Heal
 Full Restore
 Max Potion
 Hyper Potion
@@ -31,8 +31,8 @@ Max Revive
 Fresh Water
 Soda Pop
 Lemonade
-Moomoo Milk
-EnergyPowder
+Moomoo Milk III
+Energy Powder
 Energy Root
 Heal Powder
 Revival Herb
@@ -56,12 +56,12 @@ Old Gateau
 Guard Spec.
 Dire Hit
 X Attack
-X Defend
+X Defense
 X Speed
 X Accuracy
-X Special
+X Sp. Atk
 X Sp. Def
-Poke Doll
+Poké Doll
 Fluffy Tail
 Blue Flute
 Yellow Flute
@@ -81,10 +81,10 @@ Repel
 Sun Stone
 Moon Stone
 Fire Stone
-Thunderstone
+Thunder Stone
 Water Stone
 Leaf Stone
-TinyMushroom
+Tiny Mushroom
 Big Mushroom
 Pearl
 Big Pearl
@@ -111,42 +111,42 @@ Dawn Stone
 Oval Stone
 Odd Keystone
 Griseous Orb
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
+unknown
+unknown
+unknown
+Douse Drive
+Shock Drive
+Burn Drive
+Chill Drive
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+unknown
+Sweet Heart
 Adamant Orb
 Lustrous Orb
-Grass Mail
-Flame Mail
-Bubble Mail
-Bloom Mail
-Tunnel Mail
-Steel Mail
-Heart Mail
-Snow Mail
-Space Mail
-Air Mail
-Mosaic Mail
-Brick Mail
+Greet Mail
+Favored Mail
+RSVP Mail
+Thanks Mail
+Inquiry Mail
+Like Mail
+Reply Mail
+BridgeMail S
+BridgeMail D
+BridgeMail T
+BridgeMail V
+BridgeMail M
 Cheri Berry
 Chesto Berry
 Pecha Berry
@@ -162,9 +162,9 @@ Wiki Berry
 Mago Berry
 Aguav Berry
 Iapapa Berry
-Razz Berry
+Razz Berry III
 Bluk Berry
-Nanab Berry
+Nanab Berry III
 Wepear Berry
 Pinap Berry
 Pomeg Berry
@@ -211,7 +211,7 @@ Micle Berry
 Custap Berry
 Jaboca Berry
 Rowap Berry
-BrightPowder
+Bright Powder
 White Herb
 Macho Brace
 Exp. Share
@@ -220,12 +220,12 @@ Soothe Bell
 Mental Herb
 Choice Band
 King's Rock
-SilverPowder
-Amulet Coin
+Silver Powder
+Amulet Coin III
 Cleanse Tag
 Soul Dew
-DeepSeaTooth
-DeepSeaScale
+Deep Sea Tooth
+Deep Sea Scale
 Smoke Ball
 Everstone
 Focus Band
@@ -238,15 +238,15 @@ Light Ball
 Soft Sand
 Hard Stone
 Miracle Seed
-BlackGlasses
+Black Glasses
 Black Belt
 Magnet
 Mystic Water
 Sharp Beak
 Poison Barb
-NeverMeltIce
+Never-Melt Ice
 Spell Tag
-TwistedSpoon
+Twisted Spoon
 Charcoal
 Dragon Fang
 Silk Scarf
@@ -326,110 +326,110 @@ Dubious Disc
 Reaper Cloth
 Razor Claw
 Razor Fang
-TM01
-TM02
-TM03
-TM04
-TM05
-TM06
-TM07
-TM08
-TM09
-TM10
-TM11
-TM12
-TM13
-TM14
-TM15
-TM16
-TM17
-TM18
-TM19
-TM20
-TM21
-TM22
-TM23
-TM24
-TM25
-TM26
-TM27
-TM28
-TM29
-TM30
-TM31
-TM32
-TM33
-TM34
-TM35
-TM36
-TM37
-TM38
-TM39
-TM40
-TM41
-TM42
-TM43
-TM44
-TM45
-TM46
-TM47
-TM48
-TM49
-TM50
-TM51
-TM52
-TM53
-TM54
-TM55
-TM56
-TM57
-TM58
-TM59
-TM60
-TM61
-TM62
-TM63
-TM64
-TM65
-TM66
-TM67
-TM68
-TM69
-TM70
-TM71
-TM72
-TM73
-TM74
-TM75
-TM76
-TM77
-TM78
-TM79
-TM80
-TM81
-TM82
-TM83
-TM84
-TM85
-TM86
-TM87
-TM88
-TM89
-TM90
-TM91
-TM92
-HM01
-HM02
-HM03
-HM04
-HM05
-HM06
-HM07
-HM08
-???
+TM Dark
+TM Dragon
+TM Psychic
+TM Psychic
+TM Normal
+TM Poison
+TM Ice
+TM Fighting
+TM Poison
+TM Normal
+TM Fire
+TM Dark
+TM Ice
+TM Ice
+TM Normal
+TM Psychic
+TM Normal
+TM Water
+TM Psychic
+TM Normal
+TM Normal
+TM Grass
+TM Rock
+TM Electric
+TM Electric
+TM Ground
+TM Normal
+TM Ground
+TM Psychic
+TM Ghost
+TM Fighting
+TM Normal
+TM Psychic
+TM Poison
+TM Fire
+TM Poison
+TM Rock
+TM Fire
+TM Rock
+TM Flying
+TM Dark
+TM Normal
+TM Fire
+TM Psychic
+TM Normal
+TM Dark
+TM Fighting
+TM Normal
+TM Normal
+TM Fire
+TM Psychic
+TM Fighting
+TM Grass
+TM Normal
+TM Water
+TM Dark
+TM Electric
+TM Flying
+TM Fire
+TM Dark
+TM Fire
+TM Flying
+TM Dark
+TM Normal
+TM Ghost
+TM Dark
+TM Normal
+TM Normal
+TM Rock
+TM Normal
+TM Rock
+TM Electric
+TM Electric
+TM Steel
+TM Normal
+TM Bug
+TM Normal
+TM Ground
+TM Ice
+TM Rock
+TM Bug
+TM Dragon
+TM Normal
+TM Poison
+TM Psychic
+TM Grass
+TM Normal
+TM Flying
+TM Bug
+TM Normal
+TM Steel
+TM Psychic
+HM Normal
+HM Flying
+HM Water
+HM Normal
+HM Water
+HM Water
+unknown
+unknown
+Explorer Kit
 Loot Sack
 Rule Book
-Poke Radar
+Poké Radar
 Point Card
 Journal
 Seal Case
@@ -440,7 +440,7 @@ Works Key
 Old Charm
 Galactic Key
 Red Chain
-Town Map
+Town Map IV
 Vs. Seeker
 Coin Case
 Old Rod
@@ -450,7 +450,7 @@ Sprayduck
 Poffin Case
 Bicycle
 Suite Key
-Oakâ€™s Letter
+Oak's Letter
 Lunar Wing
 Member Card
 Azure Flute
@@ -461,21 +461,21 @@ Parcel
 Coupon 1
 Coupon 2
 Coupon 3
-Storage Key
-SecretPotion
+Storage Key IV
+Secret Potion
 Vs. Recorder
 Gracidea
-Secret Key
+Secret Key IV
 Apricorn Box
-UNOWN Report
+Unown Report
 Berry Pots
 Dowsing MCHN
 Blue Card
-SlowpokeTail
+Slowpoke Tail
 Clear Bell
 Card Key
 Basement Key
-SquirtBottle
+Squirt Bottle
 Red Scale
 Lost Item
 Pass
@@ -484,12 +484,12 @@ Silver Wing
 Rainbow Wing
 Mystery Egg
 Red Apricorn
-Ylw Apricorn
-Blu Apricorn
-Grn Apricorn
-Pnk Apricorn
-Wht Apricorn
-Blk Apricorn
+Blue Apricorn
+Yellow Apricorn
+Green Apricorn
+Pink Apricorn
+White Apricorn
+Black Apricorn
 Fast Ball
 Level Ball
 Lure Ball
@@ -502,36 +502,140 @@ Park Ball
 Photo Album
 GB Sounds
 Tidal Bell
-RageCandyBar
-framework.Data Card 01
-framework.Data Card 02
-framework.Data Card 03
-framework.Data Card 04
-framework.Data Card 05
-framework.Data Card 06
-framework.Data Card 07
-framework.Data Card 08
-framework.Data Card 09
-framework.Data Card 10
-framework.Data Card 11
-framework.Data Card 12
-framework.Data Card 13
-framework.Data Card 14
-framework.Data Card 15
-framework.Data Card 16
-framework.Data Card 17
-framework.Data Card 18
-framework.Data Card 19
-framework.Data Card 20
-framework.Data Card 21
-framework.Data Card 22
-framework.Data Card 23
-framework.Data Card 24
-framework.Data Card 25
-framework.Data Card 26
-framework.Data Card 27
+Rage Candy Bar
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
+framework.Data Card
 Jade Orb
 Lock Capsule
-Red Orb
-Blue Orb
+Red Orb IV
+Blue Orb IV
 Enigma Stone
+Prism Scale
+Eviolite
+Float Stone
+Rocky Helmet
+Air Balloon
+Red Card
+Ring Target
+Binding Band
+Absorb Bulb
+Cell Battery
+Eject Button
+Fire Gem
+Water Gem
+Electric Gem
+Grass Gem
+Ice Gem
+Fighting Gem
+Poison Gem
+Ground Gem
+Flying Gem
+Psychic Gem
+Bug Gem
+Rock Gem
+Ghost Gem
+Dragon Gem
+Dark Gem
+Steel Gem
+Normal Gem
+Health Wing
+Muscle Wing
+Resist Wing
+Genius Wing
+Clever Wing
+Swift Wing
+Pretty Wing
+Cover Fossil
+Plume Fossil
+Liberty Pass
+Pass Orb
+Dream Ball
+Poké Toy
+Prop Case
+Dragon Skull
+Balm Mushroom
+Big Nugget
+Pearl String
+Comet Shard
+Relic Copper
+Relic Silver
+Relic Gold
+Relic Vase
+Relic Band
+Relic Statue
+Relic Crown
+Casteliacone
+Dire Hit 2
+X Speed 2
+X Special 2
+X Sp. Def 2
+X Defend 2
+X Attack 2
+X Accuracy 2
+X Speed 3
+X Special 3
+X Sp. Def 3
+X Defend 3
+X Attack 3
+X Accuracy 3
+X Speed 6
+X Special 6
+X Sp. Def 6
+X Defend 6
+X Attack 6
+X Accuracy 6
+Ability Urge
+Item Drop
+Item Urge
+Reset Urge
+Dire Hit 3
+Light Stone
+Dark Stone
+TM Electric
+TM Fighting
+TM Dark
+Xtransceiver-m
+B2W2 Xtransceiver m
+God Stone
+Gram
+Gram
+Gram
+Xtransceiver-f
+B2W2 Xtransceiver f
+Medal Box
+DNA Splicers
+DNA Splicers
+Permit
+Oval Charm
+Shiny Charm
+Plasma Card
+Grubby Hanky
+Colress Machine
+Dropped Item-m
+Dropped Item-f
+Reveal Glass

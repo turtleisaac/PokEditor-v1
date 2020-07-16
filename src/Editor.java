@@ -1,3 +1,9 @@
+import encounters.johto.EncounterEditor;
+import evolutions.gen4.EvolutionEditor;
+import growth.GrowthEditor;
+import learnsets.LearnsetEditor;
+import personal.gen4.PersonalEditor;
+
 import java.io.*;
 
 public class Editor
@@ -61,7 +67,7 @@ public class Editor
                 break;
 
 //            case "headbutt":
-//                HeadbuttEncounterEditor headbuttEditor= new HeadbuttEncounterEditor();
+//                Encounters.Johto.HeadbuttEncounterEditor headbuttEditor= new Encounters.Johto.HeadbuttEncounterEditor();
 //                if(args[1].equals("toCsv")) {
 //                    headbuttEditor.headbuttToCsv("a252SS");
 //                } else if (args[1].equals("toHeadbutt")) {
