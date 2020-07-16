@@ -466,3 +466,6 @@ Dark Void
 Seed Flare
 Ominous Wind
 Shadow Force
+Hone Claws
+Wide Guard
+Guard Split

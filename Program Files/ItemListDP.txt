@@ -2,7 +2,7 @@ None
 Master Ball
 Ultra Ball
 Great Ball
-Poke Ball
+Poké Ball
 Safari Ball
 Net Ball
 Dive Ball
@@ -56,12 +56,12 @@ Old Gateau
 Guard Spec.
 Dire Hit
 X Attack
-X Defend
+X Defense
 X Speed
 X Accuracy
 X Special
 X Sp. Def
-Poke Doll
+Poké Doll
 Fluffy Tail
 Blue Flute
 Yellow Flute
@@ -110,29 +110,6 @@ Dusk Stone
 Dawn Stone
 Oval Stone
 Odd Keystone
-Griseous Orb
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
-???
 Adamant Orb
 Lustrous Orb
 Grass Mail
@@ -426,10 +403,10 @@ HM05
 HM06
 HM07
 HM08
-???
+Explorer Kit
 Loot Sack
 Rule Book
-Poke Radar
+Poké Radar
 Point Card
 Journal
 Seal Case
@@ -450,7 +427,7 @@ Sprayduck
 Poffin Case
 Bicycle
 Suite Key
-Oakâ€™s Letter
+Oak's Letter
 Lunar Wing
 Member Card
 Azure Flute
@@ -466,72 +443,3 @@ SecretPotion
 Vs. Recorder
 Gracidea
 Secret Key
-Apricorn Box
-UNOWN Report
-Berry Pots
-Dowsing MCHN
-Blue Card
-SlowpokeTail
-Clear Bell
-Card Key
-Basement Key
-SquirtBottle
-Red Scale
-Lost Item
-Pass
-Machine Part
-Silver Wing
-Rainbow Wing
-Mystery Egg
-Red Apricorn
-Ylw Apricorn
-Blu Apricorn
-Grn Apricorn
-Pnk Apricorn
-Wht Apricorn
-Blk Apricorn
-Fast Ball
-Level Ball
-Lure Ball
-Heavy Ball
-Love Ball
-Friend Ball
-Moon Ball
-Sport Ball
-Park Ball
-Photo Album
-GB Sounds
-Tidal Bell
-RageCandyBar
-framework.Data Card 01
-framework.Data Card 02
-framework.Data Card 03
-framework.Data Card 04
-framework.Data Card 05
-framework.Data Card 06
-framework.Data Card 07
-framework.Data Card 08
-framework.Data Card 09
-framework.Data Card 10
-framework.Data Card 11
-framework.Data Card 12
-framework.Data Card 13
-framework.Data Card 14
-framework.Data Card 15
-framework.Data Card 16
-framework.Data Card 17
-framework.Data Card 18
-framework.Data Card 19
-framework.Data Card 20
-framework.Data Card 21
-framework.Data Card 22
-framework.Data Card 23
-framework.Data Card 24
-framework.Data Card 25
-framework.Data Card 26
-framework.Data Card 27
-Jade Orb
-Lock Capsule
-Red Orb
-Blue Orb
-Enigma Stone

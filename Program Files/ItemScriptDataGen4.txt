@@ -1,0 +1,9 @@
+Heal 20 HP if HP falls below 50%
+Adamant Orb Effect
+Lustrous Orb Effect
+Heal Paralysis if afflicted while held
+Heal Sleep if afflicted while held
+Heal Poison if afflicted while held
+Heal Burn if afflicted while held
+Heal Freeze if afflicted while held
+Heal

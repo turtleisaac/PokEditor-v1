@@ -5,23 +5,25 @@ import evolutions.gen5.EvolutionEditorGen5;
 import framework.BinaryWriter;
 import framework.Buffer;
 import growth.GrowthEditor;
-import items.ItemEditorGen4;
-import items.ItemEditorGen5;
 import learnsets.LearnsetEditor;
 import narctowl.Narctowl;
 import personal.gen4.PersonalEditor;
 import personal.gen5.Gen5PersonalEditor1;
 import personal.gen5.Gen5PersonalEditor2;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
 
-public class DsRomReader
+public class DsFileFinder
 {
 
     public static void main(String[] args) throws Exception
     {
-        DsRomReader reader= new DsRomReader();
+        DsFileFinder reader= new DsFileFinder();
         reader.readRom(args);
     }
 
@@ -46,7 +48,7 @@ public class DsRomReader
     private static int GROWTH;
     private static int ENCOUNTER;
 
-    public DsRomReader()
+    public DsFileFinder()
     {
         Arrays.fill(romCapacities,"");
         romCapacities[6]= "8MB";
@@ -76,9 +78,8 @@ public class DsRomReader
         buffer= new Buffer(rom);
         readHeader();
         readFatb();
-        grabFile(args);
-        //System.out.println("Identical directories: " + compareDirs(new File(tempPathUnpack),new File(tempPathUnpack + "Recompile")));
-        clearDirectory(new File(path + "temp"));
+        findFile(args);
+//        clearDirectory(new File(path + "temp"));
     }
 
     public void readHeader() throws IOException
@@ -475,33 +476,33 @@ public class DsRomReader
                 firstFileID= D_P_PT_FIRST_FILE;
                 break;
         }
-        System.out.println("First file ID: " + firstFileID + "\n");
+//        System.out.println("First file ID: " + firstFileID + "\n");
 
         int fatbPos= 0;
         buffer.skipTo(romData.getFatbOffset());
-        System.out.println(buffer.getPosition() + "\n");
+//        System.out.println(buffer.getPosition() + "\n");
         fimgEntries= new ArrayList<>();
-        System.out.println("Length: " + romData.getFatbLength()/8 + " files");
+//        System.out.println("Length: " + romData.getFatbLength()/8 + " files");
         int lastEnd= 0;
 
 
         for(int i= 0; i < romData.getFatbLength()/8; i++)
         {
-            System.out.println("Fatb Offset: " + buffer.getPosition());
+//            System.out.println("Fatb Offset: " + buffer.getPosition());
             long startingOffset= buffer.readUIntI();
             long endingOffset= buffer.readUIntI();
             fatbPos+= 4;
-            System.out.println("ID: 0x" + Integer.toHexString(i));
-            System.out.println("Starting Offset: " +startingOffset);
-            System.out.println("Ending Offset: " + endingOffset);
-            System.out.println("Length: " + (endingOffset-startingOffset) + "\n");
+//            System.out.println("ID: 0x" + Integer.toHexString(i));
+//            System.out.println("Starting Offset: " +startingOffset);
+//            System.out.println("Ending Offset: " + endingOffset);
+//            System.out.println("Length: " + (endingOffset-startingOffset) + "\n");
 
             long gap= 0;
             if(i > firstFileID)
             {
                 gap= startingOffset-lastEnd;
             }
-            System.out.println(gap);
+//            System.out.println(gap);
 
             int finalI = i;
             long finalDiff = gap;
@@ -528,7 +529,7 @@ public class DsRomReader
             });
             lastEnd= (int) endingOffset;
         }
-        System.out.println("Number of recorded entries: " + fimgEntries.size());
+        System.out.println("Number of recorded entries: " + fimgEntries.size() + "\n");
 
 
     }
@@ -539,36 +540,63 @@ public class DsRomReader
     private static final int GROWTH_J = 0x84;
     private static final int ENCOUNTER_SS = 0x109;
     private static final int ENCOUNTER_HG = 0xA6;
-    private static final int ITEM_J = 0x92;
 
     private static final int PERSONAL_PT= 0x1A3;
     private static final int LEARNSET_PT = 0x1A7;
     private static final int EVOLUTION_PT = 0x1A1;
     private static final int GROWTH_PT = 0x1A2;
     private static final int ENCOUNTER_PT = 0x14A;
-    private static final int ITEM_PT = 0x192;
 
     private static final int PERSONAL_DP= 0x148;
     private static final int LEARNSET_DP = 0x147;
     private static final int EVOLUTION_DP = 0x144;
     private static final int GROWTH_DP = 0x145;
     private static final int ENCOUNTER_DP = 0x108;
-    private static final int ITEM_DP = 0x13A;
-    private static final int MOVE_DP = 0x158;
 
     private static final int PERSONAL_B2W2= 0x16B;
     private static final int LEARNSET_B2W2= 0x16D;
     private static final int EVOLUTION_B2W2= 0x16E;
     private static final int GROWTH_B2W2= 0x16C;
     private static final int ENCOUNTER_B2W2= 0x1D9;
-    private static final int ITEM_B2W2 = 0x173;
 
     private static final int PERSONAL_BW= 0x102;
     private static final int LEARNSET_BW= 0x104;
     private static final int EVOLUTION_BW= 0x105;
     private static final int GROWTH_BW= 0x103;
     private static final int ENCOUNTER_BW= 0x170;
-    private static final int ITEM_BW = 0;
+
+    public void findFile(String[] args) throws IOException
+    {
+        int toFind= Integer.parseInt(args[0]);
+        System.out.println(toFind);
+        Buffer romBuffer;
+        FimgEntry fimgEntry;
+
+        for(int i= 0; i < fimgEntries.size(); i++)
+        {
+            fimgEntry= fimgEntries.get(i);
+            romBuffer= new Buffer(rom);
+            romBuffer.skipTo((int)fimgEntry.getStartingOffset());
+            String magic= romBuffer.readString(4);
+            if(magic.equals("NARC"))
+            {
+                System.out.println("Narc\n");
+                romBuffer.skipBytes(20);
+                int numFiles= romBuffer.readInt();
+                if(numFiles == toFind || numFiles == toFind-1 || numFiles == toFind+1)
+                {
+                    System.out.print("Current file: 0x" + Integer.toHexString(i) + ", ");
+                    System.out.println("numFiles: " + numFiles);
+                    System.out.println("File length: " + (fimgEntry.getEndingOffset()-fimgEntry.getStartingOffset()) + "\n");
+
+                }
+            }
+            romBuffer.close();
+        }
+    }
+
+
+
 
     public void grabFile(String[] args) throws Exception
     {
@@ -610,11 +638,6 @@ public class DsRomReader
                         length= (int) fimgEntries.get(ENCOUNTER_HG).getEndingOffset()-fileOffset;
                         fileID= ENCOUNTER_HG;
                         break;
-                    case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_J;
-                        break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
@@ -646,11 +669,6 @@ public class DsRomReader
                         fileOffset= (int) fimgEntries.get(ENCOUNTER_SS).getStartingOffset();
                         length= (int) fimgEntries.get(ENCOUNTER_SS).getEndingOffset()-fileOffset;
                         fileID= ENCOUNTER_SS;
-                        break;
-                    case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_J;
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -684,11 +702,6 @@ public class DsRomReader
                         length= (int) fimgEntries.get(ENCOUNTER_PT).getEndingOffset()-fileOffset;
                         fileID= ENCOUNTER_PT;
                         break;
-                    case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_PT)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_PT)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_PT;
-                        break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
@@ -721,11 +734,6 @@ public class DsRomReader
                         length= (int) fimgEntries.get(ENCOUNTER_DP).getEndingOffset()-fileOffset;
                         fileID= ENCOUNTER_DP;
                         break;
-                    case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_DP;
-                        break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
@@ -757,11 +765,6 @@ public class DsRomReader
                         fileOffset= (int) fimgEntries.get(ENCOUNTER_DP -1).getStartingOffset();
                         length= (int) fimgEntries.get(ENCOUNTER_DP -1).getEndingOffset()-fileOffset;
                         fileID= ENCOUNTER_DP -1;
-                        break;
-                    case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_DP;
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -797,11 +800,6 @@ public class DsRomReader
                         length= (int) fimgEntries.get(ENCOUNTER_BW).getEndingOffset()-fileOffset;
                         fileID= ENCOUNTER_BW;
                         throw new RuntimeException("Not supported yet");
-                    case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_BW)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_BW)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_BW;
-                        break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
@@ -836,11 +834,6 @@ public class DsRomReader
                         length= (int) fimgEntries.get(ENCOUNTER_B2W2).getEndingOffset()-fileOffset;
                         fileID= ENCOUNTER_B2W2;
                         throw new RuntimeException("Not supported yet");
-                    case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_B2W2)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_B2W2)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_B2W2;
-                        break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
@@ -878,11 +871,6 @@ public class DsRomReader
                                 length= (int) fimgEntries.get(ENCOUNTER_DP -1).getEndingOffset()-fileOffset;
                                 fileID= ENCOUNTER_DP -1;
                                 break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_DP;
-                                break;
                             default:
                                 throw new RuntimeException("Invalid arguments");
                         }
@@ -914,11 +902,6 @@ public class DsRomReader
                                 fileOffset= (int) fimgEntries.get(ENCOUNTER_DP).getStartingOffset();
                                 length= (int) fimgEntries.get(ENCOUNTER_DP).getEndingOffset()-fileOffset;
                                 fileID= ENCOUNTER_DP;
-                                break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_DP;
                                 break;
                             default:
                                 throw new RuntimeException("Invalid arguments");
@@ -952,11 +935,6 @@ public class DsRomReader
                                 length= (int) fimgEntries.get(ENCOUNTER_PT).getEndingOffset()-fileOffset;
                                 fileID= ENCOUNTER_PT;
                                 break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_PT)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_PT)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_PT;
-                                break;
                             default:
                                 throw new RuntimeException("Invalid arguments");
                         }
@@ -989,11 +967,6 @@ public class DsRomReader
                                 length= (int) fimgEntries.get(ENCOUNTER_HG).getEndingOffset()-fileOffset;
                                 fileID= ENCOUNTER_HG;
                                 break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_J;
-                                break;
                             default:
                                 throw new RuntimeException("Invalid arguments");
                         }
@@ -1025,11 +998,6 @@ public class DsRomReader
                                 fileOffset= (int) fimgEntries.get(ENCOUNTER_SS).getStartingOffset();
                                 length= (int) fimgEntries.get(ENCOUNTER_SS).getEndingOffset()-fileOffset;
                                 fileID= ENCOUNTER_SS;
-                                break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_J;
                                 break;
                             default:
                                 throw new RuntimeException("Invalid arguments");
@@ -1065,11 +1033,6 @@ public class DsRomReader
                                 length= (int) fimgEntries.get(ENCOUNTER_BW).getEndingOffset()-fileOffset;
                                 fileID= ENCOUNTER_BW;
                                 throw new RuntimeException("Not supported yet");
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_BW)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_BW)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_BW;
-                                break;
                             default:
                                 throw new RuntimeException("Invalid arguments");
                         }
@@ -1104,11 +1067,6 @@ public class DsRomReader
                                 length= (int) fimgEntries.get(ENCOUNTER_B2W2).getEndingOffset()-fileOffset;
                                 fileID= ENCOUNTER_B2W2;
                                 throw new RuntimeException("Not supported yet");
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_B2W2)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_B2W2)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_B2W2;
-                                break;
                             default:
                                 throw new RuntimeException("Invalid arguments");
                         }
@@ -1131,8 +1089,8 @@ public class DsRomReader
         {
             writer.writeByte((byte) buffer.readByte());
         }
-        Narctowl narc= new Narctowl(); //creates new narcs.Narctowl object
-        narc.unpack(tempPath); //run narcs.Narctowl.unpack() with narc extracted from rom as parameter
+        Narctowl narc= new Narctowl(); //creates new NarcEditor object
+        narc.unpack(tempPath); //run NarcEditor.unpack() with narc extracted from rom as parameter
 
         switch (args[0].toLowerCase()) {
             case "personal":
@@ -1206,6 +1164,7 @@ public class DsRomReader
                 }
 
 
+
                 break;
             case "growth":
                 GrowthEditor growthEditor = new GrowthEditor();
@@ -1237,29 +1196,6 @@ public class DsRomReader
                         encounterEditor.encountersToCsv(tempPathUnpack);
                     } else if (args[1].equals("toEncounters")) {
                         encounterEditor.csvToEncounters(args[2],args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
-                }
-            case "items":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
-                {
-                    ItemEditorGen5 itemEditor = new ItemEditorGen5();
-                    if (args[1].equals("toCsv")) {
-                        itemEditor.itemsToCsv(tempPathUnpack);
-                    } else if (args[1].equals("toItems")) {
-                        itemEditor.csvToItems(tempPathUnpack, args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
-                }
-                else
-                {
-                    ItemEditorGen4 itemEditor = new ItemEditorGen4();
-                    if (args[1].equals("toCsv")) {
-                        itemEditor.itemsToCsv(tempPathUnpack);
-                    } else if (args[1].equals("toItems")) {
-                        itemEditor.csvToItems(tempPathUnpack, args[3]);
                     } else {
                         throw new RuntimeException("Invalid arguments");
                     }
@@ -1306,6 +1242,7 @@ public class DsRomReader
                 }
                 else
                 {
+                    System.out.println("moo");
                     EvolutionEditor evolutionEditor = new EvolutionEditor();
                     evolutionEditor.csvToEvolutions("EvolutionDataRecompile.csv", type + "Recompile");
                 }
@@ -1326,19 +1263,6 @@ public class DsRomReader
                 {
                     SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
                     encounterEditor.csvToEncounters("encounters",type + "Recompile");
-                }
-
-                break;
-            case "items":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
-                {
-                    ItemEditorGen5 itemEditor = new ItemEditorGen5();
-                    itemEditor.csvToItems("Items",type + "Recompile");
-                }
-                else
-                {
-                    ItemEditorGen4 itemEditor = new ItemEditorGen4();
-                    itemEditor.csvToItems("Items.csv",type + "Recompile");
                 }
 
                 break;
@@ -1614,7 +1538,7 @@ public class DsRomReader
 
     private void sort (File arr[])
     {
-        Arrays.sort(arr, Comparator.comparingInt(DsRomReader::fileToInt));
+        Arrays.sort(arr, Comparator.comparingInt(DsFileFinder::fileToInt));
     }
 
     private static int fileToInt (File f)
