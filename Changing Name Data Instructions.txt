@@ -4,13 +4,11 @@ If your hack has an expanded dex, edited ability list, edited item list, edited 
 
 Replace entries with what you've replaced them with (if applicable), add new entries (if applicable), or do anything else with the data as long as you are aware that the data must be in the same order as its actual indexes and offsets within the game.
 
+Below are some examples of files and what they control for program output:
 AbilityList.txt- List of Abilities
 EntryData.txt- List of Species Names
-HeadbuttLocations.txt- List of locations for Headbutt encounter data
-IndoorLocations.txt- List of locations classified as indoors (for encounter data listed in pokedex)
 ItemList.txt- List of items
 Locations.txt- List of locations for regular encounter data
 MoveList.txt- List of moves
-OutdoorLocations.txt- List of locations classified as outdoors (for encounter data listed in pokedex)
 TmList.txt- List containing TM01-TM92, HM01-HM08
 TmNameList.txt- List containing the name associated with each TM/ HM.

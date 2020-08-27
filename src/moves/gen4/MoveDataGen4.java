@@ -1,6 +1,6 @@
-package moves;
+package moves.gen4;
 
-public interface MoveData
+public interface MoveDataGen4
 {
     int getEffect();
     short getCategory();

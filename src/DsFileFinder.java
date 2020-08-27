@@ -10,13 +10,19 @@ import narctowl.Narctowl;
 import personal.gen4.PersonalEditor;
 import personal.gen5.Gen5PersonalEditor1;
 import personal.gen5.Gen5PersonalEditor2;
+import sun.misc.BASE64Encoder;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class DsFileFinder
 {
@@ -42,11 +48,11 @@ public class DsFileFinder
     private int newFileLength;
     private String type;
 
-    private static int PERSONAL;
-    private static int LEARNSET;
-    private static int EVOLUTION;
-    private static int GROWTH;
-    private static int ENCOUNTER;
+    private HashMap<String,String> map1 = new HashMap<>();
+    private HashMap<String,String> map2 = new HashMap<>();
+    private boolean rom2= true;
+    private String rom2Name;
+    private String rom1Name;
 
     public DsFileFinder()
     {
@@ -58,33 +64,40 @@ public class DsFileFinder
         romCapacities[10]= "128MB";
         romCapacities[11]= "256MB";
         romCapacities[12]= "512MB";
-
-        if(new File(path + "Program Files" + File.separator + "fileActivator.hex").exists())
-        {
-            Buffer activatorBuffer= new Buffer(path + "Program Files" + File.separator + "fileActivator.hex");
-            PERSONAL= activatorBuffer.readByte();
-            LEARNSET= activatorBuffer.readByte();
-            EVOLUTION= activatorBuffer.readByte();
-            GROWTH= activatorBuffer.readByte();
-            ENCOUNTER= activatorBuffer.readByte();
-        }
     }
 
     public void readRom(String[] args) throws Exception
     {
-        String rom= args[args.length-1];
-        this.rom= path + rom;
-        String substring = rom.substring(0, rom.length() - 4);
-        buffer= new Buffer(rom);
+        String rom2= args[args.length-1];
+        String rom1= args[args.length-2];
+        this.rom= path + rom2;
+        buffer= new Buffer(rom2);
         readHeader();
         readFatb();
-        findFile(args);
-//        clearDirectory(new File(path + "temp"));
+        map1= getAllFiles();
+        this.rom2= false;
+        fimgEntries= new ArrayList<>();
+
+        this.rom= path + rom1;
+        buffer= new Buffer(rom1);
+        readHeader();
+        readFatb();
+        map2= getAllFiles();
+
+        compareAllFiles();
     }
 
     public void readHeader() throws IOException
     {
         String title= buffer.readString(12).trim();
+        if(rom2)
+        {
+            rom2Name= title;
+        }
+        else
+        {
+            rom1Name= title;
+        }
         String gameCode= buffer.readString(4);
         String makerCode= buffer.readString(2);
         int deviceCode= buffer.readByte();
@@ -534,6 +547,11 @@ public class DsFileFinder
 
     }
 
+    public void readFntb()
+    {
+
+    }
+
     private static final int PERSONAL_J = 0x83;
     private static final int LEARNSET_J = 0xA2;
     private static final int EVOLUTION_J = 0xA3;
@@ -593,6 +611,60 @@ public class DsFileFinder
             }
             romBuffer.close();
         }
+    }
+
+
+    public HashMap<String,String> getAllFiles() throws IOException, NoSuchAlgorithmException
+    {
+        Buffer romBuffer;
+        FimgEntry fimgEntry;
+        HashMap<String,String> map= new HashMap<>();
+
+        for(int i= 0; i < fimgEntries.size(); i++)
+        {
+            fimgEntry= fimgEntries.get(i);
+            romBuffer= new Buffer(rom);
+            romBuffer.skipTo((int)fimgEntry.getStartingOffset());
+            System.out.println(romData.getTitle() + " File: 0x" + Integer.toHexString(i));
+
+            map.put(getHash(romBuffer.readBytes((int) (fimgEntry.getEndingOffset()-fimgEntry.getStartingOffset()))),"0x" + Integer.toHexString(i));
+
+            romBuffer.close();
+        }
+        System.out.println("\n-------------------------------\n");
+        return map;
+    }
+
+    public String getHash(byte[] contents) throws NoSuchAlgorithmException
+    {
+        MessageDigest digest= MessageDigest.getInstance("SHA-256");
+        digest.update(contents);
+
+        return new BASE64Encoder().encode(digest.digest());
+    }
+
+
+    public void compareAllFiles() throws IOException
+    {
+        BufferedWriter writer= new BufferedWriter(new FileWriter(path + "File Comparator Log.txt"));
+        int numIdentical= 0;
+
+        for(String file1 : map1.keySet())
+        {
+            System.out.println(rom1Name + " file with ID " + map1.get(file1) + " is identical to: " + rom2Name +  " file with ID:");
+            writer.write(rom1Name + " file with ID " + map1.get(file1) + " is identical to: " + rom2Name + " file with ID:\n");
+            if(map2.containsKey(file1))
+            {
+                System.out.println("  " + map2.get(file1));
+                writer.write("  " + map2.get(file1));
+                numIdentical++;
+            }
+            System.out.println();
+            writer.write("\n\n");
+            writer.flush();
+        }
+        System.out.println("Number of identical files between " + rom1Name + " and " + rom2Name + ": " + numIdentical);
+        writer.write("Number of identical files between " + rom1Name + " and " + rom2Name + ": " + numIdentical + "\n");
     }
 
 

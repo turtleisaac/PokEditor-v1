@@ -447,7 +447,7 @@ public class EncounterEditor
             int idx= 0;
             for(int row= 0; row < area.length; row++)
             {
-                area[row][0]= fieldRateArr[idx] + "%";
+                area[row][0]= fieldRateArr[idx] + "";
                 System.out.print(area[row][0] + ", ");
                 area[row][1]= nameData[encounterData.getFieldMorning()[idx]];
                 System.out.print(area[row][1] + ", ");
@@ -475,7 +475,7 @@ public class EncounterEditor
             int idx= 0;
             for(int row= 0; row < area.length; row++)
             {
-                area[row][0]= waterRateArr[idx] + "%";
+                area[row][0]= waterRateArr[idx] + "";
                 System.out.print(area[row][0] + ", ");
                 area[row][1]= nameData[encounterData.getSurfs()[idx]];
                 System.out.print(area[row][1] + ", ");
@@ -519,7 +519,7 @@ public class EncounterEditor
             int idx= 0;
             for(int row= 0; row < area.length; row++)
             {
-                area[row][0]= smashRateArr[idx] + "%";
+                area[row][0]= smashRateArr[idx] + "";
                 System.out.print(area[row][0] + ", ");
                 area[row][1]= nameData[encounterData.getSmashes()[idx]];
                 System.out.print(area[row][1] + ", ");

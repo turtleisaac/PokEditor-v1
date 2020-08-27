@@ -8,6 +8,8 @@ import growth.GrowthEditor;
 import items.ItemEditorGen4;
 import items.ItemEditorGen5;
 import learnsets.LearnsetEditor;
+import moves.gen4.MoveEditorGen4;
+import moves.gen5.MoveEditorGen5;
 import narctowl.Narctowl;
 import personal.gen4.PersonalEditor;
 import personal.gen5.Gen5PersonalEditor1;
@@ -30,6 +32,7 @@ public class DsRomReader
     private String rom;
     private String tempPath= "temp" + File.separator;
     private String tempPathUnpack= tempPath;
+    private String outputPath= tempPath + "rom";
     private Buffer buffer;
     private RomData romData;
     private ArrayList<FimgEntry> fimgEntries;
@@ -39,15 +42,12 @@ public class DsRomReader
     private int fileID;
     private int newFileLength;
     private String type;
-
-    private static int PERSONAL;
-    private static int LEARNSET;
-    private static int EVOLUTION;
-    private static int GROWTH;
-    private static int ENCOUNTER;
+    private ArrayList<Long> rootContents= new ArrayList<>();
 
     public DsRomReader()
     {
+        System.out.println("PokEditor is a tool written by Turtleisaac. All unauthorized or uncredited uses of this tool should be reported immediately. If you are using an authorized version of this tool, enjoy! (If you aren't using an authorized version, I am deeply disappointed)");
+
         Arrays.fill(romCapacities,"");
         romCapacities[6]= "8MB";
         romCapacities[7]= "16MB";
@@ -57,15 +57,7 @@ public class DsRomReader
         romCapacities[11]= "256MB";
         romCapacities[12]= "512MB";
 
-        if(new File(path + "Program Files" + File.separator + "fileActivator.hex").exists())
-        {
-            Buffer activatorBuffer= new Buffer(path + "Program Files" + File.separator + "fileActivator.hex");
-            PERSONAL= activatorBuffer.readByte();
-            LEARNSET= activatorBuffer.readByte();
-            EVOLUTION= activatorBuffer.readByte();
-            GROWTH= activatorBuffer.readByte();
-            ENCOUNTER= activatorBuffer.readByte();
-        }
+//        new File(outputPath).mkdirs();
     }
 
     public void readRom(String[] args) throws Exception
@@ -75,9 +67,12 @@ public class DsRomReader
         String substring = rom.substring(0, rom.length() - 4);
         buffer= new Buffer(rom);
         readHeader();
+//        readArm9();
+//        readArm7();
+//        readFntb();
         readFatb();
         grabFile(args);
-        //System.out.println("Identical directories: " + compareDirs(new File(tempPathUnpack),new File(tempPathUnpack + "Recompile")));
+//        System.out.println("Identical directories: " + compareDirs(new File(tempPathUnpack),new File(tempPathUnpack + "Recompile")));
         clearDirectory(new File(path + "temp"));
     }
 
@@ -452,6 +447,296 @@ public class DsRomReader
         System.out.println("End of header: " + buffer.getPosition() + "\n");
     }
 
+//    public void readFntb() throws IOException
+//    {
+//        buffer.skipTo(romData.getFntbOffset());
+//
+//        int fntbOffset= buffer.getPosition();
+//        int fntbEndOffset= buffer.getPosition() + romData.getFatbLength();
+//
+//        BinaryWriter writer= new BinaryWriter(path + "fntb.bin");
+//        writer.write(buffer.readBytes(romData.getFntbLength()));
+//        buffer.close();
+//
+//        buffer= new Buffer(rom);
+//        buffer.skipTo(romData.getFntbOffset());
+//
+//        int subTableOffset= buffer.readInt();
+//        int firstSubTableFileId= buffer.readUIntS();
+//        int numDirs= buffer.readUIntS();
+//
+//        while(buffer.getPosition() != )
+//        {
+//
+//        }
+//
+//        int fileId= firstSubTableFileId;
+//        while(buffer.getPosition() != fntbEndOffset)
+//        {
+//            int identifier= buffer.readByte();
+//            if(identifier == 0)
+//            {
+////                System.out.println("End of sub-table");
+//            }
+//            else if(identifier <= 0x7f)
+//            {
+//                String name= buffer.readString(identifier);
+//                System.out.println("File Name: " + name);
+//
+//                int id= fileId++;
+//                System.out.println("File ID: 0x" + hexFormat(Integer.toHexString(id)));
+//            }
+//            else if (identifier >= 0x81)
+//            {
+//                identifier-= 0x80;
+//                String name= buffer.readString(identifier);
+//                System.out.println("Sub-Directory Name: " + name);
+//
+//                int subDirId= buffer.readUIntS();
+//                System.out.println("Sub-Directory ID: 0x" + hexFormat(Integer.toHexString(subDirId)));
+//            }
+//            else
+//            {
+////                System.out.println("Reserved");
+//            }
+//
+//            System.out.println();
+//        }
+//    }
+
+    public void readArm9() throws IOException
+    {
+        buffer.skipTo(romData.getArm9Offset());
+        BinaryWriter writer= new BinaryWriter(outputPath + File.separator + "arm9.bin");
+        writer.write(buffer.readBytes(romData.getArm9Length()));
+        writer.close();
+    }
+
+    public void readArm7() throws IOException
+    {
+        buffer.skipTo(romData.getArm7Offset());
+        BinaryWriter writer= new BinaryWriter(outputPath + File.separator + "arm7.bin");
+        writer.write(buffer.readBytes(romData.getArm7Length()));
+        writer.close();
+    }
+
+    public void readFntb()
+    {
+        buffer.skipTo(romData.getFntbOffset());
+        System.out.println(buffer.getPosition() + "\n");
+        HashMap<String,String> map= new HashMap<>();
+
+        /** Main Table */
+        ArrayList<FntbEntry> fntbEntries= new ArrayList<>();
+        int fntbPos= 0;
+        long subTableOffset = buffer.readUIntI();
+        long subTableFirstFileId = buffer.readUIntS();
+        long numDirs = buffer.readUIntS();
+        System.out.println("ID: 0xf000");
+        System.out.println("Offset to Sub-table: 0x" + Long.toHexString(subTableOffset));
+        System.out.println("ID of first file in Sub-table: 0x" + Long.toHexString(subTableFirstFileId));
+        System.out.println("Number of files: 0x" + Long.toHexString(numDirs) + " (" + numDirs + ")\n");
+        fntbPos+= 8;
+        int id= 1;
+//        directories.add(new Directory() {
+//            @Override
+//            public String getName() {
+//                return "root";
+//            }
+//
+//            @Override
+//            public String getHexId() {
+//                return "f000";
+//            }
+//
+//            @Override
+//            public String getParentDir() {
+//                return new File(tempPath).getName();
+//            }
+//
+//            @Override
+//            public File getFile() {
+//                return new File(tempPath + File.separator + "root");
+//            }
+//        });
+//        System.out.println("Path: " + path + generatePath(directories.get(0)));
+//        System.out.println("Path: " + generatePath(directories.get(0)));
+////        fntbPos+= 8;
+//        System.out.println("ID: 0xf000");
+//        System.out.println("Offset to Sub-table: 0x" + Long.toHexString(subTableOffset));
+//        System.out.println("ID of first file in Sub-table: 0x" + Long.toHexString(subTableFirstFileId));
+//        System.out.println("Number of files: 0x" + Long.toHexString(numDirs) + "\n");
+//        String[] subTableOffsets= new String[(int)numDirs];
+//        subTableOffsets[0]= Long.toHexString(subTableOffset);
+//        for (int i = 0; i < numDirs - 1; i++)
+//        {
+//            int finalI = i;
+//            long subTableOffset = buffer.readUIntI();
+//            long firstFileID = buffer.readUIntS();
+//            long thirdEntry = buffer.readUIntS();
+//            File parentDir= new File(System.getProperty("user.dir"));
+//
+//            directories.add(new Directory() {
+//                @Override
+//                public String getName() {
+//                    return null;
+//                }
+//
+//                @Override
+//                public String getHexId() {
+//                    return hexFormat(Integer.toHexString(finalI + 1));
+//                }
+//
+//                @Override
+//                public String getParentDir() {
+//                    return hexFormat(Long.toHexString(thirdEntry));
+//                }
+//
+//                @Override
+//                public File getFile() {
+//                    return new File(directories.get(0).getFile().toString() + File.separator);
+//                }
+//            });
+//            System.out.println("Path: " + tempPath + File.separator + generatePath(directories.get(i+1)));
+//            System.out.println("Path: " + generatePath(directories.get(i+1)));
+//            fntbPos+= 8;
+//            System.out.println("ID: 0x" + hexFormat(Integer.toHexString(i + 1)));
+//            System.out.println("Offset to Sub-table: 0x" + Long.toHexString(subTableOffset));
+//            System.out.println("ID of first file in Sub-table: 0x" + Long.toHexString(firstFileID));
+//            System.out.println("ID of parent directory: 0x" + hexFormat(Long.toHexString(thirdEntry)) + "\n");
+//            subTableOffsets[i+1]= Long.toHexString(subTableOffset);
+//        }
+//        System.out.println(Arrays.toString(subTableOffsets));
+//        System.out.println(Integer.toHexString(fntbPos));
+//        System.out.println(buffer.getPosition());
+//        System.out.println("\n");
+
+        for(int i= 0; i < numDirs-1; i++)
+        {
+            long subTableStartOffset= buffer.readUIntI();
+            long firstFileId= buffer.readUIntS();
+            long parentDir= buffer.readUIntS();
+            fntbPos+= 8;
+            System.out.println("ID: 0x" + hexFormat(Integer.toHexString(id++)));
+            System.out.println("Offset in FNTB: 0x" + Long.toHexString(subTableStartOffset));
+            System.out.println("ID of first file in directory: 0x" + Long.toHexString(firstFileId));
+            System.out.println("ID of parent directory: 0x" + hexFormat(Long.toHexString(parentDir)) + "\n");
+            map.put("0x" + hexFormat(Integer.toHexString(id-1)),"0x" + hexFormat(Long.toHexString(parentDir)));
+            fntbEntries.add(new FntbEntry()
+            {
+                @Override
+                public long getStartingOffset() {
+                    return subTableStartOffset;
+                }
+
+                @Override
+                public long getFirstFileId() {
+                    return firstFileId;
+                }
+
+                @Override
+                public long getParentDir() {
+                    return parentDir;
+                }
+            });
+        }
+
+        /** Name Table */
+        ArrayList<String> dirNames= new ArrayList<>();
+        HashMap<Integer,String> nameMap= new HashMap<>();
+        nameMap.put(0xf000,"root");
+        int subDirectoryIndex= 0;
+        int fileIdx = (int)subTableFirstFileId;
+        for (int i = 0; buffer.getPosition() < romData.getFntbOffset() + romData.getFntbLength(); i++)
+        {
+            long length = Integer.toUnsignedLong(buffer.readByte());
+            fntbPos+= 1;
+            boolean isFile = true;
+            if (length == 128 || length  == 0)
+            {
+                isFile = false;
+            }
+            if (length >= 129 && length <= 255)
+            {
+                length -= 128;
+                isFile = false;
+            }
+            String name = buffer.readString((int) length);
+            fntbPos+= length;
+            System.out.print(name);
+            short subDirectoryId;
+            if (!isFile)
+            {
+                if(length != 0)
+                {
+                    subDirectoryId = buffer.readShort();
+                    fntbPos+= 2;
+                    System.out.println(", Sub-directory ID 0x" + Integer.toHexString(subDirectoryId).substring(4));
+                    nameMap.put((int) subDirectoryId & 0xffff, name);
+
+                    if (subDirectoryIndex != 0)
+                    {
+//                        System.out.println(dirNames.get(subDirectoryIndex-1));
+                        //new File(tempPath + File.separator + dirNames.get(subDirectoryIndex-1) + name).mkdir();
+                    }
+                    else
+                    {
+                        //new File(tempPath + File.separator +  name).mkdir();
+                    }
+                }
+                else
+                {
+                    subDirectoryIndex++;
+                    //dirNames.add(dirNamesContents);
+                    //dirNamesContents= new ArrayList<>();
+                    System.out.println();
+                }
+            }
+            else
+            {
+                System.out.println(", File ID 0x" + Integer.toHexString(fileIdx++));
+            }
+        }
+
+        System.out.println(nameMap.toString());
+
+        String[] paths= generatePaths(map);
+        Arrays.sort(paths);
+        String lastPath= "                                                                       ";
+
+        for(int i= 0; i < nameMap.size(); i++)
+        {
+            String name= nameMap.get(i + 0xf000);
+            String dirId= "0x" + hexFormat(Integer.toHexString(i + 0xf000));
+            for(int x= 0; x < paths.length; x++)
+            {
+                String path= paths[x];
+                if(path.contains(dirId))
+                {
+                    path= path.replaceAll(dirId,name);
+                }
+                paths[x]= path;
+            }
+        }
+
+        for(String str : paths)
+        {
+            if(str.length() < lastPath.length())
+            {
+                System.out.println();
+            }
+            System.out.println(str);
+            lastPath= str;
+
+            String outputPath= path + File.separator + "temp" + File.separator + "rom";
+            new File(outputPath + str).mkdirs();
+        }
+        System.out.println();
+
+        System.out.println("\n\n\n\n\n");
+    }
+
+
 
     private int SS_HG_FIRST_FILE= 0x81;
     private int D_P_PT_FIRST_FILE= 0x7A;
@@ -533,6 +818,7 @@ public class DsRomReader
 
     }
 
+
     private static final int PERSONAL_J = 0x83;
     private static final int LEARNSET_J = 0xA2;
     private static final int EVOLUTION_J = 0xA3;
@@ -540,6 +826,7 @@ public class DsRomReader
     private static final int ENCOUNTER_SS = 0x109;
     private static final int ENCOUNTER_HG = 0xA6;
     private static final int ITEM_J = 0x92;
+    private static final int MOVE_J = 0x8C;
 
     private static final int PERSONAL_PT= 0x1A3;
     private static final int LEARNSET_PT = 0x1A7;
@@ -547,9 +834,10 @@ public class DsRomReader
     private static final int GROWTH_PT = 0x1A2;
     private static final int ENCOUNTER_PT = 0x14A;
     private static final int ITEM_PT = 0x192;
+    private static final int MOVE_PT = 0x1BD;
 
-    private static final int PERSONAL_DP= 0x148;
-    private static final int LEARNSET_DP = 0x147;
+    private static final int PERSONAL_DP= 0x146;
+    private static final int LEARNSET_DP = 0x148;
     private static final int EVOLUTION_DP = 0x144;
     private static final int GROWTH_DP = 0x145;
     private static final int ENCOUNTER_DP = 0x108;
@@ -562,6 +850,7 @@ public class DsRomReader
     private static final int GROWTH_B2W2= 0x16C;
     private static final int ENCOUNTER_B2W2= 0x1D9;
     private static final int ITEM_B2W2 = 0x173;
+    private static final int MOVE_B2W2 = 0x170;
 
     private static final int PERSONAL_BW= 0x102;
     private static final int LEARNSET_BW= 0x104;
@@ -569,6 +858,7 @@ public class DsRomReader
     private static final int GROWTH_BW= 0x103;
     private static final int ENCOUNTER_BW= 0x170;
     private static final int ITEM_BW = 0;
+    private static final int MOVE_BW = 0x158;
 
     public void grabFile(String[] args) throws Exception
     {
@@ -579,544 +869,235 @@ public class DsRomReader
         length= 0;
         String type= args[0].toLowerCase();
         this.type= type;
-        String in= "";
+        String[] titles= new String[] {"POKEMON HG","POKEMON SS","POKEMON D","POKEMON P","POKEMON PL","POKEMON B","POKEMON W","POKEMON B2","POKEMON W2"};
+        String title= romData.getTitle();
 
-        switch (romData.getTitle())
+        boolean invalid= true;
+        for(String game : titles)
         {
+            if (!title.trim().equalsIgnoreCase(game))
+            {
+                invalid= false;
+                break;
+            }
+        }
+
+        if(invalid)
+        {
+            System.out.println("Invalid rom header. Please specify what game this is using the following options (MAKE SURE TO SPELL CORRECTLY): Diamond, Pearl, Platinum, HeartGold, SoulSilver, Black, White, Black2, White2");
+            title= scanner.nextLine().toLowerCase();
+        }
+
+
+
+        switch (title)
+        {
+            case "heartgold":
             case "POKEMON HG":
                 switch(type) {
                     case "personal":
-                        fileOffset= (int) fimgEntries.get(PERSONAL_J).getStartingOffset();
-                        length= (int) fimgEntries.get(PERSONAL_J).getEndingOffset()-fileOffset;
-                        fileID= PERSONAL_J;
+                        setFileData(PERSONAL_J);
                         break;
                     case "learnsets":
-                        fileOffset= (int) fimgEntries.get(LEARNSET_J).getStartingOffset();
-                        length= (int) fimgEntries.get(LEARNSET_J).getEndingOffset()-fileOffset;
-                        fileID= LEARNSET_J;
+                        setFileData(LEARNSET_J);
                         break;
                     case "evolutions":
-                        fileOffset= (int) fimgEntries.get(EVOLUTION_J).getStartingOffset();
-                        length= (int) fimgEntries.get(EVOLUTION_J).getEndingOffset()-fileOffset;
-                        fileID= EVOLUTION_J;
+                        setFileData(EVOLUTION_J);
                         break;
                     case "growth":
-                        fileOffset= (int) fimgEntries.get(GROWTH_J).getStartingOffset();
-                        length= (int) fimgEntries.get(GROWTH_J).getEndingOffset()-fileOffset;
-                        fileID= GROWTH_J;
+                        setFileData(GROWTH_J);
                         break;
                     case "encounters":
-                        fileOffset= (int) fimgEntries.get(ENCOUNTER_HG).getStartingOffset();
-                        length= (int) fimgEntries.get(ENCOUNTER_HG).getEndingOffset()-fileOffset;
-                        fileID= ENCOUNTER_HG;
+                        setFileData(ENCOUNTER_HG);
                         break;
                     case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_J;
+                        setFileData(ITEM_J);
+                        break;
+                    case "moves":
+                        setFileData(MOVE_J);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
             break;
 
+            case "soulsilver":
             case "POKEMON SS":
                 switch(type) {
                     case "personal":
-                        fileOffset= (int) fimgEntries.get(PERSONAL_J).getStartingOffset();
-                        length= (int) fimgEntries.get(PERSONAL_J).getEndingOffset()-fileOffset;
-                        fileID= PERSONAL_J;
+                        setFileData(PERSONAL_J);
                         break;
                     case "learnsets":
-                        fileOffset= (int) fimgEntries.get(LEARNSET_J).getStartingOffset();
-                        length= (int) fimgEntries.get(LEARNSET_J).getEndingOffset()-fileOffset;
-                        fileID= LEARNSET_J;
+                        setFileData(LEARNSET_J);
                         break;
                     case "evolutions":
-                        fileOffset= (int) fimgEntries.get(EVOLUTION_J).getStartingOffset();
-                        length= (int) fimgEntries.get(EVOLUTION_J).getEndingOffset()-fileOffset;
-                        fileID= EVOLUTION_J;
+                        setFileData(EVOLUTION_J);
                         break;
                     case "growth":
-                        fileOffset= (int) fimgEntries.get(GROWTH_J).getStartingOffset();
-                        length= (int) fimgEntries.get(GROWTH_J).getEndingOffset()-fileOffset;
-                        fileID= GROWTH_J;
+                        setFileData(GROWTH_J);
                         break;
                     case "encounters":
-                        fileOffset= (int) fimgEntries.get(ENCOUNTER_SS).getStartingOffset();
-                        length= (int) fimgEntries.get(ENCOUNTER_SS).getEndingOffset()-fileOffset;
-                        fileID= ENCOUNTER_SS;
+                        setFileData(ENCOUNTER_SS);
                         break;
                     case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_J;
+                        setFileData(ITEM_J);
+                        break;
+                    case "moves":
+                        setFileData(MOVE_J);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
                 break;
 
+            case "platinum":
             case "POKEMON PL":
                 switch(type) {
                     case "personal":
-                        fileOffset= (int) fimgEntries.get(PERSONAL_PT).getStartingOffset();
-                        length= (int) fimgEntries.get(PERSONAL_PT).getEndingOffset()-fileOffset;
-                        fileID= PERSONAL_PT;
+                        setFileData(PERSONAL_PT);
                         break;
                     case "learnsets":
-                        fileOffset= (int) fimgEntries.get(LEARNSET_PT).getStartingOffset();
-                        length= (int) fimgEntries.get(LEARNSET_PT).getEndingOffset()-fileOffset;
-                        fileID= LEARNSET_PT;
+                        setFileData(LEARNSET_PT);
                         break;
                     case "evolutions":
-                        fileOffset= (int) fimgEntries.get(EVOLUTION_PT).getStartingOffset();
-                        length= (int) fimgEntries.get(EVOLUTION_PT).getEndingOffset()-fileOffset;
-                        fileID= EVOLUTION_PT;
+                        setFileData(EVOLUTION_PT);
                         break;
                     case "growth":
-                        fileOffset= (int) fimgEntries.get(GROWTH_PT).getStartingOffset();
-                        length= (int) fimgEntries.get(GROWTH_PT).getEndingOffset()-fileOffset;
-                        fileID= GROWTH_PT;
+                        setFileData(GROWTH_PT);
                         break;
                     case "encounters":
-                        fileOffset= (int) fimgEntries.get(ENCOUNTER_PT).getStartingOffset();
-                        length= (int) fimgEntries.get(ENCOUNTER_PT).getEndingOffset()-fileOffset;
-                        fileID= ENCOUNTER_PT;
+                        setFileData(ENCOUNTER_PT);
                         break;
                     case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_PT)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_PT)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_PT;
+                        setFileData(ITEM_PT);
+                        break;
+                    case "moves":
+                        setFileData(MOVE_PT);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
                 break;
 
+            case "pearl":
             case "POKEMON P":
                 switch(type) {
                     case "personal":
-                        fileOffset= (int) fimgEntries.get(PERSONAL_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(PERSONAL_DP).getEndingOffset()-fileOffset;
-                        fileID= PERSONAL_DP;
+                        setFileData(PERSONAL_DP);
                         break;
                     case "learnsets":
-                        fileOffset= (int) fimgEntries.get(LEARNSET_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(LEARNSET_DP).getEndingOffset()-fileOffset;
-                        fileID= LEARNSET_DP;
+                        setFileData(LEARNSET_DP);
                         break;
                     case "evolutions":
-                        fileOffset= (int) fimgEntries.get(EVOLUTION_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(EVOLUTION_DP).getEndingOffset()-fileOffset;
-                        fileID= EVOLUTION_DP;
+                        setFileData(EVOLUTION_DP);
                         break;
                     case "growth":
-                        fileOffset= (int) fimgEntries.get(GROWTH_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(GROWTH_DP).getEndingOffset()-fileOffset;
-                        fileID= GROWTH_DP;
+                        setFileData(GROWTH_DP);
                         break;
                     case "encounters":
-                        fileOffset= (int) fimgEntries.get(ENCOUNTER_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(ENCOUNTER_DP).getEndingOffset()-fileOffset;
-                        fileID= ENCOUNTER_DP;
+                        setFileData(ENCOUNTER_DP);
                         break;
                     case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_DP;
+                        setFileData(ITEM_DP);
+                        break;
+                    case "moves":
+                        setFileData(MOVE_DP);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
                 break;
 
+            case "diamond":
             case "POKEMON D":
                 switch(type) {
                     case "personal":
-                        fileOffset= (int) fimgEntries.get(PERSONAL_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(PERSONAL_DP).getEndingOffset()-fileOffset;
-                        fileID= PERSONAL_DP;
+                        setFileData(PERSONAL_DP);
                         break;
                     case "learnsets":
-                        fileOffset= (int) fimgEntries.get(LEARNSET_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(LEARNSET_DP).getEndingOffset()-fileOffset;
-                        fileID= LEARNSET_DP;
+                        setFileData(LEARNSET_DP);
                         break;
                     case "evolutions":
-                        fileOffset= (int) fimgEntries.get(EVOLUTION_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(EVOLUTION_DP).getEndingOffset()-fileOffset;
-                        fileID= EVOLUTION_DP;
+                        setFileData(EVOLUTION_DP);
                         break;
                     case "growth":
-                        fileOffset= (int) fimgEntries.get(GROWTH_DP).getStartingOffset();
-                        length= (int) fimgEntries.get(GROWTH_DP).getEndingOffset()-fileOffset;
-                        fileID= GROWTH_DP;
+                        setFileData(GROWTH_DP);
                         break;
                     case "encounters":
-                        fileOffset= (int) fimgEntries.get(ENCOUNTER_DP -1).getStartingOffset();
-                        length= (int) fimgEntries.get(ENCOUNTER_DP -1).getEndingOffset()-fileOffset;
-                        fileID= ENCOUNTER_DP -1;
+                        setFileData(ENCOUNTER_DP-1);
                         break;
                     case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_DP;
+                        setFileData(ITEM_DP);
+                        break;
+                    case "moves":
+                        setFileData(MOVE_DP);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
                 break;
 
+            case "black":
+            case "white":
             case "POKEMON B" :
-
             case "POKEMON W" :
-                switch (type) {
-                    case "personal" :
-                        fileOffset= (int) fimgEntries.get(PERSONAL_BW).getStartingOffset();
-                        length= (int) fimgEntries.get(PERSONAL_BW).getEndingOffset()-fileOffset;
-                        fileID= PERSONAL_BW;
+                switch(type) {
+                    case "personal":
+                        setFileData(PERSONAL_BW);
                         break;
                     case "learnsets":
-                        fileOffset= (int) fimgEntries.get(LEARNSET_BW).getStartingOffset();
-                        length= (int) fimgEntries.get(LEARNSET_BW).getEndingOffset()-fileOffset;
-                        fileID= LEARNSET_BW;
+                        setFileData(LEARNSET_BW);
                         break;
                     case "evolutions":
-                        fileOffset= (int) fimgEntries.get(EVOLUTION_BW).getStartingOffset();
-                        length= (int) fimgEntries.get(EVOLUTION_BW).getEndingOffset()-fileOffset;
-                        fileID= EVOLUTION_BW;
+                        setFileData(EVOLUTION_BW);
                         break;
                     case "growth":
-                        fileOffset= (int) fimgEntries.get(GROWTH_BW).getStartingOffset();
-                        length= (int) fimgEntries.get(GROWTH_BW).getEndingOffset()-fileOffset;
-                        fileID= GROWTH_BW;
+                        setFileData(GROWTH_BW);
                         break;
                     case "encounters":
-                        fileOffset= (int) fimgEntries.get(ENCOUNTER_BW).getStartingOffset();
-                        length= (int) fimgEntries.get(ENCOUNTER_BW).getEndingOffset()-fileOffset;
-                        fileID= ENCOUNTER_BW;
-                        throw new RuntimeException("Not supported yet");
+                        setFileData(ENCOUNTER_BW);
+                        break;
                     case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_BW)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_BW)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_BW;
+                        setFileData(ITEM_BW);
+                        break;
+                    case "moves":
+                        setFileData(MOVE_BW);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
                 break;
 
+            case "black2":
+            case "white2":
             case "POKEMON W2" :
-
             case "POKEMON B2" :
-                switch (type) {
-                    case "personal" :
-                        fileOffset= (int) fimgEntries.get(PERSONAL_B2W2).getStartingOffset();
-                        length= (int) fimgEntries.get(PERSONAL_B2W2).getEndingOffset()-fileOffset;
-                        fileID= PERSONAL_B2W2;
+                switch(type) {
+                    case "personal":
+                        setFileData(PERSONAL_B2W2);
                         break;
                     case "learnsets":
-                        fileOffset= (int) fimgEntries.get(LEARNSET_B2W2).getStartingOffset();
-                        length= (int) fimgEntries.get(LEARNSET_B2W2).getEndingOffset()-fileOffset;
-                        fileID= LEARNSET_B2W2;
+                        setFileData(LEARNSET_B2W2);
                         break;
                     case "evolutions":
-                        fileOffset= (int) fimgEntries.get(EVOLUTION_B2W2).getStartingOffset();
-                        length= (int) fimgEntries.get(EVOLUTION_B2W2).getEndingOffset()-fileOffset;
-                        fileID= EVOLUTION_B2W2;
+                        setFileData(EVOLUTION_B2W2);
                         break;
                     case "growth":
-                        fileOffset= (int) fimgEntries.get(GROWTH_B2W2).getStartingOffset();
-                        length= (int) fimgEntries.get(GROWTH_B2W2).getEndingOffset()-fileOffset;
-                        fileID= GROWTH_B2W2;
+                        setFileData(GROWTH_B2W2);
                         break;
                     case "encounters":
-                        fileOffset= (int) fimgEntries.get(ENCOUNTER_B2W2).getStartingOffset();
-                        length= (int) fimgEntries.get(ENCOUNTER_B2W2).getEndingOffset()-fileOffset;
-                        fileID= ENCOUNTER_B2W2;
-                        throw new RuntimeException("Not supported yet");
+                        setFileData(ENCOUNTER_B2W2);
+                        break;
                     case "items":
-                        fileOffset= (int) fimgEntries.get((ITEM_B2W2)).getStartingOffset();
-                        length= (int) fimgEntries.get((ITEM_B2W2)).getEndingOffset()-fileOffset;
-                        fileID= ITEM_B2W2;
+                        setFileData(ITEM_B2W2);
+                        break;
+                    case "moves":
+                        setFileData(MOVE_B2W2);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
                 break;
-
-            default:
-                System.out.println("Invalid rom header. Please specify what game this is using the following options: Diamond, Pearl, Platinum, HeartGold, SoulSilver, Black, White, Black2, White2");
-                in= scanner.nextLine();
-                in= in.toLowerCase();
-                switch(in) {
-                    case "diamond":
-                        switch(type) {
-                            case "personal":
-                                fileOffset= (int) fimgEntries.get(PERSONAL_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(PERSONAL_DP).getEndingOffset()-fileOffset;
-                                fileID= PERSONAL_DP;
-                                break;
-                            case "learnsets":
-                                fileOffset= (int) fimgEntries.get(LEARNSET_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(LEARNSET_DP).getEndingOffset()-fileOffset;
-                                fileID= LEARNSET_DP;
-                                break;
-                            case "evolutions":
-                                fileOffset= (int) fimgEntries.get(EVOLUTION_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(EVOLUTION_DP).getEndingOffset()-fileOffset;
-                                fileID= EVOLUTION_DP;
-                                break;
-                            case "growth":
-                                fileOffset= (int) fimgEntries.get(GROWTH_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(GROWTH_DP).getEndingOffset()-fileOffset;
-                                fileID= GROWTH_DP;
-                                break;
-                            case "encounters":
-                                fileOffset= (int) fimgEntries.get(ENCOUNTER_DP -1).getStartingOffset();
-                                length= (int) fimgEntries.get(ENCOUNTER_DP -1).getEndingOffset()-fileOffset;
-                                fileID= ENCOUNTER_DP -1;
-                                break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_DP;
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid arguments");
-                        }
-                        break;
-
-                    case "pearl":
-                        switch(type) {
-                            case "personal":
-                                fileOffset= (int) fimgEntries.get(PERSONAL_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(PERSONAL_DP).getEndingOffset()-fileOffset;
-                                fileID= PERSONAL_DP;
-                                break;
-                            case "learnsets":
-                                fileOffset= (int) fimgEntries.get(LEARNSET_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(LEARNSET_DP).getEndingOffset()-fileOffset;
-                                fileID= LEARNSET_DP;
-                                break;
-                            case "evolutions":
-                                fileOffset= (int) fimgEntries.get(EVOLUTION_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(EVOLUTION_DP).getEndingOffset()-fileOffset;
-                                fileID= EVOLUTION_DP;
-                                break;
-                            case "growth":
-                                fileOffset= (int) fimgEntries.get(GROWTH_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(GROWTH_DP).getEndingOffset()-fileOffset;
-                                fileID= GROWTH_DP;
-                                break;
-                            case "encounters":
-                                fileOffset= (int) fimgEntries.get(ENCOUNTER_DP).getStartingOffset();
-                                length= (int) fimgEntries.get(ENCOUNTER_DP).getEndingOffset()-fileOffset;
-                                fileID= ENCOUNTER_DP;
-                                break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_DP)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_DP)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_DP;
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid arguments");
-                        }
-                        break;
-
-                    case"platinum":
-                        switch(type) {
-                            case "personal":
-                                fileOffset= (int) fimgEntries.get(PERSONAL_PT).getStartingOffset();
-                                length= (int) fimgEntries.get(PERSONAL_PT).getEndingOffset()-fileOffset;
-                                fileID= PERSONAL_PT;
-                                break;
-                            case "learnsets":
-                                fileOffset= (int) fimgEntries.get(LEARNSET_PT).getStartingOffset();
-                                length= (int) fimgEntries.get(LEARNSET_PT).getEndingOffset()-fileOffset;
-                                fileID= LEARNSET_PT;
-                                break;
-                            case "evolutions":
-                                fileOffset= (int) fimgEntries.get(EVOLUTION_PT).getStartingOffset();
-                                length= (int) fimgEntries.get(EVOLUTION_PT).getEndingOffset()-fileOffset;
-                                fileID= EVOLUTION_PT;
-                                break;
-                            case "growth":
-                                fileOffset= (int) fimgEntries.get(GROWTH_PT).getStartingOffset();
-                                length= (int) fimgEntries.get(GROWTH_PT).getEndingOffset()-fileOffset;
-                                fileID= GROWTH_PT;
-                                break;
-                            case "encounters":
-                                fileOffset= (int) fimgEntries.get(ENCOUNTER_PT).getStartingOffset();
-                                length= (int) fimgEntries.get(ENCOUNTER_PT).getEndingOffset()-fileOffset;
-                                fileID= ENCOUNTER_PT;
-                                break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_PT)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_PT)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_PT;
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid arguments");
-                        }
-                        break;
-
-                    case "heartgold":
-                        switch(type) {
-                            case "personal":
-                                fileOffset= (int) fimgEntries.get(PERSONAL_J).getStartingOffset();
-                                length= (int) fimgEntries.get(PERSONAL_J).getEndingOffset()-fileOffset;
-                                fileID= PERSONAL_J;
-                                break;
-                            case "learnsets":
-                                fileOffset= (int) fimgEntries.get(LEARNSET_J).getStartingOffset();
-                                length= (int) fimgEntries.get(LEARNSET_J).getEndingOffset()-fileOffset;
-                                fileID= LEARNSET_J;
-                                break;
-                            case "evolutions":
-                                fileOffset= (int) fimgEntries.get(EVOLUTION_J).getStartingOffset();
-                                length= (int) fimgEntries.get(EVOLUTION_J).getEndingOffset()-fileOffset;
-                                fileID= EVOLUTION_J;
-                                break;
-                            case "growth":
-                                fileOffset= (int) fimgEntries.get(GROWTH_J).getStartingOffset();
-                                length= (int) fimgEntries.get(GROWTH_J).getEndingOffset()-fileOffset;
-                                fileID= GROWTH_J;
-                                break;
-                            case "encounters":
-                                fileOffset= (int) fimgEntries.get(ENCOUNTER_HG).getStartingOffset();
-                                length= (int) fimgEntries.get(ENCOUNTER_HG).getEndingOffset()-fileOffset;
-                                fileID= ENCOUNTER_HG;
-                                break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_J;
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid arguments");
-                        }
-                        break;
-
-                    case "soulsilver":
-                        switch(type) {
-                            case "personal":
-                                fileOffset= (int) fimgEntries.get(PERSONAL_J).getStartingOffset();
-                                length= (int) fimgEntries.get(PERSONAL_J).getEndingOffset()-fileOffset;
-                                fileID= PERSONAL_J;
-                                break;
-                            case "learnsets":
-                                fileOffset= (int) fimgEntries.get(LEARNSET_J).getStartingOffset();
-                                length= (int) fimgEntries.get(LEARNSET_J).getEndingOffset()-fileOffset;
-                                fileID= LEARNSET_J;
-                                break;
-                            case "evolutions":
-                                fileOffset= (int) fimgEntries.get(EVOLUTION_J).getStartingOffset();
-                                length= (int) fimgEntries.get(EVOLUTION_J).getEndingOffset()-fileOffset;
-                                fileID= EVOLUTION_J;
-                                break;
-                            case "growth":
-                                fileOffset= (int) fimgEntries.get(GROWTH_J).getStartingOffset();
-                                length= (int) fimgEntries.get(GROWTH_J).getEndingOffset()-fileOffset;
-                                fileID= GROWTH_J;
-                                break;
-                            case "encounters":
-                                fileOffset= (int) fimgEntries.get(ENCOUNTER_SS).getStartingOffset();
-                                length= (int) fimgEntries.get(ENCOUNTER_SS).getEndingOffset()-fileOffset;
-                                fileID= ENCOUNTER_SS;
-                                break;
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_J)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_J)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_J;
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid arguments");
-                        }
-                        break;
-
-                    case "black" :
-
-                    case "white" :
-                        switch (type) {
-                            case "personal" :
-                                fileOffset= (int) fimgEntries.get(PERSONAL_BW).getStartingOffset();
-                                length= (int) fimgEntries.get(PERSONAL_BW).getEndingOffset()-fileOffset;
-                                fileID= PERSONAL_BW;
-                                break;
-                            case "learnsets":
-                                fileOffset= (int) fimgEntries.get(LEARNSET_BW).getStartingOffset();
-                                length= (int) fimgEntries.get(LEARNSET_BW).getEndingOffset()-fileOffset;
-                                fileID= LEARNSET_BW;
-                                break;
-                            case "evolutions":
-                                fileOffset= (int) fimgEntries.get(EVOLUTION_BW).getStartingOffset();
-                                length= (int) fimgEntries.get(EVOLUTION_BW).getEndingOffset()-fileOffset;
-                                fileID= EVOLUTION_BW;
-                                break;
-                            case "growth":
-                                fileOffset= (int) fimgEntries.get(GROWTH_BW).getStartingOffset();
-                                length= (int) fimgEntries.get(GROWTH_BW).getEndingOffset()-fileOffset;
-                                fileID= GROWTH_BW;
-                                break;
-                            case "encounters":
-                                fileOffset= (int) fimgEntries.get(ENCOUNTER_BW).getStartingOffset();
-                                length= (int) fimgEntries.get(ENCOUNTER_BW).getEndingOffset()-fileOffset;
-                                fileID= ENCOUNTER_BW;
-                                throw new RuntimeException("Not supported yet");
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_BW)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_BW)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_BW;
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid arguments");
-                        }
-                        break;
-
-                    case "white2" :
-
-                    case "black2" :
-                        switch (type) {
-                            case "personal" :
-                                fileOffset= (int) fimgEntries.get(PERSONAL_B2W2).getStartingOffset();
-                                length= (int) fimgEntries.get(PERSONAL_B2W2).getEndingOffset()-fileOffset;
-                                fileID= PERSONAL_B2W2;
-                                break;
-                            case "learnsets":
-                                fileOffset= (int) fimgEntries.get(LEARNSET_B2W2).getStartingOffset();
-                                length= (int) fimgEntries.get(LEARNSET_B2W2).getEndingOffset()-fileOffset;
-                                fileID= LEARNSET_B2W2;
-                                break;
-                            case "evolutions":
-                                fileOffset= (int) fimgEntries.get(EVOLUTION_B2W2).getStartingOffset();
-                                length= (int) fimgEntries.get(EVOLUTION_B2W2).getEndingOffset()-fileOffset;
-                                fileID= EVOLUTION_B2W2;
-                                break;
-                            case "growth":
-                                fileOffset= (int) fimgEntries.get(GROWTH_B2W2).getStartingOffset();
-                                length= (int) fimgEntries.get(GROWTH_B2W2).getEndingOffset()-fileOffset;
-                                fileID= GROWTH_B2W2;
-                                break;
-                            case "encounters":
-                                fileOffset= (int) fimgEntries.get(ENCOUNTER_B2W2).getStartingOffset();
-                                length= (int) fimgEntries.get(ENCOUNTER_B2W2).getEndingOffset()-fileOffset;
-                                fileID= ENCOUNTER_B2W2;
-                                throw new RuntimeException("Not supported yet");
-                            case "items":
-                                fileOffset= (int) fimgEntries.get((ITEM_B2W2)).getStartingOffset();
-                                length= (int) fimgEntries.get((ITEM_B2W2)).getEndingOffset()-fileOffset;
-                                fileID= ITEM_B2W2;
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid arguments");
-                        }
-                        break;
-
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
         }
 
         buffer.skipTo(fileOffset);
@@ -1136,133 +1117,81 @@ public class DsRomReader
 
         switch (args[0].toLowerCase()) {
             case "personal":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white"))
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white"))
                 {
                     Gen5PersonalEditor1 personalEditor= new Gen5PersonalEditor1();
-                    if (args[1].equals("toCsv")) {
-                        personalEditor.personalToCSV(tempPathUnpack);
-                    } else if (args[1].equals("toPersonal")) {
-                        personalEditor.csvToPersonal(args[2], args[3], args[4]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
+                    personalEditor.personalToCSV(tempPathUnpack);
                 }
-                else if (romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
+                else if (romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                 {
                     Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2();
-                    if (args[1].equals("toCsv")) {
-                        personalEditor.personalToCSV(tempPathUnpack);
-                    } else if (args[1].equals("toPersonal")) {
-                        personalEditor.csvToPersonal(args[2], args[3], args[4]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
+                    personalEditor.personalToCSV(tempPathUnpack);
                 }
                 else
                 {
                     PersonalEditor personalEditor = new PersonalEditor();
-                    if (args[1].equals("toCsv")) {
-                        personalEditor.personalToCSV(tempPathUnpack);
-                    } else if (args[1].equals("toPersonal")) {
-                        personalEditor.csvToPersonal(args[2], args[3], args[4]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
-                }
-                break;
-            case "learnsets":
-                LearnsetEditor learnsetEditor = new LearnsetEditor();
-                if (args[1].equals("toCsv")) {
-                    learnsetEditor.learnsetToCsv(tempPathUnpack);
-                } else if (args[1].equals("toLearnsets")) {
-                    learnsetEditor.csvToLearnsets(args[2], args[3]);
-                } else {
-                    throw new RuntimeException("Invalid arguments");
+                    personalEditor.personalToCSV(tempPathUnpack);
                 }
 
                 break;
+            case "learnsets":
+                LearnsetEditor learnsetEditor = new LearnsetEditor();
+                learnsetEditor.learnsetToCsv(tempPathUnpack);
+
+                break;
             case "evolutions":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                 {
                     EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
-                    if (args[1].equals("toCsv")) {
-                        evolutionEditor.evolutionToCsv(tempPathUnpack, false);
-                    } else if (args[1].equals("toEvolutions")) {
-                        evolutionEditor.csvToEvolutions(tempPathUnpack, args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
+                    evolutionEditor.evolutionToCsv(tempPathUnpack, false);
                 }
                 else
                 {
                     EvolutionEditor evolutionEditor = new EvolutionEditor();
-                    if (args[1].equals("toCsv")) {
-                        evolutionEditor.evolutionToCsv(tempPathUnpack, false);
-                    } else if (args[1].equals("toEvolutions")) {
-                        evolutionEditor.csvToEvolutions(tempPathUnpack, args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
+                    evolutionEditor.evolutionToCsv(tempPathUnpack, false);
                 }
-
 
                 break;
             case "growth":
                 GrowthEditor growthEditor = new GrowthEditor();
-                if (args[1].equals("toCsv")) {
-                    growthEditor.growthToCsv(tempPathUnpack);
-                } else if (args[1].equals("toGrowth")) {
-                    growthEditor.csvToGrowth(args[2], args[3]);
-                } else {
-                    throw new RuntimeException("Invalid arguments");
-                }
+                growthEditor.growthToCsv(tempPathUnpack);
 
                 break;
             case "encounters":
-                if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || in.equals("soulsilver") || in.equals("heartgold"))
+                if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || title.equals("soulsilver") || title.equals("heartgold"))
                 {
                     EncounterEditor encounterEditor= new EncounterEditor();
-                    if (args[1].equals("toCsv")) {
                         encounterEditor.encountersToCsv(tempPathUnpack);
-                    } else if (args[1].equals("toEncounters")) {
-                        encounterEditor.csvToEncounters(args[2],args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
                 }
                 else
                 {
                     SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
-                    if (args[1].equals("toCsv")) {
-                        encounterEditor.encountersToCsv(tempPathUnpack);
-                    } else if (args[1].equals("toEncounters")) {
-                        encounterEditor.csvToEncounters(args[2],args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
+                    encounterEditor.encountersToCsv(tempPathUnpack);
                 }
+                break;
             case "items":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                 {
                     ItemEditorGen5 itemEditor = new ItemEditorGen5();
-                    if (args[1].equals("toCsv")) {
-                        itemEditor.itemsToCsv(tempPathUnpack);
-                    } else if (args[1].equals("toItems")) {
-                        itemEditor.csvToItems(tempPathUnpack, args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
+                    itemEditor.itemsToCsv(tempPathUnpack);
                 }
                 else
                 {
                     ItemEditorGen4 itemEditor = new ItemEditorGen4();
-                    if (args[1].equals("toCsv")) {
-                        itemEditor.itemsToCsv(tempPathUnpack);
-                    } else if (args[1].equals("toItems")) {
-                        itemEditor.csvToItems(tempPathUnpack, args[3]);
-                    } else {
-                        throw new RuntimeException("Invalid arguments");
-                    }
+                    itemEditor.itemsToCsv(tempPathUnpack);
+                }
+
+                break;
+            case "moves":
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                {
+                    MoveEditorGen5 moveEditor = new MoveEditorGen5();
+                    moveEditor.movesToCsv(tempPathUnpack);
+                }
+                else
+                {
+                    MoveEditorGen4 moveEditor = new MoveEditorGen4();
+                    moveEditor.movesToCsv(tempPathUnpack);
                 }
 
                 break;
@@ -1275,12 +1204,12 @@ public class DsRomReader
 
         switch (args[0].toLowerCase()) {
             case "personal":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white"))
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white"))
                 {
                     Gen5PersonalEditor1 personalEditor = new Gen5PersonalEditor1();
                     personalEditor.csvToPersonal("personalDataRecompile.csv", "tmLearnsetDataRecompile.csv", type + "Recompile");
                 }
-                else if (romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
+                else if (romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                 {
                     Gen5PersonalEditor2 personalEditor = new Gen5PersonalEditor2();
                     personalEditor.csvToPersonal("personalDataRecompile.csv", "tmLearnsetDataRecompile.csv", type + "Recompile");
@@ -1299,7 +1228,7 @@ public class DsRomReader
 
                 break;
             case "evolutions":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                 {
                     EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
                     evolutionEditor.csvToEvolutions("EvolutionDataRecompile.csv", type + "Recompile");
@@ -1330,15 +1259,28 @@ public class DsRomReader
 
                 break;
             case "items":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || in.equals("black") || in.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || in.equals("black2") || in.equals("white2"))
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                 {
                     ItemEditorGen5 itemEditor = new ItemEditorGen5();
-                    itemEditor.csvToItems("Items",type + "Recompile");
+                    itemEditor.csvToItems("ItemsRecompile.csv",type + "Recompile");
                 }
                 else
                 {
                     ItemEditorGen4 itemEditor = new ItemEditorGen4();
-                    itemEditor.csvToItems("Items.csv",type + "Recompile");
+                    itemEditor.csvToItems("ItemsRecompile.csv",type + "Recompile");
+                }
+
+                break;
+            case "moves":
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                {
+                    MoveEditorGen5 moveEditor = new MoveEditorGen5();
+                    moveEditor.csvToMoves("MoveDataRecompile.csv", type + "Recompile");
+                }
+                else
+                {
+                    MoveEditorGen4 moveEditor = new MoveEditorGen4();
+                    moveEditor.csvToMoves("MoveDataRecompile.csv", type + "Recompile");
                 }
 
                 break;
@@ -1620,6 +1562,37 @@ public class DsRomReader
     private static int fileToInt (File f)
     {
         return Integer.parseInt(f.getName().split("\\.")[0]);
+    }
+
+    private void setFileData(int fileId)
+    {
+        fileOffset= (int) fimgEntries.get(fileId).getStartingOffset();
+        length= (int) fimgEntries.get(fileId).getEndingOffset()-fileOffset;
+        fileID= fileId;
+    }
+
+    private String[] generatePaths(HashMap<String,String> map)
+    {
+        ArrayList<String> pathList= new ArrayList<>();
+        StringBuilder path;
+        for(String dirId : map.keySet())
+        {
+            path= new StringBuilder();
+            path.append("/" + dirId);
+            String parentDir= map.get(dirId);
+            path.insert(0,"/" + parentDir);
+            while(!parentDir.equals("0xf000"))
+            {
+                parentDir= map.get(parentDir);
+                path.insert(0,"/" + parentDir);
+            }
+//            if(!map.containsValue(dirId))
+//            {
+                pathList.add(path.toString());
+//            }
+
+        }
+        return pathList.toArray(new String[0]);
     }
 }
 

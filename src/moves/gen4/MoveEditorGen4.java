@@ -1,26 +1,25 @@
-package moves;
+package moves.gen4;
 
 import framework.BinaryWriter;
+import framework.BitStream;
 import framework.Buffer;
 import framework.CsvReader;
-import learnsets.MoveLearnsetData;
-import moves.MoveData;
 
 import java.io.*;
 import java.util.*;
 
-public class MoveEditor
+public class MoveEditorGen4
 {
     public static void main(String[] args) throws IOException
     {
-        MoveEditor moveEditor= new MoveEditor();
+        MoveEditorGen4 moveEditor= new MoveEditorGen4();
         moveEditor.movesToCsv("waza_tbl");
     }
 
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String dataPath= path;
     private static String resourcePath= path + "Program Files" + File.separator;
-    private static final String[] typeArr= {"Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fairy", "Fire", "Water","Grass","Electric","Psychic","Ice","Dragon","Dark"};
+    private static final String[] typeArr= {"Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "???", "Fire", "Water","Grass","Electric","Psychic","Ice","Dragon","Dark"};
     private static final String[] categories= {"Physical","Special","Status"};
     private static String[] contestCategories= {"1","2","3","4","5","6","7","8","9","10","11","12"};
     private static String[] nameData;
@@ -28,41 +27,12 @@ public class MoveEditor
     private static String[] effects;
     private static String[] flags;
     private static String[] targets;
-    private static boolean gen5;
 
-    public MoveEditor() throws IOException
+    public MoveEditorGen4() throws IOException
     {
-        Scanner scanner= new Scanner(System.in);
-        String entryPath= resourcePath;
-        String movePath= resourcePath;
+        String entryPath= resourcePath + "EntryData.txt";
+        String movePath= resourcePath + "MoveList.txt";
 
-        System.out.println("Gen 4 or 5?");
-//        String gen= scanner.nextLine().toLowerCase();
-        String gen= "4";
-        switch (gen) {
-            case "4" :
-                entryPath+= "EntryData.txt";
-                movePath+= "MoveList.txt";
-                break;
-            case "5" :
-                System.out.println("Black and White 1, or Black and White 2? (1 or 2)");
-                String version= scanner.nextLine().toLowerCase();
-                movePath+= "MoveList Rebooted.txt";
-                switch (version) {
-                    case "1":
-                        entryPath += "EntryDataGen5-1.txt";
-                        break;
-                    case "2":
-                        entryPath += "EntryDataGen5-2.txt";
-                        break;
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
-                break;
-            default:
-                throw new RuntimeException("Invalid arguments");
-        }
-        this.gen5 = gen.equals("5");
 
         BufferedReader reader= new BufferedReader(new FileReader(entryPath));
         ArrayList<String> nameList= new ArrayList<>();
@@ -102,7 +72,7 @@ public class MoveEditor
             contestCategories[i]= flags[i];
         }
 
-        targets= new String[0x81];
+        targets= new String[1025];
         targets[0]= "One opponent";
         targets[1]= "Automatic";
         targets[2]= "Random";
@@ -112,6 +82,9 @@ public class MoveEditor
         targets[32]= "User's side of field";
         targets[64]= "Entire field";
         targets[128]= "Opponent's side of field";
+        targets[256]= "Automatic (fails if there is no ally)";
+        targets[512]= "User or ally";
+        targets[1024]= "One opponent (fails if target faints)";
     }
 
 
@@ -120,7 +93,7 @@ public class MoveEditor
         dataPath+= moveDir;
 
         Buffer buffer;
-        ArrayList<MoveData> dataList= new ArrayList<>();
+        ArrayList<MoveDataGen4> dataList= new ArrayList<>();
 
         List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
@@ -141,14 +114,14 @@ public class MoveEditor
             int pp = buffer.readByte();
             int additionalEffect = buffer.readByte();
 
-            int range = buffer.readUShortB();
-            byte priority = (byte) buffer.readByte();
+            int range = buffer.readUIntS();
+            byte priority = buffer.readBytes(1)[0];
             int flag = buffer.readByte();
 
             int contestEffect = buffer.readByte();
             int contestType = buffer.readByte();
 
-            dataList.add(new MoveData() {
+            dataList.add(new MoveDataGen4() {
                 @Override
                 public int getEffect() {
                     return effect;
@@ -213,12 +186,12 @@ public class MoveEditor
             buffer.close();
         }
 
-        String[][] moveTable= new String[dataList.size()][16];
+        String[][] moveTable= new String[dataList.size()][30];
         for(int i= 0; i < dataList.size(); i++)
         {
             System.out.println(moveData[i] + ": " + i);
-            MoveData move= dataList.get(i);
-            String[] line= new String[16];
+            MoveDataGen4 move= dataList.get(i);
+            String[] line= new String[30];
             Arrays.fill(line,"");
 
             int idx= 0;
@@ -241,7 +214,11 @@ public class MoveEditor
 
             line[idx++]= targets[move.getRange()];
             line[idx++]= "" + move.getPriority();
-            line[idx++]= "" + move.getFlag();
+            byte flag= (byte)move.getFlag();
+            for(int x= 0; x < 8; x++)
+            {
+                line[idx++]= Boolean.toString(((flag >> x) & 0x1) == 1);
+            }
             System.out.println("Target(s): " + targets[move.getRange()]);
 //            System.out.println("Priority: " + move.getPriority());
 //            System.out.println("Flag: " + move.getFlag());
@@ -256,7 +233,7 @@ public class MoveEditor
         }
 
         BufferedWriter writer= new BufferedWriter(new FileWriter(path + "MoveData.csv"));
-        writer.write("ID Number,Name,Additional Effect,Category,Power,Type,Accuracy,PP,Additional Effect Chance (%),Range,Priority,Flag,Contest Effect,Contest Type\n");
+        writer.write("ID Number,Name,Additional Effect,Category,Power,Type,Accuracy,PP,Additional Effect Chance (%),Target(s),Priority,Contact Move,Blocked by Protect,Reflected by Magic Coat, Affected by Snatch,Affected by Mirror Move,Triggers Kings Rock,Hide HP Bars,Remove Target's Shadow,Contest Effect,Contest Type\n");
         String line;
         for(int row= 0; row < dataList.size(); row++)
         {
@@ -309,8 +286,14 @@ public class MoveEditor
             writer.writeByte((byte)Short.parseShort(next())); //additional effect chance (out of 100)
 
             writer.writeShort(getTargets(next())); //targets
-            writer.writeByte(Byte.parseByte(next())); //priority (???)
-            writer.writeByte((byte)Short.parseShort(next())); //flag (???)
+            writer.writeByte(Byte.parseByte(next())); //priority
+            System.out.println(i + ": [");
+            BitStream bitStream= new BitStream();
+            for(int x= 0; x < 8; x++)
+            {
+                bitStream.append(Boolean.parseBoolean(next()));
+            }
+            writer.write(bitStream.toBytes()); //flags
 
             writer.writeByte((byte)Short.parseShort(next())); //contest effect (???)
             writer.writeByte((byte)Short.parseShort(next())); //contest type (???)
@@ -324,7 +307,7 @@ public class MoveEditor
 
     private void sort (File arr[])
     {
-        Arrays.sort(arr, Comparator.comparingInt(MoveEditor::fileToInt));
+        Arrays.sort(arr, Comparator.comparingInt(MoveEditorGen4::fileToInt));
     }
 
     private static int fileToInt (File f)

@@ -18,7 +18,7 @@ public class PersonalEditor
 
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String dataPath= path;
-    private static final String[] typeArr= {"Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fairy", "Fire", "Water","Grass","Electric","Psychic","Ice","Dragon","Dark"};
+    private static final String[] typeArr= {"Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "???", "Fire", "Water","Grass","Electric","Psychic","Ice","Dragon","Dark"};
     private static final String[] eggGroupArr= {"~","Monster","Water 1","Bug","Flying","Field","Fairy","Grass","Human-Like","Water 3","Mineral","Amorphous","Water 2","Ditto","Dragon","Undiscovered"};
     private static final String[] growthTableIdArr= {"Medium Fast","Erratic","Fluctuating","Medium Slow","Fast","Slow","Medium Fast","Medium Fast"};
     private static String resourcePath= path + "Program Files" + File.separator;
@@ -30,6 +30,24 @@ public class PersonalEditor
 
     public PersonalEditor() throws IOException
     {
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Johto or Sinnoh?");
+        String game= scanner.nextLine().toLowerCase();
+        String tmNameFile= "TmNameList";
+
+        switch (game)
+        {
+            case "johto" :
+                tmNameFile+= "Johto.txt";
+
+                break;
+            case "sinnoh" :
+                tmNameFile+= "Sinnoh.txt";
+                break;
+            default:
+                throw new RuntimeException("Invalid region");
+        }
+
         BufferedReader reader= new BufferedReader(new FileReader(resourcePath + "EntryData.txt"));
         ArrayList<String> nameList= new ArrayList<>();
         String line;
@@ -39,6 +57,7 @@ public class PersonalEditor
         }
         nameData= nameList.toArray(new String[0]);
         reader.close();
+
 
         reader= new BufferedReader(new FileReader(resourcePath + "TmList.txt"));
         ArrayList<String> tmList= new ArrayList<>();
@@ -70,7 +89,7 @@ public class PersonalEditor
         abilityData= abilityList.toArray(new String[0]);
         reader.close();
 
-        reader= new BufferedReader(new FileReader(resourcePath + "TmNameList.txt"));
+        reader= new BufferedReader(new FileReader(resourcePath + tmNameFile));
         ArrayList<String> tmNameList= new ArrayList<>();
 
         while((line= reader.readLine()) != null)

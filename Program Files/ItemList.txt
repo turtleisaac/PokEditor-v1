@@ -503,33 +503,33 @@ Photo Album
 GB Sounds
 Tidal Bell
 RageCandyBar
-framework.Data Card 01
-framework.Data Card 02
-framework.Data Card 03
-framework.Data Card 04
-framework.Data Card 05
-framework.Data Card 06
-framework.Data Card 07
-framework.Data Card 08
-framework.Data Card 09
-framework.Data Card 10
-framework.Data Card 11
-framework.Data Card 12
-framework.Data Card 13
-framework.Data Card 14
-framework.Data Card 15
-framework.Data Card 16
-framework.Data Card 17
-framework.Data Card 18
-framework.Data Card 19
-framework.Data Card 20
-framework.Data Card 21
-framework.Data Card 22
-framework.Data Card 23
-framework.Data Card 24
-framework.Data Card 25
-framework.Data Card 26
-framework.Data Card 27
+Data Card 01
+Data Card 02
+Data Card 03
+Data Card 04
+Data Card 05
+Data Card 06
+Data Card 07
+Data Card 08
+Data Card 09
+Data Card 10
+Data Card 11
+Data Card 12
+Data Card 13
+Data Card 14
+Data Card 15
+Data Card 16
+Data Card 17
+Data Card 18
+Data Card 19
+Data Card 20
+Data Card 21
+Data Card 22
+Data Card 23
+Data Card 24
+Data Card 25
+Data Card 26
+Data Card 27
 Jade Orb
 Lock Capsule
 Red Orb
