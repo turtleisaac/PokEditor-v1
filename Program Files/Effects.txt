@@ -1,0 +1,277 @@
+None
+Causes Sleep
+Chance to Poison
+Damages target; heals user up to 50% of damage dealt
+Chance to Burn
+Chance to Freeze
+Chance to Paralyze
+Selfdestruct/ Explosion effect
+Damages sleeping target; heals user up to 50% of damage dealt
+Mirror Move effect
+Raises Atk
+Raises Def
+Raises Spd
+Raises SpAtk
+Raises SpDef
+Raises Accuracy
+Raises Evasion
+Always hits
+Lowers Atk
+Lowers Def
+Lowers Spd
+Lowers SpAtk
+Lowers SpDef
+Lowers Accuracy
+Lowers Evasion
+Resets stat changes
+Bide effect
+Locked into move for 2-3 turns; confuses user after
+Whirlwind/ Roar effect
+Hits target 2-5 times
+Changes user's type to match one of its moves
+Chance to Flinch
+Restores up to 50% max HP
+Badly Poisons
+Pay Day effect
+1/2 damage from Special attacks
+Chance of either Paralyzing; Burning; or Freezing target
+Causes Sleep and restores all HP
+OHKO
+Charging turn; high crit ratio
+Deals damage equal to 1/2 target's current hp
+Deals 40 damage
+Binding move effect
+High crit ratio
+Hits twice
+Deals 1/2 user's max HP to user if it misses
+Prevents lowering of stats
+Sharply raises crit ratio
+1/4 damage dealt recoil
+Guaranteed Confusion
+Sharply raises Atk
+Sharply raises Def
+Sharply raises Spd
+Sharply raises SpAtk
+Sharply raises SpDef
+Sharply raises Accuracy
+Sharply raises Evasion
+Transform effect
+Sharply lowers Atk
+Sharply lowers Def
+Sharply lowers Spd
+Sharply lowers SpAtk
+Sharply lowers Accuracy
+Sharply lowers Evasion
+64
+1/2 damage from Physical attacks
+Guaranteed Poison
+Guaranteed Paralysis
+Lowers Atk
+Lowers Def
+Lowers Spd
+Lowers SpAtk
+Lowers SpDef
+Lowers Accuracy
+Lowers Evasion
+Attacks next turn; chance of flinch; increased crit ratio
+Chance to Confuse
+Hits twice; chance to poison
+Vital Throw ??
+Substitute effect
+Recharge turn
+Locked into move; raises Atk whenever hit
+Copies user-selected move
+Metronome effect
+Leech Seed effect
+Splash effect
+Disables last move used for 4-7 turns
+Deals damage equal to user's level
+Deals up to user's level x1.5 damage
+2x last amount of damage received
+Locks target into last move used for 3-7 turns
+Pain Split effect
+Can only be used while asleep; chance of causing Flinch
+Conversion2 effect
+Next move used by user guaranteed to hit
+Sketch effect
+96
+Sleep Talk effect
+Destiny Bond effect
+Higher power the less HP the user has
+Decreases PP of target's last move used by 4
+False Swipe effect
+Heal Bell effect
++1 Priority
+Hits the target up to 3 times; increases power by 10 with each hit
+Steals target's held item
+Prevents target from switching out or fleeing
+If asleep; target takes damage equal to 1/4 its max HP at the end of every turn
+Raises Evasion; weak to Stomp/Rollout/Bodyslam
+Curse effect
+110
+Protect/ Detect effect
+Spikes effect
+Ignores type immunities
+All users on field faint in 3 turns
+Causes Sandstorm
+Allows user to endure a fatal hit and survive at 1 HP
+Rollout effect
+Sharply raises target's Atk and causes Confusion
+2x power for every consecutive hit
+Infatuates target of opposite gender
+Return effect
+Present Effect
+Frustration effect
+Safeguard effect
+Thaws user; chance to Burn
+Magnitude effect
+Baton Pass effect
+Pursuit effect
+Removes all hazards/ binding moves on user's side of the field
+Inflicts 20 damage
+131
+Synthesis effect
+133
+134
+Hidden Power effect
+Causes Rain
+Causes Harsh Sunlight
+Chance of raising Def
+Chance of raising Atk
+Ancient Power boost
+141
+Belly Drum effect
+Copies all of target's stat boosts
+Mirror Coat effect
+Raises Def; attacks next turn
+Twister effect
+2x Damage on Pokemon using Dig
+Future Sight effect
+2x Damage on Pokemon using Bounce/Fly
+Causes flinch and 2x damage if target has used Minimize
+Charging turn unless in Harsh Sunlight
+Always hits in rain; chance to Paralyze
+Flees from wild single battle
+Beat Up effect
+Fly effect
+Raises Def and 2x Rollout/ Ice Ball power
+157
+Guaranteed Flinch; can only be used turn 1
+Uproar effect
+Stockpile effect
+Spit Up effect
+Swallow effect
+163
+Causes Hail
+Torment effect
+Raises target's SpAtk and causes Confusion
+Guaranteed Burn; activates Flash Fire
+User faints and target's Atk and SpAtk are lowered sharply
+2x power if user is Poisoned; Paralyzed; or Burned.
+Focus Punch effect
+2x power if target is Paralyzed; cures target of Paralysis
+Redirects all moves to user
+Nature Power effect
+Next move deals 2x damage if it is Electric-type
+Target can't use status moves for 3-5 turns
+Ally's attack deals 1.5x damage this turn
+User switches held items with target
+User copies target's Ability
+1/2 of user's max HP is restored at the end of next turn
+Assist effect
+Ingrain effect
+Lowers user's Atk and Def
+Reflects status moves back at their user
+User regains a consumed held item
+2x power if the user has been hit this turn
+Removes Light Screen/ Reflect from target's side of the field
+Yawn effect
+Renders the target's held item unusable
+Target's HP becomes equal to the user's current HP
+Power= Base power x(user's current HP/ user's max HP)
+User swaps Abilities with the target
+Target is prevented from using moves shared with the user
+Cures user of Burn; Poison; or Paralysis
+Grudge effect
+If any Pokemon uses a beneficial status move; the user uses it instead
+Inflicts greater damage on heavier targets
+Secret Power effect
+1/3 damage dealt recoil
+Guaranteed Confusion
+Chance of causing Burn; increased Crit ratio
+Weakens Electric-type moves by 50% until user switches out
+Chance of Badly Poisoning
+Type changes to match weather
+Lowers user's SpAtk harshly
+Lowers target's Atk and Def
+Raises user's Def and SpDef
+Can hit Pokémon during semi-invulnerable turns of Fly/Bounce
+Raises user's Atk and Def
+Chance of causing Poison; increased crit ratio
+1/3 damage dealt recoil
+Raises user's SpAtk and SpDef
+Raises user's Atk and Spd
+Camouflage effect
+Roost effect
+Gravity effect
+2x power if target is asleep; wakes up target
+Causes all moves to ignore changes to the target's Evasiveness
+Lowers user's Spd
+Power = min(150; (25 × Target's Current Speed / User's Current Speed) + 1)
+Healing Wish effect
+2x power if target is at or below 1/2 HP
+Natural Gift effect
+Can only hit targets that have used Protect/ Detect
+Consumes target's berry
+2x Spd for user's party for 3 turns
+Sharply raises a random stat of the target
+Damage= 1.5x damage dealt by the target's last attack
+Switches user out after dealing damage
+Lowers user's Def and SpDef
+2x Power if user moves after target
+2x damage if the target has already taken damage this turn 
+Prevents the target from using its held item or having items used on it
+Power and effect determined by held item
+Cures user of any status condition and afflicts the target with it
+The less PP the move has; the greater its Power
+Heal Block effect
+Power = Base power + 120 × (Target's Current HP / Target's Maximum HP)
+Swaps the user's Atk stat with its Def stat
+Suppresses the target's Ability
+Prevents opponents from landing critical hits on the user's party for 5 turns
+If the target has not moved yet; the user copies their move and uses it with 1.5x power
+User uses the last move that was used in battle
+Swaps the user's Atk and SpAtk buffs with the target's Atk and SpAtk buffs
+Swaps the user's Def and SpDef buffs with the target's Def and SpDef buffs
+Power= 60 + (20x # of stat increases of target)
+Fails unless the user has used all of its other moves at least once
+Changes the target's Ability to Insomnia
+Fails if the target did not select a damaging move or has already moved
+Toxic Spikes effect
+Swaps the user's stat changes with the target's
+Restores 1/16 of the user's max HP at the end of every turn
+User becomes immune to Ground-type attacks and field hazards for 5 turns
+Chance of causing Burn; 1/3 damage dealt recoil
+Struggle effect
+Dive effect
+Dig effect
+2x Damage on Pokemon using Dive
+Defog effect
+Trick Room effect
+Always hits in Hail
+Whirlpool effect
+1/3 damage dealt recoil
+Bounce effect
+264
+Lowers opposite gender target's SpAtk harshly
+Stealth Rocks effect
+Chatter effect
+Type= Type of Plate held by user
+1/2 damage dealt recoil
+Lunar Dance effect
+Chance of lowering target's SpDef harshly
+Shadow Force effect
+Chance of causing Burn; chance of causing Flinch
+Chance of causing Freeze; chance of causing Flinch
+Chance of causing Paralysis; chance of causing Flinch
+Chance of raising user's SpAtk

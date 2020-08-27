@@ -1,0 +1,31 @@
+None
+Cure Paralysis
+Cure Sleep
+Cure Poison
+Cure Burn
+Cure Freeze
+Restore 10 PP
+Restore 20 HP
+Cures Confusion
+Cure any Status or Confusion
+Restore 25% HP
+Figy Berry
+Wiki Berry
+Mago Berry
+Aguav Berry
+Iapapa Berry
+Raises Atk
+Raises Def
+Raises Spd
+Raises SpAtk
+Raises SpDef
+Raises Crit ratio
+Sharply raises random stat
+Raises Accuracy next move
+Restores lowered stats
+Cures Infatuation (Attract)
+Causes target to flinch
+Paralyzes target
+Poisons target
+Badly Poisons target
+Burns target
