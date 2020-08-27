@@ -118,7 +118,11 @@ public class Buffer {
         if (limit - position < size) {
             refill();
             if (limit - position < size) {
+<<<<<<< HEAD
                 throw new RuntimeException("Want "+size+" bytes but only "+limit+" bytes remain. Current position: " + truePosition);
+=======
+                throw new RuntimeException("Want "+size+" bytes but only "+limit+" bytes remain");
+>>>>>>> refs/remotes/origin/master
             }
         }
     }
@@ -174,9 +178,12 @@ public class Buffer {
     public byte[] readRemainder() {
         return readBytes((int)(new File(file).length()-truePosition));
     }
+<<<<<<< HEAD
 
     public int getLength()
     {
         return (int) new File(file).length();
     }
+=======
+>>>>>>> refs/remotes/origin/master
 }

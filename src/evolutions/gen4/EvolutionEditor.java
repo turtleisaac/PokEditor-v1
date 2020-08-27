@@ -13,18 +13,60 @@ public class EvolutionEditor
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String dataPath= path;
     private static final String[] typeArr= {"Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fairy", "Fire", "Water","Grass","Electric","Psychic","Ice","Dragon","Dark"};
+<<<<<<< HEAD
     private static String[] evolutionMethodArr;
+=======
+    private static String[] evolutionMethodArr= {"None","Happiness","Happiness (Day)","Happiness (Night)","Level Up","Trade","Trade (Item)","Use Item","Level (Attack > Defense)","Level (Attack = Defense)","Level (Attack < Defense)","Level (PID > 5)","Level (PID < 5)","Level (1 of 2)","Level (2 of 2)","Max Beauty","Use Item (Male)","Use Item (Female)","Use Item (Day)","Use Item (Night)","Attack Known","Pokemon in Party","Level (Male)","Level (Female)","Level (Mt. Coronet)","Level (Eterna Forest)","Level (Route 217)","","","","",""};
+>>>>>>> refs/remotes/origin/master
     private static String resourcePath= path + "Program Files" + File.separator;
     private static String[] nameData;
     private static String[] itemData;
     private static String[] moveData;
 
+<<<<<<< HEAD
     public EvolutionEditor() throws IOException
     {
         String entryPath= resourcePath + "EntryData.txt";
         String itemPath= resourcePath + "ItemList.txt";
         String movePath= resourcePath + "MoveList.txt";
 
+=======
+    public EvolutionEditor() throws IOException {
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Which gen? (4 or 5)");
+        String gen= scanner.nextLine().toLowerCase();
+
+        String entryPath= resourcePath;
+        String itemPath= resourcePath;
+        String movePath= resourcePath;
+        switch (gen)
+        {
+            case ("4") :
+                entryPath+= "EntryData.txt";
+                itemPath+= "ItemList.txt";
+                movePath+= "MoveList.txt";
+                break;
+            case ("5") :
+                System.out.println("Black and White 1, or Black and White 2? (1 or 2)");
+                String version= scanner.nextLine().toLowerCase();
+                itemPath+= "ItemListGen5.txt";
+                movePath+= "MoveList.txt";
+                switch (version)
+                {
+                    case ("1") :
+                        entryPath+= "EntryDataGen5-1.txt";
+                        break;
+                    case ("2") :
+                        entryPath+= "EntryDataGen5-2.txt";
+                        break;
+                    default:
+                        throw new RuntimeException("Invalid version");
+                }
+                break;
+            default:
+                throw new RuntimeException("Invalid Gen");
+        }
+>>>>>>> refs/remotes/origin/master
 
         BufferedReader reader= new BufferedReader(new FileReader(entryPath));
         ArrayList<String> nameList= new ArrayList<>();
@@ -56,6 +98,7 @@ public class EvolutionEditor
         moveData= moveList.toArray(new String[0]);
         reader.close();
 
+<<<<<<< HEAD
         reader= new BufferedReader(new FileReader(resourcePath + "EvolutionMethodsGen4.txt"));
         ArrayList<String> evolutionList= new ArrayList<>();
         while((line= reader.readLine()) != null)
@@ -64,6 +107,13 @@ public class EvolutionEditor
         }
         evolutionMethodArr= evolutionList.toArray(new String[0]);
         reader.close();
+=======
+        if(gen.equals("5"))
+        {
+            evolutionMethodArr= new String[] {"None","Happiness","Happiness (Day)","Happiness (Night)","Level Up","Trade","Trade (Item)","Use Item","Level (Attack > Defense)","Level (Attack = Defense)","Level (Attack < Defense)","Level (PID > 5)","Level (PID < 5)","Level (1 of 2)","Level (2 of 2)","Max Beauty","Use Item (Male)","Use Item (Female)","Use Item (Day)","Use Item (Night)","Attack Known","Pokemon in Party","Level (Male)","Level (Female)","Level (Mt. Coronet)","Level (Eterna Forest)","Level (Route 217)","","","","",""};
+
+        }
+>>>>>>> refs/remotes/origin/master
     }
 
 
@@ -302,7 +352,11 @@ public class EvolutionEditor
             }
         }
 
+<<<<<<< HEAD
         BufferedWriter writer= new BufferedWriter(new FileWriter(path + "evolutionData.csv"));
+=======
+        BufferedWriter writer= new BufferedWriter(new FileWriter(path + "Evolutions.EvolutionData.csv"));
+>>>>>>> refs/remotes/origin/master
         if(easyDisplay)
         {
             writer.write("ID Number,Name,Evolution 1,Evolution 2,Evolution 3,Evolution 4,Evolution 5,Evolution 6,Evolution 7\n");
@@ -446,7 +500,11 @@ public class EvolutionEditor
                 return i;
             }
         }
+<<<<<<< HEAD
         throw new RuntimeException("Invalid pokemon entered: " + pokemon);
+=======
+        throw new RuntimeException("Invalid pokemon entered");
+>>>>>>> refs/remotes/origin/master
     }
 
     private static int getItem(String item)

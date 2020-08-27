@@ -312,7 +312,11 @@ public class EvolutionEditorGen5
             }
         }
 
+<<<<<<< HEAD
         BufferedWriter writer= new BufferedWriter(new FileWriter(path + "evolutionData.csv"));
+=======
+        BufferedWriter writer= new BufferedWriter(new FileWriter(path + "Evolutions.EvolutionData.csv"));
+>>>>>>> refs/remotes/origin/master
         if(easyDisplay)
         {
             writer.write("ID Number,Name,Evolution 1,Evolution 2,Evolution 3,Evolution 4,Evolution 5,Evolution 6,Evolution 7\n");

@@ -76,7 +76,11 @@ Lowers Evasion
 Attacks next turn; chance of flinch; increased crit ratio
 Chance to Confuse
 Hits twice; chance to poison
+<<<<<<< HEAD
 Vital Throw ??
+=======
+-1 Priority; hits before all other decreased Priority moves
+>>>>>>> refs/remotes/origin/master
 Substitute effect
 Recharge turn
 Locked into move; raises Atk whenever hit
@@ -174,7 +178,11 @@ Redirects all moves to user
 Nature Power effect
 Next move deals 2x damage if it is Electric-type
 Target can't use status moves for 3-5 turns
+<<<<<<< HEAD
 Ally's attack deals 1.5x damage this turn
+=======
++1 Priority; ally's attack deals 1.5x damage this turn
+>>>>>>> refs/remotes/origin/master
 User switches held items with target
 User copies target's Ability
 1/2 of user's max HP is restored at the end of next turn
@@ -183,7 +191,11 @@ Ingrain effect
 Lowers user's Atk and Def
 Reflects status moves back at their user
 User regains a consumed held item
+<<<<<<< HEAD
 2x power if the user has been hit this turn
+=======
+-1 Priority; 2x power if the user has been hit this turn
+>>>>>>> refs/remotes/origin/master
 Removes Light Screen/ Reflect from target's side of the field
 Yawn effect
 Renders the target's held item unusable
@@ -193,7 +205,11 @@ User swaps Abilities with the target
 Target is prevented from using moves shared with the user
 Cures user of Burn; Poison; or Paralysis
 Grudge effect
+<<<<<<< HEAD
 If any Pokemon uses a beneficial status move; the user uses it instead
+=======
++1 Priority; if any Pokemon uses a beneficial status move; the user uses it instead
+>>>>>>> refs/remotes/origin/master
 Inflicts greater damage on heavier targets
 Secret Power effect
 1/3 damage dealt recoil
@@ -221,7 +237,11 @@ Power = min(150; (25 × Target's Current Speed / User's Current Speed) + 1)
 Healing Wish effect
 2x power if target is at or below 1/2 HP
 Natural Gift effect
+<<<<<<< HEAD
 Can only hit targets that have used Protect/ Detect
+=======
++2 Priority; can only hit targets that have used Protect/ Detect
+>>>>>>> refs/remotes/origin/master
 Consumes target's berry
 2x Spd for user's party for 3 turns
 Sharply raises a random stat of the target
@@ -246,7 +266,11 @@ Swaps the user's Def and SpDef buffs with the target's Def and SpDef buffs
 Power= 60 + (20x # of stat increases of target)
 Fails unless the user has used all of its other moves at least once
 Changes the target's Ability to Insomnia
+<<<<<<< HEAD
 Fails if the target did not select a damaging move or has already moved
+=======
++1 Priority; fails if the target did not select a damaging move or has already moved
+>>>>>>> refs/remotes/origin/master
 Toxic Spikes effect
 Swaps the user's stat changes with the target's
 Restores 1/16 of the user's max HP at the end of every turn

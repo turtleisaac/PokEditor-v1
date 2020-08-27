@@ -33,7 +33,11 @@ public class LearnsetEditor
             case "5" :
                 System.out.println("Black and White 1, or Black and White 2? (1 or 2)");
                 String version= scanner.nextLine().toLowerCase();
+<<<<<<< HEAD
                 movePath+= "MoveList.txt";
+=======
+                movePath+= "MoveList Rebooted.txt";
+>>>>>>> refs/remotes/origin/master
                 switch (version) {
                     case "1":
                         entryPath += "EntryDataGen5-1.txt";
@@ -48,7 +52,11 @@ public class LearnsetEditor
             default:
                 throw new RuntimeException("Invalid arguments");
         }
+<<<<<<< HEAD
         gen5 = gen.equals("5");
+=======
+        this.gen5 = gen.equals("5");
+>>>>>>> refs/remotes/origin/master
 
         BufferedReader reader= new BufferedReader(new FileReader(entryPath));
         ArrayList<String> nameList= new ArrayList<>();
@@ -89,6 +97,7 @@ public class LearnsetEditor
             file= files[i];
             learnsetBuffer= new Buffer(file.toString());
             int numMoves;
+<<<<<<< HEAD
             learnsetBuffer.skipTo((int) (file.length()-4));
             byte[] last4= learnsetBuffer.readRemainder();
             byte[] properDelimeter= new byte[] {(byte) 0xFF, (byte) 0xFF,0x00,0x00};
@@ -105,11 +114,21 @@ public class LearnsetEditor
                 }
             }
             else //gen 5
+=======
+            if(!gen5)
+            {
+                numMoves= (int) ((file.length()-4)/2);
+            }
+            else
+>>>>>>> refs/remotes/origin/master
             {
                 numMoves= (int) ((file.length()-4)/4);
             }
 
+<<<<<<< HEAD
             learnsetBuffer= new Buffer((file.toString()));
+=======
+>>>>>>> refs/remotes/origin/master
             System.out.println(nameData[i] + " numMoves: " + numMoves);
             ArrayList<MoveLearnsetData> moveList= new ArrayList<>();
             for(int m= 0; m < numMoves; m++)
@@ -154,6 +173,7 @@ public class LearnsetEditor
             dataList.add(moveList);
         }
 
+<<<<<<< HEAD
         String[][] learnsetTable;
         if(gen5)
         {
@@ -164,6 +184,9 @@ public class LearnsetEditor
             learnsetTable= new String[dataList.size()][40];
         }
 
+=======
+        String[][] learnsetTable= new String[dataList.size()][80];
+>>>>>>> refs/remotes/origin/master
         for (String[] row : learnsetTable) {
             Arrays.fill(row, "");
         }
@@ -225,7 +248,10 @@ public class LearnsetEditor
         {
             System.out.println(nameData[i]);
             String[] thisLine= csvReader.next();
+<<<<<<< HEAD
             int numMoves= thisLine.length/ 2;
+=======
+>>>>>>> refs/remotes/origin/master
             BinaryWriter writer= new BinaryWriter(outputPath + File.separator + i + ".bin");
             for(int m= 0; m < thisLine.length; m+= 2)
             {
@@ -253,6 +279,7 @@ public class LearnsetEditor
                     writer.writeShort((short) level);
                 }
             }
+<<<<<<< HEAD
 
             if(!gen5)
             {
@@ -270,6 +297,9 @@ public class LearnsetEditor
                 writer.write(new byte[] {(byte) 0xFF, (byte) 0xFF,0x00,0x00});
             }
 
+=======
+            writer.write(new byte[] {(byte) 0xFF, (byte) 0xFF,0x00,0x00});
+>>>>>>> refs/remotes/origin/master
             writer.close();
         }
     }

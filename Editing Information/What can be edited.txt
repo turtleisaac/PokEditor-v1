@@ -5,15 +5,9 @@ Starting off with the personal data narc: all base stats, type 1, type 2, catch 
 
 Next up is the learnset narc, which kind of speaks for itself. Each entry is defined by a move, followed by the level it is to be learned at. All species have a maximum learnset move count of 20, and all entries after the end of a mon's learnset should just be left blank.
 
-<<<<<<< HEAD
-The next narc is the evolutions narc.  You can implement the method of evolution, what is required to evolve (representing a level, item, species, move, etc... depending on the selected method), and the resulting species. Each species has a maximum of 7 evolutions. If a pokemon has no evolution in a slot, it should have "None" as the defined method, the "Required" column should be left blank, and the "Result" column should contain "~" (tilde, the squiggly line)
-
-Lastly is the final narc (for now), the encounters narc. With it, you can firstly change (on a by-area basis) (editing map header data is required to edit the associated encounter data for maps using that header) the master encounter rates for field encounters, water encounters (individual rates for each rod and surf), and rock smash encounters (all rates are out of 255).
-=======
 The next narc is the Evolutions narc.  You can implement the method of evolution, what is required to evolve (representing a level, item, species, move, etc... depending on the selected method), and the resulting species. Each species has a maximum of 7 evolutions. If a pokemon has no evolution in a slot, it should have "None" as the defined method, the "Required" column should be left blank, and the "Result" column should contain "~" (tilde, the squiggly line)
 
 Lastly is the final narc (for now), the Encounters narc. With it, you can firstly change (on a by-area basis) (editing map header data is required to edit the associated encounter data for maps using that header) the master encounter rates for field encounters, water encounters (individual rates for each rod and surf), and rock smash encounters (all rates are out of 255).
->>>>>>> refs/remotes/origin/master
 
 For field encounters you can edit the species that appears in any of 36 encounter slots: 12 for morning, 12 for day, 12 for night. Each slot for all three times share a hard-coded encounter rate and user-defined level (see program output to see what I mean). To make one species appear more frequently and at varying levels, simply put it in more encounter slots and vary the levels for those slots.
 

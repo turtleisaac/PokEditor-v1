@@ -1,15 +1,28 @@
+<<<<<<< HEAD
 None
 Pound
 Karate Chop
 Double Slap
+=======
+-
+Pound
+Karate Chop
+DoubleSlap
+>>>>>>> refs/remotes/origin/master
 Comet Punch
 Mega Punch
 Pay Day
 Fire Punch
 Ice Punch
+<<<<<<< HEAD
 Thunder Punch
 Scratch
 Vise Grip
+=======
+ThunderPunch
+Scratch
+ViceGrip
+>>>>>>> refs/remotes/origin/master
 Guillotine
 Razor Wind
 Swords Dance
@@ -26,7 +39,11 @@ Double Kick
 Mega Kick
 Jump Kick
 Rolling Kick
+<<<<<<< HEAD
 Sand Attack
+=======
+Sand-Attack
+>>>>>>> refs/remotes/origin/master
 Headbutt
 Horn Attack
 Fury Attack
@@ -47,7 +64,11 @@ Growl
 Roar
 Sing
 Supersonic
+<<<<<<< HEAD
 Sonic Boom
+=======
+SonicBoom
+>>>>>>> refs/remotes/origin/master
 Disable
 Acid
 Ember
@@ -59,7 +80,11 @@ Surf
 Ice Beam
 Blizzard
 Psybeam
+<<<<<<< HEAD
 Bubble Beam
+=======
+BubbleBeam
+>>>>>>> refs/remotes/origin/master
 Aurora Beam
 Hyper Beam
 Peck
@@ -74,15 +99,24 @@ Mega Drain
 Leech Seed
 Growth
 Razor Leaf
+<<<<<<< HEAD
 Solar Beam
 Poison Powder
+=======
+SolarBeam
+PoisonPowder
+>>>>>>> refs/remotes/origin/master
 Stun Spore
 Sleep Powder
 Petal Dance
 String Shot
 Dragon Rage
 Fire Spin
+<<<<<<< HEAD
 Thunder Shock
+=======
+ThunderShock
+>>>>>>> refs/remotes/origin/master
 Thunderbolt
 Thunder Wave
 Thunder
@@ -106,7 +140,11 @@ Double Team
 Recover
 Harden
 Minimize
+<<<<<<< HEAD
 Smokescreen
+=======
+SmokeScreen
+>>>>>>> refs/remotes/origin/master
 Confuse Ray
 Withdraw
 Defense Curl
@@ -118,7 +156,11 @@ Focus Energy
 Bide
 Metronome
 Mirror Move
+<<<<<<< HEAD
 Self-Destruct
+=======
+Selfdestruct
+>>>>>>> refs/remotes/origin/master
 Egg Bomb
 Lick
 Smog
@@ -133,8 +175,13 @@ Spike Cannon
 Constrict
 Amnesia
 Kinesis
+<<<<<<< HEAD
 Soft-Boiled
 High Jump Kick
+=======
+Softboiled
+Hi Jump Kick
+>>>>>>> refs/remotes/origin/master
 Glare
 Dream Eater
 Poison Gas
@@ -183,7 +230,11 @@ Powder Snow
 Protect
 Mach Punch
 Scary Face
+<<<<<<< HEAD
 Feint Attack
+=======
+Faint Attack
+>>>>>>> refs/remotes/origin/master
 Sweet Kiss
 Belly Drum
 Sludge Bomb
@@ -221,9 +272,15 @@ Safeguard
 Pain Split
 Sacred Fire
 Magnitude
+<<<<<<< HEAD
 Dynamic Punch
 Megahorn
 Dragon Breath
+=======
+DynamicPunch
+Megahorn
+DragonBreath
+>>>>>>> refs/remotes/origin/master
 Baton Pass
 Encore
 Pursuit
@@ -243,8 +300,13 @@ Sunny Day
 Crunch
 Mirror Coat
 Psych Up
+<<<<<<< HEAD
 Extreme Speed
 Ancient Power
+=======
+ExtremeSpeed
+AncientPower
+>>>>>>> refs/remotes/origin/master
 Shadow Ball
 Future Sight
 Rock Smash
@@ -263,7 +325,11 @@ Will-O-Wisp
 Memento
 Facade
 Focus Punch
+<<<<<<< HEAD
 Smelling Salts
+=======
+SmellingSalt
+>>>>>>> refs/remotes/origin/master
 Follow Me
 Nature Power
 Charge
@@ -295,7 +361,11 @@ Camouflage
 Tail Glow
 Luster Purge
 Mist Ball
+<<<<<<< HEAD
 Feather Dance
+=======
+FeatherDance
+>>>>>>> refs/remotes/origin/master
 Teeter Dance
 Blaze Kick
 Mud Sport
@@ -318,7 +388,11 @@ Odor Sleuth
 Rock Tomb
 Silver Wind
 Metal Sound
+<<<<<<< HEAD
 Grass Whistle
+=======
+GrassWhistle
+>>>>>>> refs/remotes/origin/master
 Tickle
 Cosmic Power
 Water Spout
@@ -468,6 +542,7 @@ Ominous Wind
 Shadow Force
 Hone Claws
 Wide Guard
+<<<<<<< HEAD
 Guard Split
 Power Split
 Wonder Room
@@ -817,3 +892,6 @@ Scorching Sands
 Jungle Healing
 Wicked Blow
 Surging Strikes
+=======
+Guard Split
+>>>>>>> refs/remotes/origin/master

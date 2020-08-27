@@ -10,6 +10,7 @@ import narctowl.Narctowl;
 import personal.gen4.PersonalEditor;
 import personal.gen5.Gen5PersonalEditor1;
 import personal.gen5.Gen5PersonalEditor2;
+<<<<<<< HEAD
 import sun.misc.BASE64Encoder;
 
 import java.io.BufferedWriter;
@@ -18,11 +19,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+=======
+
+import java.io.File;
+import java.io.IOException;
+>>>>>>> refs/remotes/origin/master
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
+<<<<<<< HEAD
 import java.util.HashMap;
+=======
+>>>>>>> refs/remotes/origin/master
 
 public class DsFileFinder
 {
@@ -48,11 +57,19 @@ public class DsFileFinder
     private int newFileLength;
     private String type;
 
+<<<<<<< HEAD
     private HashMap<String,String> map1 = new HashMap<>();
     private HashMap<String,String> map2 = new HashMap<>();
     private boolean rom2= true;
     private String rom2Name;
     private String rom1Name;
+=======
+    private static int PERSONAL;
+    private static int LEARNSET;
+    private static int EVOLUTION;
+    private static int GROWTH;
+    private static int ENCOUNTER;
+>>>>>>> refs/remotes/origin/master
 
     public DsFileFinder()
     {
@@ -64,10 +81,24 @@ public class DsFileFinder
         romCapacities[10]= "128MB";
         romCapacities[11]= "256MB";
         romCapacities[12]= "512MB";
+<<<<<<< HEAD
+=======
+
+        if(new File(path + "Program Files" + File.separator + "fileActivator.hex").exists())
+        {
+            Buffer activatorBuffer= new Buffer(path + "Program Files" + File.separator + "fileActivator.hex");
+            PERSONAL= activatorBuffer.readByte();
+            LEARNSET= activatorBuffer.readByte();
+            EVOLUTION= activatorBuffer.readByte();
+            GROWTH= activatorBuffer.readByte();
+            ENCOUNTER= activatorBuffer.readByte();
+        }
+>>>>>>> refs/remotes/origin/master
     }
 
     public void readRom(String[] args) throws Exception
     {
+<<<<<<< HEAD
         String rom2= args[args.length-1];
         String rom1= args[args.length-2];
         this.rom= path + rom2;
@@ -85,11 +116,22 @@ public class DsFileFinder
         map2= getAllFiles();
 
         compareAllFiles();
+=======
+        String rom= args[args.length-1];
+        this.rom= path + rom;
+        String substring = rom.substring(0, rom.length() - 4);
+        buffer= new Buffer(rom);
+        readHeader();
+        readFatb();
+        findFile(args);
+//        clearDirectory(new File(path + "temp"));
+>>>>>>> refs/remotes/origin/master
     }
 
     public void readHeader() throws IOException
     {
         String title= buffer.readString(12).trim();
+<<<<<<< HEAD
         if(rom2)
         {
             rom2Name= title;
@@ -98,6 +140,8 @@ public class DsFileFinder
         {
             rom1Name= title;
         }
+=======
+>>>>>>> refs/remotes/origin/master
         String gameCode= buffer.readString(4);
         String makerCode= buffer.readString(2);
         int deviceCode= buffer.readByte();
@@ -547,11 +591,14 @@ public class DsFileFinder
 
     }
 
+<<<<<<< HEAD
     public void readFntb()
     {
 
     }
 
+=======
+>>>>>>> refs/remotes/origin/master
     private static final int PERSONAL_J = 0x83;
     private static final int LEARNSET_J = 0xA2;
     private static final int EVOLUTION_J = 0xA3;
@@ -614,6 +661,7 @@ public class DsFileFinder
     }
 
 
+<<<<<<< HEAD
     public HashMap<String,String> getAllFiles() throws IOException, NoSuchAlgorithmException
     {
         Buffer romBuffer;
@@ -668,6 +716,8 @@ public class DsFileFinder
     }
 
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 
     public void grabFile(String[] args) throws Exception

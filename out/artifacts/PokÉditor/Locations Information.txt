@@ -1,9 +1,16 @@
 Narc Locations for HGSS:
 
+<<<<<<< HEAD
 personal framework.Data: a/0/0/2.narc
 Learnset framework.Data: a/0/3/3.narc
 Evolution framework.Data: a/0/3/4.narc
 Encounter framework.Data: (HG) a/0/3/7.narc, (SS) a/1/3/6.narc
+=======
+Personal Data: a/0/0/2.narc
+Learnset Data: a/0/3/3.narc
+Evolution Data: a/0/3/4.narc
+Encounter Data: (HG) a/0/3/7.narc, (SS) a/1/3/6.narc
+>>>>>>> refs/remotes/origin/master
 
 Narc Locations for DP:
 
