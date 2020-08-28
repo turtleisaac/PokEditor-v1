@@ -10,6 +10,8 @@ Written entirely in Java and is completely OS-agnostic. Java 8 or greater is req
 
 java -jar PokEditor.jar \<arguments>
 
+Example: java -jar PokEditor.jar personal HeartGold.nds
+
 # List of Editors
 
 personal
@@ -23,6 +25,8 @@ evolutions
 growth
 
 items
+
+moves
 
 # Arguments
 
