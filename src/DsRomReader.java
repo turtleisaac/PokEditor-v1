@@ -17,6 +17,7 @@ import personal.gen5.Gen5PersonalEditor2;
 
 import java.io.*;
 import java.util.*;
+import java.net.*;
 
 public class DsRomReader
 {
@@ -44,9 +45,31 @@ public class DsRomReader
     private String type;
     private ArrayList<Long> rootContents= new ArrayList<>();
 
-    public DsRomReader()
+    public DsRomReader() throws IOException
     {
         System.out.println("PokEditor is a tool written by Turtleisaac. All unauthorized or uncredited uses of this tool should be reported immediately. If you are using an authorized version of this tool, enjoy! (If you aren't using an authorized version, I am deeply disappointed)");
+
+        URL versionUrl= new URL("https://github.com/turtleisaac/PokEditor/blob/master/version");
+        BufferedReader onlineVersionReader= new BufferedReader(new InputStreamReader(versionUrl.openStream()));
+        String onlineVersion= onlineVersionReader.readLine().toLowerCase();
+        onlineVersionReader.close();
+
+        BufferedReader localVersionReader= new BufferedReader(new FileReader(path + "Program Files" + File.separator + "version"));
+        String localVersion= localVersionReader.readLine().toLowerCase();
+        localVersionReader.close();
+
+        if(!onlineVersion.equals(localVersion))
+        {
+            System.out.println("\nThere is a new version of PokEditor available. Do you wish to ignore this alert and continue? (y/N)\n");
+            Scanner scanner= new Scanner(System.in);
+
+            String ans= scanner.nextLine().toLowerCase();
+            if(ans.equals("n"))
+            {
+                System.out.println("Aborting process. Please go update PokEditor using the releases tab on the official GitHub: https://github.com/turtleisaac/PokEditor");
+                System.exit(0);
+            }
+        }
 
         Arrays.fill(romCapacities,"");
         romCapacities[6]= "8MB";
