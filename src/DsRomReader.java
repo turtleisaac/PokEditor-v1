@@ -49,7 +49,7 @@ public class DsRomReader
     {
         System.out.println("PokEditor is a tool written by Turtleisaac. All unauthorized or uncredited uses of this tool should be reported immediately. If you are using an authorized version of this tool, enjoy! (If you aren't using an authorized version, I am deeply disappointed)");
 
-        URL versionUrl= new URL("https://github.com/turtleisaac/PokEditor/blob/master/version");
+        URL versionUrl= new URL("https://raw.githubusercontent.com/turtleisaac/PokEditor/master/Program%20Files/version");
         BufferedReader onlineVersionReader= new BufferedReader(new InputStreamReader(versionUrl.openStream()));
         String onlineVersion= onlineVersionReader.readLine().toLowerCase();
         onlineVersionReader.close();
@@ -60,7 +60,7 @@ public class DsRomReader
 
         if(!onlineVersion.equals(localVersion))
         {
-            System.out.println("\nThere is a new version of PokEditor available. Do you wish to ignore this alert and continue? (y/N)\n");
+            System.out.println("\nThere is a new version of PokEditor (v" + onlineVersion + ") available. You are currently running v" + localVersion + ". Do you wish to ignore this alert and continue? (y/N)\n");
             Scanner scanner= new Scanner(System.in);
 
             String ans= scanner.nextLine().toLowerCase();
