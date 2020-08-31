@@ -71,14 +71,17 @@ public class DsRomReader
             String ans;
 
             System.out.println("\nThere is a new version of PokEditor (v" + onlineVersion + ") available. You are currently running v" + localVersion + ". Do you wish to ignore this alert and continue? (y/N)\n");
-            ans= scanner.nextLine().toLowerCase();
 
-            System.out.println("v" + onlineVersion + "Changelog:");
+            System.out.println("v" + onlineVersion + " Changelog:");
             String line;
             while((line= onlineVersionReader.readLine()) != null)
             {
-                System.out.println("   *" + line);
+                System.out.println("    " + line);
             }
+
+            ans= scanner.nextLine().toLowerCase();
+
+
 
             if(!ans.equals("y"))
             {
