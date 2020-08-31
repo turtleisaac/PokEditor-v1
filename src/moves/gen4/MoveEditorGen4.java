@@ -293,7 +293,7 @@ public class MoveEditorGen4
             {
                 bitStream.append(Boolean.parseBoolean(next()));
             }
-            writer.write(bitStream.toBytes()); //flags
+            writer.write(bitStream.toBytes()[0]); //flags
 
             writer.writeByte((byte)Short.parseShort(next())); //contest effect (???)
             writer.writeByte((byte)Short.parseShort(next())); //contest type (???)

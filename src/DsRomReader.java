@@ -50,25 +50,43 @@ public class DsRomReader
         System.out.println("PokEditor is a tool written by Turtleisaac. All unauthorized or uncredited uses of this tool should be reported immediately. If you are using an authorized version of this tool, enjoy! (If you aren't using an authorized version, I am deeply disappointed)");
 
         URL versionUrl= new URL("https://raw.githubusercontent.com/turtleisaac/PokEditor/master/Program%20Files/version");
-        BufferedReader onlineVersionReader= new BufferedReader(new InputStreamReader(versionUrl.openStream()));
+        BufferedReader onlineVersionReader;
+        try
+        {
+            onlineVersionReader= new BufferedReader(new InputStreamReader(versionUrl.openStream()));
+        }
+        catch (IOException e)
+        {
+            onlineVersionReader= new BufferedReader(new FileReader(path + "Program Files" + File.separator + "version"));
+        }
         String onlineVersion= onlineVersionReader.readLine().toLowerCase();
-        onlineVersionReader.close();
+
 
         BufferedReader localVersionReader= new BufferedReader(new FileReader(path + "Program Files" + File.separator + "version"));
         String localVersion= localVersionReader.readLine().toLowerCase();
-        localVersionReader.close();
 
         if(!onlineVersion.equals(localVersion))
         {
-            System.out.println("\nThere is a new version of PokEditor (v" + onlineVersion + ") available. You are currently running v" + localVersion + ". Do you wish to ignore this alert and continue? (y/N)\n");
             Scanner scanner= new Scanner(System.in);
+            String ans;
 
-            String ans= scanner.nextLine().toLowerCase();
-            if(ans.equals("n"))
+            System.out.println("\nThere is a new version of PokEditor (v" + onlineVersion + ") available. You are currently running v" + localVersion + ". Do you wish to ignore this alert and continue? (y/N)\n");
+            ans= scanner.nextLine().toLowerCase();
+
+            System.out.println("v" + onlineVersion + "Changelog:");
+            String line;
+            while((line= onlineVersionReader.readLine()) != null)
             {
-                System.out.println("Aborting process. Please go update PokEditor using the releases tab on the official GitHub: https://github.com/turtleisaac/PokEditor");
+                System.out.println("   *" + line);
+            }
+
+            if(!ans.equals("y"))
+            {
+                System.out.println("\nAborting process. Please go update PokEditor using the releases tab on the official GitHub: https://github.com/turtleisaac/PokEditor");
                 System.exit(0);
             }
+            onlineVersionReader.close();
+            localVersionReader.close();
         }
 
         Arrays.fill(romCapacities,"");

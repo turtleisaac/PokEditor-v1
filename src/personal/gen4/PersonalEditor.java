@@ -31,7 +31,7 @@ public class PersonalEditor
     public PersonalEditor() throws IOException
     {
         Scanner scanner= new Scanner(System.in);
-        System.out.println("Johto or Sinnoh?");
+        System.out.println("Are you playing a Johto game or a Sinnoh game?");
         String game= scanner.nextLine().toLowerCase();
         String tmNameFile= "TmNameList";
 
@@ -45,7 +45,7 @@ public class PersonalEditor
                 tmNameFile+= "Sinnoh.txt";
                 break;
             default:
-                throw new RuntimeException("Invalid region");
+                throw new RuntimeException("Invalid region. Please enter either Sinnoh or Johto");
         }
 
         BufferedReader reader= new BufferedReader(new FileReader(resourcePath + "EntryData.txt"));
@@ -622,7 +622,14 @@ public class PersonalEditor
 
                 @Override
                 public int getDexColor() {
-                    return Integer.parseInt(finalCsvRow[27]);
+                    try
+                    {
+                        return Integer.parseInt(finalCsvRow[27]);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e)
+                    {
+                        throw new RuntimeException("There is a problem with the provided personalDataRecompile.csv. Please try exporting/ downloading it again. If this does not work, please open a new Issue on the GitHub");
+                    }
                 }
 
                 @Override
@@ -647,7 +654,7 @@ public class PersonalEditor
             }
 
             tmLearnsetData[i].append(false, 28);
-            System.out.println(tmLearnsetData[i]);
+//            System.out.println(tmLearnsetData[i]);
         }
 
         outputPath+= File.separator;
@@ -663,7 +670,7 @@ public class PersonalEditor
             writer.writeShort((short)data.getRareItem());
             writer.writeBytes(data.getGenderRatio(),data.getHatchMultiplier(),data.getBaseHappiness(),data.getExpRate(),data.getEggGroup1(),data.getEggGroup2(),data.getAbility1(),data.getAbility2(),data.getRunChance(),data.getDexColor());
             writer.writeBytes(0x00,0x00);
-            System.out.println(i + ":   " + tmLearnsetData[i]);
+//            System.out.println(i + ":   " + tmLearnsetData[i]);
             writer.write(tmLearnsetData[i].toBytes());
         }
     }
