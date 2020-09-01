@@ -1,6 +1,4 @@
-1.6
-Fixed the update alert system to work when there is not an internet connection
-Improved the update alert system so a changelog can be displayed
-Fixed the BST display issue present in personal spreadsheets created by processing B2W2 roms
-Added better error handling so users know what to do when an error is encountered
-Added extra context to the "Sinnoh or Johto" prompt encountered when running the personal editor for Gen 4 games
+1.7
+Fixed the bug in the Gen 4 moves editor
+Made the automatic deletion of the temp folder optional
+Miscellaneous improvements to assist with future development
