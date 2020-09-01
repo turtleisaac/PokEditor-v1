@@ -65,7 +65,7 @@ public class DsRomReader
         BufferedReader localVersionReader= new BufferedReader(new FileReader(path + "Program Files" + File.separator + "version"));
         String localVersion= localVersionReader.readLine().toLowerCase();
 
-        if(!onlineVersion.equals(localVersion))
+        if(!onlineVersion.equals(localVersion) && (Double.parseDouble(onlineVersion) > Double.parseDouble(localVersion)))
         {
             Scanner scanner= new Scanner(System.in);
             String ans;
@@ -85,7 +85,7 @@ public class DsRomReader
 
             if(!ans.equals("y"))
             {
-                System.out.println("\nAborting process. Please go update PokEditor using the releases tab on the official GitHub: https://github.com/turtleisaac/PokEditor");
+                System.out.println("\nAborting process. Please go update PokEditor using the releases tab on the official GitHub: https://github.com/turtleisaac/PokEditor/releases");
                 System.exit(0);
             }
             onlineVersionReader.close();
@@ -116,8 +116,14 @@ public class DsRomReader
 //        readFntb();
         readFatb();
         grabFile(args);
-//        System.out.println("Identical directories: " + compareDirs(new File(tempPathUnpack),new File(tempPathUnpack + "Recompile")));
-        clearDirectory(new File(path + "temp"));
+
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Do you wish to delete the temp folder? (Y/n)");
+        String ans= scanner.nextLine();
+        if(ans.equalsIgnoreCase("n"))
+        {
+            clearDirectory(new File(path + "temp"));
+        }
     }
 
     public void readHeader() throws IOException
@@ -872,10 +878,10 @@ public class DsRomReader
     private static final int ITEM_J = 0x92;
     private static final int MOVE_J = 0x8C;
 
-    private static final int PERSONAL_PT= 0x1A3;
+    private static final int PERSONAL_PT= 0x1A5;
     private static final int LEARNSET_PT = 0x1A7;
     private static final int EVOLUTION_PT = 0x1A1;
-    private static final int GROWTH_PT = 0x1A2;
+    private static final int GROWTH_PT = 0x1A4;
     private static final int ENCOUNTER_PT = 0x14A;
     private static final int ITEM_PT = 0x192;
     private static final int MOVE_PT = 0x1BD;

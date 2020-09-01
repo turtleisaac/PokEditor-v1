@@ -271,6 +271,8 @@ public class MoveEditorGen4
 
         CsvReader csvReader= new CsvReader(movePath);
         BinaryWriter writer;
+        BitStream bitStream;
+
         for(int i= 0; i < csvReader.length(); i++)
         {
             initializeIndex(csvReader.next());
@@ -287,16 +289,23 @@ public class MoveEditorGen4
 
             writer.writeShort(getTargets(next())); //targets
             writer.writeByte(Byte.parseByte(next())); //priority
-            System.out.println(i + ": [");
-            BitStream bitStream= new BitStream();
+
+            bitStream= new BitStream();
+            boolean flag;
+//            System.out.print(i + ": [");
             for(int x= 0; x < 8; x++)
             {
-                bitStream.append(Boolean.parseBoolean(next()));
+                flag= Boolean.parseBoolean(next());
+//                System.out.print(flag + ", ");
+                bitStream.append(flag);
             }
-            writer.write(bitStream.toBytes()[0]); //flags
+//            System.out.println("]");
+//            System.out.println("BitStream " + i + ": " + bitStream.toBytes()[0]);
+            writer.writeByte(bitStream.toBytes()[0]); //flags
 
             writer.writeByte((byte)Short.parseShort(next())); //contest effect (???)
             writer.writeByte((byte)Short.parseShort(next())); //contest type (???)
+            writer.writeBytes(0,0);
         }
 
     }
