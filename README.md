@@ -14,25 +14,29 @@ java -jar PokEditor.jar \<arguments>
 
 Example: java -jar PokEditor.jar personal HeartGold.nds
 
-# List of Editors
+# List of Editors/ Tools
 
-personal
+* personal
 
-learnsets
+* learnsets
 
-encounters
+* encounters
 
-evolutions
+* evolutions
 
-growth
+* growth
 
-items
+* items
 
-moves
+* moves
+
+* narc
 
 # Arguments
 
-\<editor name> \<name of rom>
+* \<editor name> \<name of rom> (This is used to run the different editors/ tools for each data type)
+
+* help \<editor name> (This is used to view information on each editor/ tool)
 
 # How to edit
 
