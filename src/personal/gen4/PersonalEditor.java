@@ -127,8 +127,8 @@ public class PersonalEditor
             int spe= personalBuffer.readByte();
             int spAtk= personalBuffer.readByte();
             int spDef= personalBuffer.readByte();
-            int type1= personalBuffer.readByte();
-            int type2= personalBuffer.readByte();
+            int type1= personalBuffer.readSelectiveByte(typeArr.length-1);
+            int type2= personalBuffer.readSelectiveByte(typeArr.length-1);
             int catchRate= personalBuffer.readByte();
             int baseExp= personalBuffer.readByte();
 
@@ -142,16 +142,16 @@ public class PersonalEditor
             int evPadded= getPadded(evYields);
 
 
-            int uncommonItem= personalBuffer.readShort();
-            int rareItem= personalBuffer.readShort();
+            int uncommonItem= personalBuffer.readSelectiveShort(itemData.length-1);
+            int rareItem= personalBuffer.readSelectiveShort(itemData.length-1);
             int genderRatio= personalBuffer.readByte();
             int hatchMultiplier= personalBuffer.readByte();
             int baseHappiness= personalBuffer.readByte();
-            int expRate= personalBuffer.readByte();
-            int eggGroup1= personalBuffer.readByte();
-            int eggGroup2= personalBuffer.readByte();
-            int ability1= personalBuffer.readByte();
-            int ability2= personalBuffer.readByte();
+            int expRate= personalBuffer.readSelectiveByte(growthTableIdArr.length-1);
+            int eggGroup1= personalBuffer.readSelectiveByte(eggGroupArr.length-1);
+            int eggGroup2= personalBuffer.readSelectiveByte(eggGroupArr.length-1);
+            int ability1= personalBuffer.readSelectiveByte(abilityData.length-1);
+            int ability2= personalBuffer.readSelectiveByte(abilityData.length-1);
             int runChance= personalBuffer.readByte();
             int dexColor= personalBuffer.readByte();
             personalBuffer.readShort(); // 2 bytes padding

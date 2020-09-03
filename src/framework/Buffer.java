@@ -37,6 +37,24 @@ public class Buffer {
         return ret;
     }
 
+    public int readSelectiveInt(int max)
+    {
+        int ret= readInt();
+        return ret <= max ? ret : 0;
+    }
+
+    public short readSelectiveShort(int max)
+    {
+        short ret= readShort();
+        return ret <= max ? ret : 0;
+    }
+
+    public int readSelectiveByte(int max)
+    {
+        int ret= readByte();
+        return ret <= max ? ret : 0;
+    }
+
     public long readUIntI() {
         return (long)readInt() & 0xffffffffL;
     }

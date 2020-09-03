@@ -98,10 +98,10 @@ public class EvolutionEditor
             int[] evolvedIDs= new int[7];
             for(int e= 0; e < 7; e++)
             {
-                evolutionMethods[e]= evolutionBuffer.readByte();
+                evolutionMethods[e]= evolutionBuffer.readSelectiveByte(evolutionMethodArr.length-1);
                 padding[e]= evolutionBuffer.readByte();
                 requirementNumbers[e]= evolutionBuffer.readShort();
-                evolvedIDs[e]= evolutionBuffer.readShort();
+                evolvedIDs[e]= evolutionBuffer.readSelectiveShort(nameData.length-1);
             }
 
             dataList.add(new EvolutionData() {
