@@ -1,0 +1,509 @@
+ID Number,Name,Type 1,Type 2,Uncommon Held Item,Rare Held Item,Growth Rate,Egg Group 1,Egg Group 2,Ability 1,Ability 2
+0,~,Normal,Normal,None,None,Medium Fast,~,~,-,-
+1,Bulbasaur,Grass,Poison,None,None,Medium Slow,Monster,Grass,Overgrow,-
+2,Ivysaur,Grass,Poison,None,None,Medium Slow,Monster,Grass,Overgrow,-
+3,Venusaur,Grass,Poison,None,None,Medium Slow,Monster,Grass,Overgrow,-
+4,Charmander,Fire,Fire,None,None,Medium Slow,Monster,Dragon,Blaze,-
+5,Charmeleon,Fire,Fire,None,None,Medium Slow,Monster,Dragon,Blaze,-
+6,Charizard,Fire,Flying,None,None,Medium Slow,Monster,Dragon,Blaze,-
+7,Squirtle,Water,Water,None,None,Medium Slow,Monster,Water 1,Torrent,-
+8,Wartortle,Water,Water,None,None,Medium Slow,Monster,Water 1,Torrent,-
+9,Blastoise,Water,Water,None,None,Medium Slow,Monster,Water 1,Torrent,-
+10,Caterpie,Bug,Bug,None,None,Medium Fast,Bug,Bug,Shield Dust,-
+11,Metapod,Bug,Bug,None,None,Medium Fast,Bug,Bug,Shed Skin,-
+12,Butterfree,Bug,Flying,None,SilverPowder,Medium Fast,Bug,Bug,Compoundeyes,-
+13,Weedle,Bug,Poison,None,None,Medium Fast,Bug,Bug,Shield Dust,-
+14,Kakuna,Bug,Poison,None,None,Medium Fast,Bug,Bug,Shed Skin,-
+15,Beedrill,Bug,Poison,None,Poison Barb,Medium Fast,Bug,Bug,Swarm,-
+16,Pidgey,Normal,Flying,None,None,Medium Slow,Flying,Flying,Keen Eye,Tangled Feet
+17,Pidgeotto,Normal,Flying,None,None,Medium Slow,Flying,Flying,Keen Eye,Tangled Feet
+18,Pidgeot,Normal,Flying,None,None,Medium Slow,Flying,Flying,Keen Eye,Tangled Feet
+19,Rattata,Normal,Normal,None,Chilan Berry,Medium Fast,Field,Field,Run Away,Guts
+20,Raticate,Normal,Normal,None,Chilan Berry,Medium Fast,Field,Field,Run Away,Guts
+21,Spearow,Normal,Flying,None,None,Medium Fast,Flying,Flying,Keen Eye,-
+22,Fearow,Normal,Flying,None,Sharp Beak,Medium Fast,Flying,Flying,Keen Eye,-
+23,Ekans,Poison,Poison,None,None,Medium Fast,Field,Dragon,Intimidate,Shed Skin
+24,Arbok,Poison,Poison,None,None,Medium Fast,Field,Dragon,Intimidate,Shed Skin
+25,Pikachu,Electric,Electric,Oran Berry,Light Ball,Medium Fast,Field,Fairy,Static,-
+26,Raichu,Electric,Electric,None,Oran Berry,Medium Fast,Field,Fairy,Static,-
+27,Sandshrew,Ground,Ground,None,Quick Claw,Medium Fast,Field,Field,Sand Veil,-
+28,Sandslash,Ground,Ground,None,Quick Claw,Medium Fast,Field,Field,Sand Veil,-
+29,Nidoran♀,Poison,Poison,None,None,Medium Slow,Monster,Field,Poison Point,Rivalry
+30,Nidorina,Poison,Poison,None,None,Medium Slow,Undiscovered,Undiscovered,Poison Point,Rivalry
+31,Nidoqueen,Poison,Ground,None,None,Medium Slow,Undiscovered,Undiscovered,Poison Point,Rivalry
+32,Nidoran♂,Poison,Poison,None,None,Medium Slow,Monster,Field,Poison Point,Rivalry
+33,Nidorino,Poison,Poison,None,None,Medium Slow,Monster,Field,Poison Point,Rivalry
+34,Nidoking,Poison,Ground,None,None,Medium Slow,Monster,Field,Poison Point,Rivalry
+35,Clefairy,Normal,Normal,Leppa Berry,Moon Stone,Fast,Fairy,Fairy,Cute Charm,Magic Guard
+36,Clefable,Normal,Normal,Leppa Berry,Moon Stone,Fast,Fairy,Fairy,Cute Charm,Magic Guard
+37,Vulpix,Fire,Fire,Rawst Berry,Rawst Berry,Medium Fast,Field,Field,Flash Fire,-
+38,Ninetales,Fire,Fire,Rawst Berry,Rawst Berry,Medium Fast,Field,Field,Flash Fire,-
+39,Jigglypuff,Normal,Normal,None,None,Fast,Fairy,Fairy,Cute Charm,-
+40,Wigglytuff,Normal,Normal,None,None,Fast,Fairy,Fairy,Cute Charm,-
+41,Zubat,Poison,Flying,None,None,Medium Fast,Flying,Flying,Inner Focus,-
+42,Golbat,Poison,Flying,None,None,Medium Fast,Flying,Flying,Inner Focus,-
+43,Oddish,Grass,Poison,None,None,Medium Slow,Grass,Grass,Chlorophyll,-
+44,Gloom,Grass,Poison,None,None,Medium Slow,Grass,Grass,Chlorophyll,-
+45,Vileplume,Grass,Poison,None,None,Medium Slow,Grass,Grass,Chlorophyll,-
+46,Paras,Bug,Grass,TinyMushroom,Big Mushroom,Medium Fast,Bug,Grass,Effect Spore,Dry Skin
+47,Parasect,Bug,Grass,TinyMushroom,Big Mushroom,Medium Fast,Bug,Grass,Effect Spore,Dry Skin
+48,Venonat,Bug,Poison,None,None,Medium Fast,Bug,Bug,Compoundeyes,Tinted Lens
+49,Venomoth,Bug,Poison,None,Shed Shell,Medium Fast,Bug,Bug,Shield Dust,Tinted Lens
+50,Diglett,Ground,Ground,None,Soft Sand,Medium Fast,Field,Field,Sand Veil,Arena Trap
+51,Dugtrio,Ground,Ground,None,Soft Sand,Medium Fast,Field,Field,Sand Veil,Arena Trap
+52,Meowth,Normal,Normal,None,Quick Claw,Medium Fast,Field,Field,Pickup,Technician
+53,Persian,Normal,Normal,None,Quick Claw,Medium Fast,Field,Field,Limber,Technician
+54,Psyduck,Water,Water,None,None,Medium Fast,Water 1,Field,Damp,Cloud Nine
+55,Golduck,Water,Water,None,None,Medium Fast,Water 1,Field,Damp,Cloud Nine
+56,Mankey,Fighting,Fighting,None,Payapa Berry,Medium Fast,Field,Field,Vital Spirit,Anger Point
+57,Primeape,Fighting,Fighting,None,Payapa Berry,Medium Fast,Field,Field,Vital Spirit,Anger Point
+58,Growlithe,Fire,Fire,Rawst Berry,Rawst Berry,Slow,Field,Field,Intimidate,Flash Fire
+59,Arcanine,Fire,Fire,Rawst Berry,Rawst Berry,Slow,Field,Field,Intimidate,Flash Fire
+60,Poliwag,Water,Water,None,None,Medium Slow,Water 1,Water 1,Water Absorb,Damp
+61,Poliwhirl,Water,Water,None,King's Rock,Medium Slow,Water 1,Water 1,Water Absorb,Damp
+62,Poliwrath,Water,Fighting,None,King's Rock,Medium Slow,Water 1,Water 1,Water Absorb,Damp
+63,Abra,Psychic,Psychic,None,TwistedSpoon,Medium Slow,Human-Like,Human-Like,Synchronize,Inner Focus
+64,Kadabra,Psychic,Psychic,None,TwistedSpoon,Medium Slow,Human-Like,Human-Like,Synchronize,Inner Focus
+65,Alakazam,Psychic,Psychic,None,TwistedSpoon,Medium Slow,Human-Like,Human-Like,Synchronize,Inner Focus
+66,Machop,Fighting,Fighting,None,None,Medium Slow,Human-Like,Human-Like,Guts,No Guard
+67,Machoke,Fighting,Fighting,None,None,Medium Slow,Human-Like,Human-Like,Guts,No Guard
+68,Machamp,Fighting,Fighting,None,None,Medium Slow,Human-Like,Human-Like,Guts,No Guard
+69,Bellsprout,Grass,Poison,None,None,Medium Slow,Grass,Grass,Chlorophyll,-
+70,Weepinbell,Grass,Poison,None,None,Medium Slow,Grass,Grass,Chlorophyll,-
+71,Victreebel,Grass,Poison,None,None,Medium Slow,Grass,Grass,Chlorophyll,-
+72,Tentacool,Water,Poison,None,Poison Barb,Slow,Water 3,Water 3,Clear Body,Liquid Ooze
+73,Tentacruel,Water,Poison,None,Poison Barb,Slow,Water 3,Water 3,Clear Body,Liquid Ooze
+74,Geodude,Rock,Ground,None,Everstone,Medium Slow,Mineral,Mineral,Rock Head,Sturdy
+75,Graveler,Rock,Ground,None,Everstone,Medium Slow,Mineral,Mineral,Rock Head,Sturdy
+76,Golem,Rock,Ground,None,Everstone,Medium Slow,Mineral,Mineral,Rock Head,Sturdy
+77,Ponyta,Fire,Fire,None,Shuca Berry,Medium Fast,Field,Field,Run Away,Flash Fire
+78,Rapidash,Fire,Fire,None,Shuca Berry,Medium Fast,Field,Field,Run Away,Flash Fire
+79,Slowpoke,Water,Psychic,None,Lagging Tail,Medium Fast,Monster,Water 1,Oblivious,Own Tempo
+80,Slowbro,Water,Psychic,None,King's Rock,Medium Fast,Monster,Water 1,Oblivious,Own Tempo
+81,Magnemite,Electric,Steel,None,Metal Coat,Medium Fast,Mineral,Mineral,Magnet Pull,Sturdy
+82,Magneton,Electric,Steel,None,Metal Coat,Medium Fast,Mineral,Mineral,Magnet Pull,Sturdy
+83,Farfetch'd,Normal,Flying,None,Stick,Medium Fast,Flying,Field,Keen Eye,Inner Focus
+84,Doduo,Normal,Flying,None,Sharp Beak,Medium Fast,Flying,Flying,Run Away,Early Bird
+85,Dodrio,Normal,Flying,None,Sharp Beak,Medium Fast,Flying,Flying,Run Away,Early Bird
+86,Seel,Water,Water,None,None,Medium Fast,Water 1,Field,Thick Fat,Hydration
+87,Dewgong,Water,Ice,None,None,Medium Fast,Water 1,Field,Thick Fat,Hydration
+88,Grimer,Poison,Poison,None,Nugget,Medium Fast,Amorphous,Amorphous,Stench,Sticky Hold
+89,Muk,Poison,Poison,None,Nugget,Medium Fast,Amorphous,Amorphous,Stench,Sticky Hold
+90,Shellder,Water,Water,Pearl,Big Pearl,Slow,Water 3,Water 3,Shell Armor,Skill Link
+91,Cloyster,Water,Ice,Pearl,Big Pearl,Slow,Water 3,Water 3,Shell Armor,Skill Link
+92,Gastly,Ghost,Poison,None,None,Medium Slow,Amorphous,Amorphous,Levitate,-
+93,Haunter,Ghost,Poison,None,None,Medium Slow,Amorphous,Amorphous,Levitate,-
+94,Gengar,Ghost,Poison,None,None,Medium Slow,Amorphous,Amorphous,Levitate,-
+95,Onix,Rock,Ground,None,None,Medium Fast,Mineral,Mineral,Rock Head,Sturdy
+96,Drowzee,Psychic,Psychic,None,None,Medium Fast,Human-Like,Human-Like,Insomnia,Forewarn
+97,Hypno,Psychic,Psychic,None,None,Medium Fast,Human-Like,Human-Like,Insomnia,Forewarn
+98,Krabby,Water,Water,None,None,Medium Fast,Water 3,Water 3,Hyper Cutter,Shell Armor
+99,Kingler,Water,Water,None,None,Medium Fast,Water 3,Water 3,Hyper Cutter,Shell Armor
+100,Voltorb,Electric,Electric,None,None,Medium Fast,Mineral,Mineral,Soundproof,Static
+101,Electrode,Electric,Electric,None,None,Medium Fast,Mineral,Mineral,Soundproof,Static
+102,Exeggcute,Grass,Psychic,None,None,Slow,Grass,Grass,Chlorophyll,-
+103,Exeggutor,Grass,Psychic,None,None,Slow,Grass,Grass,Chlorophyll,-
+104,Cubone,Ground,Ground,None,Thick Club,Medium Fast,Monster,Monster,Rock Head,Lightningrod
+105,Marowak,Ground,Ground,None,Thick Club,Medium Fast,Monster,Monster,Rock Head,Lightningrod
+106,Hitmonlee,Fighting,Fighting,None,None,Medium Fast,Human-Like,Human-Like,Limber,Reckless
+107,Hitmonchan,Fighting,Fighting,None,None,Medium Fast,Human-Like,Human-Like,Keen Eye,Iron Fist
+108,Lickitung,Normal,Normal,None,Lagging Tail,Medium Fast,Monster,Monster,Own Tempo,Oblivious
+109,Koffing,Poison,Poison,None,Smoke Ball,Medium Fast,Amorphous,Amorphous,Levitate,-
+110,Weezing,Poison,Poison,None,Smoke Ball,Medium Fast,Amorphous,Amorphous,Levitate,-
+111,Rhyhorn,Ground,Rock,None,None,Slow,Monster,Field,Lightningrod,Rock Head
+112,Rhydon,Ground,Rock,None,None,Slow,Monster,Field,Lightningrod,Rock Head
+113,Chansey,Normal,Normal,Oval Stone,Lucky Egg,Fast,Fairy,Fairy,Natural Cure,Serene Grace
+114,Tangela,Grass,Grass,None,None,Medium Fast,Grass,Grass,Chlorophyll,Leaf Guard
+115,Kangaskhan,Normal,Normal,None,None,Medium Fast,Monster,Monster,Early Bird,Scrappy
+116,Horsea,Water,Water,None,Dragon Scale,Medium Fast,Water 1,Dragon,Swift Swim,Sniper
+117,Seadra,Water,Water,None,Dragon Scale,Medium Fast,Water 1,Dragon,Poison Point,Sniper
+118,Goldeen,Water,Water,None,None,Medium Fast,Water 2,Water 2,Swift Swim,Water Veil
+119,Seaking,Water,Water,None,None,Medium Fast,Water 2,Water 2,Swift Swim,Water Veil
+120,Staryu,Water,Water,Stardust,Star Piece,Slow,Water 3,Water 3,Illuminate,Natural Cure
+121,Starmie,Water,Psychic,Stardust,Star Piece,Slow,Water 3,Water 3,Illuminate,Natural Cure
+122,Mr. Mime,Psychic,Psychic,None,Leppa Berry,Medium Fast,Human-Like,Human-Like,Soundproof,Filter
+123,Scyther,Bug,Flying,None,None,Medium Fast,Bug,Bug,Swarm,Technician
+124,Jynx,Ice,Psychic,Aspear Berry,Aspear Berry,Medium Fast,Human-Like,Human-Like,Oblivious,Forewarn
+125,Electabuzz,Electric,Electric,None,None,Medium Fast,Human-Like,Human-Like,Static,-
+126,Magmar,Fire,Fire,None,None,Medium Fast,Human-Like,Human-Like,Flame Body,-
+127,Pinsir,Bug,Bug,None,None,Slow,Bug,Bug,Hyper Cutter,Mold Breaker
+128,Tauros,Normal,Normal,None,None,Slow,Field,Field,Intimidate,Anger Point
+129,Magikarp,Water,Water,None,None,Slow,Water 2,Dragon,Swift Swim,-
+130,Gyarados,Water,Flying,None,None,Slow,Water 2,Dragon,Intimidate,-
+131,Lapras,Water,Ice,None,None,Slow,Monster,Water 1,Water Absorb,Shell Armor
+132,Ditto,Normal,Normal,Quick Powder,Metal Powder,Medium Fast,Ditto,Ditto,Limber,-
+133,Eevee,Normal,Normal,None,None,Medium Fast,Field,Field,Run Away,Adaptability
+134,Vaporeon,Water,Water,None,None,Medium Fast,Field,Field,Water Absorb,Water Absorb
+135,Jolteon,Electric,Electric,None,None,Medium Fast,Field,Field,Volt Absorb,Volt Absorb
+136,Flareon,Fire,Fire,None,None,Medium Fast,Field,Field,Flash Fire,Flash Fire
+137,Porygon,Normal,Normal,None,None,Medium Fast,Mineral,Mineral,Trace,Download
+138,Omanyte,Rock,Water,None,None,Medium Fast,Water 1,Water 3,Swift Swim,Shell Armor
+139,Omastar,Rock,Water,None,None,Medium Fast,Water 1,Water 3,Swift Swim,Shell Armor
+140,Kabuto,Rock,Water,None,None,Medium Fast,Water 1,Water 3,Swift Swim,Battle Armor
+141,Kabutops,Rock,Water,None,None,Medium Fast,Water 1,Water 3,Swift Swim,Battle Armor
+142,Aerodactyl,Rock,Flying,None,None,Slow,Flying,Flying,Rock Head,Pressure
+143,Snorlax,Normal,Normal,Leftovers,Leftovers,Slow,Monster,Monster,Immunity,Thick Fat
+144,Articuno,Ice,Flying,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+145,Zapdos,Electric,Flying,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+146,Moltres,Fire,Flying,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+147,Dratini,Dragon,Dragon,None,Dragon Scale,Slow,Water 1,Dragon,Shed Skin,-
+148,Dragonair,Dragon,Dragon,None,Dragon Scale,Slow,Water 1,Dragon,Shed Skin,-
+149,Dragonite,Dragon,Flying,None,Dragon Scale,Slow,Water 1,Dragon,Inner Focus,-
+150,Mewtwo,Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+151,Mew,Psychic,Psychic,Lum Berry,Lum Berry,Medium Slow,Undiscovered,Undiscovered,Synchronize,-
+152,Chikorita,Grass,Grass,None,None,Medium Slow,Monster,Grass,Overgrow,-
+153,Bayleef,Grass,Grass,None,None,Medium Slow,Monster,Grass,Overgrow,-
+154,Meganium,Grass,Grass,None,None,Medium Slow,Monster,Grass,Overgrow,-
+155,Cyndaquil,Fire,Fire,None,None,Medium Slow,Field,Field,Blaze,-
+156,Quilava,Fire,Fire,None,None,Medium Slow,Field,Field,Blaze,-
+157,Typhlosion,Fire,Fire,None,None,Medium Slow,Field,Field,Blaze,-
+158,Totodile,Water,Water,None,None,Medium Slow,Monster,Water 1,Torrent,-
+159,Croconaw,Water,Water,None,None,Medium Slow,Monster,Water 1,Torrent,-
+160,Feraligatr,Water,Water,None,None,Medium Slow,Monster,Water 1,Torrent,-
+161,Sentret,Normal,Normal,None,Oran Berry,Medium Fast,Field,Field,Run Away,Keen Eye
+162,Furret,Normal,Normal,Oran Berry,Sitrus Berry,Medium Fast,Field,Field,Run Away,Keen Eye
+163,Hoothoot,Normal,Flying,None,None,Medium Fast,Flying,Flying,Insomnia,Keen Eye
+164,Noctowl,Normal,Flying,None,None,Medium Fast,Flying,Flying,Insomnia,Keen Eye
+165,Ledyba,Bug,Flying,None,None,Fast,Bug,Bug,Swarm,Early Bird
+166,Ledian,Bug,Flying,None,None,Fast,Bug,Bug,Swarm,Early Bird
+167,Spinarak,Bug,Poison,None,None,Fast,Bug,Bug,Swarm,Insomnia
+168,Ariados,Bug,Poison,None,None,Fast,Bug,Bug,Swarm,Insomnia
+169,Crobat,Poison,Flying,None,None,Medium Fast,Flying,Flying,Inner Focus,-
+170,Chinchou,Water,Electric,None,DeepSeaScale,Slow,Water 2,Water 2,Volt Absorb,Illuminate
+171,Lanturn,Water,Electric,None,DeepSeaScale,Slow,Water 2,Water 2,Volt Absorb,Illuminate
+172,Pichu,Electric,Electric,None,Oran Berry,Medium Fast,Undiscovered,Undiscovered,Static,-
+173,Cleffa,Normal,Normal,Leppa Berry,Moon Stone,Fast,Undiscovered,Undiscovered,Cute Charm,Magic Guard
+174,Igglybuff,Normal,Normal,None,None,Fast,Undiscovered,Undiscovered,Cute Charm,-
+175,Togepi,Normal,Normal,None,None,Fast,Undiscovered,Undiscovered,Hustle,Serene Grace
+176,Togetic,Normal,Flying,None,None,Fast,Flying,Fairy,Hustle,Serene Grace
+177,Natu,Psychic,Flying,None,None,Medium Fast,Flying,Flying,Synchronize,Early Bird
+178,Xatu,Psychic,Flying,None,None,Medium Fast,Flying,Flying,Synchronize,Early Bird
+179,Mareep,Electric,Electric,None,None,Medium Slow,Monster,Field,Static,-
+180,Flaaffy,Electric,Electric,None,None,Medium Slow,Monster,Field,Static,-
+181,Ampharos,Electric,Electric,None,None,Medium Slow,Monster,Field,Static,-
+182,Bellossom,Grass,Grass,None,None,Medium Slow,Grass,Grass,Chlorophyll,-
+183,Marill,Water,Water,None,None,Fast,Water 1,Fairy,Thick Fat,Huge Power
+184,Azumarill,Water,Water,None,None,Fast,Water 1,Fairy,Thick Fat,Huge Power
+185,Sudowoodo,Rock,Rock,None,None,Medium Fast,Mineral,Mineral,Sturdy,Rock Head
+186,Politoed,Water,Water,None,King's Rock,Medium Slow,Water 1,Water 1,Water Absorb,Damp
+187,Hoppip,Grass,Flying,None,None,Medium Slow,Fairy,Grass,Chlorophyll,Leaf Guard
+188,Skiploom,Grass,Flying,None,None,Medium Slow,Fairy,Grass,Chlorophyll,Leaf Guard
+189,Jumpluff,Grass,Flying,None,None,Medium Slow,Fairy,Grass,Chlorophyll,Leaf Guard
+190,Aipom,Normal,Normal,None,None,Fast,Field,Field,Run Away,Pickup
+191,Sunkern,Grass,Grass,None,Coba Berry,Medium Slow,Grass,Grass,Chlorophyll,Solar Power
+192,Sunflora,Grass,Grass,None,None,Medium Slow,Grass,Grass,Chlorophyll,Solar Power
+193,Yanma,Bug,Flying,None,Wide Lens,Medium Fast,Bug,Bug,Speed Boost,Compoundeyes
+194,Wooper,Water,Ground,None,None,Medium Fast,Water 1,Field,Damp,Water Absorb
+195,Quagsire,Water,Ground,None,None,Medium Fast,Water 1,Field,Damp,Water Absorb
+196,Espeon,Psychic,Psychic,None,None,Medium Fast,Field,Field,Synchronize,Synchronize
+197,Umbreon,Dark,Dark,None,None,Medium Fast,Field,Field,Synchronize,Synchronize
+198,Murkrow,Dark,Flying,None,None,Medium Slow,Flying,Flying,Insomnia,Super Luck
+199,Slowking,Water,Psychic,None,King's Rock,Medium Fast,Monster,Water 1,Oblivious,Own Tempo
+200,Misdreavus,Ghost,Ghost,None,None,Fast,Amorphous,Amorphous,Levitate,-
+201,Unown,Psychic,Psychic,None,None,Medium Fast,Undiscovered,Undiscovered,Levitate,-
+202,Wobbuffet,Psychic,Psychic,None,None,Medium Fast,Amorphous,Amorphous,Shadow Tag,-
+203,Girafarig,Normal,Psychic,None,Persim Berry,Medium Fast,Field,Field,Inner Focus,Early Bird
+204,Pineco,Bug,Bug,None,None,Medium Fast,Bug,Bug,Sturdy,-
+205,Forretress,Bug,Steel,None,None,Medium Fast,Bug,Bug,Sturdy,-
+206,Dunsparce,Normal,Normal,None,None,Medium Fast,Field,Field,Serene Grace,Run Away
+207,Gligar,Ground,Flying,None,None,Medium Slow,Bug,Bug,Hyper Cutter,Sand Veil
+208,Steelix,Steel,Ground,None,Metal Coat,Medium Fast,Mineral,Mineral,Rock Head,Sturdy
+209,Snubbull,Normal,Normal,None,None,Fast,Field,Fairy,Intimidate,Run Away
+210,Granbull,Normal,Normal,None,None,Fast,Field,Fairy,Intimidate,Quick Feet
+211,Qwilfish,Water,Poison,None,Poison Barb,Medium Fast,Water 2,Water 2,Poison Point,Swift Swim
+212,Scizor,Bug,Steel,None,None,Medium Fast,Bug,Bug,Swarm,Technician
+213,Shuckle,Bug,Rock,Berry Juice,Berry Juice,Medium Slow,Bug,Bug,Sturdy,Gluttony
+214,Heracross,Bug,Fighting,None,None,Slow,Bug,Bug,Swarm,Guts
+215,Sneasel,Dark,Ice,Grip Claw,Quick Claw,Medium Slow,Field,Field,Inner Focus,Keen Eye
+216,Teddiursa,Normal,Normal,None,None,Medium Fast,Field,Field,Pickup,Quick Feet
+217,Ursaring,Normal,Normal,None,None,Medium Fast,Field,Field,Guts,Quick Feet
+218,Slugma,Fire,Fire,None,None,Medium Fast,Amorphous,Amorphous,Magma Armor,Flame Body
+219,Magcargo,Fire,Rock,None,None,Medium Fast,Amorphous,Amorphous,Magma Armor,Flame Body
+220,Swinub,Ice,Ground,None,None,Slow,Field,Field,Oblivious,Snow Cloak
+221,Piloswine,Ice,Ground,None,None,Slow,Field,Field,Oblivious,Snow Cloak
+222,Corsola,Water,Rock,None,Hard Stone,Fast,Water 1,Water 3,Hustle,Natural Cure
+223,Remoraid,Water,Water,None,None,Medium Fast,Water 1,Water 2,Hustle,Sniper
+224,Octillery,Water,Water,None,None,Medium Fast,Water 1,Water 2,Suction Cups,Sniper
+225,Delibird,Ice,Flying,None,None,Fast,Water 1,Field,Vital Spirit,Hustle
+226,Mantine,Water,Flying,None,None,Slow,Water 1,Water 1,Swift Swim,Water Absorb
+227,Skarmory,Steel,Flying,None,None,Slow,Flying,Flying,Keen Eye,Sturdy
+228,Houndour,Dark,Fire,None,None,Slow,Field,Field,Early Bird,Flash Fire
+229,Houndoom,Dark,Fire,None,None,Slow,Field,Field,Early Bird,Flash Fire
+230,Kingdra,Water,Dragon,None,Dragon Scale,Medium Fast,Water 1,Dragon,Swift Swim,Sniper
+231,Phanpy,Ground,Ground,None,Passho Berry,Medium Fast,Field,Field,Pickup,-
+232,Donphan,Ground,Ground,None,Passho Berry,Medium Fast,Field,Field,Sturdy,-
+233,Porygon2,Normal,Normal,None,None,Medium Fast,Mineral,Mineral,Trace,Download
+234,Stantler,Normal,Normal,None,None,Slow,Field,Field,Intimidate,Frisk
+235,Smeargle,Normal,Normal,None,None,Fast,Field,Field,Own Tempo,Technician
+236,Tyrogue,Fighting,Fighting,None,None,Medium Fast,Undiscovered,Undiscovered,Guts,Steadfast
+237,Hitmontop,Fighting,Fighting,None,None,Medium Fast,Human-Like,Human-Like,Intimidate,Technician
+238,Smoochum,Ice,Psychic,Aspear Berry,Aspear Berry,Medium Fast,Undiscovered,Undiscovered,Oblivious,Forewarn
+239,Elekid,Electric,Electric,None,None,Medium Fast,Undiscovered,Undiscovered,Static,-
+240,Magby,Fire,Fire,None,None,Medium Fast,Undiscovered,Undiscovered,Flame Body,-
+241,Miltank,Normal,Normal,Moomoo Milk,Moomoo Milk,Slow,Field,Field,Thick Fat,Scrappy
+242,Blissey,Normal,Normal,Oval Stone,Lucky Egg,Fast,Fairy,Fairy,Natural Cure,Serene Grace
+243,Raikou,Electric,Electric,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+244,Entei,Fire,Fire,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+245,Suicune,Water,Water,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+246,Larvitar,Rock,Ground,None,None,Slow,Monster,Monster,Guts,-
+247,Pupitar,Rock,Ground,None,None,Slow,Monster,Monster,Shed Skin,-
+248,Tyranitar,Rock,Dark,None,None,Slow,Monster,Monster,Sand Stream,-
+249,Lugia,Psychic,Flying,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+250,Ho-oh,Fire,Flying,Sacred Ash,Sacred Ash,Slow,Undiscovered,Undiscovered,Pressure,-
+251,Celebi,Psychic,Grass,Lum Berry,Lum Berry,Medium Slow,Undiscovered,Undiscovered,Natural Cure,-
+252,Treecko,Grass,Grass,None,None,Medium Slow,Monster,Dragon,Overgrow,-
+253,Grovyle,Grass,Grass,None,None,Medium Slow,Monster,Dragon,Overgrow,-
+254,Sceptile,Grass,Grass,None,None,Medium Slow,Monster,Dragon,Overgrow,-
+255,Torchic,Fire,Fire,None,None,Medium Slow,Field,Field,Blaze,-
+256,Combusken,Fire,Fighting,None,None,Medium Slow,Field,Field,Blaze,-
+257,Blaziken,Fire,Fighting,None,None,Medium Slow,Field,Field,Blaze,-
+258,Mudkip,Water,Water,None,None,Medium Slow,Monster,Water 1,Torrent,-
+259,Marshtomp,Water,Ground,None,None,Medium Slow,Monster,Water 1,Torrent,-
+260,Swampert,Water,Ground,None,None,Medium Slow,Monster,Water 1,Torrent,-
+261,Poochyena,Dark,Dark,None,Pecha Berry,Medium Fast,Field,Field,Run Away,Quick Feet
+262,Mightyena,Dark,Dark,None,Pecha Berry,Medium Fast,Field,Field,Intimidate,Quick Feet
+263,Zigzagoon,Normal,Normal,None,Oran Berry,Medium Fast,Field,Field,Pickup,Gluttony
+264,Linoone,Normal,Normal,Oran Berry,Sitrus Berry,Medium Fast,Field,Field,Pickup,Gluttony
+265,Wurmple,Bug,Bug,None,None,Medium Fast,Bug,Bug,Shield Dust,-
+266,Silcoon,Bug,Bug,None,None,Medium Fast,Bug,Bug,Shed Skin,-
+267,Beautifly,Bug,Flying,None,Shed Shell,Medium Fast,Bug,Bug,Swarm,-
+268,Cascoon,Bug,Bug,None,None,Medium Fast,Bug,Bug,Shed Skin,-
+269,Dustox,Bug,Poison,None,Shed Shell,Medium Fast,Bug,Bug,Shield Dust,-
+270,Lotad,Water,Grass,None,None,Medium Slow,Water 1,Grass,Swift Swim,Rain Dish
+271,Lombre,Water,Grass,None,None,Medium Slow,Water 1,Grass,Swift Swim,Rain Dish
+272,Ludicolo,Water,Grass,None,None,Medium Slow,Water 1,Grass,Swift Swim,Rain Dish
+273,Seedot,Grass,Grass,None,None,Medium Slow,Field,Grass,Chlorophyll,Early Bird
+274,Nuzleaf,Grass,Dark,None,None,Medium Slow,Field,Grass,Chlorophyll,Early Bird
+275,Shiftry,Grass,Dark,None,None,Medium Slow,Field,Grass,Chlorophyll,Early Bird
+276,Taillow,Normal,Flying,None,Charti Berry,Medium Slow,Flying,Flying,Guts,-
+277,Swellow,Normal,Flying,None,Charti Berry,Medium Slow,Flying,Flying,Guts,-
+278,Wingull,Water,Flying,None,None,Medium Fast,Water 1,Flying,Keen Eye,-
+279,Pelipper,Water,Flying,None,None,Medium Fast,Water 1,Flying,Keen Eye,-
+280,Ralts,Psychic,Psychic,None,None,Slow,Amorphous,Amorphous,Synchronize,Trace
+281,Kirlia,Psychic,Psychic,None,None,Slow,Amorphous,Amorphous,Synchronize,Trace
+282,Gardevoir,Psychic,Psychic,None,None,Slow,Amorphous,Amorphous,Synchronize,Trace
+283,Surskit,Bug,Water,None,None,Medium Fast,Water 1,Bug,Swift Swim,-
+284,Masquerain,Bug,Flying,None,SilverPowder,Medium Fast,Water 1,Bug,Intimidate,-
+285,Shroomish,Grass,Grass,None,Kebia Berry,Fluctuating,Fairy,Grass,Effect Spore,Poison Heal
+286,Breloom,Grass,Fighting,None,Kebia Berry,Fluctuating,Fairy,Grass,Effect Spore,Poison Heal
+287,Slakoth,Normal,Normal,None,None,Slow,Field,Field,Truant,-
+288,Vigoroth,Normal,Normal,None,None,Slow,Field,Field,Vital Spirit,-
+289,Slaking,Normal,Normal,None,None,Slow,Field,Field,Truant,-
+290,Nincada,Bug,Ground,None,None,Erratic,Bug,Bug,Compoundeyes,-
+291,Ninjask,Bug,Flying,None,None,Erratic,Bug,Bug,Speed Boost,-
+292,Shedinja,Bug,Ghost,None,None,Erratic,Mineral,Mineral,Wonder Guard,-
+293,Whismur,Normal,Normal,None,Chesto Berry,Medium Slow,Monster,Field,Soundproof,-
+294,Loudred,Normal,Normal,None,Chesto Berry,Medium Slow,Monster,Field,Soundproof,-
+295,Exploud,Normal,Normal,None,Chesto Berry,Medium Slow,Monster,Field,Soundproof,-
+296,Makuhita,Fighting,Fighting,None,None,Fluctuating,Human-Like,Human-Like,Thick Fat,Guts
+297,Hariyama,Fighting,Fighting,None,King's Rock,Fluctuating,Human-Like,Human-Like,Thick Fat,Guts
+298,Azurill,Normal,Normal,None,None,Fast,Undiscovered,Undiscovered,Thick Fat,Huge Power
+299,Nosepass,Rock,Rock,None,Hard Stone,Medium Fast,Mineral,Mineral,Sturdy,Magnet Pull
+300,Skitty,Normal,Normal,None,Leppa Berry,Fast,Field,Fairy,Cute Charm,Normalize
+301,Delcatty,Normal,Normal,None,Leppa Berry,Fast,Field,Fairy,Cute Charm,Normalize
+302,Sableye,Dark,Ghost,None,None,Medium Slow,Human-Like,Human-Like,Keen Eye,Stall
+303,Mawile,Steel,Steel,None,Occa Berry,Fast,Field,Fairy,Hyper Cutter,Intimidate
+304,Aron,Steel,Rock,None,Hard Stone,Slow,Monster,Monster,Sturdy,Rock Head
+305,Lairon,Steel,Rock,None,Hard Stone,Slow,Monster,Monster,Sturdy,Rock Head
+306,Aggron,Steel,Rock,None,Hard Stone,Slow,Monster,Monster,Sturdy,Rock Head
+307,Meditite,Fighting,Psychic,None,None,Medium Fast,Human-Like,Human-Like,Pure Power,-
+308,Medicham,Fighting,Psychic,None,None,Medium Fast,Human-Like,Human-Like,Pure Power,-
+309,Electrike,Electric,Electric,None,None,Slow,Field,Field,Static,Lightningrod
+310,Manectric,Electric,Electric,None,None,Slow,Field,Field,Static,Lightningrod
+311,Plusle,Electric,Electric,None,None,Medium Fast,Fairy,Fairy,Plus,-
+312,Minun,Electric,Electric,None,None,Medium Fast,Fairy,Fairy,Minus,-
+313,Volbeat,Bug,Bug,None,None,Erratic,Bug,Human-Like,Illuminate,Swarm
+314,Illumise,Bug,Bug,None,None,Fluctuating,Bug,Human-Like,Oblivious,Tinted Lens
+315,Roselia,Grass,Poison,None,Poison Barb,Medium Slow,Fairy,Grass,Natural Cure,Poison Point
+316,Gulpin,Poison,Poison,None,Big Pearl,Fluctuating,Amorphous,Amorphous,Liquid Ooze,Sticky Hold
+317,Swalot,Poison,Poison,None,Big Pearl,Fluctuating,Amorphous,Amorphous,Liquid Ooze,Sticky Hold
+318,Carvanha,Water,Dark,None,DeepSeaTooth,Slow,Water 2,Water 2,Rough Skin,-
+319,Sharpedo,Water,Dark,None,DeepSeaTooth,Slow,Water 2,Water 2,Rough Skin,-
+320,Wailmer,Water,Water,None,None,Fluctuating,Field,Water 2,Water Veil,Oblivious
+321,Wailord,Water,Water,None,None,Fluctuating,Field,Water 2,Water Veil,Oblivious
+322,Numel,Fire,Ground,Rawst Berry,Rawst Berry,Medium Fast,Field,Field,Oblivious,Simple
+323,Camerupt,Fire,Ground,Rawst Berry,Rawst Berry,Medium Fast,Field,Field,Magma Armor,Solid Rock
+324,Torkoal,Fire,Fire,None,None,Medium Fast,Field,Field,White Smoke,-
+325,Spoink,Psychic,Psychic,None,Tanga Berry,Fast,Field,Field,Thick Fat,Own Tempo
+326,Grumpig,Psychic,Psychic,None,Tanga Berry,Fast,Field,Field,Thick Fat,Own Tempo
+327,Spinda,Normal,Normal,None,Chesto Berry,Fast,Field,Human-Like,Own Tempo,Tangled Feet
+328,Trapinch,Ground,Ground,None,Soft Sand,Medium Slow,Bug,Bug,Hyper Cutter,Arena Trap
+329,Vibrava,Ground,Dragon,None,None,Medium Slow,Bug,Bug,Levitate,Levitate
+330,Flygon,Ground,Dragon,None,None,Medium Slow,Bug,Bug,Levitate,Levitate
+331,Cacnea,Grass,Grass,None,Sticky Barb,Medium Slow,Grass,Human-Like,Sand Veil,-
+332,Cacturne,Grass,Dark,None,Sticky Barb,Medium Slow,Grass,Human-Like,Sand Veil,-
+333,Swablu,Normal,Flying,None,None,Erratic,Flying,Dragon,Natural Cure,-
+334,Altaria,Dragon,Flying,None,None,Erratic,Flying,Dragon,Natural Cure,-
+335,Zangoose,Normal,Normal,None,Quick Claw,Erratic,Field,Field,Immunity,-
+336,Seviper,Poison,Poison,None,None,Fluctuating,Field,Dragon,Shed Skin,-
+337,Lunatone,Rock,Psychic,None,Moon Stone,Fast,Mineral,Mineral,Levitate,-
+338,Solrock,Rock,Psychic,None,Sun Stone,Fast,Mineral,Mineral,Levitate,-
+339,Barboach,Water,Ground,None,None,Medium Fast,Water 2,Water 2,Oblivious,Anticipation
+340,Whiscash,Water,Ground,None,None,Medium Fast,Water 2,Water 2,Oblivious,Anticipation
+341,Corphish,Water,Water,None,None,Fluctuating,Water 1,Water 3,Hyper Cutter,Shell Armor
+342,Crawdaunt,Water,Dark,None,None,Fluctuating,Water 1,Water 3,Hyper Cutter,Shell Armor
+343,Baltoy,Ground,Psychic,None,None,Medium Fast,Mineral,Mineral,Levitate,-
+344,Claydol,Ground,Psychic,None,None,Medium Fast,Mineral,Mineral,Levitate,-
+345,Lileep,Rock,Grass,None,Big Root,Erratic,Water 3,Water 3,Suction Cups,-
+346,Cradily,Rock,Grass,None,Big Root,Erratic,Water 3,Water 3,Suction Cups,-
+347,Anorith,Rock,Bug,None,None,Erratic,Water 3,Water 3,Battle Armor,-
+348,Armaldo,Rock,Bug,None,None,Erratic,Water 3,Water 3,Battle Armor,-
+349,Feebas,Water,Water,None,None,Erratic,Water 1,Dragon,Swift Swim,-
+350,Milotic,Water,Water,None,None,Erratic,Water 1,Dragon,Marvel Scale,-
+351,Castform,Normal,Normal,Mystic Water,Mystic Water,Medium Fast,Fairy,Amorphous,Forecast,-
+352,Kecleon,Normal,Normal,None,Persim Berry,Medium Slow,Field,Field,Color Change,-
+353,Shuppet,Ghost,Ghost,None,Spell Tag,Fast,Amorphous,Amorphous,Insomnia,Frisk
+354,Banette,Ghost,Ghost,None,Spell Tag,Fast,Amorphous,Amorphous,Insomnia,Frisk
+355,Duskull,Ghost,Ghost,None,Kasib Berry,Fast,Amorphous,Amorphous,Levitate,-
+356,Dusclops,Ghost,Ghost,None,Kasib Berry,Fast,Amorphous,Amorphous,Pressure,-
+357,Tropius,Grass,Flying,None,None,Slow,Monster,Grass,Chlorophyll,Solar Power
+358,Chimecho,Psychic,Psychic,None,Colbur Berry,Fast,Amorphous,Amorphous,Levitate,-
+359,Absol,Dark,Dark,None,None,Medium Slow,Field,Field,Pressure,Super Luck
+360,Wynaut,Psychic,Psychic,None,None,Medium Fast,Undiscovered,Undiscovered,Shadow Tag,-
+361,Snorunt,Ice,Ice,None,Babiri Berry,Medium Fast,Fairy,Mineral,Inner Focus,Ice Body
+362,Glalie,Ice,Ice,None,Babiri Berry,Medium Fast,Fairy,Mineral,Inner Focus,Ice Body
+363,Spheal,Ice,Water,None,None,Medium Slow,Water 1,Field,Thick Fat,Ice Body
+364,Sealeo,Ice,Water,None,None,Medium Slow,Water 1,Field,Thick Fat,Ice Body
+365,Walrein,Ice,Water,None,None,Medium Slow,Water 1,Field,Thick Fat,Ice Body
+366,Clamperl,Water,Water,None,Big Pearl,Erratic,Water 1,Water 1,Shell Armor,-
+367,Huntail,Water,Water,None,DeepSeaTooth,Erratic,Water 1,Water 1,Swift Swim,-
+368,Gorebyss,Water,Water,None,DeepSeaScale,Erratic,Water 1,Water 1,Swift Swim,-
+369,Relicanth,Water,Rock,None,DeepSeaScale,Slow,Water 1,Water 2,Swift Swim,Rock Head
+370,Luvdisc,Water,Water,Heart Scale,None,Fast,Water 2,Water 2,Swift Swim,-
+371,Bagon,Dragon,Dragon,None,Dragon Fang,Slow,Dragon,Dragon,Rock Head,-
+372,Shelgon,Dragon,Dragon,None,Dragon Fang,Slow,Dragon,Dragon,Rock Head,-
+373,Salamence,Dragon,Flying,None,Dragon Fang,Slow,Dragon,Dragon,Intimidate,-
+374,Beldum,Steel,Psychic,None,Metal Coat,Slow,Mineral,Mineral,Clear Body,-
+375,Metang,Steel,Psychic,None,Metal Coat,Slow,Mineral,Mineral,Clear Body,-
+376,Metagross,Steel,Psychic,None,Metal Coat,Slow,Mineral,Mineral,Clear Body,-
+377,Regirock,Rock,Rock,None,None,Slow,Undiscovered,Undiscovered,Clear Body,-
+378,Regice,Ice,Ice,None,None,Slow,Undiscovered,Undiscovered,Clear Body,-
+379,Registeel,Steel,Steel,None,None,Slow,Undiscovered,Undiscovered,Clear Body,-
+380,Latias,Dragon,Psychic,None,None,Slow,Undiscovered,Undiscovered,Levitate,-
+381,Latios,Dragon,Psychic,None,None,Slow,Undiscovered,Undiscovered,Levitate,-
+382,Kyogre,Water,Water,None,None,Slow,Undiscovered,Undiscovered,Drizzle,-
+383,Groudon,Ground,Ground,None,None,Slow,Undiscovered,Undiscovered,Drought,-
+384,Rayquaza,Dragon,Flying,None,None,Slow,Undiscovered,Undiscovered,Air Lock,-
+385,Jirachi,Steel,Psychic,Star Piece,Star Piece,Slow,Undiscovered,Undiscovered,Serene Grace,-
+386,Deoxys (N),Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+387,Turtwig,Grass,Grass,None,None,Medium Slow,Monster,Grass,Overgrow,-
+388,Grotle,Grass,Grass,None,None,Medium Slow,Monster,Grass,Overgrow,-
+389,Torterra,Grass,Ground,None,None,Medium Slow,Monster,Grass,Overgrow,-
+390,Chimchar,Fire,Fire,None,None,Medium Slow,Field,Human-Like,Blaze,-
+391,Monferno,Fire,Fighting,None,None,Medium Slow,Field,Human-Like,Blaze,-
+392,Infernape,Fire,Fighting,None,None,Medium Slow,Field,Human-Like,Blaze,-
+393,Piplup,Water,Water,None,None,Medium Slow,Water 1,Field,Torrent,-
+394,Prinplup,Water,Water,None,None,Medium Slow,Water 1,Field,Torrent,-
+395,Empoleon,Water,Steel,None,None,Medium Slow,Water 1,Field,Torrent,-
+396,Starly,Normal,Flying,None,Yache Berry,Medium Slow,Flying,Flying,Keen Eye,-
+397,Staravia,Normal,Flying,None,Yache Berry,Medium Slow,Flying,Flying,Intimidate,-
+398,Staraptor,Normal,Flying,None,Yache Berry,Medium Slow,Flying,Flying,Intimidate,-
+399,Bidoof,Normal,Normal,None,None,Medium Fast,Water 1,Field,Simple,Unaware
+400,Bibarel,Normal,Water,Oran Berry,Sitrus Berry,Medium Fast,Water 1,Field,Simple,Unaware
+401,Kricketot,Bug,Bug,None,Metronome,Medium Slow,Bug,Bug,Shed Skin,-
+402,Kricketune,Bug,Bug,None,Metronome,Medium Slow,Bug,Bug,Swarm,-
+403,Shinx,Electric,Electric,None,None,Medium Slow,Field,Field,Rivalry,Intimidate
+404,Luxio,Electric,Electric,None,None,Medium Slow,Field,Field,Rivalry,Intimidate
+405,Luxray,Electric,Electric,None,None,Medium Slow,Field,Field,Rivalry,Intimidate
+406,Budew,Grass,Poison,None,Poison Barb,Medium Slow,Undiscovered,Undiscovered,Natural Cure,Poison Point
+407,Roserade,Grass,Poison,None,Poison Barb,Medium Slow,Fairy,Grass,Natural Cure,Poison Point
+408,Cranidos,Rock,Rock,None,None,Erratic,Monster,Monster,Mold Breaker,-
+409,Rampardos,Rock,Rock,None,None,Erratic,Monster,Monster,Mold Breaker,-
+410,Shieldon,Rock,Steel,None,None,Erratic,Monster,Monster,Sturdy,-
+411,Bastiodon,Rock,Steel,None,None,Erratic,Monster,Monster,Sturdy,-
+412,Burmy,Bug,Bug,None,None,Medium Fast,Bug,Bug,Shed Skin,-
+413,Wormadam (P),Bug,Grass,None,SilverPowder,Medium Fast,Bug,Bug,Anticipation,-
+414,Mothim,Bug,Flying,None,SilverPowder,Medium Fast,Bug,Bug,Swarm,-
+415,Combee,Bug,Flying,Honey,Honey,Medium Slow,Bug,Bug,Honey Gather,-
+416,Vespiquen,Bug,Flying,None,Poison Barb,Medium Slow,Bug,Bug,Pressure,-
+417,Pachirisu,Electric,Electric,None,None,Medium Fast,Field,Fairy,Run Away,Pickup
+418,Buizel,Water,Water,None,Wacan Berry,Medium Fast,Water 1,Field,Swift Swim,-
+419,Floatzel,Water,Water,None,Wacan Berry,Medium Fast,Water 1,Field,Swift Swim,-
+420,Cherubi,Grass,Grass,None,Miracle Seed,Medium Fast,Fairy,Grass,Chlorophyll,-
+421,Cherrim,Grass,Grass,None,Miracle Seed,Medium Fast,Fairy,Grass,Flower Gift,-
+422,Shellos,Water,Water,None,None,Medium Fast,Water 1,Amorphous,Sticky Hold,Storm Drain
+423,Gastrodon,Water,Ground,None,None,Medium Fast,Water 1,Amorphous,Sticky Hold,Storm Drain
+424,Ambipom,Normal,Normal,None,None,Fast,Field,Field,Technician,Pickup
+425,Drifloon,Ghost,Flying,None,None,Fluctuating,Amorphous,Amorphous,Aftermath,Unburden
+426,Drifblim,Ghost,Flying,None,None,Fluctuating,Amorphous,Amorphous,Aftermath,Unburden
+427,Buneary,Normal,Normal,None,Chople Berry,Medium Fast,Field,Human-Like,Run Away,Klutz
+428,Lopunny,Normal,Normal,None,Chople Berry,Medium Fast,Field,Human-Like,Cute Charm,Klutz
+429,Mismagius,Ghost,Ghost,None,None,Fast,Amorphous,Amorphous,Levitate,-
+430,Honchkrow,Dark,Flying,None,None,Medium Slow,Flying,Flying,Insomnia,Super Luck
+431,Glameow,Normal,Normal,None,Cheri Berry,Fast,Field,Field,Limber,Own Tempo
+432,Purugly,Normal,Normal,None,Cheri Berry,Fast,Field,Field,Thick Fat,Own Tempo
+433,Chingling,Psychic,Psychic,None,Colbur Berry,Fast,Undiscovered,Undiscovered,Levitate,-
+434,Stunky,Poison,Dark,None,Pecha Berry,Medium Fast,Field,Field,Stench,Aftermath
+435,Skuntank,Poison,Dark,None,Pecha Berry,Medium Fast,Field,Field,Stench,Aftermath
+436,Bronzor,Steel,Psychic,None,Metal Coat,Medium Fast,Mineral,Mineral,Levitate,Heatproof
+437,Bronzong,Steel,Psychic,None,Metal Coat,Medium Fast,Mineral,Mineral,Levitate,Heatproof
+438,Bonsly,Rock,Rock,None,None,Medium Fast,Undiscovered,Undiscovered,Sturdy,Rock Head
+439,Mime Jr.,Psychic,Psychic,None,Leppa Berry,Medium Fast,Undiscovered,Undiscovered,Soundproof,Filter
+440,Happiny,Normal,Normal,Oval Stone,Lucky Punch,Fast,Undiscovered,Undiscovered,Natural Cure,Serene Grace
+441,Chatot,Normal,Flying,None,Metronome,Medium Slow,Flying,Flying,Keen Eye,Tangled Feet
+442,Spiritomb,Ghost,Dark,None,None,Medium Fast,Amorphous,Amorphous,Pressure,-
+443,Gible,Dragon,Ground,None,Haban Berry,Slow,Monster,Dragon,Sand Veil,-
+444,Gabite,Dragon,Ground,None,Haban Berry,Slow,Monster,Dragon,Sand Veil,-
+445,Garchomp,Dragon,Ground,None,Haban Berry,Slow,Monster,Dragon,Sand Veil,-
+446,Munchlax,Normal,Normal,Leftovers,Leftovers,Slow,Undiscovered,Undiscovered,Pickup,Thick Fat
+447,Riolu,Fighting,Fighting,None,None,Medium Slow,Undiscovered,Undiscovered,Steadfast,Inner Focus
+448,Lucario,Fighting,Steel,None,None,Medium Slow,Field,Human-Like,Steadfast,Inner Focus
+449,Hippopotas,Ground,Ground,None,None,Slow,Field,Field,Sand Stream,-
+450,Hippowdon,Ground,Ground,None,None,Slow,Field,Field,Sand Stream,-
+451,Skorupi,Poison,Bug,None,Poison Barb,Slow,Bug,Water 3,Battle Armor,Sniper
+452,Drapion,Poison,Dark,None,Poison Barb,Slow,Bug,Water 3,Battle Armor,Sniper
+453,Croagunk,Poison,Fighting,None,Black Sludge,Medium Fast,Human-Like,Human-Like,Anticipation,Dry Skin
+454,Toxicroak,Poison,Fighting,None,Black Sludge,Medium Fast,Human-Like,Human-Like,Anticipation,Dry Skin
+455,Carnivine,Grass,Grass,None,None,Slow,Grass,Grass,Levitate,-
+456,Finneon,Water,Water,None,Rindo Berry,Erratic,Water 2,Water 2,Swift Swim,Storm Drain
+457,Lumineon,Water,Water,None,Rindo Berry,Erratic,Water 2,Water 2,Swift Swim,Storm Drain
+458,Mantyke,Water,Flying,None,None,Slow,Undiscovered,Undiscovered,Swift Swim,Water Absorb
+459,Snover,Grass,Ice,None,NeverMeltIce,Slow,Monster,Grass,Snow Warning,-
+460,Abomasnow,Grass,Ice,None,NeverMeltIce,Slow,Monster,Grass,Snow Warning,-
+461,Weavile,Dark,Ice,Grip Claw,Quick Claw,Medium Slow,Field,Field,Pressure,Pressure
+462,Magnezone,Electric,Steel,None,Metal Coat,Medium Fast,Mineral,Mineral,Magnet Pull,Sturdy
+463,Lickilicky,Normal,Normal,None,Lagging Tail,Medium Fast,Monster,Monster,Own Tempo,Oblivious
+464,Rhyperior,Ground,Rock,None,None,Slow,Monster,Field,Lightningrod,Solid Rock
+465,Tangrowth,Grass,Grass,None,None,Medium Fast,Grass,Grass,Chlorophyll,Leaf Guard
+466,Electivire,Electric,Electric,None,Electirizer,Medium Fast,Human-Like,Human-Like,Motor Drive,-
+467,Magmortar,Fire,Fire,None,Magmarizer,Medium Fast,Human-Like,Human-Like,Flame Body,-
+468,Togekiss,Normal,Flying,None,None,Fast,Flying,Fairy,Hustle,Serene Grace
+469,Yanmega,Bug,Flying,None,Wide Lens,Medium Fast,Bug,Bug,Speed Boost,Tinted Lens
+470,Leafeon,Grass,Grass,None,None,Medium Fast,Field,Field,Leaf Guard,Leaf Guard
+471,Glaceon,Ice,Ice,None,None,Medium Fast,Field,Field,Snow Cloak,Snow Cloak
+472,Gliscor,Ground,Flying,None,None,Medium Slow,Bug,Bug,Hyper Cutter,Sand Veil
+473,Mamoswine,Ice,Ground,None,None,Slow,Field,Field,Oblivious,Snow Cloak
+474,Porygon-Z,Normal,Normal,None,None,Medium Fast,Mineral,Mineral,Adaptability,Download
+475,Gallade,Psychic,Fighting,None,None,Slow,Amorphous,Amorphous,Steadfast,Steadfast
+476,Probopass,Rock,Steel,None,Hard Stone,Medium Fast,Mineral,Mineral,Sturdy,Magnet Pull
+477,Dusknoir,Ghost,Ghost,None,Kasib Berry,Fast,Amorphous,Amorphous,Pressure,-
+478,Froslass,Ice,Ghost,None,Babiri Berry,Medium Fast,Fairy,Mineral,Snow Cloak,Snow Cloak
+479,Rotom,Electric,Ghost,None,None,Medium Fast,Amorphous,Amorphous,Levitate,-
+480,Uxie,Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Levitate,-
+481,Mesprit,Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Levitate,-
+482,Azelf,Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Levitate,-
+483,Dialga,Steel,Dragon,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+484,Palkia,Water,Dragon,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+485,Heatran,Fire,Steel,None,None,Slow,Undiscovered,Undiscovered,Flash Fire,-
+486,Regigigas,Normal,Normal,None,None,Slow,Undiscovered,Undiscovered,Slow Start,-
+487,Giratina,Ghost,Dragon,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+488,Cresselia,Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Levitate,-
+489,Phione,Water,Water,None,None,Slow,Water 1,Fairy,Hydration,-
+490,Manaphy,Water,Water,None,None,Slow,Water 1,Fairy,Hydration,-
+491,Darkrai,Dark,Dark,None,None,Slow,Undiscovered,Undiscovered,Bad Dreams,-
+492,Shaymin,Grass,Grass,Lum Berry,Lum Berry,Medium Slow,Undiscovered,Undiscovered,Natural Cure,-
+493,Arceus,Normal,Normal,None,None,Slow,Undiscovered,Undiscovered,Multitype,-
+494,Egg,Normal,Normal,None,None,Slow,Undiscovered,Undiscovered,-,-
+495,Bad Egg,Normal,Normal,None,None,Slow,Undiscovered,Undiscovered,-,-
+496,Deoxys (A),Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+497,Deoxys (D),Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+498,Deoxys (S),Psychic,Psychic,None,None,Slow,Undiscovered,Undiscovered,Pressure,-
+499,Wormadam (S),Bug,Ground,None,SilverPowder,Medium Fast,Bug,Bug,Anticipation,-
+500,Wormadam (T),Bug,Steel,None,SilverPowder,Medium Fast,Bug,Bug,Anticipation,-
+501,Giratina (O),Ghost,Dragon,None,None,Slow,Undiscovered,Undiscovered,Levitate,-
+502,Shaymin (S),Grass,Flying,Lum Berry,Lum Berry,Medium Slow,Undiscovered,Undiscovered,Serene Grace,-
+503,Rotom (Heat),Electric,Fire,None,None,Medium Fast,Amorphous,Amorphous,Levitate,-
+504,Rotom (Wash),Electric,Water,None,None,Medium Fast,Amorphous,Amorphous,Levitate,-
+505,Rotom (Frost),Electric,Ice,None,None,Medium Fast,Amorphous,Amorphous,Levitate,-
+506,Rotom (Fan),Electric,Flying,None,None,Medium Fast,Amorphous,Amorphous,Levitate,-
+507,Rotom (Mow),Electric,Grass,None,None,Medium Fast,Amorphous,Amorphous,Levitate,-

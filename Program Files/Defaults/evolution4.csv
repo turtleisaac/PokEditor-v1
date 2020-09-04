@@ -1,0 +1,509 @@
+ID Number,Name,Method,Result,Method,Result,Method,Result,Method,Result,Method,Result,Method,Result,Method,Result
+0,~,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+1,Bulbasaur,Level Up,Ivysaur,None,~,None,~,None,~,None,~,None,~,None,~
+2,Ivysaur,Level Up,Venusaur,None,~,None,~,None,~,None,~,None,~,None,~
+3,Venusaur,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+4,Charmander,Level Up,Charmeleon,None,~,None,~,None,~,None,~,None,~,None,~
+5,Charmeleon,Level Up,Charizard,None,~,None,~,None,~,None,~,None,~,None,~
+6,Charizard,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+7,Squirtle,Level Up,Wartortle,None,~,None,~,None,~,None,~,None,~,None,~
+8,Wartortle,Level Up,Blastoise,None,~,None,~,None,~,None,~,None,~,None,~
+9,Blastoise,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+10,Caterpie,Level Up,Metapod,None,~,None,~,None,~,None,~,None,~,None,~
+11,Metapod,Level Up,Butterfree,None,~,None,~,None,~,None,~,None,~,None,~
+12,Butterfree,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+13,Weedle,Level Up,Kakuna,None,~,None,~,None,~,None,~,None,~,None,~
+14,Kakuna,Level Up,Beedrill,None,~,None,~,None,~,None,~,None,~,None,~
+15,Beedrill,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+16,Pidgey,Level Up,Pidgeotto,None,~,None,~,None,~,None,~,None,~,None,~
+17,Pidgeotto,Level Up,Pidgeot,None,~,None,~,None,~,None,~,None,~,None,~
+18,Pidgeot,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+19,Rattata,Level Up,Raticate,None,~,None,~,None,~,None,~,None,~,None,~
+20,Raticate,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+21,Spearow,Level Up,Fearow,None,~,None,~,None,~,None,~,None,~,None,~
+22,Fearow,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+23,Ekans,Level Up,Arbok,None,~,None,~,None,~,None,~,None,~,None,~
+24,Arbok,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+25,Pikachu,Use Item,Raichu,None,~,None,~,None,~,None,~,None,~,None,~
+26,Raichu,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+27,Sandshrew,Level Up,Sandslash,None,~,None,~,None,~,None,~,None,~,None,~
+28,Sandslash,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+29,Nidoran♀,Level Up,Nidorina,None,~,None,~,None,~,None,~,None,~,None,~
+30,Nidorina,Use Item,Nidoqueen,None,~,None,~,None,~,None,~,None,~,None,~
+31,Nidoqueen,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+32,Nidoran♂,Level Up,Nidorino,None,~,None,~,None,~,None,~,None,~,None,~
+33,Nidorino,Use Item,Nidoking,None,~,None,~,None,~,None,~,None,~,None,~
+34,Nidoking,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+35,Clefairy,Use Item,Clefable,None,~,None,~,None,~,None,~,None,~,None,~
+36,Clefable,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+37,Vulpix,Use Item,Ninetales,None,~,None,~,None,~,None,~,None,~,None,~
+38,Ninetales,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+39,Jigglypuff,Use Item,Wigglytuff,None,~,None,~,None,~,None,~,None,~,None,~
+40,Wigglytuff,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+41,Zubat,Level Up,Golbat,None,~,None,~,None,~,None,~,None,~,None,~
+42,Golbat,Happiness,Crobat,None,~,None,~,None,~,None,~,None,~,None,~
+43,Oddish,Level Up,Gloom,None,~,None,~,None,~,None,~,None,~,None,~
+44,Gloom,Use Item,Vileplume,Use Item,Bellossom,None,~,None,~,None,~,None,~,None,~
+45,Vileplume,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+46,Paras,Level Up,Parasect,None,~,None,~,None,~,None,~,None,~,None,~
+47,Parasect,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+48,Venonat,Level Up,Venomoth,None,~,None,~,None,~,None,~,None,~,None,~
+49,Venomoth,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+50,Diglett,Level Up,Dugtrio,None,~,None,~,None,~,None,~,None,~,None,~
+51,Dugtrio,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+52,Meowth,Level Up,Persian,None,~,None,~,None,~,None,~,None,~,None,~
+53,Persian,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+54,Psyduck,Level Up,Golduck,None,~,None,~,None,~,None,~,None,~,None,~
+55,Golduck,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+56,Mankey,Level Up,Primeape,None,~,None,~,None,~,None,~,None,~,None,~
+57,Primeape,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+58,Growlithe,Use Item,Arcanine,None,~,None,~,None,~,None,~,None,~,None,~
+59,Arcanine,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+60,Poliwag,Level Up,Poliwhirl,None,~,None,~,None,~,None,~,None,~,None,~
+61,Poliwhirl,Use Item,Poliwrath,Trade (Item),Politoed,None,~,None,~,None,~,None,~,None,~
+62,Poliwrath,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+63,Abra,Level Up,Kadabra,None,~,None,~,None,~,None,~,None,~,None,~
+64,Kadabra,Trade,Alakazam,None,~,None,~,None,~,None,~,None,~,None,~
+65,Alakazam,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+66,Machop,Level Up,Machoke,None,~,None,~,None,~,None,~,None,~,None,~
+67,Machoke,Trade,Machamp,None,~,None,~,None,~,None,~,None,~,None,~
+68,Machamp,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+69,Bellsprout,Level Up,Weepinbell,None,~,None,~,None,~,None,~,None,~,None,~
+70,Weepinbell,Use Item,Victreebel,None,~,None,~,None,~,None,~,None,~,None,~
+71,Victreebel,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+72,Tentacool,Level Up,Tentacruel,None,~,None,~,None,~,None,~,None,~,None,~
+73,Tentacruel,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+74,Geodude,Level Up,Graveler,None,~,None,~,None,~,None,~,None,~,None,~
+75,Graveler,Trade,Golem,None,~,None,~,None,~,None,~,None,~,None,~
+76,Golem,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+77,Ponyta,Level Up,Rapidash,None,~,None,~,None,~,None,~,None,~,None,~
+78,Rapidash,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+79,Slowpoke,Level Up,Slowbro,Trade (Item),Slowking,None,~,None,~,None,~,None,~,None,~
+80,Slowbro,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+81,Magnemite,Level Up,Magneton,None,~,None,~,None,~,None,~,None,~,None,~
+82,Magneton,Level (Mt. Coronet),Magnezone,None,~,None,~,None,~,None,~,None,~,None,~
+83,Farfetch'd,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+84,Doduo,Level Up,Dodrio,None,~,None,~,None,~,None,~,None,~,None,~
+85,Dodrio,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+86,Seel,Level Up,Dewgong,None,~,None,~,None,~,None,~,None,~,None,~
+87,Dewgong,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+88,Grimer,Level Up,Muk,None,~,None,~,None,~,None,~,None,~,None,~
+89,Muk,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+90,Shellder,Use Item,Cloyster,None,~,None,~,None,~,None,~,None,~,None,~
+91,Cloyster,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+92,Gastly,Level Up,Haunter,None,~,None,~,None,~,None,~,None,~,None,~
+93,Haunter,Trade,Gengar,None,~,None,~,None,~,None,~,None,~,None,~
+94,Gengar,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+95,Onix,Trade (Item),Steelix,None,~,None,~,None,~,None,~,None,~,None,~
+96,Drowzee,Level Up,Hypno,None,~,None,~,None,~,None,~,None,~,None,~
+97,Hypno,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+98,Krabby,Level Up,Kingler,None,~,None,~,None,~,None,~,None,~,None,~
+99,Kingler,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+100,Voltorb,Level Up,Electrode,None,~,None,~,None,~,None,~,None,~,None,~
+101,Electrode,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+102,Exeggcute,Use Item,Exeggutor,None,~,None,~,None,~,None,~,None,~,None,~
+103,Exeggutor,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+104,Cubone,Level Up,Marowak,None,~,None,~,None,~,None,~,None,~,None,~
+105,Marowak,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+106,Hitmonlee,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+107,Hitmonchan,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+108,Lickitung,Attack Known,Lickilicky,None,~,None,~,None,~,None,~,None,~,None,~
+109,Koffing,Level Up,Weezing,None,~,None,~,None,~,None,~,None,~,None,~
+110,Weezing,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+111,Rhyhorn,Level Up,Rhydon,None,~,None,~,None,~,None,~,None,~,None,~
+112,Rhydon,Trade (Item),Rhyperior,None,~,None,~,None,~,None,~,None,~,None,~
+113,Chansey,Happiness,Blissey,None,~,None,~,None,~,None,~,None,~,None,~
+114,Tangela,Attack Known,Tangrowth,None,~,None,~,None,~,None,~,None,~,None,~
+115,Kangaskhan,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+116,Horsea,Level Up,Seadra,None,~,None,~,None,~,None,~,None,~,None,~
+117,Seadra,Trade (Item),Kingdra,None,~,None,~,None,~,None,~,None,~,None,~
+118,Goldeen,Level Up,Seaking,None,~,None,~,None,~,None,~,None,~,None,~
+119,Seaking,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+120,Staryu,Use Item,Starmie,None,~,None,~,None,~,None,~,None,~,None,~
+121,Starmie,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+122,Mr. Mime,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+123,Scyther,Trade (Item),Scizor,None,~,None,~,None,~,None,~,None,~,None,~
+124,Jynx,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+125,Electabuzz,Trade (Item),Electivire,None,~,None,~,None,~,None,~,None,~,None,~
+126,Magmar,Trade (Item),Magmortar,None,~,None,~,None,~,None,~,None,~,None,~
+127,Pinsir,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+128,Tauros,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+129,Magikarp,Level Up,Gyarados,None,~,None,~,None,~,None,~,None,~,None,~
+130,Gyarados,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+131,Lapras,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+132,Ditto,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+133,Eevee,Level (Eterna Forest),Leafeon,Level (Route 217),Glaceon,Use Item,Jolteon,Use Item,Vaporeon,Use Item,Flareon,Happiness (Day),Espeon,Happiness (Night),Umbreon
+134,Vaporeon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+135,Jolteon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+136,Flareon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+137,Porygon,Trade (Item),Porygon2,None,~,None,~,None,~,None,~,None,~,None,~
+138,Omanyte,Level Up,Omastar,None,~,None,~,None,~,None,~,None,~,None,~
+139,Omastar,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+140,Kabuto,Level Up,Kabutops,None,~,None,~,None,~,None,~,None,~,None,~
+141,Kabutops,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+142,Aerodactyl,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+143,Snorlax,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+144,Articuno,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+145,Zapdos,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+146,Moltres,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+147,Dratini,Level Up,Dragonair,None,~,None,~,None,~,None,~,None,~,None,~
+148,Dragonair,Level Up,Dragonite,None,~,None,~,None,~,None,~,None,~,None,~
+149,Dragonite,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+150,Mewtwo,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+151,Mew,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+152,Chikorita,Level Up,Bayleef,None,~,None,~,None,~,None,~,None,~,None,~
+153,Bayleef,Level Up,Meganium,None,~,None,~,None,~,None,~,None,~,None,~
+154,Meganium,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+155,Cyndaquil,Level Up,Quilava,None,~,None,~,None,~,None,~,None,~,None,~
+156,Quilava,Level Up,Typhlosion,None,~,None,~,None,~,None,~,None,~,None,~
+157,Typhlosion,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+158,Totodile,Level Up,Croconaw,None,~,None,~,None,~,None,~,None,~,None,~
+159,Croconaw,Level Up,Feraligatr,None,~,None,~,None,~,None,~,None,~,None,~
+160,Feraligatr,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+161,Sentret,Level Up,Furret,None,~,None,~,None,~,None,~,None,~,None,~
+162,Furret,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+163,Hoothoot,Level Up,Noctowl,None,~,None,~,None,~,None,~,None,~,None,~
+164,Noctowl,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+165,Ledyba,Level Up,Ledian,None,~,None,~,None,~,None,~,None,~,None,~
+166,Ledian,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+167,Spinarak,Level Up,Ariados,None,~,None,~,None,~,None,~,None,~,None,~
+168,Ariados,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+169,Crobat,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+170,Chinchou,Level Up,Lanturn,None,~,None,~,None,~,None,~,None,~,None,~
+171,Lanturn,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+172,Pichu,Happiness,Pikachu,None,~,None,~,None,~,None,~,None,~,None,~
+173,Cleffa,Happiness,Clefairy,None,~,None,~,None,~,None,~,None,~,None,~
+174,Igglybuff,Happiness,Jigglypuff,None,~,None,~,None,~,None,~,None,~,None,~
+175,Togepi,Happiness,Togetic,None,~,None,~,None,~,None,~,None,~,None,~
+176,Togetic,Use Item,Togekiss,None,~,None,~,None,~,None,~,None,~,None,~
+177,Natu,Level Up,Xatu,None,~,None,~,None,~,None,~,None,~,None,~
+178,Xatu,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+179,Mareep,Level Up,Flaaffy,None,~,None,~,None,~,None,~,None,~,None,~
+180,Flaaffy,Level Up,Ampharos,None,~,None,~,None,~,None,~,None,~,None,~
+181,Ampharos,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+182,Bellossom,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+183,Marill,Level Up,Azumarill,None,~,None,~,None,~,None,~,None,~,None,~
+184,Azumarill,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+185,Sudowoodo,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+186,Politoed,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+187,Hoppip,Level Up,Skiploom,None,~,None,~,None,~,None,~,None,~,None,~
+188,Skiploom,Level Up,Jumpluff,None,~,None,~,None,~,None,~,None,~,None,~
+189,Jumpluff,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+190,Aipom,Attack Known,Ambipom,None,~,None,~,None,~,None,~,None,~,None,~
+191,Sunkern,Use Item,Sunflora,None,~,None,~,None,~,None,~,None,~,None,~
+192,Sunflora,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+193,Yanma,Attack Known,Yanmega,None,~,None,~,None,~,None,~,None,~,None,~
+194,Wooper,Level Up,Quagsire,None,~,None,~,None,~,None,~,None,~,None,~
+195,Quagsire,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+196,Espeon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+197,Umbreon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+198,Murkrow,Use Item,Honchkrow,None,~,None,~,None,~,None,~,None,~,None,~
+199,Slowking,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+200,Misdreavus,Use Item,Mismagius,None,~,None,~,None,~,None,~,None,~,None,~
+201,Unown,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+202,Wobbuffet,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+203,Girafarig,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+204,Pineco,Level Up,Forretress,None,~,None,~,None,~,None,~,None,~,None,~
+205,Forretress,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+206,Dunsparce,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+207,Gligar,Use Item (Night),Gliscor,None,~,None,~,None,~,None,~,None,~,None,~
+208,Steelix,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+209,Snubbull,Level Up,Granbull,None,~,None,~,None,~,None,~,None,~,None,~
+210,Granbull,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+211,Qwilfish,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+212,Scizor,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+213,Shuckle,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+214,Heracross,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+215,Sneasel,Use Item (Night),Weavile,None,~,None,~,None,~,None,~,None,~,None,~
+216,Teddiursa,Level Up,Ursaring,None,~,None,~,None,~,None,~,None,~,None,~
+217,Ursaring,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+218,Slugma,Level Up,Magcargo,None,~,None,~,None,~,None,~,None,~,None,~
+219,Magcargo,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+220,Swinub,Level Up,Piloswine,None,~,None,~,None,~,None,~,None,~,None,~
+221,Piloswine,Attack Known,Mamoswine,None,~,None,~,None,~,None,~,None,~,None,~
+222,Corsola,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+223,Remoraid,Level Up,Octillery,None,~,None,~,None,~,None,~,None,~,None,~
+224,Octillery,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+225,Delibird,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+226,Mantine,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+227,Skarmory,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+228,Houndour,Level Up,Houndoom,None,~,None,~,None,~,None,~,None,~,None,~
+229,Houndoom,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+230,Kingdra,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+231,Phanpy,Level Up,Donphan,None,~,None,~,None,~,None,~,None,~,None,~
+232,Donphan,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+233,Porygon2,Trade (Item),Porygon-Z,None,~,None,~,None,~,None,~,None,~,None,~
+234,Stantler,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+235,Smeargle,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+236,Tyrogue,Level (Attack < Defense),Hitmonchan,Level (Attack > Defense),Hitmonlee,Level (Attack = Defense),Hitmontop,None,~,None,~,None,~,None,~
+237,Hitmontop,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+238,Smoochum,Level Up,Jynx,None,~,None,~,None,~,None,~,None,~,None,~
+239,Elekid,Level Up,Electabuzz,None,~,None,~,None,~,None,~,None,~,None,~
+240,Magby,Level Up,Magmar,None,~,None,~,None,~,None,~,None,~,None,~
+241,Miltank,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+242,Blissey,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+243,Raikou,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+244,Entei,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+245,Suicune,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+246,Larvitar,Level Up,Pupitar,None,~,None,~,None,~,None,~,None,~,None,~
+247,Pupitar,Level Up,Tyranitar,None,~,None,~,None,~,None,~,None,~,None,~
+248,Tyranitar,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+249,Lugia,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+250,Ho-oh,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+251,Celebi,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+252,Treecko,Level Up,Grovyle,None,~,None,~,None,~,None,~,None,~,None,~
+253,Grovyle,Level Up,Sceptile,None,~,None,~,None,~,None,~,None,~,None,~
+254,Sceptile,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+255,Torchic,Level Up,Combusken,None,~,None,~,None,~,None,~,None,~,None,~
+256,Combusken,Level Up,Blaziken,None,~,None,~,None,~,None,~,None,~,None,~
+257,Blaziken,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+258,Mudkip,Level Up,Marshtomp,None,~,None,~,None,~,None,~,None,~,None,~
+259,Marshtomp,Level Up,Swampert,None,~,None,~,None,~,None,~,None,~,None,~
+260,Swampert,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+261,Poochyena,Level Up,Mightyena,None,~,None,~,None,~,None,~,None,~,None,~
+262,Mightyena,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+263,Zigzagoon,Level Up,Linoone,None,~,None,~,None,~,None,~,None,~,None,~
+264,Linoone,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+265,Wurmple,Level (PID > 5),Silcoon,Level (PID < 5),Cascoon,None,~,None,~,None,~,None,~,None,~
+266,Silcoon,Level Up,Beautifly,None,~,None,~,None,~,None,~,None,~,None,~
+267,Beautifly,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+268,Cascoon,Level Up,Dustox,None,~,None,~,None,~,None,~,None,~,None,~
+269,Dustox,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+270,Lotad,Level Up,Lombre,None,~,None,~,None,~,None,~,None,~,None,~
+271,Lombre,Use Item,Ludicolo,None,~,None,~,None,~,None,~,None,~,None,~
+272,Ludicolo,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+273,Seedot,Level Up,Nuzleaf,None,~,None,~,None,~,None,~,None,~,None,~
+274,Nuzleaf,Use Item,Shiftry,None,~,None,~,None,~,None,~,None,~,None,~
+275,Shiftry,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+276,Taillow,Level Up,Swellow,None,~,None,~,None,~,None,~,None,~,None,~
+277,Swellow,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+278,Wingull,Level Up,Pelipper,None,~,None,~,None,~,None,~,None,~,None,~
+279,Pelipper,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+280,Ralts,Level Up,Kirlia,None,~,None,~,None,~,None,~,None,~,None,~
+281,Kirlia,Level Up,Gardevoir,Use Item (Male),Gallade,None,~,None,~,None,~,None,~,None,~
+282,Gardevoir,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+283,Surskit,Level Up,Masquerain,None,~,None,~,None,~,None,~,None,~,None,~
+284,Masquerain,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+285,Shroomish,Level Up,Breloom,None,~,None,~,None,~,None,~,None,~,None,~
+286,Breloom,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+287,Slakoth,Level Up,Vigoroth,None,~,None,~,None,~,None,~,None,~,None,~
+288,Vigoroth,Level Up,Slaking,None,~,None,~,None,~,None,~,None,~,None,~
+289,Slaking,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+290,Nincada,Level (1 of 2),Ninjask,Level (2 of 2),Shedinja,None,~,None,~,None,~,None,~,None,~
+291,Ninjask,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+292,Shedinja,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+293,Whismur,Level Up,Loudred,None,~,None,~,None,~,None,~,None,~,None,~
+294,Loudred,Level Up,Exploud,None,~,None,~,None,~,None,~,None,~,None,~
+295,Exploud,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+296,Makuhita,Level Up,Hariyama,None,~,None,~,None,~,None,~,None,~,None,~
+297,Hariyama,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+298,Azurill,Happiness,Marill,None,~,None,~,None,~,None,~,None,~,None,~
+299,Nosepass,Level (Mt. Coronet),Probopass,None,~,None,~,None,~,None,~,None,~,None,~
+300,Skitty,Use Item,Delcatty,None,~,None,~,None,~,None,~,None,~,None,~
+301,Delcatty,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+302,Sableye,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+303,Mawile,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+304,Aron,Level Up,Lairon,None,~,None,~,None,~,None,~,None,~,None,~
+305,Lairon,Level Up,Aggron,None,~,None,~,None,~,None,~,None,~,None,~
+306,Aggron,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+307,Meditite,Level Up,Medicham,None,~,None,~,None,~,None,~,None,~,None,~
+308,Medicham,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+309,Electrike,Level Up,Manectric,None,~,None,~,None,~,None,~,None,~,None,~
+310,Manectric,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+311,Plusle,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+312,Minun,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+313,Volbeat,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+314,Illumise,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+315,Roselia,Use Item,Roserade,None,~,None,~,None,~,None,~,None,~,None,~
+316,Gulpin,Level Up,Swalot,None,~,None,~,None,~,None,~,None,~,None,~
+317,Swalot,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+318,Carvanha,Level Up,Sharpedo,None,~,None,~,None,~,None,~,None,~,None,~
+319,Sharpedo,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+320,Wailmer,Level Up,Wailord,None,~,None,~,None,~,None,~,None,~,None,~
+321,Wailord,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+322,Numel,Level Up,Camerupt,None,~,None,~,None,~,None,~,None,~,None,~
+323,Camerupt,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+324,Torkoal,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+325,Spoink,Level Up,Grumpig,None,~,None,~,None,~,None,~,None,~,None,~
+326,Grumpig,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+327,Spinda,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+328,Trapinch,Level Up,Vibrava,None,~,None,~,None,~,None,~,None,~,None,~
+329,Vibrava,Level Up,Flygon,None,~,None,~,None,~,None,~,None,~,None,~
+330,Flygon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+331,Cacnea,Level Up,Cacturne,None,~,None,~,None,~,None,~,None,~,None,~
+332,Cacturne,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+333,Swablu,Level Up,Altaria,None,~,None,~,None,~,None,~,None,~,None,~
+334,Altaria,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+335,Zangoose,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+336,Seviper,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+337,Lunatone,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+338,Solrock,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+339,Barboach,Level Up,Whiscash,None,~,None,~,None,~,None,~,None,~,None,~
+340,Whiscash,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+341,Corphish,Level Up,Crawdaunt,None,~,None,~,None,~,None,~,None,~,None,~
+342,Crawdaunt,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+343,Baltoy,Level Up,Claydol,None,~,None,~,None,~,None,~,None,~,None,~
+344,Claydol,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+345,Lileep,Level Up,Cradily,None,~,None,~,None,~,None,~,None,~,None,~
+346,Cradily,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+347,Anorith,Level Up,Armaldo,None,~,None,~,None,~,None,~,None,~,None,~
+348,Armaldo,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+349,Feebas,Max Beauty,Milotic,None,~,None,~,None,~,None,~,None,~,None,~
+350,Milotic,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+351,Castform,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+352,Kecleon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+353,Shuppet,Level Up,Banette,None,~,None,~,None,~,None,~,None,~,None,~
+354,Banette,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+355,Duskull,Level Up,Dusclops,None,~,None,~,None,~,None,~,None,~,None,~
+356,Dusclops,Trade (Item),Dusknoir,None,~,None,~,None,~,None,~,None,~,None,~
+357,Tropius,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+358,Chimecho,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+359,Absol,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+360,Wynaut,Level Up,Wobbuffet,None,~,None,~,None,~,None,~,None,~,None,~
+361,Snorunt,Level Up,Glalie,Use Item (Female),Froslass,None,~,None,~,None,~,None,~,None,~
+362,Glalie,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+363,Spheal,Level Up,Sealeo,None,~,None,~,None,~,None,~,None,~,None,~
+364,Sealeo,Level Up,Walrein,None,~,None,~,None,~,None,~,None,~,None,~
+365,Walrein,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+366,Clamperl,Trade (Item),Huntail,Trade (Item),Gorebyss,None,~,None,~,None,~,None,~,None,~
+367,Huntail,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+368,Gorebyss,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+369,Relicanth,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+370,Luvdisc,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+371,Bagon,Level Up,Shelgon,None,~,None,~,None,~,None,~,None,~,None,~
+372,Shelgon,Level Up,Salamence,None,~,None,~,None,~,None,~,None,~,None,~
+373,Salamence,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+374,Beldum,Level Up,Metang,None,~,None,~,None,~,None,~,None,~,None,~
+375,Metang,Level Up,Metagross,None,~,None,~,None,~,None,~,None,~,None,~
+376,Metagross,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+377,Regirock,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+378,Regice,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+379,Registeel,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+380,Latias,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+381,Latios,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+382,Kyogre,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+383,Groudon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+384,Rayquaza,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+385,Jirachi,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+386,Deoxys (N),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+387,Turtwig,Level Up,Grotle,None,~,None,~,None,~,None,~,None,~,None,~
+388,Grotle,Level Up,Torterra,None,~,None,~,None,~,None,~,None,~,None,~
+389,Torterra,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+390,Chimchar,Level Up,Monferno,None,~,None,~,None,~,None,~,None,~,None,~
+391,Monferno,Level Up,Infernape,None,~,None,~,None,~,None,~,None,~,None,~
+392,Infernape,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+393,Piplup,Level Up,Prinplup,None,~,None,~,None,~,None,~,None,~,None,~
+394,Prinplup,Level Up,Empoleon,None,~,None,~,None,~,None,~,None,~,None,~
+395,Empoleon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+396,Starly,Level Up,Staravia,None,~,None,~,None,~,None,~,None,~,None,~
+397,Staravia,Level Up,Staraptor,None,~,None,~,None,~,None,~,None,~,None,~
+398,Staraptor,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+399,Bidoof,Level Up,Bibarel,None,~,None,~,None,~,None,~,None,~,None,~
+400,Bibarel,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+401,Kricketot,Level Up,Kricketune,None,~,None,~,None,~,None,~,None,~,None,~
+402,Kricketune,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+403,Shinx,Level Up,Luxio,None,~,None,~,None,~,None,~,None,~,None,~
+404,Luxio,Level Up,Luxray,None,~,None,~,None,~,None,~,None,~,None,~
+405,Luxray,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+406,Budew,Happiness (Day),Roselia,None,~,None,~,None,~,None,~,None,~,None,~
+407,Roserade,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+408,Cranidos,Level Up,Rampardos,None,~,None,~,None,~,None,~,None,~,None,~
+409,Rampardos,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+410,Shieldon,Level Up,Bastiodon,None,~,None,~,None,~,None,~,None,~,None,~
+411,Bastiodon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+412,Burmy,Level (Female),Wormadam (P),Level (Male),Mothim,None,~,None,~,None,~,None,~,None,~
+413,Wormadam (P),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+414,Mothim,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+415,Combee,Level (Female),Vespiquen,None,~,None,~,None,~,None,~,None,~,None,~
+416,Vespiquen,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+417,Pachirisu,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+418,Buizel,Level Up,Floatzel,None,~,None,~,None,~,None,~,None,~,None,~
+419,Floatzel,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+420,Cherubi,Level Up,Cherrim,None,~,None,~,None,~,None,~,None,~,None,~
+421,Cherrim,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+422,Shellos,Level Up,Gastrodon,None,~,None,~,None,~,None,~,None,~,None,~
+423,Gastrodon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+424,Ambipom,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+425,Drifloon,Level Up,Drifblim,None,~,None,~,None,~,None,~,None,~,None,~
+426,Drifblim,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+427,Buneary,Happiness,Lopunny,None,~,None,~,None,~,None,~,None,~,None,~
+428,Lopunny,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+429,Mismagius,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+430,Honchkrow,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+431,Glameow,Level Up,Purugly,None,~,None,~,None,~,None,~,None,~,None,~
+432,Purugly,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+433,Chingling,Happiness (Night),Chimecho,None,~,None,~,None,~,None,~,None,~,None,~
+434,Stunky,Level Up,Skuntank,None,~,None,~,None,~,None,~,None,~,None,~
+435,Skuntank,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+436,Bronzor,Level Up,Bronzong,None,~,None,~,None,~,None,~,None,~,None,~
+437,Bronzong,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+438,Bonsly,Attack Known,Sudowoodo,None,~,None,~,None,~,None,~,None,~,None,~
+439,Mime Jr.,Attack Known,Mr. Mime,None,~,None,~,None,~,None,~,None,~,None,~
+440,Happiny,Use Item (Day),Chansey,None,~,None,~,None,~,None,~,None,~,None,~
+441,Chatot,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+442,Spiritomb,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+443,Gible,Level Up,Gabite,None,~,None,~,None,~,None,~,None,~,None,~
+444,Gabite,Level Up,Garchomp,None,~,None,~,None,~,None,~,None,~,None,~
+445,Garchomp,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+446,Munchlax,Happiness,Snorlax,None,~,None,~,None,~,None,~,None,~,None,~
+447,Riolu,Happiness (Day),Lucario,None,~,None,~,None,~,None,~,None,~,None,~
+448,Lucario,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+449,Hippopotas,Level Up,Hippowdon,None,~,None,~,None,~,None,~,None,~,None,~
+450,Hippowdon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+451,Skorupi,Level Up,Drapion,None,~,None,~,None,~,None,~,None,~,None,~
+452,Drapion,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+453,Croagunk,Level Up,Toxicroak,None,~,None,~,None,~,None,~,None,~,None,~
+454,Toxicroak,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+455,Carnivine,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+456,Finneon,Level Up,Lumineon,None,~,None,~,None,~,None,~,None,~,None,~
+457,Lumineon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+458,Mantyke,Pokemon in Party,Mantine,None,~,None,~,None,~,None,~,None,~,None,~
+459,Snover,Level Up,Abomasnow,None,~,None,~,None,~,None,~,None,~,None,~
+460,Abomasnow,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+461,Weavile,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+462,Magnezone,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+463,Lickilicky,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+464,Rhyperior,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+465,Tangrowth,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+466,Electivire,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+467,Magmortar,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+468,Togekiss,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+469,Yanmega,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+470,Leafeon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+471,Glaceon,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+472,Gliscor,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+473,Mamoswine,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+474,Porygon-Z,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+475,Gallade,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+476,Probopass,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+477,Dusknoir,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+478,Froslass,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+479,Rotom,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+480,Uxie,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+481,Mesprit,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+482,Azelf,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+483,Dialga,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+484,Palkia,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+485,Heatran,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+486,Regigigas,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+487,Giratina,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+488,Cresselia,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+489,Phione,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+490,Manaphy,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+491,Darkrai,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+492,Shaymin,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+493,Arceus,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+494,Egg,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+495,Bad Egg,None,~,None,~,None,~,None,~,None,~,None,~,None,~
+496,Deoxys (A),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+497,Deoxys (D),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+498,Deoxys (S),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+499,Wormadam (S),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+500,Wormadam (T),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+501,Giratina (O),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+502,Shaymin (S),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+503,Rotom (Heat),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+504,Rotom (Wash),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+505,Rotom (Frost),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+506,Rotom (Fan),None,~,None,~,None,~,None,~,None,~,None,~,None,~
+507,Rotom (Mow),None,~,None,~,None,~,None,~,None,~,None,~,None,~

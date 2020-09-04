@@ -48,7 +48,7 @@ public class DsRomReader
         String localVersion= localVersionReader.readLine().toLowerCase();
         Scanner scanner= new Scanner(System.in);
 
-        if(!onlineVersion.equals(localVersion) && Integer.parseInt(onlineVersion.split(".")[1]) > Integer.parseInt(localVersion.split(".")[1]))
+        if(!onlineVersion.equals(localVersion))
         {
 
             String ans;
@@ -68,7 +68,7 @@ public class DsRomReader
 
             if(ans.equals("y"))
             {
-                System.out.println("\nAborting process. Please go update PokEditor using the releases tab on the official GitHub: https://github.com/turtleisaac/PokEditor/releases");
+                System.out.println("\nPlease go update PokEditor using the releases tab on the official GitHub: https://github.com/turtleisaac/PokEditor/releases");
                 System.exit(0);
             }
             onlineVersionReader.close();
@@ -170,7 +170,7 @@ public class DsRomReader
                     System.out.println("PokEditor\n");
                     System.out.println("\nWelcome to PokEditor! PokEditor is a tool written by Turtleisaac which is meant to replace many features of the previously used, old programs such as PPRE or SDSME");
                     System.out.println("PokEditor functions by reading game data straight from a rom, processing it into an editable spreadsheet, then using an edited spreadsheet to modify the existing data in a rom");
-                    System.out.println("Unlike many of the old tools for Nintendo DS Pokémon hacking, PokEditor will work with your rom, regardless of how crazily it has been modified from the original");
+                    System.out.println("Unlike many of the old tools for Nintendo DS Pokémon hacking, PokEditor will work with your rom, regardless of how crazily it has been modified from the original. It also works on others' hacks, such as");
                     System.out.println("PokEditor currently has many different editors across both Gen 4 and 5, with many more editors planned for future versions. Please stay tuned!");
                     System.out.println("The easiest way to edit data is to use the PokEditor templates on Google Sheets. They have plenty of formatting, data validation/ error correction, and detailed descriptions of what each value does");
                     System.out.println("This is the link to the PokEditor Google Sheets templates: https://drive.google.com/drive/folders/1hlKiP7V31Ddj4WmKnjK7lfhT88yPjB55?usp=sharing");
@@ -213,10 +213,13 @@ public class DsRomReader
                 case "pack" :
                     System.out.println("Name of the folder to pack?");
                     String dirName= scanner.nextLine();
-                    System.out.println("Name to give to output narc?");
+                    System.out.println("Name to give to output narc? (do not include .narc)");
                     String outputName= scanner.nextLine();
                     narctowl.pack(dirName,outputName);
                     break;
+
+                default:
+                    throw new RuntimeException("Invalid arguments. Valid arguments for accessing Narctowl are either \"narc unpack\" or \"narc pack\"");
             }
         }
 
@@ -966,33 +969,33 @@ public class DsRomReader
                 firstFileID= D_P_PT_FIRST_FILE;
                 break;
         }
-        System.out.println("First file ID: " + firstFileID + "\n");
+//        System.out.println("First file ID: " + firstFileID + "\n");
 
         int fatbPos= 0;
         buffer.skipTo(romData.getFatbOffset());
-        System.out.println(buffer.getPosition() + "\n");
+//        System.out.println(buffer.getPosition() + "\n");
         fimgEntries= new ArrayList<>();
-        System.out.println("Length: " + romData.getFatbLength()/8 + " files");
+//        System.out.println("Length: " + romData.getFatbLength()/8 + " files");
         int lastEnd= 0;
 
 
         for(int i= 0; i < romData.getFatbLength()/8; i++)
         {
-            System.out.println("Fatb Offset: " + buffer.getPosition());
+//            System.out.println("Fatb Offset: " + buffer.getPosition());
             long startingOffset= buffer.readUIntI();
             long endingOffset= buffer.readUIntI();
             fatbPos+= 4;
-            System.out.println("ID: 0x" + Integer.toHexString(i));
-            System.out.println("Starting Offset: " +startingOffset);
-            System.out.println("Ending Offset: " + endingOffset);
-            System.out.println("Length: " + (endingOffset-startingOffset) + "\n");
+//            System.out.println("ID: 0x" + Integer.toHexString(i));
+//            System.out.println("Starting Offset: " +startingOffset);
+//            System.out.println("Ending Offset: " + endingOffset);
+//            System.out.println("Length: " + (endingOffset-startingOffset) + "\n");
 
             long gap= 0;
             if(i > firstFileID)
             {
                 gap= startingOffset-lastEnd;
             }
-            System.out.println(gap);
+//            System.out.println(gap);
 
             int finalI = i;
             long finalDiff = gap;
@@ -1019,7 +1022,7 @@ public class DsRomReader
             });
             lastEnd= (int) endingOffset;
         }
-        System.out.println("Number of recorded entries: " + fimgEntries.size());
+//        System.out.println("Number of recorded entries: " + fimgEntries.size());
 
 
     }
@@ -1262,10 +1265,12 @@ public class DsRomReader
                         break;
                     case "encounters":
                         setFileData(ENCOUNTER_BW);
-                        break;
+                        throw new RuntimeException("Encounters currently can't be edited for Gen 5");
+//                        break;
                     case "items":
                         setFileData(ITEM_BW);
-                        break;
+                        throw new RuntimeException("Items currently can't be edited for Gen 5");
+//                        break;
                     case "moves":
                         setFileData(MOVE_BW);
                         break;
@@ -1293,10 +1298,12 @@ public class DsRomReader
                         break;
                     case "encounters":
                         setFileData(ENCOUNTER_B2W2);
-                        break;
+                        throw new RuntimeException("Encounters currently can't be edited for Gen 5");
+//                        break;
                     case "items":
                         setFileData(ITEM_B2W2);
-                        break;
+                        throw new RuntimeException("Items currently can't be edited for Gen 5");
+//                        break;
                     case "moves":
                         setFileData(MOVE_B2W2);
                         break;

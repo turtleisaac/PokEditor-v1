@@ -22,11 +22,13 @@ public class PersonalEditor
     private static final String[] eggGroupArr= {"~","Monster","Water 1","Bug","Flying","Field","Fairy","Grass","Human-Like","Water 3","Mineral","Amorphous","Water 2","Ditto","Dragon","Undiscovered"};
     private static final String[] growthTableIdArr= {"Medium Fast","Erratic","Fluctuating","Medium Slow","Fast","Slow","Medium Fast","Medium Fast"};
     private static String resourcePath= path + "Program Files" + File.separator;
+    private static String defaultsPath= resourcePath + "Defaults" + File.separator;
     private static String[] nameData;
     private static String[] tmData;
     private static String[] itemData;
     private static String[] abilityData;
     private static String[] tmNameData;
+    private static boolean autoFix;
 
     public PersonalEditor() throws IOException
     {
@@ -98,6 +100,10 @@ public class PersonalEditor
         }
         tmNameData= tmNameList.toArray(new String[0]);
         reader.close();
+
+        System.out.println("Do you wish to toggle automatic correction of incorrect/ broken data? (Y/n) (If the rom you are editing has an expanded move, ability, type, or item table, and you have not yet adjusted the data in the \"Program Files\" directory, it is safest to say no)");
+        autoFix= !scanner.nextLine().equalsIgnoreCase("n");
+        System.out.println(autoFix);
     }
 
     public void personalToCSV(String personalDir) throws IOException
@@ -113,6 +119,9 @@ public class PersonalEditor
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
         sort(files); //sorts files numerically (0.bin, 1.bin, 2.bin, etc...)
         File file;
+
+        CsvReader csvReader= new CsvReader(defaultsPath + "personal4.csv");
+
         int count= 0;
 
         for(int i= 0; i < files.length; i++)
@@ -121,14 +130,26 @@ public class PersonalEditor
             System.out.println(nameData[i]);
             file= files[i];
             personalBuffer= new Buffer(file.toString());
+            initializeIndex(csvReader.next());
+
             int hp= personalBuffer.readByte();
             int atk= personalBuffer.readByte();
             int def= personalBuffer.readByte();
             int spe= personalBuffer.readByte();
             int spAtk= personalBuffer.readByte();
             int spDef= personalBuffer.readByte();
-            int type1= personalBuffer.readSelectiveByte(typeArr.length-1);
-            int type2= personalBuffer.readSelectiveByte(typeArr.length-1);
+            int type1;
+            int type2;
+            if(autoFix)
+            {
+                type1= personalBuffer.readSelectiveByte(typeArr.length-1,getType(next()));
+                type2= personalBuffer.readSelectiveByte(typeArr.length-1,getType(next()));
+            }
+            else
+            {
+                type1= personalBuffer.readByte();
+                type2= personalBuffer.readByte();
+            }
             int catchRate= personalBuffer.readByte();
             int baseExp= personalBuffer.readByte();
 
@@ -141,17 +162,42 @@ public class PersonalEditor
             int spDefYield= getSpDef(evYields);
             int evPadded= getPadded(evYields);
 
-
-            int uncommonItem= personalBuffer.readSelectiveShort(itemData.length-1);
-            int rareItem= personalBuffer.readSelectiveShort(itemData.length-1);
+            int uncommonItem;
+            int rareItem;
+            if(autoFix)
+            {
+                uncommonItem= personalBuffer.readSelectiveShort(itemData.length-1, (short) getItem(next()));
+                rareItem= personalBuffer.readSelectiveShort(itemData.length-1, (short) getItem(next()));
+            }
+            else
+            {
+                uncommonItem= personalBuffer.readShort();
+                rareItem= personalBuffer.readShort();
+            }
             int genderRatio= personalBuffer.readByte();
             int hatchMultiplier= personalBuffer.readByte();
             int baseHappiness= personalBuffer.readByte();
-            int expRate= personalBuffer.readSelectiveByte(growthTableIdArr.length-1);
-            int eggGroup1= personalBuffer.readSelectiveByte(eggGroupArr.length-1);
-            int eggGroup2= personalBuffer.readSelectiveByte(eggGroupArr.length-1);
-            int ability1= personalBuffer.readSelectiveByte(abilityData.length-1);
-            int ability2= personalBuffer.readSelectiveByte(abilityData.length-1);
+            int expRate;
+            int eggGroup1;
+            int eggGroup2;
+            int ability1;
+            int ability2;
+            if (autoFix)
+            {
+                expRate = personalBuffer.readSelectiveByte(growthTableIdArr.length-1,getGrowthRate(next()));
+                eggGroup1= personalBuffer.readSelectiveByte(eggGroupArr.length-1,getEggGroup(next()));
+                eggGroup2= personalBuffer.readSelectiveByte(eggGroupArr.length-1,getEggGroup(next()));
+                ability1= personalBuffer.readSelectiveByte(abilityData.length-1,getAbility(next()));
+                ability2= personalBuffer.readSelectiveByte(abilityData.length-1,getAbility(next()));
+            }
+            else
+            {
+                expRate= personalBuffer.readByte();
+                eggGroup1= personalBuffer.readByte();
+                eggGroup2= personalBuffer.readByte();
+                ability1= personalBuffer.readByte();
+                ability2= personalBuffer.readByte();
+            }
             int runChance= personalBuffer.readByte();
             int dexColor= personalBuffer.readByte();
             personalBuffer.readShort(); // 2 bytes padding
@@ -978,10 +1024,6 @@ public class PersonalEditor
     }
 
 
-
-
-
-
     private void sort (File arr[])
     {
         Arrays.sort(arr, Comparator.comparingInt(PersonalEditor::fileToInt));
@@ -990,6 +1032,27 @@ public class PersonalEditor
     private static int fileToInt (File f)
     {
         return Integer.parseInt(f.getName().split("\\.")[0]);
+    }
+
+    private int arrIdx;
+    private String[] input;
+
+    private void initializeIndex(String[] arr)
+    {
+        arrIdx= 0;
+        input= arr;
+    }
+
+    private String next()
+    {
+        try
+        {
+            return input[arrIdx++];
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            return "";
+        }
     }
 
     private static int getHp (short x)

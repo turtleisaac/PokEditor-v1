@@ -15,9 +15,11 @@ public class EvolutionEditor
     private static final String[] typeArr= {"Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fairy", "Fire", "Water","Grass","Electric","Psychic","Ice","Dragon","Dark"};
     private static String[] evolutionMethodArr;
     private static String resourcePath= path + "Program Files" + File.separator;
+    private static String defaultsPath= resourcePath + "Defaults" + File.separator;
     private static String[] nameData;
     private static String[] itemData;
     private static String[] moveData;
+    private static boolean autoFix;
 
     public EvolutionEditor() throws IOException
     {
@@ -64,6 +66,10 @@ public class EvolutionEditor
         }
         evolutionMethodArr= evolutionList.toArray(new String[0]);
         reader.close();
+
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Do you wish to toggle automatic correction of incorrect/ broken data? (Y/n) (If the rom you are editing has an expanded move, ability, type, or item table, and you have not yet adjusted the data in the \"Program Files\" directory, it is safest to say no)");
+        autoFix= !scanner.nextLine().equalsIgnoreCase("n");
     }
 
 
@@ -79,6 +85,8 @@ public class EvolutionEditor
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
         sort(files); //sorts files numerically (0.bin, 1.bin, 2.bin, etc...)
         File file;
+
+        CsvReader csvReader= new CsvReader(defaultsPath + "evolution4.csv");
         int count= 0;
 
         for(int i= 0; i < files.length; i++)
@@ -89,6 +97,7 @@ public class EvolutionEditor
                 throw new RuntimeException("This is not an evolution file");
             }
             evolutionBuffer= new Buffer(file.toString());
+            initializeIndex(csvReader.next());
             int finalCount= count;
             count++;
 
@@ -98,10 +107,25 @@ public class EvolutionEditor
             int[] evolvedIDs= new int[7];
             for(int e= 0; e < 7; e++)
             {
-                evolutionMethods[e]= evolutionBuffer.readSelectiveByte(evolutionMethodArr.length-1);
+                if(autoFix)
+                {
+                    evolutionMethods[e]= evolutionBuffer.readSelectiveByte(evolutionMethodArr.length-1,getEvolutionMethod(next()));
+                }
+                else
+                {
+                    evolutionMethods[e]= evolutionBuffer.readByte();
+                }
                 padding[e]= evolutionBuffer.readByte();
                 requirementNumbers[e]= evolutionBuffer.readShort();
-                evolvedIDs[e]= evolutionBuffer.readSelectiveShort(nameData.length-1);
+                if(autoFix)
+                {
+                    evolvedIDs[e]= evolutionBuffer.readSelectiveShort(nameData.length-1, (short) getPokemon(next()));
+                }
+                else
+                {
+                    evolvedIDs[e]= evolutionBuffer.readShort();
+                }
+
             }
 
             dataList.add(new EvolutionData() {
@@ -399,6 +423,27 @@ public class EvolutionEditor
     private static int fileToInt (File f)
     {
         return Integer.parseInt(f.getName().split("\\.")[0]);
+    }
+
+    private int arrIdx;
+    private String[] input;
+
+    private void initializeIndex(String[] arr)
+    {
+        arrIdx= 0;
+        input= arr;
+    }
+
+    private String next()
+    {
+        try
+        {
+            return input[arrIdx++];
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            return "";
+        }
     }
 
     private static int getEvolutionMethod(String evo)
