@@ -470,6 +470,7 @@ public class PersonalEditor
 
         int xValue;
         int yValue;
+        CsvReader defaultReader= new CsvReader(resourcePath + "Defaults" + File.separator + "personal4.csv");
 
         BufferedReader reader= new BufferedReader(new FileReader(personalPath));
         if(!personalCsv.substring(personalCsv.length()-4).equals(".csv"))
@@ -516,6 +517,7 @@ public class PersonalEditor
         ArrayList<PersonalData> personalData= new ArrayList<>();
         for(int row= 0; row < yValue; row++)
         {
+            String[] defaults= defaultReader.next();
             csvRow= personalLines.get(row).split(",");
             String[] finalCsvRow = csvRow;
             int finalRow = row;
@@ -667,14 +669,23 @@ public class PersonalEditor
                 }
 
                 @Override
-                public int getDexColor() {
+                public int getDexColor()
+                {
                     try
                     {
                         return Integer.parseInt(finalCsvRow[27]);
                     }
                     catch (ArrayIndexOutOfBoundsException e)
                     {
-                        throw new RuntimeException("There is a problem with the provided personalDataRecompile.csv. Please try exporting/ downloading it again. If this does not work, please open a new Issue on the GitHub");
+
+                        if(autoFix)
+                        {
+                            return Integer.parseInt(defaults[9]);
+                        }
+                        else
+                        {
+                            throw new RuntimeException("There is a problem with the provided personalDataRecompile.csv. Please try exporting/ downloading it again. If this does not work, please open a new Issue on the GitHub");
+                        }
                     }
                 }
 

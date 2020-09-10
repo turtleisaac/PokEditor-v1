@@ -1,3 +1,4 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import encounters.johto.EncounterEditor;
 import encounters.sinnoh.SinnohEncounterEditor;
 import evolutions.gen4.EvolutionEditor;
@@ -68,23 +69,33 @@ public class DsFileFinder
 
     public void readRom(String[] args) throws Exception
     {
-        String rom2= args[args.length-1];
-        String rom1= args[args.length-2];
-        this.rom= path + rom2;
-        buffer= new Buffer(rom2);
+//        String rom2= args[args.length-1];
+//        String rom1= args[args.length-2];
+//        this.rom= path + rom2;
+//        buffer= new Buffer(rom2);
+//        readHeader();
+//        readFatb();
+//        map1= getAllFiles();
+//        this.rom2= false;
+//        fimgEntries= new ArrayList<>();
+//
+//        this.rom= path + rom1;
+//        buffer= new Buffer(rom1);
+//        readHeader();
+//        readFatb();
+//        map2= getAllFiles();
+//
+//        compareAllFiles();
+
+        String rom= args[args.length-1];
+        this.rom= path + rom;
+        buffer= new Buffer(rom);
         readHeader();
         readFatb();
-        map1= getAllFiles();
-        this.rom2= false;
-        fimgEntries= new ArrayList<>();
+//        findFile(64);
+//        findFile(0x7A,(byte)0xAB,(byte)0x01,(byte)0x00,(byte)0x00);
+        findFile(0x57,(byte)0x83,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x86,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x89,(byte)0x01);
 
-        this.rom= path + rom1;
-        buffer= new Buffer(rom1);
-        readHeader();
-        readFatb();
-        map2= getAllFiles();
-
-        compareAllFiles();
     }
 
     public void readHeader() throws IOException
@@ -603,12 +614,46 @@ public class DsFileFinder
                 int numFiles= romBuffer.readInt();
                 if(numFiles == toFind || numFiles == toFind-1 || numFiles == toFind+1)
                 {
-                    System.out.print("Current file: 0x" + Integer.toHexString(i) + ", ");
+                    System.out.print("Current file: " + i + ", ");
                     System.out.println("numFiles: " + numFiles);
                     System.out.println("File length: " + (fimgEntry.getEndingOffset()-fimgEntry.getStartingOffset()) + "\n");
 
                 }
             }
+            romBuffer.close();
+        }
+    }
+
+    public void findFile(int id) throws IOException
+    {
+        System.out.println(fimgEntries.get(id).getStartingOffset());
+    }
+
+    public void findFile(int max, byte... bytes) throws IOException
+    {
+        Buffer romBuffer;
+        FimgEntry fimgEntry;
+
+        for(int i= 0; i < max; i++)
+        {
+            fimgEntry= fimgEntries.get(i);
+            romBuffer= new Buffer(rom);
+            romBuffer.skipTo((int)fimgEntry.getStartingOffset());
+            byte[] contents= romBuffer.readBytes((int) (fimgEntry.getEndingOffset()-fimgEntry.getStartingOffset()));
+            byte[] arr;
+            for(int j= 0; j < contents.length; j++)
+            {
+                arr= Arrays.copyOfRange(contents,j,j+bytes.length);
+                if(Arrays.equals(arr,bytes))
+                {
+                    System.out.print("Current file: " + i + ", ");
+                    System.out.println("Global offset: 0x" + Integer.toHexString((int) (fimgEntry.getStartingOffset() + j)));
+                    System.out.println("Offset in file: 0x" + Integer.toHexString(j));
+                    System.out.println("File length: " + (fimgEntry.getEndingOffset()-fimgEntry.getStartingOffset()) + "\n");
+                }
+            }
+
+
             romBuffer.close();
         }
     }
@@ -1616,6 +1661,18 @@ public class DsFileFinder
     private static int fileToInt (File f)
     {
         return Integer.parseInt(f.getName().split("\\.")[0]);
+    }
+
+    private boolean contains(byte[] arr, byte val)
+    {
+        for(byte num : arr)
+        {
+            if(num == val)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
