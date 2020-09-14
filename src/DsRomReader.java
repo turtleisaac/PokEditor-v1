@@ -230,7 +230,7 @@ public class DsRomReader
          */
         if (args[0].equalsIgnoreCase("narc"))
         {
-            Narctowl narctowl= new Narctowl();
+            Narctowl narctowl= new Narctowl(true);
             switch (args[1].toLowerCase())
             {
                 case "unpack" :
@@ -249,6 +249,7 @@ public class DsRomReader
                 default:
                     throw new RuntimeException("Invalid arguments. Valid arguments for accessing Narctowl are either \"narc unpack\" or \"narc pack\"");
             }
+            System.exit(0);
         }
 
         /**
@@ -1449,7 +1450,7 @@ public class DsRomReader
         BinaryWriter writer= new BinaryWriter(tempPath);
 //        System.out.println("Read and wrote " + length + " bytes.");
         writer.write(buffer.readBytes(length));
-        Narctowl narctowl= new Narctowl(); //creates new narctowl.Narctowl object
+        Narctowl narctowl= new Narctowl(false); //creates new narctowl.Narctowl object
         if(isNarc)
         {
             narctowl.unpack(tempPath); //run narcs.Narctowl.unpack() with narc extracted from rom as parameter

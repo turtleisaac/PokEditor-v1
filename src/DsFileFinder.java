@@ -1266,7 +1266,7 @@ public class DsFileFinder
         {
             writer.writeByte((byte) buffer.readByte());
         }
-        Narctowl narc= new Narctowl(); //creates new NarcEditor object
+        Narctowl narc= new Narctowl(false); //creates new NarcEditor object
         narc.unpack(tempPath); //run NarcEditor.unpack() with narc extracted from rom as parameter
 
         switch (args[0].toLowerCase()) {

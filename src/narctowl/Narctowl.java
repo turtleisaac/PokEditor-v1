@@ -17,27 +17,28 @@ import java.util.*;
  * FrankieD for assisting me as we figured out how to read a narc and correctly extract other files from it
  */
 public class Narctowl {
-    public static void main(String[] args) throws Exception {
-        Narctowl narc = new Narctowl(); //creates new NarcEditor object
-        if (args.length != 0) //checks if arguments were provided
-        {
-            if (args[0].toLowerCase().equals("unpack")) //if first argument is unpack
-            {
-                narc.unpack(args[1]); //run NARC.unpack with second argument as parameter
-                System.exit(0);
-            } else if (args[0].toLowerCase().equals("pack")) {
-                narc.pack(narc.extractPath + args[1], args[2]);
-                System.exit(0);
-            }
-        }
-        throw new RuntimeException("\nInvalid arguments. Usage is as follows: java -jar NARCtowl.jar <arguments> \n Unpacking: java -jar NARCtowl.jar unpack <file name (include .narc)> \n Packing: java -jar NARCtowl.jar pack <name of directory in extracted folder> <name of file to create (do not include .narc)> \n   Note: Narc must be in the same folder as NARCtowl.jar \n   Note: Directory to construct narc from must be in \"extracted\" directory");
-    }
+//    public static void main(String[] args) throws Exception {
+//        Narctowl narc = new Narctowl(); //creates new NarcEditor object
+//        if (args.length != 0) //checks if arguments were provided
+//        {
+//            if (args[0].toLowerCase().equals("unpack")) //if first argument is unpack
+//            {
+//                narc.unpack(args[1]); //run NARC.unpack with second argument as parameter
+//                System.exit(0);
+//            } else if (args[0].toLowerCase().equals("pack")) {
+//                narc.pack(narc.extractPath + args[1], args[2]);
+//                System.exit(0);
+//            }
+//        }
+//        throw new RuntimeException("\nInvalid arguments. Usage is as follows: java -jar NARCtowl.jar <arguments> \n Unpacking: java -jar NARCtowl.jar unpack <file name (include .narc)> \n Packing: java -jar NARCtowl.jar pack <name of directory in extracted folder> <name of file to create (do not include .narc)> \n   Note: Narc must be in the same folder as NARCtowl.jar \n   Note: Directory to construct narc from must be in \"extracted\" directory");
+//    }
 
     private String separator = File.separator;
     private String path = System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String extractPath = path + "temp" + File.separator; //creates a new String field containing path, the directory "extracted", and File.separator (/ on Unix systems, \ on Windows)
     public static String[] extensionStrings; //creates a new String[] to be filled later (see static)
     private ArrayList<byte[]> fileExtensions = new ArrayList<>(); //creates a new ArrayList of byte[] to contain the file extension hex strings
+    private boolean manualAccess;
 
     private static final int MAX_SIZE = 1024 * 1024;
 
@@ -45,7 +46,15 @@ public class Narctowl {
         extensionStrings = new String[]{"bmd0", "btx0", "ncsr", "nclr", "ncgr", "nanr", "nmar", "nmcr", "ncer", "sdat", "narc", "nscr", "ntfp", "ntft", "ntfs", "pmcp", "sseq", "ssar", "swar", "sbnk"}; //creates a String[] that contains each file extension corresponding to the hex string at the same index in identifiers.hex
     }
 
-    public Narctowl() throws IOException {
+    public Narctowl(boolean manualAccess) throws IOException
+    {
+        this.manualAccess= manualAccess;
+
+        if(manualAccess)
+        {
+            extractPath = path + "extracted" + File.separator;
+        }
+
         String extensionPath = path + "Program Files" + File.separator + "identifiers.hex"; //creates a String containing the path to identifiers.hex (constant)
         for (int i = 0; i < new File(extensionPath).length() / 4; i++) //goes through the file four bytes at a time
         {
