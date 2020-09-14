@@ -14,7 +14,7 @@ java -jar PokEditor.jar \<arguments>
 
 Example: java -jar PokEditor.jar personal HeartGold.nds
 
-# List of Editors/ Tools
+# List of Spreadsheet-Based Editors/ Tools
 
 * personal
 
@@ -30,6 +30,14 @@ Example: java -jar PokEditor.jar personal HeartGold.nds
 
 * moves
 
+# List of Command Line-Based Editors/ Tools
+
+* starters
+
+* intro
+
+* opening
+
 * narc
 
 # Arguments
@@ -38,7 +46,7 @@ Example: java -jar PokEditor.jar personal HeartGold.nds
 
 * help \<editor name> (This is used to view information on each editor/ tool)
 
-# How to edit
+# How to edit (Instructions here are for the spreadsheet-based tools only)
 
  The recommended method of editing is to use the [PokEditor Google Sheets templates](https://drive.google.com/drive/folders/1hlKiP7V31Ddj4WmKnjK7lfhT88yPjB55?usp=sharing), which will require that you have a Google account. Double click on the template for the game you wish to use (note: not all Pokémon DS game templates are currently available due to work still being carried out on them), then wait for the spreadsheet to load. Click "File", "Make a Copy", then choose what to name the copy and where in your Google Drive you want the copy to be placed. 
  
