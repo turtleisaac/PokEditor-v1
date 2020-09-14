@@ -69,6 +69,7 @@ public class ItemEditorGen4
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             itemList.add(line);
         }
         itemNames = itemList.toArray(new String[0]);
@@ -79,6 +80,7 @@ public class ItemEditorGen4
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             abilityList.add(line);
         }
         abilityData= abilityList.toArray(new String[0]);
@@ -88,6 +90,7 @@ public class ItemEditorGen4
         ArrayList<String> fieldEffectList= new ArrayList<>();
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             fieldEffectList.add(line);
         }
         fieldFunctions = fieldEffectList.toArray(new String[0]);
@@ -97,6 +100,7 @@ public class ItemEditorGen4
         ArrayList<String> pluckEffectList= new ArrayList<>();
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             pluckEffectList.add(line);
         }
         pluckFlingEffects = pluckEffectList.toArray(new String[0]);

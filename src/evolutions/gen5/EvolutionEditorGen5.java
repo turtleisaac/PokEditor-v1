@@ -45,6 +45,7 @@ public class EvolutionEditorGen5
         String line;
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             nameList.add(line);
         }
         nameData= nameList.toArray(new String[0]);
@@ -55,6 +56,7 @@ public class EvolutionEditorGen5
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             itemList.add(line);
         }
         itemData= itemList.toArray(new String[0]);
@@ -65,6 +67,7 @@ public class EvolutionEditorGen5
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             moveList.add(line);
         }
         moveData= moveList.toArray(new String[0]);
@@ -74,6 +77,7 @@ public class EvolutionEditorGen5
         ArrayList<String> evolutionList= new ArrayList<>();
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             evolutionList.add(line);
         }
         evolutionMethodArr= evolutionList.toArray(new String[0]);

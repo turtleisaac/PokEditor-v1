@@ -57,6 +57,7 @@ public class MoveEditorGen5
         String line;
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             nameList.add(line);
         }
         nameData= nameList.toArray(new String[0]);
@@ -67,6 +68,7 @@ public class MoveEditorGen5
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             moveList.add(line);
         }
         moveData= moveList.toArray(new String[0]);
@@ -76,6 +78,7 @@ public class MoveEditorGen5
         ArrayList<String> effectList= new ArrayList<>();
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             effectList.add(line);
         }
         effects= effectList.toArray(new String[0]);

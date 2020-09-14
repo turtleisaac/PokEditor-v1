@@ -1,21 +1,27 @@
-package starters.gen4;
+package opening;
 
 import framework.BinaryWriter;
 import framework.Buffer;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
 
-public class StarterEditorGen4
+public class OpeningEditorGen4
 {
     private static String path = System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private static String resourcePath = path + "Program Files" + File.separator;
     private static String[] nameData;
     private String gameCode;
-    Buffer starterBuffer;
-    BinaryWriter writer;
+    private Buffer starterBuffer;
+    private BinaryWriter writer;
 
-    public StarterEditorGen4(String gameCode) throws IOException
+    public OpeningEditorGen4(String gameCode) throws IOException
     {
         this.gameCode = gameCode;
 
@@ -33,10 +39,10 @@ public class StarterEditorGen4
         reader.close();
     }
 
-    public void changeStarters(String startersFile) throws IOException
+    public void changeOpening(String openingFile) throws IOException
     {
-        starterBuffer= new Buffer(startersFile);
-        writer= new BinaryWriter(startersFile + "Recompile");
+        starterBuffer= new Buffer(openingFile);
+        writer= new BinaryWriter(openingFile + "Recompile");
         int offset;
 
         String noRegion= gameCode.substring(0,3).toLowerCase();
@@ -45,24 +51,24 @@ public class StarterEditorGen4
             case "cpu": //Platinum
                 if(gameCode.substring(3).equalsIgnoreCase("j"))
                 {
-                    offset = 0x1bac;
+                    offset = 0x6bb4;
                 } else
                 {
-                    offset = 0x1bc0;
+                    offset = 0x6bb4;
                 }
-                editStarterData(offset);
+                editOpeningData(offset);
                 break;
 
             case "apa": //Pearl
             case "ada"://Diamond
                 if(gameCode.substring(3).equalsIgnoreCase("j"))
                 {
-                    offset = 0x30;
+                    offset = 0x49ec;
                 } else
                 {
-                    offset = 0x1b88;
+                    offset = 0x49ec;
                 }
-                editStarterData(offset);
+                editOpeningData(offset);
                 break;
 
             default:
@@ -70,18 +76,17 @@ public class StarterEditorGen4
         }
     }
 
-    private void editStarterData(int offset) throws IOException
+    private void editOpeningData(int offset) throws IOException
     {
         Scanner scanner= new Scanner(System.in);
         String ans;
         int pokemonId;
-        BinaryWriter starterWriter= new BinaryWriter(path + "temp" + File.separator + "starters.bin");
 
         writer.write(starterBuffer.readBytes(offset));
         for(int i= 0; i < 3; i++)
         {
             pokemonId= starterBuffer.readInt();
-            System.out.println("Starter " + (i + 1) + " is currently: " + nameData[pokemonId] + ". Do you want to change it? (y/N)\n");
+            System.out.println("Opening Cutscene Pokemon " + (i + 1) + " is currently: " + nameData[pokemonId] + ". Do you want to change it? (y/N)\n");
             ans= scanner.nextLine();
             System.out.println("\n");
 
@@ -89,19 +94,17 @@ public class StarterEditorGen4
             {
                 System.out.println("Please enter the name of the Pokemon you wish to replace it with\n");
                 pokemonId= getPokemon(scanner.nextLine());
-                System.out.println("\nStarter has been replaced with " + nameData[pokemonId] + "\n");
+                System.out.println("\nPokemon has been replaced with " + nameData[pokemonId] + "\n");
             }
             writer.writeInt(pokemonId);
-            starterWriter.writeShort((short)pokemonId);
         }
         writer.write(starterBuffer.readRemainder());
-        starterWriter.close();
         writer.close();
     }
 
     private void sort(File arr[])
     {
-        Arrays.sort(arr, Comparator.comparingInt(StarterEditorGen4::fileToInt));
+        Arrays.sort(arr, Comparator.comparingInt(OpeningEditorGen4::fileToInt));
     }
 
     private static int fileToInt(File f)

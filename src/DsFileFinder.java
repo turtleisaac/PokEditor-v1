@@ -12,6 +12,7 @@ import personal.gen4.PersonalEditor;
 import personal.gen5.Gen5PersonalEditor1;
 import personal.gen5.Gen5PersonalEditor2;
 import sun.misc.BASE64Encoder;
+import framework.dsdecmp.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,11 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
-import java.util.HashMap;
+import java.util.*;
 
 public class DsFileFinder
 {
@@ -92,10 +89,18 @@ public class DsFileFinder
         buffer= new Buffer(rom);
         readHeader();
         readFatb();
+        /**
+         * DP Overlays: 0x00 - 0x56
+         * Pt Overlays: 0x00 - 0x7A
+         * HGSS Overlays: 0x00 - 0x80
+         */
 //        findFile(64);
 //        findFile(0x7A,(byte)0xAB,(byte)0x01,(byte)0x00,(byte)0x00);
-        findFile(0x57,(byte)0x83,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x86,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x89,(byte)0x01);
+        findFile(0x80,(byte)0x98,(byte)0x00,(byte)0x9B,(byte)0x00,(byte)0x9E,(byte)0x00);
+//        findFile((byte)0x83,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x86,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x89,(byte)0x01);
+        System.out.println(romData.getTitle() + ":");
 
+//        findFile(0x56,(byte)0x00,(byte)0x05,(byte)0x05,(byte)0x00,(byte)0x08,(byte)0x05,(byte)0x0A,(byte)0x0A,(byte)0x05);
     }
 
     public void readHeader() throws IOException
@@ -594,7 +599,7 @@ public class DsFileFinder
     private static final int GROWTH_BW= 0x103;
     private static final int ENCOUNTER_BW= 0x170;
 
-    public void findFile(String[] args) throws IOException
+    public void findNarc(String[] args) throws IOException
     {
         int toFind= Integer.parseInt(args[0]);
         System.out.println(toFind);
@@ -657,6 +662,61 @@ public class DsFileFinder
             romBuffer.close();
         }
     }
+
+//    public void findFile(boolean decompress, byte... bytes) throws IOException
+//    {
+//        Buffer romBuffer;
+//        FimgEntry fimgEntry;
+//        File temp= new File(path + "fileFinderTemp.bin");
+//        System.out.println(temp.getPath());
+////        temp.deleteOnExit();
+//        BinaryWriter writer;
+//
+//        for(int i= 0; i < fimgEntries.size(); i++)
+//        {
+//            System.out.println("File: " + i);
+//            writer= new BinaryWriter(temp.getPath());
+//
+//            fimgEntry= fimgEntries.get(i);
+//            romBuffer= new Buffer(rom);
+//            romBuffer.skipTo((int)fimgEntry.getStartingOffset());
+//            byte[] fileContents= romBuffer.readBytes((int) (fimgEntry.getEndingOffset()-fimgEntry.getStartingOffset()));
+//
+//
+//            if(decompress)
+//            {
+//                writer.write(fileContents);
+//                HexInputStream hexInputStream= new HexInputStream(temp.getPath());
+//
+//                int[] decompArr= JavaDSDecmp.decompress(hexInputStream);
+//                if(!Arrays.equals(decompArr, new int[] {}))
+//                {
+//                    byte[] contents= new byte[decompArr.length];
+//                    for(int x= 0; x < contents.length; x++)
+//                    {
+//                        contents[x]= (byte) decompArr[x];
+//                    }
+//
+//                    fileContents= contents;
+//                }
+//            }
+//            byte[] arr;
+//            for(int j= 0; j < fileContents.length; j++)
+//            {
+//                arr= Arrays.copyOfRange(fileContents,j,j+bytes.length);
+//                if(Arrays.equals(arr,bytes))
+//                {
+//                    System.out.print("Current file: " + i + ", ");
+//                    System.out.println("Global offset: 0x" + Integer.toHexString((int) (fimgEntry.getStartingOffset() + j)));
+//                    System.out.println("Offset in file: 0x" + Integer.toHexString(j));
+//                    System.out.println("File length: " + (fimgEntry.getEndingOffset()-fimgEntry.getStartingOffset()) + "\n");
+//                }
+//            }
+//
+//
+//            romBuffer.close();
+//        }
+//    }
 
 
     public HashMap<String,String> getAllFiles() throws IOException, NoSuchAlgorithmException

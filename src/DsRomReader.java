@@ -17,6 +17,7 @@ import personal.gen5.Gen5PersonalEditor1;
 import personal.gen5.Gen5PersonalEditor2;
 import starters.gen4.StarterEditorGen4;
 import intro.IntroEditorGen4;
+import opening.OpeningEditorGen4;
 
 import java.io.*;
 import java.util.*;
@@ -92,7 +93,8 @@ public class DsRomReader
             if(args.length == 1)
             {
                 System.out.println("\n\nThe following entries are the different editors/ tools you can run in PokEditor\nTo view information on any of these editors/ tools, please either type in their names now, or for future reference, add them as a second parameter when running the help command. For example, run \"java -jar PokEditor.jar help moves\" to see information on the move editor");
-                System.out.println("\n* PokEditor\n* Personal\n* Learnsets\n* Encounters\n* Evolutions\n* Growth\n* Items\n* Moves\n* Narc\n");
+                System.out.println("\nSpreadsheet-Based Editors:\n* PokEditor\n* Personal\n* Learnsets\n* Encounters\n* Evolutions\n* Growth\n* Items\n* Moves\n* Narc\n");
+                System.out.println("\nCMD-Based Editors:\n* Starters\n* Intro\n* Opening");
                 args= new String[] {args[0],scanner.nextLine()};
                 System.out.print("\nHelp: ");
             }
@@ -182,6 +184,29 @@ public class DsRomReader
 
                     break;
 
+                case "starters" :
+                    System.out.println("Starter Editor\n");
+                    System.out.println("This editor, as the name suggests, allows you to change the three starter Pokemon you are able to choose from at the start of the game");
+                    System.out.println("To run the Starter Editor, you need to run PokEditor using the argument \"starters\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
+                    System.out.println("Unlike most editors in this tool, you make the edits through the command line instead of a spreadsheet for this editor");
+                    System.out.println("This editor currently works for only the Sinnoh Gen 4 games (Diamond, Pearl, Platinum)");
+                    break;
+
+                case "intro" :
+                    System.out.println("Intro Editor\n");
+                    System.out.println("This editor, as the name suggests, allows you to change the Pokemon that Professor Rowan shows you during the intro at the start of the game");
+                    System.out.println("To run the Intro Editor, you need to run PokEditor using the argument \"intro\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
+                    System.out.println("Unlike most editors in this tool, you make the edits through the command line instead of a spreadsheet for this editor");
+                    System.out.println("This editor currently works for only the Sinnoh Gen 4 games (Diamond, Pearl, Platinum)");
+                    break;
+
+                case "opening" :
+                    System.out.println("Opening Cinematic Cutscene Editor\n");
+                    System.out.println("This editor, as the name suggests, allows you to change the Pokemon that can appear during the opening cinematic cutscene before you open your save file");
+                    System.out.println("To run the Opening Cinematic Cutscene Editor, you need to run PokEditor using the argument \"opening\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
+                    System.out.println("Unlike most editors in this tool, you make the edits through the command line instead of a spreadsheet for this editor");
+                    System.out.println("This editor currently works for only the Sinnoh Gen 4 games (Diamond, Pearl, Platinum)");
+                    break;
                 case "help" :
                     System.out.println("Help Command\n");
                     System.out.println("Why the heck are you using the help command to figure out how to use the help command? That's like using an index file to look up the location of the index file!");
@@ -237,9 +262,8 @@ public class DsRomReader
     private String[] romCapacities= new String[13];
     private String rom;
     private String tempPath= "temp" + File.separator;
-    private String tempPathUnpack= tempPath;
-    private String outputPath= tempPath + "rom";
-    private String resourcePath= path + "Program Files" + File.separator;
+    private String tempPathUnpack;
+//    private String outputPath= tempPath + "rom";
     private Buffer buffer;
     private RomData romData;
     private ArrayList<FimgEntry> fimgEntries;
@@ -253,8 +277,8 @@ public class DsRomReader
     private String type;
     private ArrayList<Long> rootContents= new ArrayList<>();
     private static String[] nameData;
-    private static String entryPath;
     private static boolean isNarc;
+    private static boolean startersHasRan= false;
     Scanner scanner= new Scanner(System.in);
 
 
@@ -276,18 +300,33 @@ public class DsRomReader
 
     public void readRom(String[] args) throws Exception
     {
+        if(args[0].equalsIgnoreCase("starters2"))
+        {
+            throw new RuntimeException("Do not run PokEditor with the argument \"starters2\", as that is an internal parameter only. To run the Starter Editor, please use the argument \"starters\"");
+        }
+
         String rom= args[args.length-1];
         this.rom= path + rom;
-        String substring = rom.substring(0, rom.length() - 4);
         buffer= new Buffer(rom);
         String title= readHeader();
 //        readArm9();
 //        readArm7();
 //        readFntb();
         readFatb();
-
         grabFile(args, title);
-
+//        if(args[0].equalsIgnoreCase("starters"))
+//        {
+//            startersHasRan= true;
+//            args= new String[] {"starters2", "temp" + File.separator + "rom1.nds"};
+//            buffer.close();
+//
+//            rom= args[args.length-1];
+//            this.rom= path + rom;
+//            buffer= new Buffer(rom);
+//            title= readHeader();
+//            readFatb();
+//            grabFile(args,title);
+//        }
 
         System.out.println("Do you wish to delete the temp folder? (Y/n)");
         String ans= scanner.nextLine();
@@ -688,49 +727,8 @@ public class DsRomReader
             finalTitle= scanner.nextLine().toLowerCase();
         }
 
-        switch (title)
-        {
-            case "heartgold":
-            case "POKEMON HG":
-            case "soulsilver":
-            case "POKEMON SS":
-            case "platinum":
-            case "POKEMON PL":
-            case "pearl":
-            case "POKEMON P":
-            case "diamond":
-            case "POKEMON D":
-                entryPath= resourcePath + "EntryData.txt";
-                break;
-
-            case "black":
-            case "white":
-            case "POKEMON B" :
-            case "POKEMON W" :
-                entryPath= resourcePath + "EntryDataGen5-1.txt";
-                break;
-
-            case "black2":
-            case "white2":
-            case "POKEMON W2" :
-            case "POKEMON B2" :
-                entryPath= resourcePath + "EntryDataGen5-2.txt";
-                break;
-
-            default:
-                throw new RuntimeException("Invalid game title");
-        }
 
 
-        BufferedReader reader= new BufferedReader(new FileReader(entryPath));
-        ArrayList<String> nameList= new ArrayList<>();
-        String line;
-        while((line= reader.readLine()) != null)
-        {
-            nameList.add(line);
-        }
-        nameData= nameList.toArray(new String[0]);
-        reader.close();
 
         return finalTitle;
     }
@@ -794,18 +792,18 @@ public class DsRomReader
 
     public void readArm9() throws IOException
     {
-        buffer.skipTo(romData.getArm9Offset());
-        BinaryWriter writer= new BinaryWriter(outputPath + File.separator + "arm9.bin");
-        writer.write(buffer.readBytes(romData.getArm9Length()));
-        writer.close();
+//        buffer.skipTo(romData.getArm9Offset());
+//        BinaryWriter writer= new BinaryWriter(outputPath + File.separator + "arm9.bin");
+//        writer.write(buffer.readBytes(romData.getArm9Length()));
+//        writer.close();
     }
 
     public void readArm7() throws IOException
     {
-        buffer.skipTo(romData.getArm7Offset());
-        BinaryWriter writer= new BinaryWriter(outputPath + File.separator + "arm7.bin");
-        writer.write(buffer.readBytes(romData.getArm7Length()));
-        writer.close();
+//        buffer.skipTo(romData.getArm7Offset());
+//        BinaryWriter writer= new BinaryWriter(outputPath + File.separator + "arm7.bin");
+//        writer.write(buffer.readBytes(romData.getArm7Length()));
+//        writer.close();
     }
 
     public void readFntb()
@@ -1115,9 +1113,6 @@ public class DsRomReader
     private static final int ENCOUNTER_HG = 0xA6;
     private static final int ITEM_J = 0x92;
     private static final int MOVE_J = 0x8C;
-    private static final int STARTER_J= 64;
-    private static final int STARTER2_J= 64;
-    private static final int INTRO_J= 0x3b;
 
 
     private static final int PERSONAL_PT= 0x1A5;
@@ -1127,9 +1122,10 @@ public class DsRomReader
     private static final int ENCOUNTER_PT = 0x14A;
     private static final int ITEM_PT = 0x192;
     private static final int MOVE_PT = 0x1BD;
-    private static final int STARTER_PT= 78;
-    private static final int STARTER2_PT= 78;
+    private static final int STARTER_PT= 0x4E;
+    private static final int STARTER2_PT= 104;
     private static final int INTRO_PT= 0x49;
+    private static final int OPENING_PT= 0x4D;
 
     private static final int PERSONAL_DP= 0x146;
     private static final int LEARNSET_DP = 0x148;
@@ -1138,9 +1134,10 @@ public class DsRomReader
     private static final int ENCOUNTER_DP = 0x108;
     private static final int ITEM_DP = 0x13A;
     private static final int MOVE_DP = 0x158;
-    private static final int STARTER_DP= 64;
+    private static final int STARTER_DP= 0x40;
     private static final int STARTER2_DP= 63;
     private static final int INTRO_DP= 0x3b;
+    private static final int OPENING_DP= 0x3F;
 
 
     private static final int PERSONAL_B2W2= 0x16B;
@@ -1150,9 +1147,6 @@ public class DsRomReader
     private static final int ENCOUNTER_B2W2= 0x1D9;
     private static final int ITEM_B2W2 = 0x173;
     private static final int MOVE_B2W2 = 0x170;
-    private static final int STARTER_B2W2= 64;
-    private static final int STARTER2_B2W2= 78;
-    private static final int INTRO_B2W2= 0x3b;
 
     private static final int PERSONAL_BW= 0x102;
     private static final int LEARNSET_BW= 0x104;
@@ -1161,9 +1155,6 @@ public class DsRomReader
     private static final int ENCOUNTER_BW= 0x170;
     private static final int ITEM_BW = 0;
     private static final int MOVE_BW = 0x158;
-    private static final int STARTER_BW= 64;
-    private static final int STARTER2_BW= 64;
-    private static final int INTRO_BW= 0x3b;
 
 
     public void grabFile(String[] args, String title) throws Exception
@@ -1171,13 +1162,14 @@ public class DsRomReader
         String type= args[0].toLowerCase();
 
         isNarc= false;
-        tempPath+= type;
-        if(!type.equalsIgnoreCase("starters") && !type.equalsIgnoreCase("intro"))
+        tempPath= "temp" + File.separator + type;
+        tempPathUnpack= tempPath;
+        if(!type.equalsIgnoreCase("starters") && !type.equalsIgnoreCase("intro") && !type.equalsIgnoreCase("starters2") && !type.equalsIgnoreCase("opening"))
         {
             tempPath+= ".narc";
             isNarc= true;
         }
-        tempPathUnpack+= type;
+
 
         fileOffset= 0;
         length= 0;
@@ -1201,7 +1193,8 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_J);
-                        break;
+                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
+//                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_HG);
                         break;
@@ -1210,12 +1203,6 @@ public class DsRomReader
                         break;
                     case "moves":
                         setFileData(MOVE_J);
-                        break;
-                    case "starters" :
-                        setFileData(STARTER_J);
-                        break;
-                    case "intro" :
-                        setFileData(INTRO_J);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -1236,7 +1223,8 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_J);
-                        break;
+                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
+//                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_SS);
                         break;
@@ -1245,12 +1233,6 @@ public class DsRomReader
                         break;
                     case "moves":
                         setFileData(MOVE_J);
-                        break;
-                    case "starters" :
-                        setFileData(STARTER_J);
-                        break;
-                    case "intro" :
-                        setFileData(INTRO_J);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -1271,7 +1253,8 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_PT);
-                        break;
+                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
+//                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_PT);
                         break;
@@ -1283,6 +1266,12 @@ public class DsRomReader
                         break;
                     case "starters" :
                         setFileData(STARTER_PT);
+                        break;
+                    case "opening" :
+                        setFileData(OPENING_PT);
+                        break;
+                    case "starters2" :
+                        setFileData(STARTER2_PT);
                         break;
                     case "intro" :
                         setFileData(INTRO_PT);
@@ -1306,7 +1295,8 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_DP);
-                        break;
+                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
+//                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_DP);
                         break;
@@ -1318,6 +1308,12 @@ public class DsRomReader
                         break;
                     case "starters" :
                         setFileData(STARTER_DP);
+                        break;
+                    case "opening" :
+                        setFileData(OPENING_DP);
+                        break;
+                    case "starters2" :
+                        setFileData(STARTER2_DP);
                         break;
                     case "intro" :
                         setFileData(INTRO_DP);
@@ -1341,7 +1337,8 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_DP);
-                        break;
+                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
+//                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_DP-1);
                         break;
@@ -1353,6 +1350,12 @@ public class DsRomReader
                         break;
                     case "starters" :
                         setFileData(STARTER_DP);
+                        break;
+                    case "opening" :
+                        setFileData(OPENING_DP);
+                        break;
+                    case "starters2" :
+                        setFileData(STARTER2_DP);
                         break;
                     case "intro" :
                         setFileData(INTRO_DP);
@@ -1378,7 +1381,8 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_BW);
-                        break;
+                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
+//                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_BW);
                         throw new RuntimeException("Encounters currently can't be edited for Gen 5");
@@ -1389,12 +1393,6 @@ public class DsRomReader
 //                        break;
                     case "moves":
                         setFileData(MOVE_BW);
-                        break;
-                    case "starters" :
-                        setFileData(STARTER_BW);
-                        break;
-                    case "intro" :
-                        setFileData(INTRO_BW);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -1417,7 +1415,8 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_B2W2);
-                        break;
+                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
+//                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_B2W2);
                         throw new RuntimeException("Encounters currently can't be edited for Gen 5");
@@ -1428,12 +1427,6 @@ public class DsRomReader
 //                        break;
                     case "moves":
                         setFileData(MOVE_B2W2);
-                        break;
-                    case "starters" :
-                        setFileData(STARTER_B2W2);
-                        break;
-                    case "intro" :
-                        setFileData(INTRO_B2W2);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -1448,13 +1441,13 @@ public class DsRomReader
         buffer= new Buffer(rom);
 
         buffer.skipTo(fileOffset);
-        System.out.println("Current Location: " + buffer.getPosition());
+//        System.out.println("Current Location: " + buffer.getPosition());
         if(!new File(path + "temp").exists() && !new File(path + "temp").mkdir())
         {
             throw new RuntimeException("Failed to create temp directory. Check write perms.");
         }
         BinaryWriter writer= new BinaryWriter(tempPath);
-        System.out.println("Read and wrote " + length + " bytes.");
+//        System.out.println("Read and wrote " + length + " bytes.");
         writer.write(buffer.readBytes(length));
         Narctowl narctowl= new Narctowl(); //creates new narctowl.Narctowl object
         if(isNarc)
@@ -1547,10 +1540,15 @@ public class DsRomReader
                 starterEditor.changeStarters(tempPathUnpack);
 
                 break;
+            case "opening" :
+                OpeningEditorGen4 openingEditor= new OpeningEditorGen4(romData.getGameCode());
+                openingEditor.changeOpening(tempPathUnpack);
 
+                break;
             case "intro" :
                 IntroEditorGen4 introEditor= new IntroEditorGen4(romData.getGameCode());
                 introEditor.changeIntroPokemon(tempPathUnpack);
+
                 break;
             default:
                 throw new RuntimeException("Invalid arguments");
@@ -1670,12 +1668,26 @@ public class DsRomReader
     public void replaceFile(String[] args) throws Exception
     {
 
+        String name;
+        BinaryWriter writer;
+        Buffer romBuffer;
+        String tempRom;
+//        boolean starters= args[0].equalsIgnoreCase("starters");
+//        if(!starters)
+//        {
+            System.out.println("Please enter the name to be given to the output rom (include .nds)");
+            name= scanner.nextLine();
+            tempRom= path + "temp" + File.separator + "rom.nds";
+//        }
+//        else
+//        {
+//            name= "temp" + File.separator + "rom.nds";
+//            tempRom= path + "temp" + File.separator + "rom1.nds";
+//        }
+        romBuffer= new Buffer(rom);
+        writer= new BinaryWriter(tempRom);
 
-        System.out.println("Please enter the name to be given to the output rom (include .nds)");
-        String name= scanner.nextLine();
 
-        BinaryWriter writer= new BinaryWriter(path + "temp" + File.separator + "rom.nds");
-        Buffer romBuffer= new Buffer(rom);
 
 //        writer.write(romBuffer.readBytes(romData.getFatbOffset() + (fileID*8))); //copies all bytes from base rom between 0x00 and FATB entry for file that was extracted and edited
 
@@ -1795,7 +1807,7 @@ public class DsRomReader
         }
         else
         {
-            narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile"); //creates a new Framework.Buffer object to read through the repacked, modified narc
+            narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile"); //creates a new Framework.Buffer object to read through the modified file
         }
 
 //        writer.write(narcBuffer.readBytes(newFileLength)); //writes the entire modified narc to the new rom
@@ -1813,9 +1825,14 @@ public class DsRomReader
 //        writer.writeByte((byte)b);
 //        writer.write(romBuffer.readBytes((int) (new File(rom).length()-romBuffer.getPosition())));
 
+        if(startersHasRan)
+        {
+            tempRom= path + "temp" + File.separator + "rom1.nds";
+        }
+
         writer= new BinaryWriter(path + name);
-        romBuffer= new Buffer(path + "temp" + File.separator + "rom.nds");
-        writer.write(romBuffer.readBytes((int) new File(path + "temp" + File.separator + "rom.nds").length()));
+        romBuffer= new Buffer(tempRom);
+        writer.write(romBuffer.readBytes((int) new File(tempRom).length()));
         System.out.println("\nProcess completed. Output file can be found at: " + path + name);
 
         //writer.write(romBuffer.readBytes((int) (new File(rom).length()-fimgEntries.get(fileID+1).getStartingOffset()))); //writes all bytes from the starting offset of the file after the modified file to the end of the rom
@@ -1921,175 +1938,175 @@ public class DsRomReader
 
     public void editOverlays(String[] args, String title) throws Exception
     {
-        OverlayData overlayData;
-        args[0]= args[0].toLowerCase();
-
-        switch (title)
-        {
-            case "heartgold":
-            case "POKEMON HG":
-            case "soulsilver":
-            case "POKEMON SS":
-                switch(args[0]) {
-                    case "starters" :
-                        overlayID= STARTER_J;
-                        throw new RuntimeException("Not supported yet");
+//        OverlayData overlayData;
+//        args[0]= args[0].toLowerCase();
+//
+//        switch (title)
+//        {
+//            case "heartgold":
+//            case "POKEMON HG":
+//            case "soulsilver":
+//            case "POKEMON SS":
+//                switch(args[0]) {
+//                    case "starters" :
+//                        overlayID= STARTER_J;
+//                        throw new RuntimeException("Not supported yet");
+////                        break;
+//                    default:
+//                        throw new RuntimeException("Invalid arguments");
+//                }
+////                break;
+//
+//            case "platinum":
+//            case "POKEMON PL":
+//                switch(args[0]) {
+//                    case "starters" :
+//                        overlayID= STARTER_PT;
 //                        break;
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
+//                    default:
+//                        throw new RuntimeException("Invalid arguments");
+//                }
 //                break;
-
-            case "platinum":
-            case "POKEMON PL":
-                switch(args[0]) {
-                    case "starters" :
-                        overlayID= STARTER_PT;
-                        break;
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
-                break;
-
-            case "pearl":
-            case "POKEMON P":
-            case "diamond":
-            case "POKEMON D":
-                switch(args[0]) {
-                    case "starters" :
-                        overlayID= STARTER_DP;
-                        break;
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
-                break;
-
-            case "black":
-            case "white":
-            case "POKEMON B" :
-            case "POKEMON W" :
-                switch(args[0]) {
-                    case "starters" :
-                        overlayID= STARTER_BW;
-                        throw new RuntimeException("Not supported yet");
+//
+//            case "pearl":
+//            case "POKEMON P":
+//            case "diamond":
+//            case "POKEMON D":
+//                switch(args[0]) {
+//                    case "starters" :
+//                        overlayID= STARTER_DP;
 //                        break;
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
+//                    default:
+//                        throw new RuntimeException("Invalid arguments");
+//                }
 //                break;
-
-            case "black2":
-            case "white2":
-            case "POKEMON W2" :
-            case "POKEMON B2" :
-                switch(args[0]) {
-                    case "starters" :
-                        overlayID= STARTER_B2W2;
-                        throw new RuntimeException("Not supported yet");
+//
+//            case "black":
+//            case "white":
+//            case "POKEMON B" :
+//            case "POKEMON W" :
+//                switch(args[0]) {
+//                    case "starters" :
+//                        overlayID= STARTER_BW;
+//                        throw new RuntimeException("Not supported yet");
+////                        break;
+//                    default:
+//                        throw new RuntimeException("Invalid arguments");
+//                }
+////                break;
+//
+//            case "black2":
+//            case "white2":
+//            case "POKEMON W2" :
+//            case "POKEMON B2" :
+//                switch(args[0]) {
+//                    case "starters" :
+//                        overlayID= STARTER_B2W2;
+//                        throw new RuntimeException("Not supported yet");
+////                        break;
+//                    default:
+//                        throw new RuntimeException("Invalid arguments");
+//                }
+////                break;
+//
+//            default:
+//                throw new RuntimeException("Invalid game title");
+//        }
+//
+//        overlayData= overlayEntries.get(overlayID);
+//
+//        BinaryWriter writer= new BinaryWriter(path + "temp" + File.separator + "rom.nds");
+//        Buffer romBuffer= new Buffer(rom);
+//
+//
+//        writer.write(romBuffer.readBytes((int) overlayData.getStaticInitStart()));
+//
+//        switch (args[0])
+//        {
+//            case "starters" :
+//                String ans;
+//                int pokemonId;
+//
+//                switch (title)
+//                {
+//                    case "heartgold":
+//                    case "POKEMON HG":
+//                    case "soulsilver":
+//                    case "POKEMON SS":
 //                        break;
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
+//
+//                    case "platinum":
+//                    case "POKEMON PL":
+//                        writer.write(romBuffer.readBytes(0x1bc0));
+//                        for(int i= 0; i < 3; i++)
+//                        {
+//                            pokemonId= romBuffer.readInt();
+//                            System.out.println("Starter " + (i + 1) + " is currently: " + nameData[pokemonId] + ". Do you want to change it? (y/N)\n");
+//                            ans= scanner.nextLine();
+//                            System.out.println("\n");
+//
+//                            if(ans.equalsIgnoreCase("y"))
+//                            {
+//                                System.out.println("Please enter the name of the Pokemon you wish to replace it with\n");
+//                                pokemonId= getPokemon(scanner.nextLine());
+//                                System.out.println("\nStarter has been replaced with " + nameData[pokemonId] + "\n");
+//                            }
+//                            writer.writeInt(pokemonId);
+//                            romBuffer.skipBytes(4);
+//                        }
+//                        break;
+//
+//                    case "pearl":
+//                    case "POKEMON P":
+//                    case "diamond":
+//                    case "POKEMON D":
+//                        writer.write(romBuffer.readBytes(0x1b88));
+//                        for(int i= 0; i < 3; i++)
+//                        {
+//                            pokemonId= romBuffer.readInt();
+//                            System.out.println("Starter " + (i + 1) + " is currently: " + nameData[pokemonId] + ". Do you want to change it? (y/N)\n");
+//                            ans= scanner.nextLine();
+//                            System.out.println("\n");
+//
+//                            if(ans.equalsIgnoreCase("y"))
+//                            {
+//                                System.out.println("Please enter the name of the Pokemon you wish to replace it with\n");
+//                                pokemonId= getPokemon(scanner.nextLine());
+//                                System.out.println("\nStarter has been replaced with " + nameData[pokemonId] + "\n");
+//                            }
+//                            writer.writeInt(pokemonId);
+//                            romBuffer.skipBytes(4);
+//                        }
+//                        break;
+//
+//                    case "black":
+//                    case "white":
+//                    case "POKEMON B" :
+//                    case "POKEMON W" :
+//                        break;
+//
+//                    case "black2":
+//                    case "white2":
+//                    case "POKEMON W2" :
+//                    case "POKEMON B2" :
+//                        break;
+//                }
+//                writer.write(buffer.readRemainder());
+//                writer.close();
 //                break;
-
-            default:
-                throw new RuntimeException("Invalid game title");
-        }
-
-        overlayData= overlayEntries.get(overlayID);
-
-        BinaryWriter writer= new BinaryWriter(path + "temp" + File.separator + "rom.nds");
-        Buffer romBuffer= new Buffer(rom);
-
-
-        writer.write(romBuffer.readBytes((int) overlayData.getStaticInitStart()));
-
-        switch (args[0])
-        {
-            case "starters" :
-                String ans;
-                int pokemonId;
-
-                switch (title)
-                {
-                    case "heartgold":
-                    case "POKEMON HG":
-                    case "soulsilver":
-                    case "POKEMON SS":
-                        break;
-
-                    case "platinum":
-                    case "POKEMON PL":
-                        writer.write(romBuffer.readBytes(0x1bc0));
-                        for(int i= 0; i < 3; i++)
-                        {
-                            pokemonId= romBuffer.readInt();
-                            System.out.println("Starter " + (i + 1) + " is currently: " + nameData[pokemonId] + ". Do you want to change it? (y/N)\n");
-                            ans= scanner.nextLine();
-                            System.out.println("\n");
-
-                            if(ans.equalsIgnoreCase("y"))
-                            {
-                                System.out.println("Please enter the name of the Pokemon you wish to replace it with\n");
-                                pokemonId= getPokemon(scanner.nextLine());
-                                System.out.println("\nStarter has been replaced with " + nameData[pokemonId] + "\n");
-                            }
-                            writer.writeInt(pokemonId);
-                            romBuffer.skipBytes(4);
-                        }
-                        break;
-
-                    case "pearl":
-                    case "POKEMON P":
-                    case "diamond":
-                    case "POKEMON D":
-                        writer.write(romBuffer.readBytes(0x1b88));
-                        for(int i= 0; i < 3; i++)
-                        {
-                            pokemonId= romBuffer.readInt();
-                            System.out.println("Starter " + (i + 1) + " is currently: " + nameData[pokemonId] + ". Do you want to change it? (y/N)\n");
-                            ans= scanner.nextLine();
-                            System.out.println("\n");
-
-                            if(ans.equalsIgnoreCase("y"))
-                            {
-                                System.out.println("Please enter the name of the Pokemon you wish to replace it with\n");
-                                pokemonId= getPokemon(scanner.nextLine());
-                                System.out.println("\nStarter has been replaced with " + nameData[pokemonId] + "\n");
-                            }
-                            writer.writeInt(pokemonId);
-                            romBuffer.skipBytes(4);
-                        }
-                        break;
-
-                    case "black":
-                    case "white":
-                    case "POKEMON B" :
-                    case "POKEMON W" :
-                        break;
-
-                    case "black2":
-                    case "white2":
-                    case "POKEMON W2" :
-                    case "POKEMON B2" :
-                        break;
-                }
-                writer.write(buffer.readRemainder());
-                writer.close();
-                break;
-            default:
-                System.out.println("Invalid arguments. Please try re-running the program with different arguments");
-                System.exit(0);
-        }
-
-        System.out.println("Please enter the name to be given to the output rom (include .nds)");
-        String name= scanner.nextLine();
-
-        writer= new BinaryWriter(path + name);
-        romBuffer= new Buffer(path + "temp" + File.separator + "rom.nds");
-        writer.write(romBuffer.readBytes((int) new File(path + "temp" + File.separator + "rom.nds").length()));
-        System.out.println("\nProcess completed. Output file can be found at: " + path + name);
-        writer.close();
+//            default:
+//                System.out.println("Invalid arguments. Please try re-running the program with different arguments");
+//                System.exit(0);
+//        }
+//
+//        System.out.println("Please enter the name to be given to the output rom (include .nds)");
+//        String name= scanner.nextLine();
+//
+//        writer= new BinaryWriter(path + name);
+//        romBuffer= new Buffer(path + "temp" + File.separator + "rom.nds");
+//        writer.write(romBuffer.readBytes((int) new File(path + "temp" + File.separator + "rom.nds").length()));
+//        System.out.println("\nProcess completed. Output file can be found at: " + path + name);
+//        writer.close();
     }
 
 

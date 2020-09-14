@@ -7,12 +7,12 @@ public class JavaDSDecmp {
 
     public static int[] decompress(HexInputStream his) throws IOException {
         switch(his.readU8()){
-            case 0x10: return Decompress10LZ(his);
+//            case 0x10: return Decompress10LZ(his);
             case 0x11: return Decompress11LZ(his);
-            case 0x24:
-            case 0x28: return DecompressHuff(his);
-            case 0x30: return DecompressRLE(his);
-            default: return null;
+//            case 0x24:
+//            case 0x28: return DecompressHuff(his);
+//            case 0x30: return DecompressRLE(his);
+            default: return new int[] {};
         }
     }
 

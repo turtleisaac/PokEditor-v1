@@ -55,6 +55,7 @@ public class LearnsetEditor
         String line;
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             nameList.add(line);
         }
         nameData= nameList.toArray(new String[0]);
@@ -65,6 +66,7 @@ public class LearnsetEditor
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             moveList.add(line);
         }
         moveData= moveList.toArray(new String[0]);

@@ -55,6 +55,7 @@ public class PersonalEditor
         String line;
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             nameList.add(line);
         }
         nameData= nameList.toArray(new String[0]);
@@ -66,6 +67,7 @@ public class PersonalEditor
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             tmList.add(line);
         }
         tmData= tmList.toArray(new String[0]);
@@ -76,6 +78,7 @@ public class PersonalEditor
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             itemList.add(line);
         }
         itemData= itemList.toArray(new String[0]);
@@ -86,6 +89,7 @@ public class PersonalEditor
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             abilityList.add(line);
         }
         abilityData= abilityList.toArray(new String[0]);
@@ -96,6 +100,7 @@ public class PersonalEditor
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             tmNameList.add(line);
         }
         tmNameData= tmNameList.toArray(new String[0]);

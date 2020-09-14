@@ -229,7 +229,7 @@ Damage= 1.5x damage dealt by the target's last attack
 Switches user out after dealing damage
 Lowers user's Def and SpDef
 2x Power if user moves after target
-2x damage if the target has already taken damage this turn 
+2x damage if the target has already taken damage this turn
 Prevents the target from using its held item or having items used on it
 Power and effect determined by held item
 Cures user of any status condition and afflicts the target with it

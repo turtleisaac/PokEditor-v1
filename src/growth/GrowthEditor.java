@@ -23,6 +23,7 @@ public class GrowthEditor
         String line;
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             nameList.add(line);
         }
         nameData= nameList.toArray(new String[0]);
