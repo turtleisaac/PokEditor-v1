@@ -1,4 +1,7 @@
-1.7.2
-Added the help command
-Added the (optional) automatic correction of incorrect/ broken files for the Gen 4 Personal and Evolutions editors
-Fixed an issue involving the update alert system that appeared starting in v1.7.1
+1.8
+Added the DPPT Intro Editor
+Added the DPPT Starter Editor
+Added the DPPT Opening Cutscene Editor
+Changed parts of how the program is ran to accommodate future updates/ editors
+Changed manual access of Narctowl to output in the "extracted" directory instead of the "temp" directory
+Fixed some miscellaneous issues
