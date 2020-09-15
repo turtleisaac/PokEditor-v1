@@ -8,6 +8,8 @@ Written entirely in Java and is completely OS-agnostic. Java 8 or greater is req
 
 **Note:** This is a Command Line Tool. You can't just run it by double clicking the .jar file, as this has no GUI. You need to run it through Terminal (macOS/ Linux) or cmd (Windows)
 
+![PokEditor Personal Editor](https://i.imgur.com/VTNdwo2.png)
+
 # Usage
 
 java -jar PokEditor.jar \<arguments>
@@ -45,6 +47,14 @@ Example: java -jar PokEditor.jar personal HeartGold.nds
 * \<editor name> \<name of rom> (This is used to run the different editors/ tools for each data type)
 
 * help \<editor name> (This is used to view information on each editor/ tool)
+
+# Help Command
+
+ To use the help command, either run PokEditor with no arugments, run PokEditor with the argument "help", or run PokEditor with the argument "help", followed by the editor you wish to view information on (one of the entries on the bulleted lists above). 
+ 
+ ![Help Main Menu](https://i.imgur.com/oK6C9Qx.png)
+ 
+ ![Help Personal Data Editor](https://i.imgur.com/x0gXBBv.png)
 
 # How to edit (Instructions here are for the spreadsheet-based tools only)
 
