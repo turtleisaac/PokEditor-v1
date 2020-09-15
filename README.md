@@ -8,7 +8,7 @@ Written entirely in Java and is completely OS-agnostic. Java 8 or greater is req
 
 **Note:** This is a Command Line Tool. You can't just run it by double clicking the .jar file, as this has no GUI. You need to run it through Terminal (macOS/ Linux) or cmd (Windows)
 
-![PokEditor Personal Editor](https://i.imgur.com/VTNdwo2.png)
+![PokEditor Personal Editor](https://i.imgur.com/YyBOyCY.png)
 
 # Usage
 
