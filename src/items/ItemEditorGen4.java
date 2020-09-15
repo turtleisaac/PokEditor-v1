@@ -10,12 +10,12 @@ import java.util.*;
 
 public class ItemEditorGen4
 {
-    public static void main(String[] args) throws IOException
-    {
-        ItemEditorGen4 editorGen4= new ItemEditorGen4();
-        editorGen4.itemsToCsv("item_data");
-        editorGen4.csvToItems("Items.csv","items");
-    }
+//    public static void main(String[] args) throws IOException
+//    {
+//        ItemEditorGen4 editorGen4= new ItemEditorGen4();
+//        editorGen4.itemsToCsv("item_data");
+//        editorGen4.csvToItems("Items.csv","items");
+//    }
 
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String dataPath= path;
@@ -32,37 +32,31 @@ public class ItemEditorGen4
     private static String[] battleFunctions= {"None","Pokeballs","Recovery","Escape"};
     private static String[] workTypes= {"Dummy","Usable"};
 
-    public ItemEditorGen4() throws IOException
+    public ItemEditorGen4(String gameCode) throws IOException
     {
         String itemPath= resourcePath;
-        Scanner scanner= new Scanner(System.in);
-        System.out.println("D, P, Pt, HG, or SS?");
-        String game= scanner.nextLine().toLowerCase();
 
-        BufferedReader reader= new BufferedReader(new FileReader(resourcePath + "EntryData.txt"));
-        ArrayList<String> nameList= new ArrayList<>();
+        BufferedReader reader;
         String line;
-        while((line= reader.readLine()) != null)
-        {
-            nameList.add(line);
-        }
-        nameData= nameList.toArray(new String[0]);
-        reader.close();
 
-        switch(game) {
-            case "p" :
-            case "d" :
+        switch(gameCode.toLowerCase().substring(0,3))
+        {
+            case "apa" :
+            case "ada" :
                 itemPath+= "ItemListDP.txt";
                 break;
-            case "pt" :
+
+            case "cpu" :
                 itemPath+= "ItemListPt.txt";
                 break;
-            case "hg" :
-            case "ss" :
+
+            case "ipk" :
+            case "ipg" :
                 itemPath+= "ItemList.txt";
                 break;
+
             default :
-                throw new RuntimeException("Invalid arguments");
+                throw new RuntimeException("Invalid rom header: Game Code/ Title");
         }
         reader= new BufferedReader(new FileReader(itemPath));
         ArrayList<String> itemList= new ArrayList<>();
@@ -862,18 +856,6 @@ public class ItemEditorGen4
         }
 
         throw new RuntimeException("Invalid type entered: " + type);
-    }
-
-    private static int getPokemon(String pokemon)
-    {
-        for(int i= 0; i < nameData.length; i++)
-        {
-            if(pokemon.equals(nameData[i]))
-            {
-                return i;
-            }
-        }
-        throw new RuntimeException("Invalid pokemon entered");
     }
 
 

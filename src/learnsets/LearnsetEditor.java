@@ -17,38 +17,36 @@ public class LearnsetEditor
     private static boolean gen5;
 
 
-    public LearnsetEditor() throws IOException
+    public LearnsetEditor(String gameCode) throws IOException
     {
-        Scanner scanner= new Scanner(System.in);
         String entryPath= resourcePath;
-        String movePath= resourcePath;
+        String movePath= resourcePath +  "MoveList.txt";
 
-        System.out.println("Gen 4 or 5?");
-        String gen= scanner.nextLine().toLowerCase();
-        switch (gen) {
-            case "4" :
+        switch (gameCode.substring(0,3).toLowerCase())
+        {
+            case "apa" :
+            case "ada" :
+            case "cpu" :
+            case "ipk" :
+            case "ipg" :
                 entryPath+= "EntryData.txt";
-                movePath+= "MoveList.txt";
                 break;
-            case "5" :
-                System.out.println("Black and White 1, or Black and White 2? (1 or 2)");
-                String version= scanner.nextLine().toLowerCase();
-                movePath+= "MoveList.txt";
-                switch (version) {
-                    case "1":
-                        entryPath += "EntryDataGen5-1.txt";
-                        break;
-                    case "2":
-                        entryPath += "EntryDataGen5-2.txt";
-                        break;
-                    default:
-                        throw new RuntimeException("Invalid arguments");
-                }
+
+            case "irw" :
+            case "irb" :
+                gen5= true;
+                entryPath += "EntryDataGen5-1.txt";
                 break;
+
+            case "ire" :
+            case "ird" :
+                gen5= true;
+                entryPath += "EntryDataGen5-2.txt";
+                break;
+
             default:
                 throw new RuntimeException("Invalid arguments");
         }
-        gen5 = gen.equals("5");
 
         BufferedReader reader= new BufferedReader(new FileReader(entryPath));
         ArrayList<String> nameList= new ArrayList<>();
@@ -62,18 +60,19 @@ public class LearnsetEditor
         reader.close();
 
         reader= new BufferedReader(new FileReader(movePath));
-        ArrayList<String> moveList= new ArrayList<>();
+        ArrayList<String> moveNameList= new ArrayList<>();
 
         while((line= reader.readLine()) != null)
         {
             line= line.trim();
-            moveList.add(line);
+            moveNameList.add(line);
         }
-        moveData= moveList.toArray(new String[0]);
+        moveData= moveNameList.toArray(new String[0]);
         reader.close();
     }
 
-    public void learnsetToCsv(String learnsetDir) throws IOException {
+    public void learnsetToCsv(String learnsetDir) throws IOException
+    {
         dataPath+= learnsetDir;
 
         Buffer learnsetBuffer;

@@ -384,8 +384,7 @@ public class Gen5PersonalEditor2
         }
 
         System.out.println("Display BST? (y/N)");
-        boolean bst= (scanner.nextLine().toLowerCase().equals( "y"));
-        bst= false;
+        boolean bst= false;
         for(int row= 0; row < dataList.size(); row++)
         {
             System.out.println(nameData[row]);

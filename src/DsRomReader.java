@@ -28,6 +28,13 @@ public class DsRomReader
 
     public static void main(String[] args) throws Exception
     {
+        System.setIn(new FilterInputStream(System.in){
+            @Override
+            public void close(){
+                throw new RuntimeException("System.in closed!");
+            }
+        } );
+
         /**
          * Update Notifications
          */
@@ -255,7 +262,7 @@ public class DsRomReader
         /**
          * Running DsRomReader/ PokEditor
          */
-        DsRomReader reader= new DsRomReader();
+        DsRomReader reader= new DsRomReader(scanner);
         reader.readRom(args);
     }
 
@@ -279,13 +286,13 @@ public class DsRomReader
     private ArrayList<Long> rootContents= new ArrayList<>();
     private static String[] nameData;
     private static boolean isNarc;
-    private static boolean startersHasRan= false;
-    Scanner scanner= new Scanner(System.in);
+    private Scanner scanner;
+    private String gameCode;
 
 
-    public DsRomReader() throws IOException
+    public DsRomReader(Scanner scanner) throws IOException
     {
-
+        this.scanner= scanner;
 
         Arrays.fill(romCapacities,"");
         romCapacities[6]= "8MB";
@@ -299,12 +306,12 @@ public class DsRomReader
 //        new File(outputPath).mkdirs();
     }
 
-    public void readRom(String[] args) throws Exception
+    private void readRom(String[] args) throws Exception
     {
-        if(args[0].equalsIgnoreCase("starters2"))
-        {
-            throw new RuntimeException("Do not run PokEditor with the argument \"starters2\", as that is an internal parameter only. To run the Starter Editor, please use the argument \"starters\"");
-        }
+//        if(args[0].equalsIgnoreCase("starters2"))
+//        {
+//            throw new RuntimeException("Do not run PokEditor with the argument \"starters2\", as that is an internal parameter only. To run the Starter Editor, please use the argument \"starters\"");
+//        }
 
         String rom= args[args.length-1];
         this.rom= path + rom;
@@ -338,7 +345,7 @@ public class DsRomReader
 
     }
 
-    public String readHeader() throws IOException
+    protected String readHeader() throws IOException
     {
         String title= buffer.readString(12).trim();
         String gameCode= buffer.readString(4);
@@ -708,8 +715,9 @@ public class DsRomReader
 
         System.out.println("End of header: " + buffer.getPosition() + "\n");
 
-
+        String region= gameCode.substring(3);
         String[] titles= new String[] {"POKEMON HG","POKEMON SS","POKEMON D","POKEMON P","POKEMON PL","POKEMON B","POKEMON W","POKEMON B2","POKEMON W2"};
+        String[] gameCodes= new String[] {"IPK" + region,"IPG" + region,"ADA" + region,"APA" + region,"CPU" + region,"IRB" + region,"IRW" + region,"IRE" + region,"IRD" + region};
         String finalTitle= title;
 
         boolean invalid= true;
@@ -726,8 +734,23 @@ public class DsRomReader
         {
             System.out.println("Invalid rom header. Please specify what game this is using the following options (MAKE SURE TO SPELL CORRECTLY): Diamond, Pearl, Platinum, HeartGold, SoulSilver, Black, White, Black2, White2");
             finalTitle= scanner.nextLine().toLowerCase();
+            for(int i= 0; i < titles.length; i++)
+            {
+                String game= titles[i];
+                if (finalTitle.trim().equalsIgnoreCase(game))
+                {
+                    this.gameCode= gameCodes[i];
+                }
+                else
+                {
+                    throw new RuntimeException("Invalid game: " + finalTitle);
+                }
+            }
         }
-
+        else
+        {
+            this.gameCode= gameCode;
+        }
 
 
 
@@ -1025,12 +1048,11 @@ public class DsRomReader
 
 
 
-    private int SS_HG_FIRST_FILE= 0x81;
-    private int D_P_PT_FIRST_FILE= 0x7A;
-
-    public void readFatb() throws IOException
+    protected void readFatb() throws IOException
     {
         int firstFileID= 0;
+        int SS_HG_FIRST_FILE = 0x81;
+        int D_P_PT_FIRST_FILE = 0x7A;
         switch (romData.getTitle())
         {
             case "POKEMON SS" :
@@ -1158,7 +1180,7 @@ public class DsRomReader
     private static final int MOVE_BW = 0x158;
 
 
-    public void grabFile(String[] args, String title) throws Exception
+    private void grabFile(String[] args, String title) throws Exception
     {
         String type= args[0].toLowerCase();
 
@@ -1470,13 +1492,13 @@ public class DsRomReader
                 }
                 else
                 {
-                    PersonalEditor personalEditor = new PersonalEditor();
+                    PersonalEditor personalEditor = new PersonalEditor(gameCode);
                     personalEditor.personalToCSV(tempPathUnpack);
                 }
 
                 break;
             case "learnsets":
-                LearnsetEditor learnsetEditor = new LearnsetEditor();
+                LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
                 learnsetEditor.learnsetToCsv(tempPathUnpack);
 
                 break;
@@ -1518,7 +1540,7 @@ public class DsRomReader
                 }
                 else
                 {
-                    ItemEditorGen4 itemEditor = new ItemEditorGen4();
+                    ItemEditorGen4 itemEditor = new ItemEditorGen4(gameCode);
                     itemEditor.itemsToCsv(tempPathUnpack);
                 }
 
@@ -1574,14 +1596,14 @@ public class DsRomReader
                     }
                     else
                     {
-                        PersonalEditor personalEditor = new PersonalEditor();
+                        PersonalEditor personalEditor = new PersonalEditor(gameCode);
                         personalEditor.csvToPersonal("personalDataRecompile.csv", "tmLearnsetDataRecompile.csv", type + "Recompile");
                     }
 
 
                     break;
                 case "learnsets":
-                    LearnsetEditor learnsetEditor = new LearnsetEditor();
+                    LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
                     learnsetEditor.csvToLearnsets("LearnsetRecompile.csv", type + "Recompile");
 
                     break;
@@ -1624,7 +1646,7 @@ public class DsRomReader
                     }
                     else
                     {
-                        ItemEditorGen4 itemEditor = new ItemEditorGen4();
+                        ItemEditorGen4 itemEditor = new ItemEditorGen4(gameCode);
                         itemEditor.csvToItems("ItemsRecompile.csv",type + "Recompile");
                     }
 
@@ -1666,7 +1688,7 @@ public class DsRomReader
         replaceFile(args);
     }
 
-    public void replaceFile(String[] args) throws Exception
+    private void replaceFile(String[] args) throws Exception
     {
 
         String name;
@@ -1826,6 +1848,7 @@ public class DsRomReader
 //        writer.writeByte((byte)b);
 //        writer.write(romBuffer.readBytes((int) (new File(rom).length()-romBuffer.getPosition())));
 
+        boolean startersHasRan = false;
         if(startersHasRan)
         {
             tempRom= path + "temp" + File.separator + "rom1.nds";
@@ -2150,7 +2173,7 @@ public class DsRomReader
 //        {
 //            throw new RuntimeException("Unable to delete directory " + directory.getName() + ". Check write perms.");
 //        }
-        for(File subfile : directory.listFiles())
+        for(File subfile : Objects.requireNonNull(directory.listFiles()))
         {
             if(subfile.isDirectory())
             {
@@ -2167,17 +2190,19 @@ public class DsRomReader
     private String hexFormat(String hexVal)
     {
         assert hexVal.length() <= 4;
-        while(hexVal.length() != 4)
+        StringBuilder hexValBuilder = new StringBuilder(hexVal);
+        while(hexValBuilder.length() != 4)
         {
-            if(hexVal.length() != 3)
+            if(hexValBuilder.length() != 3)
             {
-                hexVal= "0" + hexVal;
+                hexValBuilder.insert(0, "0");
             }
             else
             {
-                hexVal= "f" + hexVal;
+                hexValBuilder.insert(0, "f");
             }
         }
+        hexVal = hexValBuilder.toString();
         return hexVal;
     }
 
@@ -2185,6 +2210,8 @@ public class DsRomReader
     {
         File[] dir1List= dir1.listFiles();
         File[] dir2List= dir2.listFiles();
+        assert dir1List != null;
+        assert dir2List != null;
         if(dir1List.length != dir2List.length)
         {
             return false;
@@ -2209,7 +2236,7 @@ public class DsRomReader
         return true;
     }
 
-    private void sort (File arr[])
+    private void sort (File[] arr)
     {
         Arrays.sort(arr, Comparator.comparingInt(DsRomReader::fileToInt));
     }
@@ -2233,7 +2260,7 @@ public class DsRomReader
         for(String dirId : map.keySet())
         {
             path= new StringBuilder();
-            path.append("/" + dirId);
+            path.append("/").append(dirId);
             String parentDir= map.get(dirId);
             path.insert(0,"/" + parentDir);
             while(!parentDir.equals("0xf000"))
@@ -2248,18 +2275,6 @@ public class DsRomReader
 
         }
         return pathList.toArray(new String[0]);
-    }
-
-    private static int getPokemon(String pokemon)
-    {
-        for(int i= 0; i < nameData.length; i++)
-        {
-            if(pokemon.equalsIgnoreCase(nameData[i]))
-            {
-                return i;
-            }
-        }
-        throw new RuntimeException("Invalid pokemon entered: " + pokemon);
     }
 }
 

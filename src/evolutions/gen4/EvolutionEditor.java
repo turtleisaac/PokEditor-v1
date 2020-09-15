@@ -70,15 +70,15 @@ public class EvolutionEditor
         }
         evolutionMethodArr= evolutionList.toArray(new String[0]);
         reader.close();
-
-        Scanner scanner= new Scanner(System.in);
-        System.out.println("Do you wish to toggle automatic correction of incorrect/ broken data? (Y/n) (If the rom you are editing has an expanded move, ability, type, or item table, and you have not yet adjusted the data in the \"Program Files\" directory, it is safest to say no)");
-        autoFix= !scanner.nextLine().equalsIgnoreCase("n");
     }
 
 
     public void evolutionToCsv(String evolutionDir, boolean easyDisplay) throws IOException
     {
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Do you wish to toggle automatic correction of incorrect/ broken data? (Y/n) (If the rom you are editing has an expanded move, ability, type, or item table, and you have not yet adjusted the data in the \"Program Files\" directory, it is safest to say no)");
+        autoFix= !scanner.nextLine().equalsIgnoreCase("n");
+
         dataPath+= evolutionDir;
         Buffer evolutionBuffer;
         ArrayList<EvolutionData> dataList= new ArrayList<>();

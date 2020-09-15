@@ -11,10 +11,10 @@ import java.util.*;
 public class PersonalEditor
 {
 
-    public static void main(String[] args) throws IOException {
-        PersonalEditor personalEditor= new PersonalEditor();
-        personalEditor.csvToPersonal2("personalData.csv","tmLearnsetData.csv","moo");
-    }
+//    public static void main(String[] args) throws IOException {
+//        PersonalEditor personalEditor= new PersonalEditor();
+//        personalEditor.csvToPersonal2("personalData.csv","tmLearnsetData.csv","moo");
+//    }
 
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String dataPath= path;
@@ -29,26 +29,11 @@ public class PersonalEditor
     private static String[] abilityData;
     private static String[] tmNameData;
     private static boolean autoFix;
+    private String gameCode;
 
-    public PersonalEditor() throws IOException
+    public PersonalEditor(String gameCode) throws IOException
     {
-        Scanner scanner= new Scanner(System.in);
-        System.out.println("Are you playing a Johto game or a Sinnoh game?");
-        String game= scanner.nextLine().toLowerCase();
-        String tmNameFile= "TmNameList";
-
-        switch (game)
-        {
-            case "johto" :
-                tmNameFile+= "Johto.txt";
-
-                break;
-            case "sinnoh" :
-                tmNameFile+= "Sinnoh.txt";
-                break;
-            default:
-                throw new RuntimeException("Invalid region. Please enter either Sinnoh or Johto");
-        }
+        this.gameCode= gameCode;
 
         BufferedReader reader= new BufferedReader(new FileReader(resourcePath + "EntryData.txt"));
         ArrayList<String> nameList= new ArrayList<>();
@@ -94,9 +79,31 @@ public class PersonalEditor
         }
         abilityData= abilityList.toArray(new String[0]);
         reader.close();
+    }
 
-        reader= new BufferedReader(new FileReader(resourcePath + tmNameFile));
+    public void personalToCSV(String personalDir) throws IOException
+    {
+        String tmNameFile= "TmNameList";
+
+        switch (gameCode.toLowerCase().substring(0,3))
+        {
+            case "ipk" :
+            case "ipg" :
+                tmNameFile+= "Johto.txt";
+
+                break;
+            case "cpu" :
+            case "apa" :
+            case "ada" :
+                tmNameFile+= "Sinnoh.txt";
+                break;
+            default:
+                throw new RuntimeException("Invalid rom header: Game Code/ Title");
+        }
+
+        BufferedReader reader= new BufferedReader(new FileReader(resourcePath + tmNameFile));
         ArrayList<String> tmNameList= new ArrayList<>();
+        String line;
 
         while((line= reader.readLine()) != null)
         {
@@ -106,13 +113,10 @@ public class PersonalEditor
         tmNameData= tmNameList.toArray(new String[0]);
         reader.close();
 
+        Scanner scanner= new Scanner(System.in);
         System.out.println("Do you wish to toggle automatic correction of incorrect/ broken data? (Y/n) (If the rom you are editing has an expanded move, ability, type, or item table, and you have not yet adjusted the data in the \"Program Files\" directory, it is safest to say no)");
         autoFix= !scanner.nextLine().equalsIgnoreCase("n");
-        System.out.println(autoFix);
-    }
 
-    public void personalToCSV(String personalDir) throws IOException
-    {
         dataPath+= personalDir;
 
         Buffer personalBuffer;
@@ -408,7 +412,6 @@ public class PersonalEditor
         }
 
         BufferedWriter writer= new BufferedWriter(new FileWriter(path + "personalData.csv"));
-        String line;
         writer.write("ID Number,Name,HP,Attack,Defense,Speed,Sp. Atk,Sp. Def,Type 1,Type 2,Catch Rate,Exp Drop,HP EV Yield,Spe EV Yield,Attack EV Yield,Defense EV Yield,Sp. Atk EV Yield,Sp. Def EV Yield,Uncommon Held Item,Rare Held Item,Gender Ratio,Hatch Multiplier,Base Happiness,Growth Rate,Egg Group 1,Egg Group 2,Ability 1,Ability 2,Run Chance (Safari Zone only),DO NOT TOUCH\n");
         for(int row= 0; row < dataList.size(); row++)
         {
