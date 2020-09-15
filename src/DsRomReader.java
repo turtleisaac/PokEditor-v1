@@ -248,13 +248,13 @@ public class DsRomReader
                 case "pack" :
                     System.out.println("Name of the folder to pack?");
                     String dirName= scanner.nextLine();
-                    System.out.println("Name to give to output narc? (do not include .narc)");
+                    System.out.println("Name to give to output narc? (include .narc)");
                     String outputName= scanner.nextLine();
-                    narctowl.pack(dirName,outputName);
+                    narctowl.pack("extracted" + File.separator + dirName,outputName);
                     break;
 
                 default:
-                    throw new RuntimeException("Invalid arguments. Valid arguments for accessing Narctowl are either \"narc unpack\" or \"narc pack\"");
+                    throw new RuntimeException("Invalid arguments. Valid arguments for accessing Narctowl arew either \"narc unpack\" or \"narc pack\"");
             }
             System.exit(0);
         }
@@ -1559,17 +1559,17 @@ public class DsRomReader
 
                 break;
             case "starters" :
-                StarterEditorGen4 starterEditor= new StarterEditorGen4(romData.getGameCode());
+                StarterEditorGen4 starterEditor= new StarterEditorGen4(gameCode);
                 starterEditor.changeStarters(tempPathUnpack);
 
                 break;
             case "opening" :
-                OpeningEditorGen4 openingEditor= new OpeningEditorGen4(romData.getGameCode());
+                OpeningEditorGen4 openingEditor= new OpeningEditorGen4(gameCode);
                 openingEditor.changeOpening(tempPathUnpack);
 
                 break;
             case "intro" :
-                IntroEditorGen4 introEditor= new IntroEditorGen4(romData.getGameCode());
+                IntroEditorGen4 introEditor= new IntroEditorGen4(gameCode);
                 introEditor.changeIntroPokemon(tempPathUnpack);
 
                 break;
@@ -1668,7 +1668,7 @@ public class DsRomReader
                     throw new RuntimeException("Invalid arguments");
             }
 
-            narctowl.pack(tempPathUnpack + "Recompile",type + "Recompile");
+            narctowl.pack(tempPathUnpack + "Recompile",type + "Recompile.narc");
 
             if(length != new File(path + "temp" + File.separator + type + "Recompile.narc").length())
             {

@@ -36,10 +36,8 @@ public class Narctowl {
     private String separator = File.separator;
     private String path = System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String extractPath = path + "temp" + File.separator; //creates a new String field containing path, the directory "extracted", and File.separator (/ on Unix systems, \ on Windows)
-    public static String[] extensionStrings; //creates a new String[] to be filled later (see static)
-    private ArrayList<byte[]> fileExtensions = new ArrayList<>(); //creates a new ArrayList of byte[] to contain the file extension hex strings
-    private boolean manualAccess;
-
+    private static String[] extensionStrings; //creates a new String[] to be filled later (see static)
+    private String outputNarcPath= path + "temp" + File.separator;
     private static final int MAX_SIZE = 1024 * 1024;
 
     static {
@@ -48,17 +46,18 @@ public class Narctowl {
 
     public Narctowl(boolean manualAccess) throws IOException
     {
-        this.manualAccess= manualAccess;
-
         if(manualAccess)
         {
             extractPath = path + "extracted" + File.separator;
+            outputNarcPath= path;
         }
 
         String extensionPath = path + "Program Files" + File.separator + "identifiers.hex"; //creates a String containing the path to identifiers.hex (constant)
         for (int i = 0; i < new File(extensionPath).length() / 4; i++) //goes through the file four bytes at a time
         {
             Buffer extensions = new Buffer(extensionPath); //creates a new Framework.Buffer object for reading from identifiers.hex
+            //creates a new ArrayList of byte[] to contain the file extension hex strings
+            ArrayList<byte[]> fileExtensions = new ArrayList<>();
             fileExtensions.add(extensions.readBytes(4)); //adds the current set of four bytes to the fileExtensions ArrayList as a byte[]
             extensions.close(); //closes Framework.Buffer object extensions' internal BufferedInputStream and flushes data
         }
@@ -83,7 +82,8 @@ public class Narctowl {
             {
                 throw new RuntimeException("Could not create narc directory. Check write permissions");
             }
-        } else //if a folder matching the name of the input narc already exists within "extracted"
+        }
+        else //if a folder matching the name of the input narc already exists within "extracted"
         {
             while (true) //this makes sure that the program will keep asking if the user inputs an invalid response
             {
@@ -289,13 +289,14 @@ public class Narctowl {
         System.out.println("Process completed. Output directory can be found at: " + extractPath);
     }
 
-    public void pack(String directory, String name) throws IOException {
-        if (new File(path + "temp" + File.separator + name + ".narc").exists()) //if a narc matching parameter name exists
+    public void pack(String directory, String name) throws IOException
+    {
+        if (new File(outputNarcPath + name).exists()) //if a narc matching parameter name exists
         {
             Scanner scanner = new Scanner(System.in); //creates a new Scanner object
             while (true) //will keep running until valid input is received
             {
-                System.out.println("A file named " + name + ".narc already exists. Overwrite? (y/N)");
+                System.out.println("A file named " + name + " already exists. Overwrite? (y/N)");
                 String input = scanner.nextLine().toLowerCase(); //prompts user for response
                 if (input.equals("y")) //if user input equals "y", meaning "yes"
                 {
@@ -316,7 +317,7 @@ public class Narctowl {
         ArrayList<TableSubFile> fimgTable = new ArrayList<>(); //creates new ArrayList of tableSubFile instances
 
         File file; //creates a File object to be defined later in for-loop
-        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(directory).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
+        List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(path + directory).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
 
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
@@ -412,7 +413,7 @@ public class Narctowl {
             writer.writeInt(tableSubFile.getEndingOffset()); //writes the ending offset as four bytes
         }
 
-        BinaryWriter narcWriter = new BinaryWriter(path + "temp" + File.separator + name + ".narc"); //creates new file to output to in user directory with parameter "name" + .narc
+        BinaryWriter narcWriter = new BinaryWriter(outputNarcPath + name); //creates new file to output to in user directory with parameter "name" + .narc
         narcWriter.writeBytes(0x4E, 0x41, 0x52, 0x43, 0xFE, 0xFF, 0x00, 0x01); //writes the narc magic number and constant data (constant)
         int fileLength = fimgSize + fatbSize + fntbSize + 16; //creates new int variable and sets it to combined lengths of fimg section, fntb section, fatb section, and file header
         narcWriter.writeInt(fileLength); //writes the file length as four bytes
