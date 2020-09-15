@@ -1,7 +1,4 @@
-1.8
-Added the DPPT Intro Editor
-Added the DPPT Starter Editor
-Added the DPPT Opening Cutscene Editor
-Changed parts of how the program is ran to accommodate future updates/ editors
-Changed manual access of Narctowl to output in the "extracted" directory instead of the "temp" directory
-Fixed some miscellaneous issues
+1.8.1
+Changed Narctowl output directories
+Removed many user prompts in favor of automatic detection
+Miscellaneous changes
