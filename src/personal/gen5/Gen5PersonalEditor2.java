@@ -11,9 +11,9 @@ import java.util.*;
 public class Gen5PersonalEditor2
 {
 
-    public static void main(String[] args) throws IOException {
-        Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2();
-    }
+//    public static void main(String[] args) throws IOException {
+//        Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2();
+//    }
 
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
     private String dataPath= path;
@@ -26,14 +26,34 @@ public class Gen5PersonalEditor2
     private static String[] itemData;
     private static String[] abilityData;
     private static String[] tmNameData;
+    private boolean b2w2;
 
-    public Gen5PersonalEditor2() throws IOException
+    public Gen5PersonalEditor2(String gameCode) throws IOException
     {
-        BufferedReader reader= new BufferedReader(new FileReader(resourcePath + "EntryDataGen5-2.txt"));
+        String entryPath= resourcePath;
+        switch (gameCode.substring(0,3).toLowerCase())
+        {
+            case "irb" :
+            case "irw" :
+                b2w2= false;
+                entryPath+= "EntryDataGen5-1.txt";
+                break;
+
+            case "ird" :
+            case "ire" :
+                b2w2= true;
+                entryPath+= "EntryDataGen5-2.txt";
+                break;
+            default:
+                throw new RuntimeException("Invalid game");
+        }
+
+        BufferedReader reader= new BufferedReader(new FileReader(entryPath));
         ArrayList<String> nameList= new ArrayList<>();
         String line;
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             nameList.add(line);
         }
         nameData= nameList.toArray(new String[0]);
@@ -44,6 +64,7 @@ public class Gen5PersonalEditor2
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             tmList.add(line);
         }
         tmData= tmList.toArray(new String[0]);
@@ -54,6 +75,7 @@ public class Gen5PersonalEditor2
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             itemList.add(line);
         }
         itemData= itemList.toArray(new String[0]);
@@ -64,6 +86,7 @@ public class Gen5PersonalEditor2
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             abilityList.add(line);
         }
         abilityData= abilityList.toArray(new String[0]);
@@ -74,6 +97,7 @@ public class Gen5PersonalEditor2
 
         while((line= reader.readLine()) != null)
         {
+            line= line.trim();
             tmNameList.add(line);
         }
         tmNameData= tmNameList.toArray(new String[0]);
@@ -361,18 +385,23 @@ public class Gen5PersonalEditor2
             count++;
         }
 
-        file= files[files.length-1];
-        personalBuffer= new Buffer(file.toString());
-        byte[] unknown= personalBuffer.readRemainder();
-        if(!new File(path + "temp" + File.separator + "personalRecompile").exists() && !new File(path + "temp" + File.separator + "personalRecompile").mkdir())
-        {
-            throw new RuntimeException("Check write perms");
-        }
-        BinaryWriter writer2= new BinaryWriter(path + "temp" + File.separator + "personalRecompile" + File.separator +  "709.bin");
-        writer2.write(unknown);
-        writer2.writeBytes(0xFF,0xFF);
-        writer2.close();
-        personalBuffer.close();
+//        if(b2w2)
+//        {
+            file= files[files.length-1];
+            personalBuffer= new Buffer(file.toString());
+            byte[] unknown= personalBuffer.readRemainder();
+            if(!new File(path + "temp" + File.separator + "personalRecompile").exists() && !new File(path + "temp" + File.separator + "personalRecompile").mkdir())
+            {
+                throw new RuntimeException("Check write perms");
+            }
+            BinaryWriter writer2= new BinaryWriter(path + "temp" + File.separator + "personalRecompile" + File.separator +  "709.bin");
+            writer2.write(unknown);
+//            writer2.writeBytes(0xFF,0xFF);
+            writer2.close();
+            personalBuffer.close();
+
+//        }
+
 
         Scanner scanner= new Scanner(System.in);
 
@@ -383,7 +412,7 @@ public class Gen5PersonalEditor2
             Arrays.fill(pokeTable[i],"");
         }
 
-        System.out.println("Display BST? (y/N)");
+//        System.out.println("Display BST? (y/N)");
         boolean bst= false;
         for(int row= 0; row < dataList.size(); row++)
         {
@@ -401,77 +430,39 @@ public class Gen5PersonalEditor2
             {
                 pokeTable[row][idx++]= dataList.get(row).getHP() + dataList.get(row).getAtk() + dataList.get(row).getDef() + dataList.get(row).getSpe() + dataList.get(row).getSpAtk() + dataList.get(row).getSpDef() + "";
             }
-            if(dataList.get(row).getType1() != 231)
-            {
-                pokeTable[row][idx++]= typeArr[dataList.get(row).getType1()];
-                pokeTable[row][idx++]= typeArr[dataList.get(row).getType2()];
-            }
-            else
-            {
-                pokeTable[row][idx++]= "" + dataList.get(row).getType1();
-                pokeTable[row][idx++]= "" + dataList.get(row).getType2();
-            }
+            pokeTable[row][idx++]= typeArr[dataList.get(row).getType1()];
+            pokeTable[row][idx++]= typeArr[dataList.get(row).getType2()];
+
             pokeTable[row][idx++]= "" + dataList.get(row).getCatchRate();
             pokeTable[row][idx++]= "" + dataList.get(row).getStage();
+
             pokeTable[row][idx++]= "" + dataList.get(row).getHpEv();
             pokeTable[row][idx++]= "" + dataList.get(row).getSpeEv();
             pokeTable[row][idx++]= "" + dataList.get(row).getAtkEv();
             pokeTable[row][idx++]= "" + dataList.get(row).getDefEv();
             pokeTable[row][idx++]= "" + dataList.get(row).getSpAtkEv();
             pokeTable[row][idx++]= "" + dataList.get(row).getSpDefEv();
-            if(dataList.get(row).getItem1() != 999)
-            {
-                pokeTable[row][idx++]= itemData[dataList.get(row).getItem1()];
-                pokeTable[row][idx++]= itemData[dataList.get(row).getItem2()];
-                pokeTable[row][idx++]= itemData[dataList.get(row).getItem3()];
-            }
-            else
-            {
-                pokeTable[row][idx++]= "" + dataList.get(row).getItem1();
-                pokeTable[row][idx++]= "" + dataList.get(row).getItem2();
-                pokeTable[row][idx++]= "" + dataList.get(row).getItem3();
-            }
+
+            pokeTable[row][idx++]= itemData[dataList.get(row).getItem1()];
+            pokeTable[row][idx++]= itemData[dataList.get(row).getItem2()];
+            pokeTable[row][idx++]= itemData[dataList.get(row).getItem3()];
 
             pokeTable[row][idx++]= "" + dataList.get(row).getGenderRatio();
             pokeTable[row][idx++]= "" + dataList.get(row).getHatchMultiplier();
             pokeTable[row][idx++]= "" + dataList.get(row).getBaseHappiness();
             pokeTable[row][idx++]= growthTableIdArr[dataList.get(row).getExpRate()];
-            if(dataList.get(row).getEggGroup1() != 231)
-            {
-                pokeTable[row][idx++]= eggGroupArr[dataList.get(row).getEggGroup1()];
-                pokeTable[row][idx++]= eggGroupArr[dataList.get(row).getEggGroup2()];
-            }
-            else
-            {
-                pokeTable[row][idx++]= "" + dataList.get(row).getEggGroup1();
-                pokeTable[row][idx++]= "" + dataList.get(row).getEggGroup2();
-            }
-            if(dataList.get(row).getAbility1() != 231)
-            {
-                pokeTable[row][idx++]= abilityData[dataList.get(row).getAbility1()];
-                pokeTable[row][idx++]= abilityData[dataList.get(row).getAbility2()];
-                pokeTable[row][idx++]= abilityData[dataList.get(row).getAbility3()];
-            }
-            else
-            {
-                pokeTable[row][idx++]= "" + dataList.get(row).getAbility1();
-                pokeTable[row][idx++]= "" + dataList.get(row).getAbility2();
-                pokeTable[row][idx++]= "" + dataList.get(row).getAbility3();
-            }
 
+            pokeTable[row][idx++]= eggGroupArr[dataList.get(row).getEggGroup1()];
+            pokeTable[row][idx++]= eggGroupArr[dataList.get(row).getEggGroup2()];
+            pokeTable[row][idx++]= abilityData[dataList.get(row).getAbility1()];
+            pokeTable[row][idx++]= abilityData[dataList.get(row).getAbility2()];
+            pokeTable[row][idx++]= abilityData[dataList.get(row).getAbility3()];
             pokeTable[row][idx++]= "" + dataList.get(row).getRunChance();
-            if(dataList.get(row).getFormID() != 999)
-            {
-                pokeTable[row][idx++]= nameData[dataList.get(row).getFormID()];
-//                pokeTable[row][idx++]= nameData[dataList.get(row).getForm()];
-                pokeTable[row][idx++]= "" + dataList.get(row).getForm();
-            }
-            else
-            {
-                pokeTable[row][idx++]= "" + dataList.get(row).getFormID();
-                pokeTable[row][idx++]= "" + dataList.get(row).getForm();
-            }
+
+            pokeTable[row][idx++]= nameData[dataList.get(row).getFormID()];
+            pokeTable[row][idx++]= "" + dataList.get(row).getForm();
             pokeTable[row][idx++]= "" + dataList.get(row).getNumForms();
+
             pokeTable[row][idx++]= "" + dataList.get(row).getDexColor();
             pokeTable[row][idx++]= "" + dataList.get(row).getBaseExp();
             pokeTable[row][idx++]= "" + dataList.get(row).getHeight();
@@ -735,7 +726,7 @@ public class Gen5PersonalEditor2
 
                 @Override
                 public int getForm() {
-                    return getPokemon(finalCsvRow[30]);
+                    return Integer.parseInt(finalCsvRow[30]);
                 }
 
                 @Override
@@ -960,8 +951,7 @@ public class Gen5PersonalEditor2
                 return i;
             }
         }
-        return Integer.parseInt(type);
-//        throw new RuntimeException("Invalid type entered");
+        throw new RuntimeException("Invalid type entered: " + type);
     }
 
     private static int getPokemon(String pokemon)
@@ -973,8 +963,7 @@ public class Gen5PersonalEditor2
                 return i;
             }
         }
-        return Integer.parseInt(pokemon);
-//        throw new RuntimeException("Invalid pokemon entered: " + pokemon);
+        throw new RuntimeException("Invalid pokemon entered: " + pokemon);
     }
 
     private static int getEggGroup(String group)
@@ -986,8 +975,7 @@ public class Gen5PersonalEditor2
                 return i;
             }
         }
-        return Integer.parseInt(group);
-//        throw new RuntimeException("Invalid egg group entered");
+        throw new RuntimeException("Invalid egg group entered: " + group);
     }
 
     private static int getAbility(String ability)
@@ -999,8 +987,7 @@ public class Gen5PersonalEditor2
                 return i;
             }
         }
-        return Integer.parseInt(ability);
-//        throw new RuntimeException("Invalid ability entered");
+        throw new RuntimeException("Invalid ability entered: " + ability);
     }
 
     private static int getItem(String item)
@@ -1012,8 +999,7 @@ public class Gen5PersonalEditor2
                 return i;
             }
         }
-        return Integer.parseInt(item);
-//        throw new RuntimeException("Invalid item entered");
+        throw new RuntimeException("Invalid item entered: " + item);
     }
 
     private static int getGrowthRate(String growthRate)
@@ -1025,8 +1011,7 @@ public class Gen5PersonalEditor2
                 return i;
             }
         }
-        return Integer.parseInt(growthRate);
-//        throw new RuntimeException("Invalid growth rate id entered");
+        throw new RuntimeException("Invalid growth rate id entered: " + growthRate);
     }
 
     private static String evYieldBinary(int num)

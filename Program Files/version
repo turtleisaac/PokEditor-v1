@@ -1,4 +1,3 @@
-1.8.1
-Changed Narctowl output directories
-Removed many user prompts in favor of automatic detection
-Miscellaneous changes
+1.8.2
+Fixed errors in Gen 5 personal data editor
+Miscellaneous fixes

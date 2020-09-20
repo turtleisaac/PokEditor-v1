@@ -96,7 +96,7 @@ public class DsFileFinder
          */
 //        findFile(64);
 //        findFile(0x7A,(byte)0xAB,(byte)0x01,(byte)0x00,(byte)0x00);
-        findFile(0x80,(byte)0x98,(byte)0x00,(byte)0x9B,(byte)0x00,(byte)0x9E,(byte)0x00);
+        findFileBytes(0x7A);
 //        findFile((byte)0x83,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x86,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x89,(byte)0x01);
         System.out.println(romData.getTitle() + ":");
 
@@ -562,12 +562,6 @@ public class DsFileFinder
 
 
     }
-
-    public void readFntb()
-    {
-
-    }
-
     private static final int PERSONAL_J = 0x83;
     private static final int LEARNSET_J = 0xA2;
     private static final int EVOLUTION_J = 0xA3;
@@ -632,6 +626,38 @@ public class DsFileFinder
     public void findFile(int id) throws IOException
     {
         System.out.println(fimgEntries.get(id).getStartingOffset());
+    }
+
+    public void findFileBytes(int max) throws IOException
+    {
+        Buffer toFind = new Buffer(path + "toFind.bin");
+        byte[] bytes= toFind.readRemainder();
+        Buffer romBuffer;
+        FimgEntry fimgEntry;
+
+        for (int i = 0; i < max; i++)
+        {
+            fimgEntry = fimgEntries.get(i);
+            romBuffer = new Buffer(rom);
+            romBuffer.skipTo((int) fimgEntry.getStartingOffset());
+            byte[] contents = romBuffer.readBytes((int) (fimgEntry.getEndingOffset() - fimgEntry.getStartingOffset()));
+            byte[] arr;
+            for (int j = 0; j < contents.length; j++)
+            {
+                arr = Arrays.copyOfRange(contents, j, j + bytes.length);
+                if (Arrays.equals(arr, bytes))
+                {
+                    System.out.print("Current file: " + i + ", ");
+                    System.out.println("Global offset: 0x" + Integer.toHexString((int) (fimgEntry.getStartingOffset() + j)));
+                    System.out.println("Offset in file: 0x" + Integer.toHexString(j));
+                    System.out.println("File length: " + (fimgEntry.getEndingOffset() - fimgEntry.getStartingOffset()) + "\n");
+                }
+            }
+
+
+            romBuffer.close();
+            toFind.close();
+        }
     }
 
     public void findFile(int max, byte... bytes) throws IOException

@@ -313,6 +313,11 @@ public class DsRomReader
 //            throw new RuntimeException("Do not run PokEditor with the argument \"starters2\", as that is an internal parameter only. To run the Starter Editor, please use the argument \"starters\"");
 //        }
 
+
+        if(new File(path + "temp").exists())
+        {
+            clearDirectory(new File(path + "temp"));
+        }
         String rom= args[args.length-1];
         this.rom= path + rom;
         buffer= new Buffer(rom);
@@ -1480,14 +1485,9 @@ public class DsRomReader
 
         switch (args[0].toLowerCase()) {
             case "personal":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white"))
+                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                 {
-                    Gen5PersonalEditor1 personalEditor= new Gen5PersonalEditor1();
-                    personalEditor.personalToCSV(tempPathUnpack);
-                }
-                else if (romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                {
-                    Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2();
+                    Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2(gameCode);
                     personalEditor.personalToCSV(tempPathUnpack);
                 }
                 else
@@ -1584,14 +1584,9 @@ public class DsRomReader
 
             switch (args[0].toLowerCase()) {
                 case "personal":
-                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white"))
+                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                     {
-                        Gen5PersonalEditor1 personalEditor = new Gen5PersonalEditor1();
-                        personalEditor.csvToPersonal("personalDataRecompile.csv", "tmLearnsetDataRecompile.csv", type + "Recompile");
-                    }
-                    else if (romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                    {
-                        Gen5PersonalEditor2 personalEditor = new Gen5PersonalEditor2();
+                        Gen5PersonalEditor2 personalEditor = new Gen5PersonalEditor2(gameCode);
                         personalEditor.csvToPersonal("personalDataRecompile.csv", "tmLearnsetDataRecompile.csv", type + "Recompile");
                     }
                     else
@@ -1599,7 +1594,6 @@ public class DsRomReader
                         PersonalEditor personalEditor = new PersonalEditor(gameCode);
                         personalEditor.csvToPersonal("personalDataRecompile.csv", "tmLearnsetDataRecompile.csv", type + "Recompile");
                     }
-
 
                     break;
                 case "learnsets":
@@ -1670,12 +1664,28 @@ public class DsRomReader
 
             narctowl.pack(tempPathUnpack + "Recompile",type + "Recompile.narc");
 
+            Buffer narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc");
+            BinaryWriter narcWriter;
+
+            if(args[0].equalsIgnoreCase("personal") && (gameCode.substring(0,3).equalsIgnoreCase("ird") || gameCode.substring(0,3).equalsIgnoreCase("ire")))
+            {
+                System.out.println("mooooooo1");
+                byte[] first8= narcBuffer.readBytes(8);
+                int length= narcBuffer.readInt() + 2;
+                byte[] narcConents= narcBuffer.readRemainder();
+                narcWriter= new BinaryWriter(path + "temp" + File.separator + type + "Recompile.narc");
+                narcWriter.write(first8);
+                narcWriter.writeInt(length);
+                narcWriter.write(narcConents);
+                narcWriter.writeBytes(0xff,0xff);
+            }
+
             if(length != new File(path + "temp" + File.separator + type + "Recompile.narc").length())
             {
                 System.out.println("The file you have recompiled is different in length from the original file. Recompiling roms using a file of different length is unsupported at the moment, so please use Tinke to insert the narc into your rom.\nUse this website to find out where the file is meant to go in Tinke: https://projectpokemon.org/rawdb/");
 
-                Buffer narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc");
-                BinaryWriter narcWriter= new BinaryWriter(path + type + "Recompile.narc");
+                narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc");
+                narcWriter= new BinaryWriter(path + type + "Recompile.narc");
                 narcWriter.write(narcBuffer.readBytes((int)new File(path + "temp" + File.separator + type + "Recompile.narc").length()));
                 narcBuffer.close();
                 narcWriter.close();
@@ -1869,6 +1879,94 @@ public class DsRomReader
 //        romBuffer.close();
         }
 
+
+
+    private static final int S_BABIES_PT_E= 0x17a7ec;
+    private static final int S_BABIES_PT_J= 0x17a7ec;
+    private static final int S_BABIES_PT_F= 0x17a7ec;
+    private static final int S_BABIES_PT_G= 0x17a7ec;
+    private static final int S_BABIES_PT_I= 0x17a7ec;
+    private static final int S_BABIES_PT_S= 0x17a7ec;
+    private static final int S_BABIES_PT_K= 0x17a7ec;
+
+    private static final int S_BABIES_DP_E= 0x165a32;
+    private static final int S_BABIES_DP_J= 0x165a32;
+    private static final int S_BABIES_DP_F= 0x165a32;
+    private static final int S_BABIES_DP_G= 0x165a32;
+    private static final int S_BABIES_DP_I= 0x165a32;
+    private static final int S_BABIES_DP_S= 0x165a32;
+    private static final int S_BABIES_DP_K= 0x165a32;
+
+    private void arm9Jump(String[] args)
+    {
+        int offset;
+        String noRegion= gameCode.substring(0,3).toLowerCase();
+
+
+        switch (noRegion)
+        {
+            case "cpu" :
+                switch (gameCode.toLowerCase().substring(3))
+                {
+                    case "e" :
+                        offset= S_BABIES_PT_E;
+                        break;
+                    case "j" :
+                        offset= S_BABIES_PT_J;
+                        break;
+                    case "f" :
+                        offset= S_BABIES_PT_F;
+                        break;
+                    case "g" :
+                        offset= S_BABIES_PT_G;
+                        break;
+                    case "i" :
+                        offset= S_BABIES_PT_I;
+                        break;
+                    case "s" :
+                        offset= S_BABIES_PT_S;
+                        break;
+                    case "k" :
+                        offset= S_BABIES_PT_K;
+                        break;
+                    default:
+                        throw new RuntimeException("Unsupported Region");
+                }
+                break;
+
+            case "apa" :
+            case "ada" :
+                switch (gameCode.toLowerCase().substring(3))
+                {
+                    case "e" :
+                        offset= S_BABIES_DP_E;
+                        break;
+                    case "j" :
+                        offset= S_BABIES_DP_J;
+                        break;
+                    case "f" :
+                        offset= S_BABIES_DP_F;
+                        break;
+                    case "g" :
+                        offset= S_BABIES_DP_G;
+                        break;
+                    case "i" :
+                        offset= S_BABIES_DP_I;
+                        break;
+                    case "s" :
+                        offset= S_BABIES_DP_S;
+                        break;
+                    case "k" :
+                        offset= S_BABIES_DP_K;
+                        break;
+                    default:
+                        throw new RuntimeException("Unsupported Region");
+                }
+                break;
+            default:
+                throw new RuntimeException("This editor can't be used with Gen 5 or HGSS currently.");
+        }
+    }
 
     public void readOverlays()
     {
