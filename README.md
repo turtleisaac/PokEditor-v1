@@ -6,7 +6,7 @@ Multifunctional in-depth editor for Pokémon Gen 4 and 5 game data
 
 Written entirely in Java and is completely OS-agnostic. Java 8 or greater is required.
 
-**Note:** This is a Command Line Tool. You can't just run it by double clicking the .jar file, as this has no GUI. You need to run it through Terminal (macOS/ Linux) or cmd (Windows)
+**Note:** This is a Command Line Tool. You can't just run it by double clicking the .jar file, as this has no GUI. You need to run it through Terminal (macOS/ Linux) or cmd (Windows). For those of you who do not know how to use a Command Line Tool, this is a friendly reminder to make sure that you navigate to the PokEditor folder that the .jar is in __before__ trying to run it using the instructions in the "Usage" and "Arguments" sections of this README.
 
 ![PokEditor Personal Editor](https://i.imgur.com/YyBOyCY.png)
 
