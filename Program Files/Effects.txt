@@ -101,7 +101,7 @@ Higher power the less HP the user has
 Decreases PP of target's last move used by 4
 False Swipe effect
 Heal Bell effect
-+1 Priority
+Priority +1
 Hits the target up to 3 times; increases power by 10 with each hit
 Steals target's held item
 Prevents target from switching out or fleeing
@@ -205,7 +205,7 @@ Type changes to match weather
 Lowers user's SpAtk harshly
 Lowers target's Atk and Def
 Raises user's Def and SpDef
-Can hit Pokémon during semi-invulnerable turns of Fly/Bounce
+Can hit Pokemon during semi-invulnerable turns of Fly/Bounce
 Raises user's Atk and Def
 Chance of causing Poison; increased crit ratio
 1/3 damage dealt recoil
@@ -217,7 +217,7 @@ Gravity effect
 2x power if target is asleep; wakes up target
 Causes all moves to ignore changes to the target's Evasiveness
 Lowers user's Spd
-Power = min(150; (25 × Target's Current Speed / User's Current Speed) + 1)
+Power = min(150; (25 x Target's Current Speed / User's Current Speed) + 1)
 Healing Wish effect
 2x power if target is at or below 1/2 HP
 Natural Gift effect
@@ -235,7 +235,7 @@ Power and effect determined by held item
 Cures user of any status condition and afflicts the target with it
 The less PP the move has; the greater its Power
 Heal Block effect
-Power = Base power + 120 × (Target's Current HP / Target's Maximum HP)
+Power = Base power + 120 x (Target's Current HP / Target's Maximum HP)
 Swaps the user's Atk stat with its Def stat
 Suppresses the target's Ability
 Prevents opponents from landing critical hits on the user's party for 5 turns

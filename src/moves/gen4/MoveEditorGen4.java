@@ -278,9 +278,11 @@ public class MoveEditorGen4
 
         for(int i= 0; i < csvReader.length(); i++)
         {
-            initializeIndex(csvReader.next());
+            String[] arr= csvReader.next();
+            initializeIndex(arr);
             writer= new BinaryWriter(outputPath + i + ".bin");
 
+            System.out.println("Move: " + i + ", " + Arrays.toString(arr));
             writer.writeShort(getEffect(next())); //additional effect
             writer.writeByte(getCategory(next())); //category (physical, special, status)
             writer.writeByte((byte)Short.parseShort(next())); //power
@@ -377,9 +379,19 @@ public class MoveEditorGen4
     {
         for(int i= 0; i < effects.length; i++)
         {
-            if(effect.equals(effects[i]))
+            String str= effects[i];
+            effect= effect.replaceAll("×","x");
+            effect= effect.replaceAll("é","e");
+            str= str.replaceAll("×","x");
+            str= str.replaceAll("é","e");
+
+            if(effect.equals(str))
             {
                 return (short) i;
+            }
+            else if(effect.equalsIgnoreCase("Priority +1"))
+            {
+                return 103;
             }
         }
         throw new RuntimeException("Invalid effect entered: " + effect);

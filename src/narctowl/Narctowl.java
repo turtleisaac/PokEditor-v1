@@ -1,9 +1,6 @@
 package narctowl;
 
 import framework.*;
-import framework.dsdecmp.HexInputStream;
-import framework.dsdecmp.JavaDSDecmp;
-
 import java.io.*;
 import java.util.*;
 /**
@@ -118,8 +115,8 @@ public class Narctowl {
         }
         int constant = buffer.readInt(); //data between NARC hex identifier and the file size, is constant in all narcs
         int fileSize = buffer.readInt(); //how many bytes are in the file
-        short headerSize = buffer.readShort(); //no idea tbh
-        short numSections = buffer.readShort(); //no idea tbh
+        short headerSize = buffer.readShort();
+        short numSections = buffer.readShort();
 
         //File Allocation Table Block (FATB)
         String fatbMagic = buffer.readString(4); //sets String "fatbMagic" to the BTAF identifier
@@ -244,7 +241,8 @@ public class Narctowl {
             }
 
             //writes data to output files
-            writer = new BinaryWriter(extractPath + subFiles.get(i).getName() + "." + extension); //creates new BinaryWriter object using specified name/ numbering from subFiles ArrayList of NarcSubFiles
+            String outName= extractPath + subFiles.get(i).getName() + "." + extension;
+            writer = new BinaryWriter(outName); //creates new BinaryWriter object using specified name/ numbering from subFiles ArrayList of NarcSubFiles
             writer.write(bytes); //writes the bytes read from the narc located in byte[] bytes to the output file
             if(bytes[0] == 0)
             {
@@ -253,36 +251,26 @@ public class Narctowl {
 
             writer.close(); //closes BinaryWriter and flushes data
 
-            if (extension.equalsIgnoreCase("lzss")) {
-//                LZ77 compressor = new LZ77();
+            if (extension.equalsIgnoreCase("lzss"))
+            {
+//                HexInputStream hexInputStream= new HexInputStream(extractPath + subFiles.get(i).getName() + "." + extension);
 //
-//                File dest = new File(extractPath + subFiles.get(i).getName() + "." + trueExtension);
-//
-//                try
+//                writer = new BinaryWriter(extractPath + subFiles.get(i).getName() + "." + trueExtension);
+//                int[] decompArr= Objects.requireNonNull(JavaDSDecmp.decompress(hexInputStream));
+//                byte[] contents= new byte[decompArr.length];
+//                for(int x= 0; x < contents.length; x++)
 //                {
-//                    compressor.decode(new File(extractPath + subFiles.get(i).getName() + "." + extension), dest, null);
-//
+//                    contents[x]= (byte) decompArr[x];
 //                }
-//                catch(Exception e)
+//                writer.write(contents);
+//                writer.close();
+//                if(!new File(extractPath + subFiles.get(i).getName() + "." + extension).delete())
 //                {
-//                    System.err.println("compression created exception: "+e);
-//                    e.printStackTrace();
+//                    throw new RuntimeException("Check write perms...");
 //                }
-                HexInputStream hexInputStream= new HexInputStream(extractPath + subFiles.get(i).getName() + "." + extension);
 
-                writer = new BinaryWriter(extractPath + subFiles.get(i).getName() + "." + trueExtension);
-                int[] decompArr= Objects.requireNonNull(JavaDSDecmp.decompress(hexInputStream));
-                byte[] contents= new byte[decompArr.length];
-                for(int x= 0; x < contents.length; x++)
-                {
-                    contents[x]= (byte) decompArr[x];
-                }
-                writer.write(contents);
-                writer.close();
-                if(!new File(extractPath + subFiles.get(i).getName() + "." + extension).delete())
-                {
-                    throw new RuntimeException("Check write perms...");
-                }
+                BLZCoder blzCoder= new BLZCoder(new String[] {"-d",outName});
+
             }
         }
         buffer.close(); //closes Buffer object buffer's internal BufferedInputStream and flushes data

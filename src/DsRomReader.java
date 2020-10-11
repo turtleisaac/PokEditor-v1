@@ -13,8 +13,8 @@ import moves.gen5.MoveEditorGen5;
 import narctowl.Narctowl;
 import overlays.OverlayData;
 import personal.gen4.PersonalEditor;
-import personal.gen5.Gen5PersonalEditor1;
 import personal.gen5.Gen5PersonalEditor2;
+import randomizer.FileRandomizer;
 import starters.gen4.StarterEditorGen4;
 import intro.IntroEditorGen4;
 import opening.OpeningEditorGen4;
@@ -214,6 +214,18 @@ public class DsRomReader
                     System.out.println("Unlike most editors in this tool, you make the edits through the command line instead of a spreadsheet for this editor");
                     System.out.println("This editor currently works for only the Sinnoh Gen 4 games (Diamond, Pearl, Platinum)");
                     break;
+
+                case "random" :
+                    System.out.println("File Randomizer\n");
+                    System.out.println("This tool will randomize the order of your rom's personal, learnsets, growth, etc... files so the data for every species ends up inside of a different sprite, dex entry, cry, etc...");
+                    System.out.println("For example, you could get all of the attributes of Origin Forme Giratina inside of the sprite and cry of an Igglybuff. Fun!");
+                    System.out.println("The resulting files are not guaranteed to permit a possible run. Extreme bad luck could make it so that progression-essential HM's can't be learned by any available species at the start of the game");
+                    System.out.println("To run the File Randomizer on all of the files at once, you need to run PokEditor using the argument \"random\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)");
+                    System.out.println("Alternatively, to run the randomizer on an individual data type, add \"random\" (without the quotes) in between the editor type and the rom name when typing the arguments for another editor (ex: personal random rom.nds)");
+                    System.out.println("One thing that must be noted is that unlike all of the other tools/ editors for editing the data in a rom, the File Randomizer WILL overwrite the rom that you supply. Make sure to have a copy of your rom stored elsewhere before randomizing");
+                    System.out.println("This editor currently works for all games, both Gen 4 and 5");
+                    break;
+
                 case "help" :
                     System.out.println("Help Command\n");
                     System.out.println("Why the heck are you using the help command to figure out how to use the help command? That's like using an index file to look up the location of the index file!");
@@ -262,8 +274,23 @@ public class DsRomReader
         /**
          * Running DsRomReader/ PokEditor
          */
-        DsRomReader reader= new DsRomReader(scanner);
-        reader.readRom(args);
+
+        DsRomReader reader;
+        if(args.length == 2 && containsObj(args, "random"))
+        {
+            String[] randomizerEditors= new String[] {"personal","learnsets"};
+            for(int i= 0; i < randomizerEditors.length; i++)
+            {
+                System.out.println("Randomizing: " + randomizerEditors[i]);
+                reader= new DsRomReader(scanner,true);
+                reader.readRom(new String[] {randomizerEditors[i],"random",args[args.length-1]});
+            }
+        }
+        else
+        {
+            reader= new DsRomReader(scanner,false);
+            reader.readRom(args);
+        }
     }
 
     private String path= System.getProperty("user.dir") + File.separator;
@@ -288,11 +315,13 @@ public class DsRomReader
     private static boolean isNarc;
     private Scanner scanner;
     private String gameCode;
+    private boolean multiRun;
 
 
-    public DsRomReader(Scanner scanner) throws IOException
+    public DsRomReader(Scanner scanner, boolean multiRun) throws IOException
     {
         this.scanner= scanner;
+        this.multiRun= multiRun;
 
         Arrays.fill(romCapacities,"");
         romCapacities[6]= "8MB";
@@ -314,7 +343,7 @@ public class DsRomReader
 //        }
 
 
-        if(new File(path + "temp").exists())
+        if(new File(path + "temp").exists() && !args[1].equalsIgnoreCase("random"))
         {
             clearDirectory(new File(path + "temp"));
         }
@@ -341,13 +370,15 @@ public class DsRomReader
 //            grabFile(args,title);
 //        }
 
-        System.out.println("Do you wish to delete the temp folder? (Y/n)");
-        String ans= scanner.nextLine();
-        if(!ans.equalsIgnoreCase("n"))
+        if(!args[1].equalsIgnoreCase("random") && new File(path + "temp" + File.separator + "random.ser").exists())
         {
-            clearDirectory(new File(path + "temp"));
+            System.out.println("Do you wish to delete the temp folder? (Y/n)");
+            String ans= scanner.nextLine();
+            if(!ans.equalsIgnoreCase("n"))
+            {
+                clearDirectory(new File(path + "temp"));
+            }
         }
-
     }
 
     protected String readHeader() throws IOException
@@ -1198,6 +1229,8 @@ public class DsRomReader
             isNarc= true;
         }
 
+        boolean randomize= args[1].equalsIgnoreCase("random");
+
 
         fileOffset= 0;
         length= 0;
@@ -1483,104 +1516,131 @@ public class DsRomReader
             narctowl.unpack(tempPath); //run narcs.Narctowl.unpack() with narc extracted from rom as parameter
         }
 
-        switch (args[0].toLowerCase()) {
-            case "personal":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                {
-                    Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2(gameCode);
-                    personalEditor.personalToCSV(tempPathUnpack);
-                }
-                else
-                {
-                    PersonalEditor personalEditor = new PersonalEditor(gameCode);
-                    personalEditor.personalToCSV(tempPathUnpack);
-                }
-
-                break;
-            case "learnsets":
-                LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
-                learnsetEditor.learnsetToCsv(tempPathUnpack);
-
-                break;
-            case "evolutions":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                {
-                    EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
-                    evolutionEditor.evolutionToCsv(tempPathUnpack, false);
-                }
-                else
-                {
-                    EvolutionEditor evolutionEditor = new EvolutionEditor();
-                    evolutionEditor.evolutionToCsv(tempPathUnpack, false);
-                }
-
-                break;
-            case "growth":
-                GrowthEditor growthEditor = new GrowthEditor();
-                growthEditor.growthToCsv(tempPathUnpack);
-
-                break;
-            case "encounters":
-                if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || title.equals("soulsilver") || title.equals("heartgold"))
-                {
-                    EncounterEditor encounterEditor= new EncounterEditor();
-                        encounterEditor.encountersToCsv(tempPathUnpack);
-                }
-                else
-                {
-                    SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
-                    encounterEditor.encountersToCsv(tempPathUnpack);
-                }
-                break;
-            case "items":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                {
-                    ItemEditorGen5 itemEditor = new ItemEditorGen5();
-                    itemEditor.itemsToCsv(tempPathUnpack);
-                }
-                else
-                {
-                    ItemEditorGen4 itemEditor = new ItemEditorGen4(gameCode);
-                    itemEditor.itemsToCsv(tempPathUnpack);
-                }
-
-                break;
-            case "moves":
-                if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                {
-                    MoveEditorGen5 moveEditor = new MoveEditorGen5();
-                    moveEditor.movesToCsv(tempPathUnpack);
-                }
-                else
-                {
-                    MoveEditorGen4 moveEditor = new MoveEditorGen4();
-                    moveEditor.movesToCsv(tempPathUnpack);
-                }
-
-                break;
-            case "starters" :
-                StarterEditorGen4 starterEditor= new StarterEditorGen4(gameCode);
-                starterEditor.changeStarters(tempPathUnpack);
-
-                break;
-            case "opening" :
-                OpeningEditorGen4 openingEditor= new OpeningEditorGen4(gameCode);
-                openingEditor.changeOpening(tempPathUnpack);
-
-                break;
-            case "intro" :
-                IntroEditorGen4 introEditor= new IntroEditorGen4(gameCode);
-                introEditor.changeIntroPokemon(tempPathUnpack);
-
-                break;
-            default:
-                throw new RuntimeException("Invalid arguments");
-        }
-
-        if(isNarc)
+        if(randomize && isNarc)
         {
+            FileRandomizer randomizer= new FileRandomizer(gameCode, false);
+            String ans;
+            if(multiRun)
+            {
+                if(args[0].equalsIgnoreCase("personal"))
+                    ans= "y";
+                else
+                    ans= "n";
+            }
+            else
+            {
+                System.out.println("Do you want to generate a new random order? (Y/n) ");
+                ans= scanner.nextLine();
+            }
+
+
+            if(!ans.equalsIgnoreCase("n"))
+            {
+                randomizer.createOrder(Objects.requireNonNull(new File(tempPathUnpack).listFiles()).length);
+            }
+            randomizer.randomizeWithSet(tempPathUnpack);
+
+        }
+        else
+        {
+            switch (args[0].toLowerCase()) {
+                case "personal":
+                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                    {
+                        Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2(gameCode);
+                        personalEditor.personalToCSV(tempPathUnpack);
+                    }
+                    else
+                    {
+                        PersonalEditor personalEditor = new PersonalEditor(gameCode);
+                        personalEditor.personalToCSV(tempPathUnpack);
+                    }
+
+                    break;
+                case "learnsets":
+                    LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
+                    learnsetEditor.learnsetToCsv(tempPathUnpack);
+
+                    break;
+                case "evolutions":
+                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                    {
+                        EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
+                        evolutionEditor.evolutionToCsv(tempPathUnpack, false);
+                    }
+                    else
+                    {
+                        EvolutionEditor evolutionEditor = new EvolutionEditor();
+                        evolutionEditor.evolutionToCsv(tempPathUnpack, false);
+                    }
+
+                    break;
+                case "growth":
+                    GrowthEditor growthEditor = new GrowthEditor();
+                    growthEditor.growthToCsv(tempPathUnpack);
+
+                    break;
+                case "encounters":
+                    if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || title.equals("soulsilver") || title.equals("heartgold"))
+                    {
+                        EncounterEditor encounterEditor= new EncounterEditor();
+                        encounterEditor.encountersToCsv(tempPathUnpack);
+                    }
+                    else
+                    {
+                        SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
+                        encounterEditor.encountersToCsv(tempPathUnpack);
+                    }
+                    break;
+                case "items":
+                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                    {
+                        ItemEditorGen5 itemEditor = new ItemEditorGen5();
+                        itemEditor.itemsToCsv(tempPathUnpack);
+                    }
+                    else
+                    {
+                        ItemEditorGen4 itemEditor = new ItemEditorGen4(gameCode);
+                        itemEditor.itemsToCsv(tempPathUnpack);
+                    }
+
+                    break;
+                case "moves":
+                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                    {
+                        MoveEditorGen5 moveEditor = new MoveEditorGen5();
+                        moveEditor.movesToCsv(tempPathUnpack);
+                    }
+                    else
+                    {
+                        MoveEditorGen4 moveEditor = new MoveEditorGen4();
+                        moveEditor.movesToCsv(tempPathUnpack);
+                    }
+
+                    break;
+                case "starters" :
+                    StarterEditorGen4 starterEditor= new StarterEditorGen4(gameCode);
+                    starterEditor.changeStarters(tempPathUnpack);
+
+                    break;
+                case "opening" :
+                    OpeningEditorGen4 openingEditor= new OpeningEditorGen4(gameCode);
+                    openingEditor.changeOpening(tempPathUnpack);
+
+                    break;
+                case "intro" :
+                    IntroEditorGen4 introEditor= new IntroEditorGen4(gameCode);
+                    introEditor.changeIntroPokemon(tempPathUnpack);
+
+                    break;
+                default:
+                    throw new RuntimeException("Invalid arguments");
+            }
+
             System.out.println("\nAfter making all edits to the csv file(s), export them with the same name(s) as they had originally, but with \"Recompile\" appended prior to the file extension. Place them in the same folder they were output in.\nPress Enter to continue (you may need to press it more than once).");
+            Thread.sleep(1000);
             scanner.nextLine();
+            Thread.sleep(1000);
 
             switch (args[0].toLowerCase()) {
                 case "personal":
@@ -1661,13 +1721,16 @@ public class DsRomReader
                 default:
                     throw new RuntimeException("Invalid arguments");
             }
+        }
 
+        if(isNarc)
+        {
             narctowl.pack(tempPathUnpack + "Recompile",type + "Recompile.narc");
 
             Buffer narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc");
             BinaryWriter narcWriter;
 
-            if(args[0].equalsIgnoreCase("personal") && (gameCode.substring(0,3).equalsIgnoreCase("ird") || gameCode.substring(0,3).equalsIgnoreCase("ire")))
+            if(args[0].equalsIgnoreCase("personal") && (gameCode.substring(0,3).equalsIgnoreCase("ird") || gameCode.substring(0,3).equalsIgnoreCase("ire")) && !args[1].equalsIgnoreCase("personal"))
             {
                 System.out.println("mooooooo1");
                 byte[] first8= narcBuffer.readBytes(8);
@@ -1708,9 +1771,16 @@ public class DsRomReader
 //        boolean starters= args[0].equalsIgnoreCase("starters");
 //        if(!starters)
 //        {
+        if(!multiRun)
+        {
             System.out.println("Please enter the name to be given to the output rom (include .nds)");
             name= scanner.nextLine();
-            tempRom= path + "temp" + File.separator + "rom.nds";
+        }
+        else
+        {
+            name= args[args.length-1];
+        }
+        tempRom= path + "temp" + File.separator + "rom.nds";
 //        }
 //        else
 //        {
@@ -1847,6 +1917,7 @@ public class DsRomReader
         writer.write(narcBuffer.readBytes(length));
         romBuffer.skipBytes(length); //skips past the original file in the Framework.Buffer reading the original rom
         writer.write(romBuffer.readRemainder());
+        writer.close();
 
 //        int b;
 //        while((b= romBuffer.readByte()) == 0xff)
@@ -1881,91 +1952,11 @@ public class DsRomReader
 
 
 
-    private static final int S_BABIES_PT_E= 0x17a7ec;
-    private static final int S_BABIES_PT_J= 0x17a7ec;
-    private static final int S_BABIES_PT_F= 0x17a7ec;
-    private static final int S_BABIES_PT_G= 0x17a7ec;
-    private static final int S_BABIES_PT_I= 0x17a7ec;
-    private static final int S_BABIES_PT_S= 0x17a7ec;
-    private static final int S_BABIES_PT_K= 0x17a7ec;
 
-    private static final int S_BABIES_DP_E= 0x165a32;
-    private static final int S_BABIES_DP_J= 0x165a32;
-    private static final int S_BABIES_DP_F= 0x165a32;
-    private static final int S_BABIES_DP_G= 0x165a32;
-    private static final int S_BABIES_DP_I= 0x165a32;
-    private static final int S_BABIES_DP_S= 0x165a32;
-    private static final int S_BABIES_DP_K= 0x165a32;
 
     private void arm9Jump(String[] args)
     {
-        int offset;
-        String noRegion= gameCode.substring(0,3).toLowerCase();
 
-
-        switch (noRegion)
-        {
-            case "cpu" :
-                switch (gameCode.toLowerCase().substring(3))
-                {
-                    case "e" :
-                        offset= S_BABIES_PT_E;
-                        break;
-                    case "j" :
-                        offset= S_BABIES_PT_J;
-                        break;
-                    case "f" :
-                        offset= S_BABIES_PT_F;
-                        break;
-                    case "g" :
-                        offset= S_BABIES_PT_G;
-                        break;
-                    case "i" :
-                        offset= S_BABIES_PT_I;
-                        break;
-                    case "s" :
-                        offset= S_BABIES_PT_S;
-                        break;
-                    case "k" :
-                        offset= S_BABIES_PT_K;
-                        break;
-                    default:
-                        throw new RuntimeException("Unsupported Region");
-                }
-                break;
-
-            case "apa" :
-            case "ada" :
-                switch (gameCode.toLowerCase().substring(3))
-                {
-                    case "e" :
-                        offset= S_BABIES_DP_E;
-                        break;
-                    case "j" :
-                        offset= S_BABIES_DP_J;
-                        break;
-                    case "f" :
-                        offset= S_BABIES_DP_F;
-                        break;
-                    case "g" :
-                        offset= S_BABIES_DP_G;
-                        break;
-                    case "i" :
-                        offset= S_BABIES_DP_I;
-                        break;
-                    case "s" :
-                        offset= S_BABIES_DP_S;
-                        break;
-                    case "k" :
-                        offset= S_BABIES_DP_K;
-                        break;
-                    default:
-                        throw new RuntimeException("Unsupported Region");
-                }
-                break;
-            default:
-                throw new RuntimeException("This editor can't be used with Gen 5 or HGSS currently.");
-        }
     }
 
     public void readOverlays()
@@ -2373,6 +2364,26 @@ public class DsRomReader
 
         }
         return pathList.toArray(new String[0]);
+    }
+
+    private static <E> boolean containsObj(E[] arr, E value)
+    {
+        for (E e : arr)
+        {
+            if (e.equals(value))
+                return true;
+        }
+        return false;
+    }
+
+    private static <E> boolean containsPrim(E[] arr, E value)
+    {
+        for (E e : arr)
+        {
+            if (e == value)
+                return true;
+        }
+        return false;
     }
 }
 

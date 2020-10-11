@@ -706,9 +706,8 @@ public class PersonalEditor
 
 
 
-        CsvReader csvReader= new CsvReader(tmPath);
-        csvReader.skipLine();
-        BitStream[] tmLearnsetData = new BitStream[csvReader.length()-1];
+        CsvReader csvReader= new CsvReader(tmPath,2,2);
+        BitStream[] tmLearnsetData = new BitStream[csvReader.length()];
         for(int i= 0; i < tmLearnsetData.length; i++)
         {
             tmLearnsetData[i] = new BitStream();
@@ -735,7 +734,7 @@ public class PersonalEditor
             writer.writeShort((short)data.getRareItem());
             writer.writeBytes(data.getGenderRatio(),data.getHatchMultiplier(),data.getBaseHappiness(),data.getExpRate(),data.getEggGroup1(),data.getEggGroup2(),data.getAbility1(),data.getAbility2(),data.getRunChance(),data.getDexColor());
             writer.writeBytes(0x00,0x00);
-//            System.out.println(i + ":   " + tmLearnsetData[i]);
+            System.out.println(i + ":   " + tmLearnsetData[i]);
             writer.write(tmLearnsetData[i].toBytes());
         }
     }

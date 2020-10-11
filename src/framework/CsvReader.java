@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CsvReader
 {
@@ -12,11 +13,17 @@ public class CsvReader
 
     public CsvReader(String filePath) throws IOException
     {
-        in= getData(filePath);
+        in= getData(filePath,2,1);
         line= 0;
     }
 
-    private String[][] getData(String filePath) throws IOException
+    public CsvReader(String filePath, int firstX, int firstY) throws IOException
+    {
+        in= getData(filePath,firstX,firstY);
+        line= 0;
+    }
+
+    private String[][] getData(String filePath, int firstX, int firstY) throws IOException
     {
         ArrayList<String> fileLines= new ArrayList<>();
         BufferedReader reader= new BufferedReader(new FileReader(filePath));
@@ -26,14 +33,23 @@ public class CsvReader
             fileLines.add(line);
         }
         reader.close();
-        fileLines.remove(0);
+        for(; firstY != 0; firstY--)
+        {
+            fileLines.remove(0);
+        }
+
 
         String[][] fileData= new String[fileLines.size()][];
+        int x;
         for(int i= 0; i < fileLines.size(); i++)
         {
+            x= firstX;
             String thisLine= fileLines.get(i);
-            thisLine= thisLine.substring(thisLine.indexOf(",")+1);
-            thisLine= thisLine.substring(thisLine.indexOf(",")+1);
+            for(; x != 0; x--)
+            {
+                thisLine= thisLine.substring(thisLine.indexOf(",")+1);
+            }
+            thisLine= thisLine.replaceAll("×","x");
             fileData[i]= thisLine.split(",");
         }
         return fileData;

@@ -163,60 +163,102 @@ Zen Mode
 Victory Star
 Turboblaze
 Teravolt
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
+Aroma Veil
+Flower Veil
+Cheek Pouch
+Protean
+Fur Coat
+Magician
+Bulletproof
+Competitive
+Strong Jaw
+Refrigerate
+Sweet Veil
+Stance Change
+Gale Wings
+Mega Launcher
+Grass Pelt
+Symbiosis
+Tough Claws
+Pixilate
+Gooey
+Aerilate
+Parental Bond
+Dark Aura
+Fairy Aura
+Aura Break
+Primordial Sea
+Desolate Land
+Delta Stream
+Stamina
+Wimp Out
+Emergency Exit
+Water Compaction
+Merciless
+Shields Down
+Stakeout
+Water Bubble
+Steelworker
+Berserk
+Slush Rush
+Long Reach
+Liquid Voice
+Triage
+Galvanize
+Surge Surfer
+Schooling
+Disguise
+Battle Bond
+Power Construct
+Corrosion
+Comatose
+Queenly Majesty
+Innards Out
+Dancer
+Battery
+Fluffy
+Dazzling
+Soul-Heart
+Tangling Hair
+Receiver
+Power of Alchemy
+Beast Boost
+RKS System
+Electric Surge
+Psychic Surge
+Misty Surge
+Grassy Surge
+Full Metal Body
+Shadow Shield
+Prism Armor
+Neuroforce
+Intrepid Sword
+Dauntless Shield
+Libero
+Ball Fetch
+Cotton Down
+Propeller Tail
+Mirror Armor
+Gulp Missile
+Stalwart
+Steam Engine
+Punk Rock
+Sand Spit
+Ice Scales
+Ripen
+Ice Face
+Power Spot
+Mimicry
+Screen Cleaner
+Steely Spirit
+Perish Body
+Wandering Spirit
+Gorilla Tactics
+Neutralizing Gas
+Pastel Veil
+Hunger Switch
+Quick Draw
+Unseen Fist
 96
 97
 98

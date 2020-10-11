@@ -4,14 +4,17 @@ import framework.BinaryWriter;
 import framework.Buffer;
 import framework.CsvReader;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
-public class TextEditor
+public class TextEditor2
 {
     public static void main(String[] args) throws IOException
     {
-        TextEditor textEditor= new TextEditor();
+        TextEditor2 textEditor= new TextEditor2();
         textEditor.textToCsv("msg2");
     }
 
@@ -19,7 +22,7 @@ public class TextEditor
     private String dataPath = path;
     private static String resourcePath = path + "Program Files" + File.separator;
 
-    public TextEditor() throws IOException {
+    public TextEditor2() throws IOException {
 
     }
 
@@ -28,7 +31,7 @@ public class TextEditor
 
         Buffer buffer;
         CharTable charTable= new CharTable();
-        BufferedWriter writer= new BufferedWriter(new FileWriter(path + File.separator + "ExtractedText.txt"));
+        BufferedWriter writer= new BufferedWriter(new FileWriter(path + File.separator + "ExtractedText2.txt"));
         ArrayList<String> dataList= new ArrayList<>();
 
         List<File> fileList= new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
@@ -137,7 +140,7 @@ public class TextEditor
                                                 {
                                                     String str2= charTable.getCharacter(num8);
                                                     text.append(str2);
-                                                    if (str2.equals("0"))
+                                                    if (str2 == "0")
                                                     {
                                                         if (Integer.toHexString(num8).length() < 4)
                                                         {
@@ -167,7 +170,7 @@ public class TextEditor
                                             {
                                                 String str3= charTable.getCharacter(num8);
                                                 text.append(str3);
-                                                if (str3.equals("0"))
+                                                if (str3 == "0")
                                                 {
                                                     if (Integer.toHexString(num8).length() < 4)
                                                     {
@@ -202,7 +205,7 @@ public class TextEditor
                                 {
                                     String str3= charTable.getCharacter(num4);
                                     text.append(str3);
-                                    if (str3.equals("0"))
+                                    if (str3 == "0")
                                     {
                                         if (Integer.toHexString(num4).length() < 4)
                                         {
@@ -246,7 +249,7 @@ public class TextEditor
                             str= str.substring(idx + 2);
                             line.append("VAR(");
 
-                            line.append(Integer.parseInt(str.substring(0, 4), 16)).append(",");
+                            line.append(Integer.parseInt(str.substring(0,4),16) + ",");
                             str= str.substring(str.indexOf("\\") + 3);
 
 
@@ -328,8 +331,8 @@ public class TextEditor
 
     }
 
-    private void sort(File[] arr) {
-        Arrays.sort(arr, Comparator.comparingInt(TextEditor::fileToInt));
+    private void sort(File arr[]) {
+        Arrays.sort(arr, Comparator.comparingInt(TextEditor2::fileToInt));
     }
 
     private static int fileToInt(File f) {
