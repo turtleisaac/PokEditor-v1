@@ -100,8 +100,8 @@ public class DsRomReader
             if(args.length == 1)
             {
                 System.out.println("\n\nThe following entries are the different editors/ tools you can run in PokEditor\nTo view information on any of these editors/ tools, please either type in their names now, or for future reference, add them as a second parameter when running the help command. For example, run \"java -jar PokEditor.jar help moves\" to see information on the move editor");
-                System.out.println("\nSpreadsheet-Based Editors:\n* PokEditor\n* Personal\n* Learnsets\n* Encounters\n* Evolutions\n* Growth\n* Items\n* Moves\n* Narc\n");
-                System.out.println("\nCMD-Based Editors:\n* Starters\n* Intro\n* Opening");
+                System.out.println("\nSpreadsheet-Based Editors:\n* PokEditor\n* Personal\n* Learnsets\n* Encounters\n* Evolutions\n* Growth\n* Items\n* Moves\n* Tutors");
+                System.out.println("\nCMD-Based Editors:\n* Starters\n* Intro\n* Opening\n* Narc\n* Random\n");
                 args= new String[] {args[0],scanner.nextLine()};
                 System.out.print("\nHelp: ");
             }
@@ -217,13 +217,19 @@ public class DsRomReader
 
                 case "random" :
                     System.out.println("File Randomizer\n");
-                    System.out.println("This tool will randomize the order of your rom's personal, learnsets, growth, etc... files so the data for every species ends up inside of a different sprite, dex entry, cry, etc...");
+                    System.out.println("This tool can randomize the order of your rom's personal, learnsets, evolutions, etc... files so the data for every species ends up inside of a different sprite, dex entry, cry, etc...");
                     System.out.println("For example, you could get all of the attributes of Origin Forme Giratina inside of the sprite and cry of an Igglybuff. Fun!");
                     System.out.println("The resulting files are not guaranteed to permit a possible run. Extreme bad luck could make it so that progression-essential HM's can't be learned by any available species at the start of the game");
-                    System.out.println("To run the File Randomizer on all of the files at once, you need to run PokEditor using the argument \"random\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)");
+                    System.out.println("To run the File Randomizer on all of the Pokemon-related files at once (personal, learnsets, growth, some others as well), you need to run PokEditor using the argument \"random\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)");
                     System.out.println("Alternatively, to run the randomizer on an individual data type, add \"random\" (without the quotes) in between the editor type and the rom name when typing the arguments for another editor (ex: personal random rom.nds)");
+                    System.out.println("This feature only works with the following set of file types: personal (includes stats and tm learnsets), learnsets, growth, moves, encounters (does all types together), items (not recommended at all, makes game impossible), and evolutions");
                     System.out.println("One thing that must be noted is that unlike all of the other tools/ editors for editing the data in a rom, the File Randomizer WILL overwrite the rom that you supply. Make sure to have a copy of your rom stored elsewhere before randomizing");
                     System.out.println("This editor currently works for all games, both Gen 4 and 5");
+                    break;
+
+                case "tutors" :
+                    System.out.println("Tutor Editor\n");
+                    System.out.println("This editor is currently not available");
                     break;
 
                 case "help" :
@@ -1172,6 +1178,7 @@ public class DsRomReader
     private static final int ENCOUNTER_HG = 0xA6;
     private static final int ITEM_J = 0x92;
     private static final int MOVE_J = 0x8C;
+    private static final int BABY_J= 0x1FF;
 
 
     private static final int PERSONAL_PT= 0x1A5;
@@ -1185,6 +1192,8 @@ public class DsRomReader
     private static final int STARTER2_PT= 104;
     private static final int INTRO_PT= 0x49;
     private static final int OPENING_PT= 0x4D;
+    private static final int TUTOR_PT= 0x05;
+    private static final int BABY_PT= 0x1A6;
 
     private static final int PERSONAL_DP= 0x146;
     private static final int LEARNSET_DP = 0x148;
@@ -1197,6 +1206,8 @@ public class DsRomReader
     private static final int STARTER2_DP= 63;
     private static final int INTRO_DP= 0x3b;
     private static final int OPENING_DP= 0x3F;
+    private static final int TUTOR_DP= 0x05;
+    private static final int BABY_DP= 0x147;
 
 
     private static final int PERSONAL_B2W2= 0x16B;
@@ -1254,8 +1265,7 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_J);
-                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
-//                        break;
+                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_HG);
                         break;
@@ -1264,6 +1274,9 @@ public class DsRomReader
                         break;
                     case "moves":
                         setFileData(MOVE_J);
+                        break;
+                    case "babies":
+                        setFileData(BABY_J);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -1284,8 +1297,7 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_J);
-                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
-//                        break;
+                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_SS);
                         break;
@@ -1294,6 +1306,9 @@ public class DsRomReader
                         break;
                     case "moves":
                         setFileData(MOVE_J);
+                        break;
+                    case "babies":
+                        setFileData(BABY_J);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -1314,8 +1329,7 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_PT);
-                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
-//                        break;
+                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_PT);
                         break;
@@ -1337,6 +1351,12 @@ public class DsRomReader
                     case "intro" :
                         setFileData(INTRO_PT);
                         break;
+                    case "tutors":
+                        setFileData(TUTOR_PT);
+                        break;
+                    case "babies":
+                        setFileData(BABY_PT);
+                        break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
@@ -1356,8 +1376,7 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_DP);
-                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
-//                        break;
+                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_DP);
                         break;
@@ -1379,6 +1398,12 @@ public class DsRomReader
                     case "intro" :
                         setFileData(INTRO_DP);
                         break;
+                    case "tutors":
+                        setFileData(TUTOR_DP);
+                        break;
+                    case "babies":
+                        setFileData(BABY_DP);
+                        break;
                     default:
                         throw new RuntimeException("Invalid arguments");
                 }
@@ -1398,8 +1423,7 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_DP);
-                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
-//                        break;
+                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_DP-1);
                         break;
@@ -1420,6 +1444,12 @@ public class DsRomReader
                         break;
                     case "intro" :
                         setFileData(INTRO_DP);
+                        break;
+                    case "tutors":
+                        setFileData(TUTOR_DP);
+                        break;
+                    case "babies":
+                        setFileData(BABY_DP);
                         break;
                     default:
                         throw new RuntimeException("Invalid arguments");
@@ -1442,8 +1472,7 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_BW);
-                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
-//                        break;
+                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_BW);
                         throw new RuntimeException("Encounters currently can't be edited for Gen 5");
@@ -1476,8 +1505,7 @@ public class DsRomReader
                         break;
                     case "growth":
                         setFileData(GROWTH_B2W2);
-                        throw new RuntimeException("The Growth Editor is currently disabled due to issues");
-//                        break;
+                        break;
                     case "encounters":
                         setFileData(ENCOUNTER_B2W2);
                         throw new RuntimeException("Encounters currently can't be edited for Gen 5");
@@ -1541,7 +1569,7 @@ public class DsRomReader
             randomizer.randomizeWithSet(tempPathUnpack);
 
         }
-        else
+        else if(isNarc)
         {
             switch (args[0].toLowerCase()) {
                 case "personal":
@@ -1576,10 +1604,12 @@ public class DsRomReader
 
                     break;
                 case "growth":
-                    GrowthEditor growthEditor = new GrowthEditor();
-                    growthEditor.growthToCsv(tempPathUnpack);
+                    throw new RuntimeException("The Growth Editor is currently disabled due to issues");
 
-                    break;
+//                    GrowthEditor growthEditor = new GrowthEditor();
+//                    growthEditor.growthToCsv(tempPathUnpack);
+//
+//                    break;
                 case "encounters":
                     if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || title.equals("soulsilver") || title.equals("heartgold"))
                     {

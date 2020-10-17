@@ -15,9 +15,9 @@ public class TutorCompatibilityEditor
 {
     public static void main(String[] args) throws IOException
     {
-        TutorCompatibilityEditor editor= new TutorCompatibilityEditor("CPUE","overlay9_5.bin");
-        editor.compatibilityToCsv();
-        editor.csvToCompatibility("tutorCompatibilityData.csv","overlay9_5_C.bin");
+//        TutorCompatibilityEditor editor= new TutorCompatibilityEditor("CPUE","overlay9_5.bin");
+//        editor.compatibilityToCsv();
+//        editor.csvToCompatibility("tutorCompatibilityData.csv","overlay9_5_C.bin");
     }
 
     private static String path = System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
@@ -28,8 +28,6 @@ public class TutorCompatibilityEditor
     private String gameCode;
     private ArrayList<SpecialBabyFormData> dataList;
     private int offset;
-    private Buffer buffer;
-    private BinaryWriter writer;
 
     private static final int S_TUTORS_PT_E= 0x30127;
     private static final int S_TUTORS_PT_J= 0x30127;
@@ -47,10 +45,9 @@ public class TutorCompatibilityEditor
     private static final int S_TUTORS_DP_S= 0x165a32;
     private static final int S_TUTORS_DP_K= 0x165a32;
 
-    public TutorCompatibilityEditor(String gameCode, String compatibilityFile) throws IOException
+    public TutorCompatibilityEditor(String gameCode) throws IOException
     {
         this.gameCode = gameCode;
-        this.compatibilityFile= compatibilityFile;
         String entryPath = resourcePath + "EntryData.txt";
         String movePath= resourcePath + "MoveList.txt";
 
@@ -143,10 +140,8 @@ public class TutorCompatibilityEditor
         }
     }
 
-    public void compatibilityToCsv() throws IOException
+    public void compatibilityToCsv(Buffer buffer) throws IOException
     {
-        dataList= new ArrayList<>();
-        buffer= new Buffer(path + "temp" + File.separator + compatibilityFile);
         buffer.skipTo(offset);
         byte[] thisMon;
         String[][] compatibilityTable= new String[nameData.length][38];
@@ -199,30 +194,17 @@ public class TutorCompatibilityEditor
         csvWriter.close();
     }
 
-    public void csvToCompatibility(String compatibilityCsv, String outputFile) throws IOException
+    public void csvToCompatibility(String compatibilityCsv, BinaryWriter writer, Buffer buffer) throws IOException
     {
-        String moveListPath = path + compatibilityCsv;
-        String outputPath;
+        String compatibilityPath = path + compatibilityCsv;
 
-        if (outputFile.contains("Recompile"))
-        {
-            outputPath = path + "temp" + File.separator + outputFile;
-        } else
-        {
-            outputPath = path + outputFile;
-        }
-
-
-        CsvReader csvReader = new CsvReader(moveListPath,2,1);
-        BinaryWriter writer= new BinaryWriter(outputPath);
+        CsvReader csvReader = new CsvReader(compatibilityPath,2,1);
         BitStream bitStream;
-        Buffer buffer= new Buffer("temp" + File.separator + compatibilityFile);
-        writer.write(buffer.readBytes(offset));
+        writer.write(buffer.readBytes(offset-buffer.getPosition()));
         for (int i = 0; i < csvReader.length(); i++)
         {
             bitStream= new BitStream();
             initializeIndex(csvReader.next());
-//            System.out.println(Arrays.toString(input));
             for(int x= 0; x < 38; x++)
             {
                 bitStream.append(next().equalsIgnoreCase("true"));

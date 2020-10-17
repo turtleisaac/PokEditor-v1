@@ -96,7 +96,6 @@ public class BabyFormEditor
         {
             writer.writeShort(getPokemon(csvReader.next()[0]));
         }
-
     }
 
 

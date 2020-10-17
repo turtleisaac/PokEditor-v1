@@ -1,4 +1,4 @@
-package encounters.johto;
+package encounters.johto.headbutt;
 
 import framework.BinaryWriter;
 import framework.Buffer;

@@ -16,7 +16,7 @@ public class TutorMoveListEditor
     {
         TutorMoveListEditor editor= new TutorMoveListEditor("CPUE","overlay9_5.bin");
         editor.moveListToCsv();
-        editor.csvToMoveList("tutorMoveDataRecompile.csv","overlay9_5_NEW.bin");
+        editor.csvToMoveList("tutorMoveDataRecompile.csv","tutorCo","overlay9_5_NEW.bin");
     }
 
     private static String path = System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
@@ -259,11 +259,13 @@ public class TutorMoveListEditor
         }
         csvWriter.close();
 
+        TutorCompatibilityEditor tutorCompatibilityEditor= new TutorCompatibilityEditor(gameCode);
+        tutorCompatibilityEditor.compatibilityToCsv(buffer);
     }
 
 
 
-    public void csvToMoveList(String moveListCsv,String outputFile) throws IOException
+    public void csvToMoveList(String moveListCsv, String compatibilityCsv, String outputFile) throws IOException
     {
         String moveListPath = path + moveListCsv;
         String outputPath;
@@ -293,8 +295,9 @@ public class TutorMoveListEditor
             writer.writeInt((int) Long.parseLong(next()));
             buffer.skipBytes(12);
         }
-        writer.write(buffer.readRemainder());
-        writer.close();
+
+        TutorCompatibilityEditor tutorCompatibilityEditor= new TutorCompatibilityEditor(gameCode);
+        tutorCompatibilityEditor.csvToCompatibility(compatibilityCsv,writer,buffer);
     }
 
     private void sort(File arr[])
