@@ -120,6 +120,10 @@ public class FileRandomizer implements Serializable
             ObjectInputStream objIn= new ObjectInputStream(fileIn);
 
             arr= (int[]) objIn.readObject();
+            if(arr.length != files.length)
+            {
+                throw new RuntimeException("The narc that you are trying to randomize contains an amount of files that does not match the amount in the existing randomized set");
+            }
             printOrder(arr);
 
             BinaryWriter writer;
@@ -140,7 +144,7 @@ public class FileRandomizer implements Serializable
         }
         else
         {
-            throw new RuntimeException("A random order does not yet exist");
+            throw new RuntimeException("A random order has not been generated yet");
         }
     }
 

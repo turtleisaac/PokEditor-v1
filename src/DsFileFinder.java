@@ -87,15 +87,17 @@ public class DsFileFinder
 //        findFile(0x7A,(byte)0xAB,(byte)0x01,(byte)0x00,(byte)0x00);
 //        findFileBytes(0x7A);
 //        findFile((byte)0x83,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x86,(byte)0x01,(byte)0x00,(byte)0x00,(byte)0x89,(byte)0x01);
-        System.out.println(romData.getTitle() + ":");
+        System.out.println(romData.getTitle() + ": ");
 
-        readArm9();
+//        readArm9();
 
 //        findFile(0x56,(byte) 0x06, (byte) 0x20, (byte) 0x08);
 
 //        findFile(true,0x80, 0x00, 0x98, 0x00, 0x9B,0x00,0x9E);
 //        findFile(true,0x80,0x98,0x00,0x00,0x00,0x9B,0x00,0x00,0x00,0x9E,0x00,0x00,0x00);
 //        findFile(true,0x80,0x98,0x00,0x9B,0x00,0x9E,0x00);
+
+        findFile(0x56,0x83,0x01,0x00,0x00,0x86,0x01,0x00,0x00,0x89,0x01,0x00,0x00);
 
 
         writeFile(5);
@@ -642,8 +644,14 @@ public class DsFileFinder
         }
     }
 
-    public void findFile(int max, byte... bytes) throws IOException
+    public void findFile(int max, int... bytes) throws IOException
     {
+        byte[] byteArr= new byte[bytes.length];
+        for(int i= 0; i < bytes.length; i++)
+        {
+            byteArr[i]= (byte)bytes[i];
+        }
+
         Buffer romBuffer;
         FimgEntry fimgEntry;
 
@@ -657,7 +665,7 @@ public class DsFileFinder
             for(int j= 0; j < contents.length; j++)
             {
                 arr= Arrays.copyOfRange(contents,j,j+bytes.length);
-                if(Arrays.equals(arr,bytes))
+                if(Arrays.equals(arr,byteArr))
                 {
                     System.out.print("Current file: " + i + ", ");
                     System.out.println("Global offset: 0x" + Integer.toHexString((int) (fimgEntry.getStartingOffset() + j)));

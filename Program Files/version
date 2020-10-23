@@ -1,3 +1,8 @@
-1.8.2
-Fixed errors in Gen 5 personal data editor
-Miscellaneous fixes
+1.9
+Added the DPPT Move Tutor Editor
+Added the Gen 4 Baby Form Editor
+Fixed the Growth Editor
+Added arm9 extraction
+Added arm7 extraction
+Added the File Randomizer (see README and the help command for more info)
+Fixed miscellaneous issues

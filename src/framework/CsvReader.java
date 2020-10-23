@@ -80,4 +80,12 @@ public class CsvReader
     {
         return in;
     }
+
+    public void print()
+    {
+        for(String[] arr : in)
+        {
+            System.out.println(Arrays.toString(arr));
+        }
+    }
 }

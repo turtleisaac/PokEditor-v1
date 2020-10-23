@@ -479,8 +479,10 @@ public class PersonalEditor
         int xValue;
         int yValue;
         CsvReader defaultReader= new CsvReader(resourcePath + "Defaults" + File.separator + "personal4.csv");
+        CsvReader csvReader= new CsvReader(tmPath,2,2);
+        BitStream[] tmLearnsetData = new BitStream[csvReader.length()];
 
-        BufferedReader reader= new BufferedReader(new FileReader(personalPath));
+        CsvReader personalReader= new CsvReader(personalPath,2,1);
         if(!personalCsv.substring(personalCsv.length()-4).equals(".csv"))
         {
             throw new RuntimeException("The provided personal data file is not a .csv");
@@ -498,37 +500,52 @@ public class PersonalEditor
             }
         }
 
-
-        ArrayList<String> personalLines= new ArrayList<>();
-        String line;
-
-        while((line=reader.readLine()) != null)
-        {
-            personalLines.add(line);
-        }
-        reader.close();
-        personalLines.remove(0);
-        xValue= personalLines.get(0).split(",").length;
-        yValue= personalLines.size();
-
-        for(int row= 0; row < yValue; row++)
-        {
-            for(int i= 0; i < 2; i++)
-            {
-                line= personalLines.get(row);
-                personalLines.set(row, line.substring(line.indexOf(",")+1));
-            }
-            personalLines.set(row,personalLines.get(row).substring(0,personalLines.get(row).length()-1).trim());
-        }
+        yValue= personalReader.length();
 
         String[] csvRow;
         ArrayList<PersonalData> personalData= new ArrayList<>();
-        for(int row= 0; row < yValue; row++)
+        for(int row= 0; row < personalReader.length(); row++)
         {
             String[] defaults= defaultReader.next();
-            csvRow= personalLines.get(row).split(",");
-            String[] finalCsvRow = csvRow;
+            csvRow= personalReader.next();
+            System.out.println(nameData[row] + " (" + row + "): " + Arrays.toString(csvRow));
+            initializeIndex(csvRow);
             int finalRow = row;
+
+            int hp= Integer.parseInt(next());
+            int atk= Integer.parseInt(next());
+            int def= Integer.parseInt(next());
+            int spe= Integer.parseInt(next());
+            int spAtk= Integer.parseInt(next());
+            int spDef= Integer.parseInt(next());
+
+            int type1= getType(next());
+            int type2= getType(next());
+            int catchRate= Integer.parseInt(next());
+            int baseExp= Integer.parseInt(next());
+
+            int hpEv= Integer.parseInt(next());
+            int speEv= Integer.parseInt(next());
+            int atkEv= Integer.parseInt(next());
+            int defEv= Integer.parseInt(next());
+            int spAtkEv= Integer.parseInt(next());
+            int spDefEv= Integer.parseInt(next());
+
+            int item1= getItem(next());
+            int item2= getItem(next());
+            int genderRatio= Integer.parseInt(next());
+            int hatchMultiplier= Integer.parseInt(next());
+            int baseHappiness= Integer.parseInt(next());
+            int expRate= getGrowthRate(next());
+
+            int eggGroup1= getEggGroup(next());
+            int eggGroup2= getEggGroup(next());
+            int ability1= getAbility(next());
+            int ability2= getAbility(next());
+            int runChance= Integer.parseInt(next());
+            int dexColor= Integer.parseInt(next());
+
+
 
             personalData.add(new PersonalData() {
                 @Override
@@ -538,82 +555,82 @@ public class PersonalEditor
 
                 @Override
                 public int getHP() {
-                    return Integer.parseInt(finalCsvRow[0]);
+                    return hp;
                 }
 
                 @Override
                 public int getAtk() {
-                    return Integer.parseInt(finalCsvRow[1]);
+                    return atk;
                 }
 
                 @Override
                 public int getDef() {
-                    return Integer.parseInt(finalCsvRow[2]);
+                    return def;
                 }
 
                 @Override
                 public int getSpe() {
-                    return Integer.parseInt(finalCsvRow[3]);
+                    return spe;
                 }
 
                 @Override
                 public int getSpAtk() {
-                    return Integer.parseInt(finalCsvRow[4]);
+                    return spAtk;
                 }
 
                 @Override
                 public int getSpDef() {
-                    return Integer.parseInt(finalCsvRow[5]);
+                    return spDef;
                 }
 
                 @Override
                 public int getType1() {
-                    return getType(finalCsvRow[6]);
+                    return type1;
                 }
 
                 @Override
                 public int getType2() {
-                    return getType(finalCsvRow[7]);
+                    return type2;
                 }
 
                 @Override
                 public int getCatchRate() {
-                    return Integer.parseInt(finalCsvRow[8]);
+                    return catchRate;
                 }
 
                 @Override
                 public int getBaseExp() {
-                    return Integer.parseInt(finalCsvRow[9]);
+                    return baseExp;
                 }
 
                 @Override
                 public int getHpEv() {
-                    return Integer.parseInt(finalCsvRow[10]);
+                    return hpEv;
                 }
 
                 @Override
                 public int getSpeEv() {
-                    return Integer.parseInt(finalCsvRow[11]);
+                    return speEv;
                 }
 
                 @Override
                 public int getAtkEv() {
-                    return Integer.parseInt(finalCsvRow[12]);
+                    return atkEv;
                 }
 
                 @Override
                 public int getDefEv() {
-                    return Integer.parseInt(finalCsvRow[13]);
+                    return defEv;
                 }
 
                 @Override
                 public int getSpAtkEv() {
-                    return Integer.parseInt(finalCsvRow[14]);
+                    return spAtkEv;
                 }
 
                 @Override
                 public int getSpDefEv() {
-                    return Integer.parseInt(finalCsvRow[15]);
+                    return spDefEv;
                 }
 
                 @Override
@@ -623,57 +640,57 @@ public class PersonalEditor
 
                 @Override
                 public int getUncommonItem() {
-                    return getItem(finalCsvRow[16]);
+                    return item1;
                 }
 
                 @Override
                 public int getRareItem() {
-                    return getItem(finalCsvRow[17]);
+                    return item2;
                 }
 
                 @Override
                 public int getGenderRatio() {
-                    return Integer.parseInt(finalCsvRow[18]);
+                    return genderRatio;
                 }
 
                 @Override
                 public int getHatchMultiplier() {
-                    return Integer.parseInt(finalCsvRow[19]);
+                    return hatchMultiplier;
                 }
 
                 @Override
                 public int getBaseHappiness() {
-                    return Integer.parseInt(finalCsvRow[20]);
+                    return baseHappiness;
                 }
 
                 @Override
                 public int getExpRate() {
-                    return getGrowthRate(finalCsvRow[21]);
+                    return expRate;
                 }
 
                 @Override
                 public int getEggGroup1() {
-                    return getEggGroup(finalCsvRow[22]);
+                    return eggGroup1;
                 }
 
                 @Override
                 public int getEggGroup2() {
-                    return getEggGroup(finalCsvRow[23]);
+                    return eggGroup2;
                 }
 
                 @Override
                 public int getAbility1() {
-                    return getAbility(finalCsvRow[24]);
+                    return ability1;
                 }
 
                 @Override
                 public int getAbility2() {
-                    return getAbility(finalCsvRow[25]);
+                    return ability2;
                 }
 
                 @Override
                 public int getRunChance() {
-                    return Integer.parseInt(finalCsvRow[26]);
+                    return runChance;
                 }
 
                 @Override
@@ -681,7 +698,7 @@ public class PersonalEditor
                 {
                     try
                     {
-                        return Integer.parseInt(finalCsvRow[27]);
+                        return dexColor;
                     }
                     catch (ArrayIndexOutOfBoundsException e)
                     {
@@ -692,7 +709,7 @@ public class PersonalEditor
                         }
                         else
                         {
-                            throw new RuntimeException("There is a problem with the provided personalDataRecompile.csv. Please try exporting/ downloading it again. If this does not work, please open a new Issue on the GitHub");
+                            throw new RuntimeException("There is a problem with the provided personalDataRecompile.csv. Please try exporting/ downloading it again. If this does not work, please open a new Issue on the GitHub or contact me on Discord (https://discord.gg/cTKQq5Y).\nAdditionally, if you are seeing this message on a non-Windows computer, please let me know as quickly as possible");
                         }
                     }
                 }
@@ -704,11 +721,11 @@ public class PersonalEditor
             });
         }
 
+        System.out.println("");
 
 
-        CsvReader csvReader= new CsvReader(tmPath,2,2);
-        BitStream[] tmLearnsetData = new BitStream[csvReader.length()];
-        for(int i= 0; i < tmLearnsetData.length; i++)
+
+        for(int i= 0; i < csvReader.length(); i++)
         {
             tmLearnsetData[i] = new BitStream();
 

@@ -1,5 +1,6 @@
 package growth;
 
+import framework.BinaryWriter;
 import framework.Buffer;
 import framework.CsvReader;
 
@@ -35,7 +36,7 @@ public class GrowthEditor
         dataPath+= growthDir;
 
         Buffer buffer;
-        ArrayList<int[]> dataList= new ArrayList<>();
+        ArrayList<long[]> dataList= new ArrayList<>();
 
         List<File> fileList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(dataPath).listFiles()))); //creates a List of File objects representing every file in specified parameter directory
         fileList.removeIf(File::isHidden); //removes all File objects from List that are hidden
@@ -45,18 +46,18 @@ public class GrowthEditor
 
         for (File file : files)
         {
-            int[] mon = new int[101];
+            long[] entry = new long[101];
             buffer = new Buffer(file.toString());
-            for (int l = 0; l < mon.length; l++)
+            for (int x = 0; x < entry.length; x++)
             {
-                mon[l]= buffer.readInt();
+                entry[x]= buffer.readUIntI();
             }
             buffer.close();
-            dataList.add(mon);
+            dataList.add(entry);
         }
 
-        BufferedWriter writer= new BufferedWriter(new FileWriter(path + "GrowthTable.csv"));
-        writer.write("ID Number,Name,");
+        BufferedWriter writer= new BufferedWriter(new FileWriter(path + "growthTable.csv"));
+        writer.write("ID Number,Growth Type,");
         for(int i= 0; i < 101; i++)
         {
             writer.write("Level " + i + ",");
@@ -65,10 +66,11 @@ public class GrowthEditor
 
         for(int row= 0; row < dataList.size(); row++)
         {
-            writer.write(row + "," + nameData[row] + ",");
-            for(int col= 0; col < 101; col++)
+            writer.write(row + "," + growthTableIdArr[row] + ",");
+            long[] thisRow= dataList.get(row);
+            for(int col= 0; col < thisRow.length; col++)
             {
-                writer.write(dataList.get(row)[col] + ",");
+                writer.write(thisRow[col] + ",");
             }
             writer.write("\n");
         }
@@ -80,15 +82,27 @@ public class GrowthEditor
         String outputPath;
         if(outputDir.contains("Recompile"))
         {
-            outputPath= path + "temp" + File.separator+ outputDir;
+            outputPath= path + "temp" + File.separator+ outputDir + File.separator;
         }
         else
         {
-            outputPath= path + File.separator + outputDir;
+            outputPath= path + File.separator + outputDir + File.separator;
         }
 
         String growthPath= path + growthCsv;
         CsvReader csvReader= new CsvReader(growthPath);
+        BinaryWriter writer;
+
+        for(int i= 0; i < csvReader.length(); i++)
+        {
+            initializeIndex(csvReader.next());
+            writer= new BinaryWriter(outputPath + i + ".bin");
+            for(int x= 0; x < input.length; x++)
+            {
+                writer.writeInt((int)Long.parseLong(next()));
+            }
+
+        }
 
     }
 
@@ -101,5 +115,26 @@ public class GrowthEditor
     private static int fileToInt (File f)
     {
         return Integer.parseInt(f.getName().split("\\.")[0]);
+    }
+
+    private int arrIdx;
+    private String[] input;
+
+    private void initializeIndex(String[] arr)
+    {
+        arrIdx= 0;
+        input= arr;
+    }
+
+    private String next()
+    {
+        try
+        {
+            return input[arrIdx++];
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            return "";
+        }
     }
 }
