@@ -14,7 +14,21 @@ Written entirely in Java and is completely OS-agnostic. Java 8 or greater is req
 
 java -jar PokEditor.jar \<arguments>
 
-Example: java -jar PokEditor.jar personal HeartGold.nds
+# Arguments
+
+* \<editor name> \<name of rom> (This is used to run the different editors/ tools for each data type)
+
+* help \<editor name> (This is used to view information on each editor/ tool)
+
+* random \<editor name(s) (each separated by a space)> \<name of rom>
+
+Examples: 
+
+* java -jar PokEditor.jar personal HeartGold.nds
+
+* java -jar PokEditor.jar help personal
+
+* java -jar PokEditor.jar random personal learnsets Platinum.nds
 
 # List of Spreadsheet-Based Editors/ Tools
 
@@ -32,6 +46,10 @@ Example: java -jar PokEditor.jar personal HeartGold.nds
 
 * moves
 
+* tutors
+
+* babies
+
 # List of Command Line-Based Editors/ Tools
 
 * starters
@@ -42,11 +60,11 @@ Example: java -jar PokEditor.jar personal HeartGold.nds
 
 * narc
 
-# Arguments
+* random
 
-* \<editor name> \<name of rom> (This is used to run the different editors/ tools for each data type)
+* arm9
 
-* help \<editor name> (This is used to view information on each editor/ tool)
+* arm7
 
 # Help Command
 
@@ -78,3 +96,11 @@ Example: java -jar PokEditor.jar personal HeartGold.nds
  After using the program to generate the spreadsheet(s), import the .csv files into any spreadsheet editor like Google Sheets or Microsoft Excel. The recommended method is to use the [PokEditor Google Sheets templates](https://drive.google.com/drive/folders/1hlKiP7V31Ddj4WmKnjK7lfhT88yPjB55?usp=sharing) (see information on this further up in the readme) and use "File" + "Import" on whatever sheet you want to overwrite with new data, choose the sheet output by the program, then select "Replace current sheet" (repeat for each sheet the program produced). Edit to your heart's content, then export/ download the spreadsheets as a .csv, place them in the same folder as PokEditor.jar, and make the name of the file match the name it originally had, but with "Recompile" appended to the end of the name (ex: personalDataRecompile.csv). You can then either run the program a second time using the same arguments as before, or if you never exited the comand line, simply press enter for the program to continue doing its work.
 
  If you did not add new entries (this is usually the case), the program will prompt you to type in a name for the output rom. Be sure to include .nds in the name, or else the file will not have a file extension. If you did add new entries, such as additional personal data files for new pokemon/ forms, the program will instead output a narc file and instructions on how to insert it into the game, as PokEditor is currently unable to rebuild roms when a larger/ smaller narc is recompiled. (**NOTE:** If you did not add new entries/ remove old entries and PokEditor exits and tells you that your narc is of a different size than the original, that means that there is a bug in the program. Please report this error to me using the Issues tab here on GitHub or on [this Discord server](https://discord.gg/cTKQq5Y)).
+ 
+ # File Randomizer
+ 
+  The File Randomizer is a never-before-seen kind of randomizer that I came up with a few months ago, but implemented fully only recently. The basic concept behind it is that you can take any narc (a file that is used to contain many individual files of the same type) and randomize the order of the files within it. This will result in the same exact set of data still being used, but in a random order. This concept can be applied to narcs such as the personal, learnsets, evolutions, encounters, growth, and moves narcs to recieve very fun results. For example, applying the randomizer to the personal file and the learnsets file will result in the data of one species being inside of the sprite of another. 
+  
+  For the best randomized experience, it is recommended that you use the arguments "random personal learnsets \<name of rom>". Running PokEditor with these arguments will result in the personal and learnsets narcs being randomized. While you are randomizing the rom, you may be prompted to create a new random order. It must be noted that when you are using the randomizer, you may be prompted to create a new random order. What this means is that it is asking you if you want to create a new randomization seed. If you want to have the same exact randomized order used on multiple files, say no to this prompt. Some narcs do not contain the same amount of files and therefore can't use the same randomized order, but all of the pokemon-related ones can. These include personal, learnsets, and evolutions. Trying to randomize encounters, moves, growth, or any other narc without making a new randomized order will cause the program to throw and error and not complete the task. Please keep this in mind when using the program.
+  
+  If you want to share the randomization seed with someone else, go into the "temp" folder and send them the file in there called "random.ser". If they put the seed file in their "temp" folder, then they can randomize their narcs to be the same order as long as they don't choose to generate a new order when running the program.
