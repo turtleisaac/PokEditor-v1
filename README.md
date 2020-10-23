@@ -8,6 +8,8 @@ Written entirely in Java and is completely OS-agnostic. Java 8 or greater is req
 
 **Note:** This is a Command Line Tool. You can't just run it by double clicking the .jar file, as this has no GUI. You need to run it through Terminal (macOS/ Linux) or cmd (Windows). For those of you who do not know how to use a Command Line Tool, this is a friendly reminder to make sure that you navigate to the PokEditor folder that the .jar is in __before__ trying to run it using the instructions in the [Usage](https://github.com/turtleisaac/PokEditor/blob/master/README.md#usage) and [Arguments](https://github.com/turtleisaac/PokEditor/blob/master/README.md#arguments) sections of this README.
 
+**Note:** Code from the [Universal Pokemon Randomizer ZX](https://github.com/Ajarmar/universal-pokemon-randomizer-zx) is adapted for LZ decompression purposes under the rights provided by the GNU General Public License v3.0. If there are any complaints related to this, please create a new Issue in the Issues tab here on GitHub.
+
 ![PokEditor Personal Editor](https://i.imgur.com/YyBOyCY.png)
 
 # Usage
