@@ -6,7 +6,6 @@ import java.util.*;
 /**
  * Author: turtleisaac
  * Start Date: 5/18/2020
- * End Date: 5/28/2020
  *
  * Thanks/ Credits to:
  * PlatinumMaster for writing the python NARCTool version I used as a reference
@@ -244,10 +243,10 @@ public class Narctowl {
             String outName= extractPath + subFiles.get(i).getName() + "." + extension;
             writer = new BinaryWriter(outName); //creates new BinaryWriter object using specified name/ numbering from subFiles ArrayList of NarcSubFiles
             writer.write(bytes); //writes the bytes read from the narc located in byte[] bytes to the output file
-            if(bytes[0] == 0)
-            {
-                System.out.println(i + ": " + Arrays.toString(bytes));
-            }
+//            if(bytes[0] == 0)
+//            {
+//                System.out.println(i + ": " + Arrays.toString(bytes));
+//            }
 
             writer.close(); //closes BinaryWriter and flushes data
 
@@ -311,13 +310,28 @@ public class Narctowl {
         File[] files = fileList.toArray(new File[0]); //creates an array of File objects using the contents of the modified List
         sort(files); //sorts files numerically (0.bin, 1.bin, 2.bin, etc...)
 
+
+
         int fimgPosition = 0; //creates a counter to track the length of the fimg section
         for (int i = 0; i < files.length; i++) //goes through each file in order
         {
             file = files[i];
             fimgBuffer = new Buffer(file.toString()); //sets the Framework.Buffer object to the current file
             byte[] contents = fimgBuffer.readRemainder(); //contains the contents of the file
+            byte[] fixedContents;
             int fimgPosition2 = fimgPosition; //creates a local, final variable to hold the fimgPosition data
+
+            if(contents.length % 4 != 0)
+            {
+                System.out.println("File " + i + " padding added: " + contents.length % 4);
+                fixedContents= new byte[contents.length + (contents.length % 4)];
+                Arrays.fill(fixedContents,(byte) 0xff);
+                System.arraycopy(contents,0,fixedContents,0,contents.length);
+            }
+            else
+            {
+                fixedContents= contents;
+            }
 
             fimgTable.add(new TableSubFile() {
                 @Override
@@ -332,55 +346,26 @@ public class Narctowl {
 
                 @Override
                 public byte[] getFileContents() {
-                    return contents;
+                    return fixedContents;
                 }
 
                 @Override
                 public int length() {
-                    return contents.length;
+                    return fixedContents.length;
                 }
             });
-            fimgPosition += fimgBuffer.getPosition(); //increments fimgPosition by the length of the file contents for purpose of keeping track of starting offsets/ ending offsets and the length of the section
+            fimgPosition += fixedContents.length; //increments fimgPosition by the length of the file contents for purpose of keeping track of starting offsets/ ending offsets and the length of the section
             fimgBuffer.close();
         }
 
         MemBuf fimgBuf = MemBuf.create(); //creates new Framework.MemBuf object of maximum size of 1 MB for fimg section
         int fimgSize = fimgPosition + 8; //creates new int variable to hold length of fimg table. Additional 8 bytes are for the header length
         MemBuf.MemBufWriter writer = fimgBuf.writer().writeBytes(0x47, 0x4D, 0x49, 0x46).writeInt(fimgSize); //writes fimg magic number
-        int count = 1;
 
         for (int i = 0; i < fimgTable.size(); i++) //goes through each narcs.TableSubFile object in the ArrayList
         {
             TableSubFile tableSubFile = fimgTable.get(i);
-            writer.write(tableSubFile.getFileContents()); //writes contents of each narcs.TableSubFile object
-            if (tableSubFile.getStartingOffset() % 4 != 0) //sees if file doesn't start at an offset divisible by 4
-            {
-                writer.skip(4 - (tableSubFile.getStartingOffset() % 4)); //if so, skip 4 - remainder amount of bytes
-                fimgSize += 4 - (tableSubFile.getStartingOffset() % 4);
-                System.out.println("File " + i + " padding added: " + (4 - (tableSubFile.getStartingOffset() % 4)));
-                fimgTable.set(i, new TableSubFile() {
-                    @Override
-                    public int getStartingOffset() {
-                        return tableSubFile.getStartingOffset() + 4 - (tableSubFile.getStartingOffset() % 4);
-                    }
-
-                    @Override
-                    public int getEndingOffset() {
-                        return tableSubFile.getEndingOffset() + 4 - (tableSubFile.getStartingOffset() % 4);
-                    }
-
-                    @Override
-                    public byte[] getFileContents() {
-                        return tableSubFile.getFileContents();
-                    }
-
-                    @Override
-                    public int length() {
-                        return tableSubFile.getFileContents().length;
-                    }
-                });
-            }
-            count++;
+            writer.write(tableSubFile.getFileContents()); //writes contents of each TableSubFile object
         }
 
 

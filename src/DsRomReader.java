@@ -1658,100 +1658,106 @@ public class DsRomReader
         }
         else if(isNarc)
         {
-            switch (args[0].toLowerCase()) {
-                case "personal":
-                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                    {
-                        Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2(gameCode);
-                        personalEditor.personalToCSV(tempPathUnpack);
-                    }
-                    else
-                    {
-                        PersonalEditor personalEditor = new PersonalEditor(gameCode);
-                        personalEditor.personalToCSV(tempPathUnpack);
-                    }
+            System.out.println("Do you want to generate new sheets? (Y/n)");
+            String ans= scanner.nextLine().toLowerCase();
+            if(!ans.equalsIgnoreCase("n"))
+            {
+                switch (args[0].toLowerCase()) {
+                    case "personal":
+                        if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                        {
+                            Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2(gameCode);
+                            personalEditor.personalToCSV(tempPathUnpack);
+                        }
+                        else
+                        {
+                            PersonalEditor personalEditor = new PersonalEditor(gameCode);
+                            personalEditor.personalToCSV(tempPathUnpack);
+                        }
 
-                    break;
+                        break;
 
-                case "learnsets":
-                    LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
-                    learnsetEditor.learnsetToCsv(tempPathUnpack);
+                    case "learnsets":
+                        LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
+                        learnsetEditor.learnsetToCsv(tempPathUnpack);
 
-                    break;
+                        break;
 
-                case "evolutions":
-                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                    {
-                        EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
-                        evolutionEditor.evolutionToCsv(tempPathUnpack, false);
-                    }
-                    else
-                    {
-                        EvolutionEditor evolutionEditor = new EvolutionEditor();
-                        evolutionEditor.evolutionToCsv(tempPathUnpack, false);
-                    }
+                    case "evolutions":
+                        if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                        {
+                            EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
+                            evolutionEditor.evolutionToCsv(tempPathUnpack, false);
+                        }
+                        else
+                        {
+                            EvolutionEditor evolutionEditor = new EvolutionEditor();
+                            evolutionEditor.evolutionToCsv(tempPathUnpack, false);
+                        }
 
-                    break;
+                        break;
 
-                case "growth":
-                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                    {
-                        throw new RuntimeException("The Growth Editor is currently not available for Gen 5");
-                    }
-                    else
-                    {
-                        GrowthEditor growthEditor = new GrowthEditor();
-                        growthEditor.growthToCsv(tempPathUnpack);
-                    }
+                    case "growth":
+                        if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                        {
+                            throw new RuntimeException("The Growth Editor is currently not available for Gen 5");
+                        }
+                        else
+                        {
+                            GrowthEditor growthEditor = new GrowthEditor();
+                            growthEditor.growthToCsv(tempPathUnpack);
+                        }
 
-                    break;
-                case "encounters":
-                    if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || title.equals("soulsilver") || title.equals("heartgold"))
-                    {
-                        EncounterEditor encounterEditor= new EncounterEditor();
-                        encounterEditor.encountersToCsv(tempPathUnpack);
-                    }
-                    else
-                    {
-                        SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
-                        encounterEditor.encountersToCsv(tempPathUnpack);
-                    }
-                    break;
+                        break;
+                    case "encounters":
+                        if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || title.equals("soulsilver") || title.equals("heartgold"))
+                        {
+                            EncounterEditor encounterEditor= new EncounterEditor();
+                            encounterEditor.encountersToCsv(tempPathUnpack);
+                        }
+                        else
+                        {
+                            SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
+                            encounterEditor.encountersToCsv(tempPathUnpack);
+                        }
+                        break;
 
-                case "items":
-                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                    {
-                        ItemEditorGen5 itemEditor = new ItemEditorGen5();
-                        itemEditor.itemsToCsv(tempPathUnpack);
-                    }
-                    else
-                    {
-                        ItemEditorGen4 itemEditor = new ItemEditorGen4(gameCode);
-                        itemEditor.itemsToCsv(tempPathUnpack);
-                    }
-                    break;
+                    case "items":
+                        if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                        {
+                            ItemEditorGen5 itemEditor = new ItemEditorGen5();
+                            itemEditor.itemsToCsv(tempPathUnpack);
+                        }
+                        else
+                        {
+                            ItemEditorGen4 itemEditor = new ItemEditorGen4(gameCode);
+                            itemEditor.itemsToCsv(tempPathUnpack);
+                        }
+                        break;
 
-                case "moves":
-                    if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
-                    {
-                        MoveEditorGen5 moveEditor = new MoveEditorGen5();
-                        moveEditor.movesToCsv(tempPathUnpack);
-                    }
-                    else
-                    {
-                        MoveEditorGen4 moveEditor = new MoveEditorGen4();
-                        moveEditor.movesToCsv(tempPathUnpack);
-                    }
-                    break;
+                    case "moves":
+                        if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
+                        {
+                            MoveEditorGen5 moveEditor = new MoveEditorGen5();
+                            moveEditor.movesToCsv(tempPathUnpack);
+                        }
+                        else
+                        {
+                            MoveEditorGen4 moveEditor = new MoveEditorGen4();
+                            moveEditor.movesToCsv(tempPathUnpack);
+                        }
+                        break;
 
-                default:
-                    throw new RuntimeException("Invalid arguments");
+                    default:
+                        throw new RuntimeException("Invalid arguments");
+                }
+
+                System.out.println("\nAfter making all edits to the csv file(s), export them with the same name(s) as they had originally, but with \"Recompile\" appended prior to the file extension. Place them in the same folder they were output in.\nPress Enter to continue.");
+                Thread.sleep(1000);
+                scanner.nextLine();
+                Thread.sleep(1000);
             }
 
-            System.out.println("\nAfter making all edits to the csv file(s), export them with the same name(s) as they had originally, but with \"Recompile\" appended prior to the file extension. Place them in the same folder they were output in.\nPress Enter to continue.");
-            Thread.sleep(1000);
-            scanner.nextLine();
-            Thread.sleep(1000);
 
             switch (args[0].toLowerCase()) {
                 case "personal":
@@ -1835,6 +1841,7 @@ public class DsRomReader
         }
         else
         {
+            String ans;
             switch (args[0].toLowerCase())
             {
                 case "starters" :
@@ -1853,25 +1860,34 @@ public class DsRomReader
                     break;
 
                 case "tutors" :
+                    System.out.println("Do you want to generate new sheets? (Y/n)");
+                    ans= scanner.nextLine().toLowerCase();
                     TutorMoveListEditor tutorEditor= new TutorMoveListEditor(gameCode,tempPathUnpack);
-                    tutorEditor.moveListToCsv();
+                    if(!ans.equalsIgnoreCase("n"))
+                    {
+                        tutorEditor.moveListToCsv();
 
-                    System.out.println("\nAfter making all edits to the csv file(s), export them with the same name(s) as they had originally, but with \"Recompile\" appended prior to the file extension. Place them in the same folder they were output in.\nPress Enter to continue.");
-                    Thread.sleep(1000);
-                    scanner.nextLine();
-                    Thread.sleep(1000);
-
+                        System.out.println("\nAfter making all edits to the csv file(s), export them with the same name(s) as they had originally, but with \"Recompile\" appended prior to the file extension. Place them in the same folder they were output in.\nPress Enter to continue.");
+                        Thread.sleep(1000);
+                        scanner.nextLine();
+                        Thread.sleep(1000);
+                    }
                     tutorEditor.csvToMoveList("tutorMoveDataRecompile.csv","tutorCompatibilityDataRecompile.csv",type + "Recompile");
                     break;
 
                 case "babies" :
+                    System.out.println("Do you want to generate new sheets? (Y/n)");
+                    ans= scanner.nextLine().toLowerCase();
                     BabyFormEditor babyEditor= new BabyFormEditor();
-                    babyEditor.babyFormsToCsv(tempPathUnpack);
+                    if(!ans.equalsIgnoreCase("n"))
+                    {
+                        babyEditor.babyFormsToCsv(tempPathUnpack);
 
-                    System.out.println("\nAfter making all edits to the csv file(s), export them with the same name(s) as they had originally, but with \"Recompile\" appended prior to the file extension. Place them in the same folder they were output in.\nPress Enter to continue.");
-                    Thread.sleep(1000);
-                    scanner.nextLine();
-                    Thread.sleep(1000);
+                        System.out.println("\nAfter making all edits to the csv file(s), export them with the same name(s) as they had originally, but with \"Recompile\" appended prior to the file extension. Place them in the same folder they were output in.\nPress Enter to continue.");
+                        Thread.sleep(1000);
+                        scanner.nextLine();
+                        Thread.sleep(1000);
+                    }
 
                     babyEditor.csvToBabyForms("babyFormsDataRecompile.csv",type + "Recompile");
                     break;

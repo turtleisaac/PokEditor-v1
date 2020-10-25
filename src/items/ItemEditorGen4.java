@@ -27,14 +27,15 @@ public class ItemEditorGen4
     private static String[] abilityData;
     private static String[] fieldFunctions;
     private static String[] pluckFlingEffects;
-    private static String[] fieldBagPockets= {"Items","Medicine","Pokeballs","TMs/HMs","Berries","Mail","Battle Items","Key Items"};
+    private static String[] fieldBagPockets;
     private static String[] battleBagPockets= {"None","Pokeballs","Battle Items","","Recovery","","","","Status Healing","","","","Status/ HP Recovery","","","","PP Recovery"};
-    private static String[] battleFunctions= {"None","Pokeballs","Recovery","Escape"};
+    private static String[] battleFunctions;
     private static String[] workTypes= {"Dummy","Usable"};
 
     public ItemEditorGen4(String gameCode) throws IOException
     {
         String itemPath= resourcePath;
+        String fieldFunctionsPath= resourcePath;
 
         BufferedReader reader;
         String line;
@@ -44,15 +45,18 @@ public class ItemEditorGen4
             case "apa" :
             case "ada" :
                 itemPath+= "ItemListDP.txt";
+                fieldFunctionsPath+= "ItemFieldFunctionsSinnoh.txt";
                 break;
 
             case "cpu" :
                 itemPath+= "ItemListPt.txt";
+                fieldFunctionsPath+= "ItemFieldFunctionsSinnoh.txt";
                 break;
 
             case "ipk" :
             case "ipg" :
-                itemPath+= "ItemList.txt";
+                itemPath+= "ItemListJohto.txt";
+                fieldFunctionsPath+= "ItemFieldFunctionsJohto.txt";
                 break;
 
             default :
@@ -80,7 +84,7 @@ public class ItemEditorGen4
         abilityData= abilityList.toArray(new String[0]);
         reader.close();
 
-        reader= new BufferedReader(new FileReader(resourcePath + "ItemFieldFunctionsGen4.txt"));
+        reader= new BufferedReader(new FileReader(fieldFunctionsPath));
         ArrayList<String> fieldEffectList= new ArrayList<>();
         while((line= reader.readLine()) != null)
         {
@@ -88,6 +92,26 @@ public class ItemEditorGen4
             fieldEffectList.add(line);
         }
         fieldFunctions = fieldEffectList.toArray(new String[0]);
+        reader.close();
+
+        reader= new BufferedReader(new FileReader(resourcePath + "ItemFieldBagPocketsGen4.txt"));
+        ArrayList<String> fieldPocketList= new ArrayList<>();
+        while((line= reader.readLine()) != null)
+        {
+            line= line.trim();
+            fieldPocketList.add(line);
+        }
+        fieldBagPockets = fieldPocketList.toArray(new String[0]);
+        reader.close();
+
+        reader= new BufferedReader(new FileReader(resourcePath + "ItemBattleFunctionsGen4.txt"));
+        ArrayList<String> battleEffectList= new ArrayList<>();
+        while((line= reader.readLine()) != null)
+        {
+            line= line.trim();
+            battleEffectList.add(line);
+        }
+        battleFunctions = battleEffectList.toArray(new String[0]);
         reader.close();
 
         reader= new BufferedReader(new FileReader(resourcePath + "PluckFlingEffectsGen4.txt"));
@@ -868,7 +892,7 @@ public class ItemEditorGen4
                 return i;
             }
         }
-        throw new RuntimeException("Invalid ability entered");
+        throw new RuntimeException("Invalid ability entered: " + ability);
     }
 
     private static int getItem(String item)
@@ -880,7 +904,7 @@ public class ItemEditorGen4
                 return i;
             }
         }
-        throw new RuntimeException("Invalid item entered");
+        throw new RuntimeException("Invalid item entered: " + item);
     }
 
     private static int getFieldPocket(String pocket)
@@ -892,7 +916,7 @@ public class ItemEditorGen4
                 return i;
             }
         }
-        throw new RuntimeException("Invalid pocket entered");
+        throw new RuntimeException("Invalid field pocket entered: " + pocket);
     }
 
     private static int getBattlePocket(String pocket)
@@ -904,7 +928,7 @@ public class ItemEditorGen4
                 return i;
             }
         }
-        throw new RuntimeException("Invalid pocket entered");
+        throw new RuntimeException("Invalid battle pocket entered: " + pocket);
     }
 
     private static int getFieldFunction(String function)
@@ -916,7 +940,7 @@ public class ItemEditorGen4
                 return i;
             }
         }
-        throw new RuntimeException("Invalid function entered");
+        throw new RuntimeException("Invalid field function entered: " + function);
     }
 
     private static int getBattleFunction(String function)
@@ -928,7 +952,7 @@ public class ItemEditorGen4
                 return i;
             }
         }
-        throw new RuntimeException("Invalid function entered");
+        throw new RuntimeException("Invalid battle function entered: " + function);
     }
 
     private static int getPluckEffect(String effect)
@@ -940,6 +964,6 @@ public class ItemEditorGen4
                 return i;
             }
         }
-        throw new RuntimeException("Invalid effect entered");
+        throw new RuntimeException("Invalid pluck effect entered: " + effect);
     }
 }

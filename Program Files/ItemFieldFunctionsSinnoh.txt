@@ -21,3 +21,5 @@ Display Bag Prompt
 Evolution Item
 Escape Rope
 Azure Flute
+Vs. Item
+Gracidea

@@ -111,28 +111,6 @@ Dawn Stone
 Oval Stone
 Odd Keystone
 Griseous Orb
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
-unknown
 Adamant Orb
 Lustrous Orb
 Grass Mail
@@ -426,7 +404,7 @@ HM05
 HM06
 HM07
 HM08
-Explorer Kit*
+Explorer Kit
 Loot Sack
 Rule Book
 Poké Radar
