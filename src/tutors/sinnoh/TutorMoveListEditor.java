@@ -1,6 +1,6 @@
 package tutors.sinnoh;
 
-import babies.SpecialBabyFormData;
+import com.turtleisaac.pokeditor.editors.babies.SpecialBabyFormData;
 import framework.BinaryWriter;
 import framework.Buffer;
 import framework.CsvReader;

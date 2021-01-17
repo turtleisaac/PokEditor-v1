@@ -1,4 +1,4 @@
-import babies.BabyFormEditor;
+import com.turtleisaac.pokeditor.editors.babies.BabyFormEditor;
 import encounters.johto.EncounterEditor;
 import encounters.sinnoh.SinnohEncounterEditor;
 import evolutions.gen4.EvolutionEditor;
@@ -112,7 +112,7 @@ public class DsRomReader
 
             switch (args[1].toLowerCase())
             {
-                case "personal" :
+                case "com/turtleisaac/pokeditor/editors/personal":
                     System.out.println("Personal Data Editor\n");
                     System.out.println("The Personal Data narc is used to store a large chunk of the information needed for each species of Pokémon, such as their base stats, types, abilities, ev yields, and much more!");
                     System.out.println("To run the Personal Data Editor, you need to run PokEditor using the argument \"personal\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -121,7 +121,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for all games, both Gen 4 and 5");
                     break;
 
-                case "learnsets" :
+                case "com/turtleisaac/pokeditor/editors/learnsets":
                     System.out.println("Level-Up Learnsets Editor\n");
                     System.out.println("The Level-Up Learnsets narc, as the name suggests, is used to store the level-up learnsets of each species of Pokémon. Each Pokémon can have a maximum of 20 moves in Gen 4, and a maximum of 30 in Gen 5");
                     System.out.println("To run the Level-Up Learnsets Editor, you need to run PokEditor using the argument \"learnsets\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -130,7 +130,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for all games, both Gen 4 and 5");
                     break;
 
-                case "encounters" :
+                case "com/turtleisaac/pokeditor/editors/encounters":
                     System.out.println("Wild Encounters Editor\n");
                     System.out.println("The Encounters narc, as the name suggests, is used to store the different types of encounter data for each area in the game");
                     System.out.println("To run the Wild Encounters Editor, you need to run PokEditor using the argument \"encounters\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -139,7 +139,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for all Gen 4 games");
                     break;
 
-                case "evolutions" :
+                case "com/turtleisaac/pokeditor/editors/evolutions":
                     System.out.println("Evolutions Editor\n");
                     System.out.println("The Evolutions narc, as the name suggests, is used to store the different evolutions of each species of Pokémon. Each species can only have a maximum of seven evolutions");
                     System.out.println("To run the Evolutions Editor, you need to run PokEditor using the argument \"evolutions\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -148,7 +148,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for all games, both Gen 4 and 5");
                     break;
 
-                case "growth" :
+                case "com/turtleisaac/pokeditor/editors/growth":
                     System.out.println("Growth Table Editor\n");
                     System.out.println("The Growth table narc is used to store the amount of exp required for each level for each growth type (the growth type used be changed for each pokemon using the Personal editor)");
                     System.out.println("To run the Growth Table Editor, you need to run PokEditor using the argument \"growth\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -157,7 +157,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for all Gen 4 games");
                     break;
 
-                case "items" :
+                case "com/turtleisaac/pokeditor/editors/items":
                     System.out.println("Item Editor\n");
                     System.out.println("The Items narc, as the name suggests, is used to store the data required to define every single item in the game");
                     System.out.println("To run the Item Editor, you need to run PokEditor using the argument \"items\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -166,7 +166,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for all Gen 4 games");
                     break;
 
-                case "moves" :
+                case "com/turtleisaac/pokeditor/editors/moves":
                     System.out.println("Move Editor\n");
                     System.out.println("The Moves narc, as the name suggests, is used to store the data required to define every single move in the game");
                     System.out.println("To run the Move Editor, you need to run PokEditor using the argument \"moves\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -194,7 +194,7 @@ public class DsRomReader
                     System.out.println("If you have any issues with this tool, feel free to contact me for help! You can use the \"Issues\" tab on GitHub, or join the following Discord server: https://discord.gg/cTKQq5Y");
                     break;
 
-                case "starters" :
+                case "com/turtleisaac/pokeditor/editors/starters":
                     System.out.println("Starter Editor\n");
                     System.out.println("This editor, as the name suggests, allows you to change the three starter Pokemon you are able to choose from at the start of the game");
                     System.out.println("To run the Starter Editor, you need to run PokEditor using the argument \"starters\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -203,7 +203,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for only the Sinnoh Gen 4 games (Diamond, Pearl, Platinum)");
                     break;
 
-                case "intro" :
+                case "com/turtleisaac/pokeditor/editors/intro":
                     System.out.println("Intro Editor\n");
                     System.out.println("This editor, as the name suggests, allows you to change the Pokemon that Professor Rowan shows you during the intro at the start of the game");
                     System.out.println("To run the Intro Editor, you need to run PokEditor using the argument \"intro\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -211,7 +211,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for only the Sinnoh Gen 4 games (Diamond, Pearl, Platinum)");
                     break;
 
-                case "opening" :
+                case "com/turtleisaac/pokeditor/editors/opening":
                     System.out.println("Opening Cinematic Cutscene Editor\n");
                     System.out.println("This editor, as the name suggests, allows you to change the Pokemon that can appear during the opening cinematic cutscene before you open your save file");
                     System.out.println("To run the Opening Cinematic Cutscene Editor, you need to run PokEditor using the argument \"opening\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -231,7 +231,7 @@ public class DsRomReader
                     System.out.println("This tool currently works for all games, both Gen 4 and 5 (however, some randomization types will not work due to how the data is stored)");
                     break;
 
-                case "tutors" :
+                case "com/turtleisaac/pokeditor/editors/tutors":
                     System.out.println("Tutor Editor\n");
                     System.out.println("This editor, as the name suggests, allows you to change the moves taught by the move tutors in the game and every species' compatibility with those moves");
                     System.out.println("To run the Tutor Editor, you need to run PokEditor using the argument \"tutors\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -239,7 +239,7 @@ public class DsRomReader
                     System.out.println("This editor currently works for only the Sinnoh Gen 4 games (Diamond, Pearl, Platinum)");
                     break;
 
-                case "babies" :
+                case "com/turtleisaac/pokeditor/editors/babies":
                     System.out.println("Baby Form Editor\n");
                     System.out.println("This editor, as the name suggests, allows you to change species of Pokemon created when hatching an egg created by a female member of a species (note: incense babies/ held-item dependent babies are not part of this editor)");
                     System.out.println("To run the Baby Form Editor, you need to run PokEditor using the argument \"babies\" (without the quotes), followed by the name of your rom (including .nds) (which needs to be inside of the PokEditor folder)\n");
@@ -1317,12 +1317,12 @@ public class DsRomReader
         isNarc= false;
         tempPath= "temp" + File.separator + type;
         tempPathUnpack= tempPath;
-        if(!type.equalsIgnoreCase("starters") && !type.equalsIgnoreCase("intro") && !type.equalsIgnoreCase("starters2") && !type.equalsIgnoreCase("opening") && !type.equalsIgnoreCase("tutors") && !type.equalsIgnoreCase("babies") && !type.equalsIgnoreCase("babies_sp"))
+        if(!type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/starters") && !type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/intro") && !type.equalsIgnoreCase("starters2") && !type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/opening") && !type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/tutors") && !type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/babies") && !type.equalsIgnoreCase("babies_sp"))
         {
             tempPath+= ".narc";
             isNarc= true;
         }
-        if(!type.equalsIgnoreCase("starters") && !type.equalsIgnoreCase("intro") && !type.equalsIgnoreCase("starters2") && !type.equalsIgnoreCase("opening"))
+        if(!type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/starters") && !type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/intro") && !type.equalsIgnoreCase("starters2") && !type.equalsIgnoreCase("com/turtleisaac/pokeditor/editors/opening"))
         {
             isSpreadsheet= true;
         }
@@ -1341,28 +1341,28 @@ public class DsRomReader
             case "heartgold":
             case "POKEMON HG":
                 switch(type) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         setFileData(PERSONAL_J);
                         break;
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         setFileData(LEARNSET_J);
                         break;
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         setFileData(EVOLUTION_J);
                         break;
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         setFileData(GROWTH_J);
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         setFileData(ENCOUNTER_HG);
                         break;
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         setFileData(ITEM_J);
                         break;
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         setFileData(MOVE_J);
                         break;
-                    case "babies":
+                    case "com/turtleisaac/pokeditor/editors/babies":
                         setFileData(BABY_J);
                         break;
                     default:
@@ -1373,28 +1373,28 @@ public class DsRomReader
             case "soulsilver":
             case "POKEMON SS":
                 switch(type) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         setFileData(PERSONAL_J);
                         break;
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         setFileData(LEARNSET_J);
                         break;
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         setFileData(EVOLUTION_J);
                         break;
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         setFileData(GROWTH_J);
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         setFileData(ENCOUNTER_SS);
                         break;
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         setFileData(ITEM_J);
                         break;
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         setFileData(MOVE_J);
                         break;
-                    case "babies":
+                    case "com/turtleisaac/pokeditor/editors/babies":
                         setFileData(BABY_J);
                         break;
                     default:
@@ -1405,43 +1405,43 @@ public class DsRomReader
             case "platinum":
             case "POKEMON PL":
                 switch(type) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         setFileData(PERSONAL_PT);
                         break;
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         setFileData(LEARNSET_PT);
                         break;
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         setFileData(EVOLUTION_PT);
                         break;
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         setFileData(GROWTH_PT);
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         setFileData(ENCOUNTER_PT);
                         break;
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         setFileData(ITEM_PT);
                         break;
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         setFileData(MOVE_PT);
                         break;
-                    case "starters" :
+                    case "com/turtleisaac/pokeditor/editors/starters":
                         setFileData(STARTER_PT);
                         break;
-                    case "opening" :
+                    case "com/turtleisaac/pokeditor/editors/opening":
                         setFileData(OPENING_PT);
                         break;
                     case "starters2" :
                         setFileData(STARTER2_PT);
                         break;
-                    case "intro" :
+                    case "com/turtleisaac/pokeditor/editors/intro":
                         setFileData(INTRO_PT);
                         break;
-                    case "tutors":
+                    case "com/turtleisaac/pokeditor/editors/tutors":
                         setFileData(TUTOR_PT);
                         break;
-                    case "babies":
+                    case "com/turtleisaac/pokeditor/editors/babies":
                         setFileData(BABY_PT);
                         break;
                     default:
@@ -1452,43 +1452,43 @@ public class DsRomReader
             case "pearl":
             case "POKEMON P":
                 switch(type) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         setFileData(PERSONAL_DP);
                         break;
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         setFileData(LEARNSET_DP);
                         break;
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         setFileData(EVOLUTION_DP);
                         break;
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         setFileData(GROWTH_DP);
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         setFileData(ENCOUNTER_DP);
                         break;
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         setFileData(ITEM_DP);
                         break;
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         setFileData(MOVE_DP);
                         break;
-                    case "starters" :
+                    case "com/turtleisaac/pokeditor/editors/starters":
                         setFileData(STARTER_DP);
                         break;
-                    case "opening" :
+                    case "com/turtleisaac/pokeditor/editors/opening":
                         setFileData(OPENING_DP);
                         break;
                     case "starters2" :
                         setFileData(STARTER2_DP);
                         break;
-                    case "intro" :
+                    case "com/turtleisaac/pokeditor/editors/intro":
                         setFileData(INTRO_DP);
                         break;
-                    case "tutors":
+                    case "com/turtleisaac/pokeditor/editors/tutors":
                         setFileData(TUTOR_DP);
                         break;
-                    case "babies":
+                    case "com/turtleisaac/pokeditor/editors/babies":
                         setFileData(BABY_DP);
                         break;
                     default:
@@ -1499,43 +1499,43 @@ public class DsRomReader
             case "diamond":
             case "POKEMON D":
                 switch(type) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         setFileData(PERSONAL_DP);
                         break;
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         setFileData(LEARNSET_DP);
                         break;
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         setFileData(EVOLUTION_DP);
                         break;
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         setFileData(GROWTH_DP);
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         setFileData(ENCOUNTER_DP-1);
                         break;
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         setFileData(ITEM_DP);
                         break;
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         setFileData(MOVE_DP);
                         break;
-                    case "starters" :
+                    case "com/turtleisaac/pokeditor/editors/starters":
                         setFileData(STARTER_DP);
                         break;
-                    case "opening" :
+                    case "com/turtleisaac/pokeditor/editors/opening":
                         setFileData(OPENING_DP);
                         break;
                     case "starters2" :
                         setFileData(STARTER2_DP);
                         break;
-                    case "intro" :
+                    case "com/turtleisaac/pokeditor/editors/intro":
                         setFileData(INTRO_DP);
                         break;
-                    case "tutors":
+                    case "com/turtleisaac/pokeditor/editors/tutors":
                         setFileData(TUTOR_DP);
                         break;
-                    case "babies":
+                    case "com/turtleisaac/pokeditor/editors/babies":
                         setFileData(BABY_DP);
                         break;
                     default:
@@ -1548,27 +1548,27 @@ public class DsRomReader
             case "POKEMON B" :
             case "POKEMON W" :
                 switch(type) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         setFileData(PERSONAL_BW);
                         break;
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         setFileData(LEARNSET_BW);
                         break;
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         setFileData(EVOLUTION_BW);
                         break;
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         setFileData(GROWTH_BW);
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         setFileData(ENCOUNTER_BW);
                         throw new RuntimeException("Encounters currently can't be edited for Gen 5");
 //                        break;
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         setFileData(ITEM_BW);
                         throw new RuntimeException("Items currently can't be edited for Gen 5");
 //                        break;
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         setFileData(MOVE_BW);
                         break;
                     default:
@@ -1581,27 +1581,27 @@ public class DsRomReader
             case "POKEMON W2" :
             case "POKEMON B2" :
                 switch(type) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         setFileData(PERSONAL_B2W2);
                         break;
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         setFileData(LEARNSET_B2W2);
                         break;
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         setFileData(EVOLUTION_B2W2);
                         break;
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         setFileData(GROWTH_B2W2);
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         setFileData(ENCOUNTER_B2W2);
                         throw new RuntimeException("Encounters currently can't be edited for Gen 5");
 //                        break;
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         setFileData(ITEM_B2W2);
                         throw new RuntimeException("Items currently can't be edited for Gen 5");
 //                        break;
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         setFileData(MOVE_B2W2);
                         break;
                     default:
@@ -1637,7 +1637,7 @@ public class DsRomReader
             String ans;
             if(multiRun)
             {
-                if(args[0].equalsIgnoreCase("personal"))
+                if(args[0].equalsIgnoreCase("com/turtleisaac/pokeditor/editors/personal"))
                     ans= "y";
                 else
                     ans= "n";
@@ -1663,7 +1663,7 @@ public class DsRomReader
             if(!ans.equalsIgnoreCase("n"))
             {
                 switch (args[0].toLowerCase()) {
-                    case "personal":
+                    case "com/turtleisaac/pokeditor/editors/personal":
                         if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                         {
                             Gen5PersonalEditor2 personalEditor= new Gen5PersonalEditor2(gameCode);
@@ -1677,13 +1677,13 @@ public class DsRomReader
 
                         break;
 
-                    case "learnsets":
+                    case "com/turtleisaac/pokeditor/editors/learnsets":
                         LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
                         learnsetEditor.learnsetToCsv(tempPathUnpack);
 
                         break;
 
-                    case "evolutions":
+                    case "com/turtleisaac/pokeditor/editors/evolutions":
                         if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                         {
                             EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
@@ -1697,7 +1697,7 @@ public class DsRomReader
 
                         break;
 
-                    case "growth":
+                    case "com/turtleisaac/pokeditor/editors/growth":
                         if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                         {
                             throw new RuntimeException("The Growth Editor is currently not available for Gen 5");
@@ -1709,7 +1709,7 @@ public class DsRomReader
                         }
 
                         break;
-                    case "encounters":
+                    case "com/turtleisaac/pokeditor/editors/encounters":
                         if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS") || title.equals("soulsilver") || title.equals("heartgold"))
                         {
                             EncounterEditor encounterEditor= new EncounterEditor();
@@ -1722,7 +1722,7 @@ public class DsRomReader
                         }
                         break;
 
-                    case "items":
+                    case "com/turtleisaac/pokeditor/editors/items":
                         if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                         {
                             ItemEditorGen5 itemEditor = new ItemEditorGen5();
@@ -1735,7 +1735,7 @@ public class DsRomReader
                         }
                         break;
 
-                    case "moves":
+                    case "com/turtleisaac/pokeditor/editors/moves":
                         if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                         {
                             MoveEditorGen5 moveEditor = new MoveEditorGen5();
@@ -1760,7 +1760,7 @@ public class DsRomReader
 
 
             switch (args[0].toLowerCase()) {
-                case "personal":
+                case "com/turtleisaac/pokeditor/editors/personal":
                     if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                     {
                         Gen5PersonalEditor2 personalEditor = new Gen5PersonalEditor2(gameCode);
@@ -1773,12 +1773,12 @@ public class DsRomReader
                     }
 
                     break;
-                case "learnsets":
+                case "com/turtleisaac/pokeditor/editors/learnsets":
                     LearnsetEditor learnsetEditor = new LearnsetEditor(gameCode);
                     learnsetEditor.csvToLearnsets("LearnsetRecompile.csv", type + "Recompile");
 
                     break;
-                case "evolutions":
+                case "com/turtleisaac/pokeditor/editors/evolutions":
                     if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                     {
                         EvolutionEditorGen5 evolutionEditor = new EvolutionEditorGen5();
@@ -1791,25 +1791,25 @@ public class DsRomReader
                     }
 
                     break;
-                case "growth":
+                case "com/turtleisaac/pokeditor/editors/growth":
                     GrowthEditor growthEditor = new GrowthEditor();
                     growthEditor.csvToGrowth("GrowthTableRecompile.csv", type + "Recompile");
 
                     break;
-                case "encounters":
+                case "com/turtleisaac/pokeditor/editors/encounters":
                     if(romData.getTitle().equals("POKEMON HG") || romData.getTitle().equals("POKEMON SS"))
                     {
                         EncounterEditor encounterEditor = new EncounterEditor();
-                        encounterEditor.csvToEncounters("encounters",type + "Recompile");
+                        encounterEditor.csvToEncounters("com/turtleisaac/pokeditor/editors/encounters",type + "Recompile");
                     }
                     else
                     {
                         SinnohEncounterEditor encounterEditor = new SinnohEncounterEditor();
-                        encounterEditor.csvToEncounters("encounters",type + "Recompile");
+                        encounterEditor.csvToEncounters("com/turtleisaac/pokeditor/editors/encounters",type + "Recompile");
                     }
 
                     break;
-                case "items":
+                case "com/turtleisaac/pokeditor/editors/items":
                     if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                     {
                         ItemEditorGen5 itemEditor = new ItemEditorGen5();
@@ -1822,7 +1822,7 @@ public class DsRomReader
                     }
 
                     break;
-                case "moves":
+                case "com/turtleisaac/pokeditor/editors/moves":
                     if(romData.getTitle().equals("POKEMON B") || romData.getTitle().equals("POKEMON W") || title.equals("black") || title.equals("white") || romData.getTitle().equals("POKEMON B2") || romData.getTitle().equals("POKEMON W2") || title.equals("black2") || title.equals("white2"))
                     {
                         MoveEditorGen5 moveEditor = new MoveEditorGen5();
@@ -1844,22 +1844,22 @@ public class DsRomReader
             String ans;
             switch (args[0].toLowerCase())
             {
-                case "starters" :
+                case "com/turtleisaac/pokeditor/editors/starters":
                     StarterEditorGen4 starterEditor= new StarterEditorGen4(gameCode);
                     starterEditor.changeStarters(tempPathUnpack);
                     break;
 
-                case "opening" :
+                case "com/turtleisaac/pokeditor/editors/opening":
                     OpeningEditorGen4 openingEditor= new OpeningEditorGen4(gameCode);
                     openingEditor.changeOpening(tempPathUnpack);
                     break;
 
-                case "intro" :
+                case "com/turtleisaac/pokeditor/editors/intro":
                     IntroEditorGen4 introEditor= new IntroEditorGen4(gameCode);
                     introEditor.changeIntroPokemon(tempPathUnpack);
                     break;
 
-                case "tutors" :
+                case "com/turtleisaac/pokeditor/editors/tutors":
                     System.out.println("Do you want to generate new sheets? (Y/n)");
                     ans= scanner.nextLine().toLowerCase();
                     TutorMoveListEditor tutorEditor= new TutorMoveListEditor(gameCode,tempPathUnpack);
@@ -1875,7 +1875,7 @@ public class DsRomReader
                     tutorEditor.csvToMoveList("tutorMoveDataRecompile.csv","tutorCompatibilityDataRecompile.csv",type + "Recompile");
                     break;
 
-                case "babies" :
+                case "com/turtleisaac/pokeditor/editors/babies":
                     System.out.println("Do you want to generate new sheets? (Y/n)");
                     ans= scanner.nextLine().toLowerCase();
                     BabyFormEditor babyEditor= new BabyFormEditor();
@@ -1904,7 +1904,7 @@ public class DsRomReader
             Buffer narcBuffer= new Buffer(path + "temp" + File.separator + type + "Recompile.narc");
             BinaryWriter narcWriter;
 
-            if(args[0].equalsIgnoreCase("personal") && (gameCode.substring(0,3).equalsIgnoreCase("ird") || gameCode.substring(0,3).equalsIgnoreCase("ire")) && !args[1].equalsIgnoreCase("personal"))
+            if(args[0].equalsIgnoreCase("com/turtleisaac/pokeditor/editors/personal") && (gameCode.substring(0,3).equalsIgnoreCase("ird") || gameCode.substring(0,3).equalsIgnoreCase("ire")) && !args[1].equalsIgnoreCase("com/turtleisaac/pokeditor/editors/personal"))
             {
 //                System.out.println("mooooooo1");
                 byte[] first8= narcBuffer.readBytes(8);

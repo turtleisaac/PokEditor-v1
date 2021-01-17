@@ -11,7 +11,7 @@ public class FileRandomizer implements Serializable
     public static void main(String[] args) throws IOException
     {
         FileRandomizer randomizer= new FileRandomizer("CPUE",false);
-        randomizer.randomizeCompletely("temp" + File.separator + "personal");
+        randomizer.randomizeCompletely("temp" + File.separator + "com/turtleisaac/pokeditor/editors/personal");
 //        randomizer.randomize(Objects.requireNonNull(new File("temp" + File.separator + "personal").listFiles()).length);
     }
 

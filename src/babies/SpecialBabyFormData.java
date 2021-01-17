@@ -1,4 +1,4 @@
-package babies;
+package com.turtleisaac.pokeditor.editors.babies;
 
 public interface SpecialBabyFormData
 {

@@ -570,12 +570,12 @@ public class EncounterEditor
             soundTable.add(area);
         }
 
-        if(!new File(path + "encounters").exists() && !new File(path + "encounters").mkdir())
+        if(!new File(path + "com/turtleisaac/pokeditor/editors/encounters").exists() && !new File(path + "com/turtleisaac/pokeditor/editors/encounters").mkdir())
         {
             throw new RuntimeException("Could not create output directory. Check write permissions");
         }
 
-        BufferedWriter writer= new BufferedWriter(new FileWriter(path + "encounters" + separator +  "fieldEncounterData.csv"));
+        BufferedWriter writer= new BufferedWriter(new FileWriter(path + "com/turtleisaac/pokeditor/editors/encounters" + separator +  "fieldEncounterData.csv"));
         writer.write("ID Number,Area,Rate,Morning,Day,Night,Level\n");
         for(int i= 0; i < dataList.size(); i++)
         {
@@ -596,7 +596,7 @@ public class EncounterEditor
         }
         writer.close();
 
-        writer= new BufferedWriter(new FileWriter(path + "encounters" + separator + "waterEncounterData.csv"));
+        writer= new BufferedWriter(new FileWriter(path + "com/turtleisaac/pokeditor/editors/encounters" + separator + "waterEncounterData.csv"));
         writer.write("ID Number,Area,Rate,Surf Encounter,Min Level,Max Level,Old Rod Encounter,Min Level,Max Level,Good Rod Encounter,Min Level,Max Level,Super Rod Encounter,Min Level,Max Level\n");
         for(int i= 0; i < dataList.size(); i++)
         {
@@ -617,7 +617,7 @@ public class EncounterEditor
         }
         writer.close();
 
-        writer= new BufferedWriter(new FileWriter(path + "encounters" + separator + "smashEncounterData.csv"));
+        writer= new BufferedWriter(new FileWriter(path + "com/turtleisaac/pokeditor/editors/encounters" + separator + "smashEncounterData.csv"));
         writer.write("ID Number,Area,Rate,Encounter,Min Level,Max Level\n");
         for(int i= 0; i < dataList.size(); i++)
         {
@@ -638,7 +638,7 @@ public class EncounterEditor
         }
         writer.close();
 
-        writer= new BufferedWriter(new FileWriter(path + "encounters" + separator + "massOutbreakEncounterData.csv"));
+        writer= new BufferedWriter(new FileWriter(path + "com/turtleisaac/pokeditor/editors/encounters" + separator + "massOutbreakEncounterData.csv"));
         writer.write("ID Number,Area,Field,Surf,Good Rod,Super Rod\n");
         for(int i= 0; i < dataList.size(); i++)
         {
@@ -652,7 +652,7 @@ public class EncounterEditor
         }
         writer.close();
 
-        writer= new BufferedWriter(new FileWriter(path + "encounters" + separator + "soundEncounterData.csv"));
+        writer= new BufferedWriter(new FileWriter(path + "com/turtleisaac/pokeditor/editors/encounters" + separator + "soundEncounterData.csv"));
         writer.write("ID Number,Area,Hoenn,Sinnoh\n");
         for(int i= 0; i < dataList.size(); i++)
         {

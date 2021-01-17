@@ -14,7 +14,7 @@ public class MoveEditorGen5
     {
         MoveEditorGen5 moveEditor= new MoveEditorGen5();
         moveEditor.movesToCsv("a021W2");
-        moveEditor.csvToMoves("MoveData.csv","moves");
+        moveEditor.csvToMoves("MoveData.csv", "com/turtleisaac/pokeditor/editors/moves");
     }
 
     private static String path= System.getProperty("user.dir") + File.separator; //creates a new String field containing user.dir and File.separator (/ on Unix systems, \ on Windows)
