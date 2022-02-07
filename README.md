@@ -1,6 +1,8 @@
 # DEVELOPMENT NOTICE:
 
-**PokEditor is currently undergoing a major overhaul including the introduction of a GUI and integration with the Google Sheets API. The current CMD version is no longer being supported as v2.0 is the future of PokEditor. If you would like to see updates on progress, feel free to join [this Discord server](https://discord.gg/cTKQq5Y)! This is a Pokemon DS Hacking-devoted server with loads of people who can help you out with things other than PokEditor, so I highly recommend joining even if you aren't using this tool. Thank you!**
+**PokEditor is currently undergoing a major overhaul including the introduction of a GUI and integration with the Google Sheets API. The current CMD version is no longer being supported as v2 is the future of PokEditor. If you would like to see updates on progress, feel free to join [this Discord server](https://discord.gg/zAtqJDW2jC)! This is a Pokemon DS Hacking-devoted server with loads of people who can help you out with things other than PokEditor, so I highly recommend joining even if you aren't using this tool. Thank you!**
+
+*The images below are screenshots from the* **in progress** *PokEditor v2. They do not reflect the contents of this repo in any way, shape, or form. Dev builds of v2 are available on the Discord server linked above, and if you wish to use v1.9.1 despite its age and poor quality, please scroll further down for those instructions.*
 
 ![image](https://user-images.githubusercontent.com/7987859/110886228-5401e080-82b6-11eb-8bea-40a5dfaa8120.png)
 ![image](https://user-images.githubusercontent.com/7987859/110886253-5b28ee80-82b6-11eb-92e0-ef36e24cece4.png)
