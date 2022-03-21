@@ -1,6 +1,6 @@
 # DEVELOPMENT NOTICE:
 
-**PokEditor has now been replaced by PokEditor v2! The new GitHub repo for it can be found [here](https://github.com/turtleisaac/PokEditor-v2)!**
+**PokEditor has now been replaced by PokEditor v2! The new GitHub repo for it can be found [here](https://github.com/turtleisaac/PokEditor-v2)! The repo for this version of PokEditor is now archived and will no longer recieve any updates or changes.**
 
 # PokEditor
 
